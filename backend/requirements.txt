@@ -1,3 +1,5 @@
 django==3.1.2
 mysqlclient==2.0.1
 djangorestframework==3.12.1
+uuid==1.30
+django-redis==4.12.1
