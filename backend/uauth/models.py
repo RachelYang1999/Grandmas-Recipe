@@ -6,7 +6,7 @@ class User(models.Model):
     class Meta:
         db_table='users'
         
-    u_name = models.CharField(max_length=32,unique=True)
-    u_password = models.CharField(max_length=256)
-    is_delete = models.BooleanField(default=False)
+    username = models.CharField(max_length=32,unique=True)
+    password = models.CharField(max_length=256)
+    salt = models.CharField(max_length=256)
     is_super = models.BooleanField(default=False)

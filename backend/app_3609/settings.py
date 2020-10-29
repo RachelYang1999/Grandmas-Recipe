@@ -131,7 +131,6 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-SUPER_USER=("root","root")
 CACHES = {
     'default': {
         'BACKEND': 'django_redis.cache.RedisCache',
