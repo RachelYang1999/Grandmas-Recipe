@@ -1,2 +1,0 @@
-HTTP_ACTION_REGISTER = "register"
-HTTP_ACTION_LOGIN = "login"

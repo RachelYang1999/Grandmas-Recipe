@@ -1,7 +1,6 @@
 import uuid
 
 from uauth.auth import UserAuth
-from uauth.constants import HTTP_ACTION_REGISTER, HTTP_ACTION_LOGIN
 from uauth.models import User
 from uauth.permissions import IsSuperUser
 from uauth.serializers import UserSerializer
@@ -14,6 +13,10 @@ from rest_framework.response import Response
 
 import app_3609.util as util
 
+HTTP_ACTION_REGISTER = "register"
+HTTP_ACTION_LOGIN = "login"
+HTTP_ACTION_LOGOUT = "logout"
+
 class User_auth(ListCreateAPIView):
     serializer_class = UserSerializer
     queryset = User.objects.all()
@@ -24,7 +27,6 @@ class User_auth(ListCreateAPIView):
         data = {
                 'msg': 'success',
             }
-        
         return Response(data,status=200)
 
 
@@ -32,39 +34,58 @@ class User_auth(ListCreateAPIView):
         action = request.query_params.get('action')
 
         if action == HTTP_ACTION_REGISTER:
-            return self.create(request, *args, **kwargs)
-
+            return self.register(request, *args, **kwargs)
         elif action == HTTP_ACTION_LOGIN:
-            u_name = request.data.get('username')
-            u_password = request.data.get('password')
-            try:
-                user = User.objects.get(username=u_name)
-
-                data = {
-                            'msg': 'success',
-                            'token': "",
-                        }
-                if cache.get(user.id)==None:
-                    if user.password == util.create_md5(u_password,user.salt):
-
-                        token = "${}$".format(user.id)+uuid.uuid4().hex
-
-                        cache.set(user.id,token,timeout=3600)
-                        data['token']=token
-                        
-                        return Response(data,status=200)
-                    else:
-                        raise exceptions.AuthenticationFailed
-                else:
-                    data['token']=cache.get(user.id)
-                    return Response(data)
-
-            except User.DoesNotExist:
-                raise exceptions.NotFound
+            return self.login(request, *args, **kwargs)
+        elif action == HTTP_ACTION_LOGOUT:
+            return self.logout(request, *args, **kwargs)
         else:
             raise exceptions.ValidationError
 
-    def create(self, request, *args, **kwargs):
+    def logout(self, request, *args, **kwargs):
+        token = request.data.get('token')
+        u_id=token.split("$")[1]
+        data = {
+                'msg': '',
+            }
+        if token==cache.get(u_id):
+            cache.delete(u_id)
+            data['msg']="success"
+        else:
+            data['msg']="fail"
+            
+        return Response(data,status=201)
+
+
+    def login(self, request, *args, **kwargs):
+        u_name = request.data.get('username')
+        u_password = request.data.get('password')
+        try:
+            user = User.objects.get(username=u_name)
+
+            data = {
+                    'msg': 'success',
+                    'token': "",
+                }
+            if cache.get(user.id)==None:
+                if user.password == util.create_md5(u_password,user.salt):
+
+                    token = "${}$".format(user.id)+uuid.uuid4().hex
+
+                    cache.set(user.id,token,timeout=3600)
+                    data['token']=token
+                    
+                    return Response(data,status=200)
+                else:
+                    raise exceptions.AuthenticationFailed
+            else:
+                data['token']=cache.get(user.id)
+                return Response(data)
+
+        except User.DoesNotExist:
+            raise exceptions.NotFound
+
+    def register(self, request, *args, **kwargs):
         username = request.data.get('username')
         password = request.data.get('password')
         salt = util.create_salt()
