@@ -20,11 +20,13 @@ class User_auth(ListCreateAPIView):
     authentication_classes = (UserAuth,)
     permission_classes = (IsSuperUser,)
 
-    # def get(self, request, *args, **kwargs):
-    #     if isinstance(request.user, User):
-    #         return self.list(request, *args, **kwargs)
-    #     else:
-    #         raise exceptions.NotAcceptable
+    def get(self, request, *args, **kwargs):
+        data = {
+                'msg': 'success',
+            }
+        
+        return Response(data,status=200)
+
 
     def post(self, request, *args, **kwargs):
         action = request.query_params.get('action')
@@ -40,7 +42,6 @@ class User_auth(ListCreateAPIView):
 
                 data = {
                             'msg': 'success',
-                            'status': 200,
                             'token': "",
                         }
                 if cache.get(user.id)==None:
@@ -51,7 +52,7 @@ class User_auth(ListCreateAPIView):
                         cache.set(user.id,token,timeout=3600)
                         data['token']=token
                         
-                        return Response(data)
+                        return Response(data,status=200)
                     else:
                         raise exceptions.AuthenticationFailed
                 else:
@@ -64,21 +65,20 @@ class User_auth(ListCreateAPIView):
             raise exceptions.ValidationError
 
     def create(self, request, *args, **kwargs):
-        serializer = self.get_serializer(data=request.data)
-        serializer.is_valid(raise_exception=True)
-        self.perform_create(serializer)
+        username = request.data.get('username')
+        password = request.data.get('password')
+        salt = util.create_salt()
+        password =util.create_md5(password,salt)
+        
+        try:
+            user = User.objects.get(username=username)
+            raise exceptions.ValidationError("username exist")
+        except User.DoesNotExist:
+            user=User.objects.create(username=username,password=password,salt=salt)
 
-        data = serializer.data
+        data = {
+                'msg': 'success',
+            }
+        return Response(data,status=201)
 
-        u_id = data.get('id')
-        user = User.objects.get(pk=u_id)
-        user.salt = util.create_salt()
-        user.password=util.create_md5(user.password,user.salt )
-        user.save()
-        headers = self.get_success_headers(serializer.data)
-        return Response(data, status=status.HTTP_201_CREATED, headers=headers)
-
-class UserAPIView(ListCreateAPIView):
-    serializer_class = UserSerializer
-    queryset = User.objects.all()
 

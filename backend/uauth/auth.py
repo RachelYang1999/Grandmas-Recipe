@@ -7,7 +7,7 @@ class UserAuth(BaseAuthentication):
 
     def authenticate(self, request):
         if request.method == 'GET':
-            token = request.query_params.get('token')
+            token = request.data.get('token')
             user_id=token.split("$")[1]
             try:
                 cache_toke = cache.get(user_id)
