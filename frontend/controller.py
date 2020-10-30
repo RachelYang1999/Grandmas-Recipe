@@ -16,6 +16,6 @@ def serve_pages(html_page):
 def serve_css(css):
     return static_file(css, root='static/css/')
 
-@get('/test')
-def test():
-    return serve_pages("test.html")
+@get('/login')
+def login():
+    return serve_pages("login.html")
