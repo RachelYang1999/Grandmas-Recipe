@@ -1,4 +1,14 @@
-from bottle import route, get, post, request, static_file, response, redirect
+from bottle import route, get, post, request, static_file, response, redirect,template
+import configparser
+
+def get_backend():
+    config = configparser.ConfigParser()
+    config.read('config.ini')
+    return config['SETTING']['backend']
+
+def getToken():
+    token = request.get_cookie('token')
+    return token
 
 @route('/js/<js:path>')
 def serve_js(js):
@@ -12,26 +22,19 @@ def serve_font(font):
 def serve_css(css):
     return static_file(css, root='static/css/')
 
-def serve_pages(html_page):
-    return static_file(html_page, root='template/')
-
-def getToken():
-    token = request.get_cookie('token')
-    return token
-
 @get('/signin')
 def signin():
-    return serve_pages("signin.html")
+    return template("signin",backend=get_backend())
 
 @get('/signup')
 def signup():
-    return serve_pages("signup.html")
+    return template("signup",backend=get_backend())
 
 @get('/')
 def get_login_controller():
     token = getToken()
     if token is not None:
-        return serve_pages("index.html")
+        return template("index",backend=get_backend())
     else:
-        redirect('/login')
+        redirect('/signin')
 

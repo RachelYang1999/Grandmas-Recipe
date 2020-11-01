@@ -19,5 +19,7 @@
 <script type="text/javascript" src="/js/layui.js"></script>
 <script type="text/javascript" src="/js/index.js"></script>
 
+Debug: <label name="backend" id="backend" value="{{backend}}">{{backend}}</label>
+
 </body>
 </html>

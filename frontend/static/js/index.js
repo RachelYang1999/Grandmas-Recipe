@@ -3,7 +3,7 @@ layui.use('table', function(){
   
   table.render({
     elem: '#test'
-    ,url:'http://172.17.0.7:9999/api/auth/'
+    ,url:'http://'+$("#backend").html()+':9999/api/auth/'
     ,where:{"token":$.cookie("token")}
     ,cellMinWidth: 80 
     ,cols: [[
@@ -12,12 +12,12 @@ layui.use('table', function(){
       ,{field:'password', width:400, title: 'password'}
       ,{field:'is_super', width:200, title: 'is_super'}
     ]],
-    parseData: function(res){ //res 即为原始返回的数据
+    parseData: function(res){
     return {
-      "code": 0, //解析接口状态
-      "msg": $.cookie("token"), //解析提示文本
-      "count": 2, //解析数据长度
-      "data": res //解析数据列表
+      "code": 0,
+      "msg": $.cookie("token"),
+      "count": 2,
+      "data": res
     };
   }
   });
