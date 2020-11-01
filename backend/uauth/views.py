@@ -13,9 +13,9 @@ from rest_framework.response import Response
 
 import app_3609.util as util
 
-HTTP_ACTION_REGISTER = "register"
-HTTP_ACTION_LOGIN = "login"
-HTTP_ACTION_LOGOUT = "logout"
+HTTP_ACTION_REGISTER = "signup"
+HTTP_ACTION_LOGIN = "signin"
+HTTP_ACTION_LOGOUT = "signout"
 
 class User_auth(ListCreateAPIView):
     serializer_class = UserSerializer
@@ -23,11 +23,11 @@ class User_auth(ListCreateAPIView):
     authentication_classes = (UserAuth,)
     permission_classes = (IsSuperUser,)
 
-    def get(self, request, *args, **kwargs):
-        data = {
-                'msg': 'success',
-            }
-        return Response(data,status=200)
+    # def get(self, request, *args, **kwargs):
+    #     data = {
+    #             'msg': 'success',
+    #         }
+    #     return Response(data,status=200)
 
 
     def post(self, request, *args, **kwargs):

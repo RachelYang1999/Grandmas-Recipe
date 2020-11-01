@@ -1,3 +1,4 @@
 # project_100
 
-test
+Backend: Django
+Frontend: Bottle + Layui
