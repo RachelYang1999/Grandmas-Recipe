@@ -1,27 +1,27 @@
-function login() {
-    $.ajax({
-        type: "POST",
-        //dataType: "json",
-        url: "https://10.86.164.216:8080/api/auth/login",
-        data: $('#loginForm').serialize(),
-        success: function (result) {
-            if (result.code == 200){
-                $.cookie("token",result.data);
-                window.location.href = "/discussion";
-            }
-        },
-        // error: function () {
-        //     alert("Incorrect Email Or Password");
-        // }
-        error: function(message){
-            var json = message.responseJSON;
-            console.log(json);
-            alert(json.message);
-            if (json.status == "401" || json.message == "Token Corrupted"){
-                window.location.href = "/login";
-            }
-        }
-    });
-}
+layui.use(['form','layer','jquery'], function () {
 
-$("[type='button']").click(login);
+        var form = layui.form;
+        var $ = layui.jquery;
+        form.on('submit(login)',function (data) {
+            $.ajax({
+                url:'http://172.17.0.7:9999/api/auth/?action=login',
+                data:data.field,
+                dataType:'text',
+                type:'post',
+                success: function (data) {
+                    var result = JSON.parse(data)
+                    console.log(result);
+                    if (result.msg == "success"){
+                        $.cookie("token",result.token);
+                        console.log($.cookie("token"));
+                    }
+                },
+                error: function(data){
+                    console.log(data);
+                }
+            })
+            return false;
+        })
+ 
+    });
+

@@ -7,9 +7,11 @@ class UserAuth(BaseAuthentication):
 
     def authenticate(self, request):
         if request.method == 'GET':
-            token = request.data.get('token')
-            user_id=token.split("$")[1]
+            
             try:
+                token = request.query_params.get('token')
+                print(token)
+                user_id=token.split("$")[1]
                 cache_toke = cache.get(user_id)
                 if cache_toke==token:
                     user = User.objects.get(pk=user_id)

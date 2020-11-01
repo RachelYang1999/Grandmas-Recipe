@@ -16,6 +16,15 @@ def serve_pages(html_page):
 def serve_css(css):
     return static_file(css, root='static/css/')
 
+def getLoginId():
+    token = request.get_cookie('token')
+    return token
+
 @get('/login')
 def login():
     return serve_pages("login.html")
+
+@get('/')
+def get_login_controller():
+    pid = getLoginId()
+    return pid

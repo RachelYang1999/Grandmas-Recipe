@@ -79,8 +79,11 @@ class User_auth(ListCreateAPIView):
                 else:
                     raise exceptions.AuthenticationFailed
             else:
-                data['token']=cache.get(user.id)
-                return Response(data)
+                if user.password == util.create_md5(u_password,user.salt):
+                    data['token']=cache.get(user.id)
+                    return Response(data)
+                else:
+                    raise exceptions.AuthenticationFailed
 
         except User.DoesNotExist:
             raise exceptions.NotFound
