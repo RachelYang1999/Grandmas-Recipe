@@ -9,9 +9,11 @@ class User(models.Model):
     salt = models.CharField(max_length=30)
     # is_super = models.BooleanField(default=False)
     email = models.EmailField(max_length=254, unique=True)
-    introduction = models.CharField(max_length=1024)
+    introduction = models.CharField(max_length=1024,blank=True)
     gender = models.CharField(max_length=30)
+    date_of_birth = models.CharField(max_length=30)
     register_date = models.DateTimeField(auto_now_add=True)
     total_follower = models.IntegerField(default=0)
+    total_following = models.IntegerField(default=0)
     avatar = models.FileField(
         max_length=300, upload_to="avatar/", default="default.png")
