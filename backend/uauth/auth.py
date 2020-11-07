@@ -1,4 +1,4 @@
-from uauth.models import User
+from user.models import User
 from django.core.cache import cache
 from rest_framework.authentication import BaseAuthentication
 

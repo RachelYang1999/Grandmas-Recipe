@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'uauth',
     'upload',
     'profiles',
+    'user',
 ]
 
 MIDDLEWARE = [
@@ -54,15 +55,14 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
-CORS_ORIGIN_ALLOW_ALL = True   
+CORS_ORIGIN_ALLOW_ALL = True
 
 ROOT_URLCONF = 'app_3609.urls'
 
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'templates')]
-        ,
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -121,13 +121,14 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Australia/Sydney'
+DATETIME_FORMAT = 'Y-m-d H:i:s'
 
 USE_I18N = True
 
-USE_L10N = True
+USE_L10N = False
 
-USE_TZ = True
+USE_TZ = False
 
 
 # Static files (CSS, JavaScript, Images)
@@ -145,3 +146,6 @@ CACHES = {
         'TIMEOUT': 60 * 60 * 2
     }
 }
+
+
+MEDIA_URL = '../upload/'

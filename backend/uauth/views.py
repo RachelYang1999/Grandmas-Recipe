@@ -1,7 +1,7 @@
 import uuid
 
 from uauth.auth import UserAuth
-from uauth.models import User
+from user.models import User
 from uauth.permissions import IsSuperUser
 from uauth.serializers import UserSerializer
 
@@ -21,7 +21,7 @@ class User_auth(ListCreateAPIView):
     serializer_class = UserSerializer
     queryset = User.objects.all()
     authentication_classes = (UserAuth,)
-    permission_classes = (IsSuperUser,)
+    # permission_classes = (IsSuperUser,)
 
     # def get(self, request, *args, **kwargs):
     #     data = {
