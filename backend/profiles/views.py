@@ -24,3 +24,26 @@ def add_profile(request):
     user.save()
     
     return HttpResponse("Add Success")
+
+def get_profile(request):
+    profiles = User.objects.all()
+    for p in profiles:
+        print(p.username)
+    context = {
+        "p": "Sophie",
+        "profiles": profiles
+    }
+    # return HttpResponse("Profile List")
+    return render(request, 'profile_list.tpl', context=context)
+
+def update_profile(request):
+    profile = User.objects.get(id=8)
+    profile.email = 'zihe7096@uni.sydney.edu.au'
+    profile.save()
+    return HttpResponse("Profile Update Success")
+
+def delete_profile(request):
+    profile = User.objects.get(id=8)
+    profile.delete()
+    return HttpResponse("Profile Delete Success")
+
