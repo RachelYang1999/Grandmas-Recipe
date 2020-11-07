@@ -12,7 +12,7 @@ class User(models.Model):
     email = models.EmailField(max_length=254, unique=True)
     introduction = models.CharField(max_length=1024,blank=True)
     gender = models.CharField(max_length=30)
-    date_of_birth = models.DateField(default="0000-00-00", null = True)
+    date_of_birth = models.DateField(auto_now_add=True)
     register_date = models.DateTimeField(auto_now_add=True)
     total_follower = models.IntegerField(default=0)
     total_following = models.IntegerField(default=0)
