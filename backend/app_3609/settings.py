@@ -149,6 +149,6 @@ CACHES = {
     }
 }
 
+MEDIA_ROOT = '../upload/'
 
-MEDIA_URL = '../upload/'
 
