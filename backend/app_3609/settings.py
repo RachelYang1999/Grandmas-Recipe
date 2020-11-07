@@ -43,6 +43,8 @@ INSTALLED_APPS = [
     'upload',
     'profiles',
     'user',
+    'calendars',
+    'category',
 ]
 
 MIDDLEWARE = [
@@ -122,7 +124,6 @@ AUTH_PASSWORD_VALIDATORS = [
 LANGUAGE_CODE = 'en-us'
 
 TIME_ZONE = 'Australia/Sydney'
-DATETIME_FORMAT = 'Y-m-d H:i:s'
 
 USE_I18N = True
 
@@ -149,3 +150,4 @@ CACHES = {
 
 
 MEDIA_URL = '../upload/'
+

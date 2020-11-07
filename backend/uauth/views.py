@@ -2,13 +2,13 @@ import uuid
 
 from uauth.auth import UserAuth
 from user.models import User
-from uauth.permissions import IsSuperUser
+# from uauth.permissions import IsSuperUser
 from uauth.serializers import UserSerializer
 
 from django.core.cache import cache
 
 from rest_framework import status, exceptions
-from rest_framework.generics import ListCreateAPIView
+from rest_framework.views import APIView
 from rest_framework.response import Response
 
 import app_3609.util as util
@@ -17,17 +17,17 @@ HTTP_ACTION_REGISTER = "signup"
 HTTP_ACTION_LOGIN = "signin"
 HTTP_ACTION_LOGOUT = "signout"
 
-class User_auth(ListCreateAPIView):
+class User_auth(APIView):
     serializer_class = UserSerializer
     queryset = User.objects.all()
-    authentication_classes = (UserAuth,)
+    # authentication_classes = (UserAuth,)
     # permission_classes = (IsSuperUser,)
 
     # def get(self, request, *args, **kwargs):
     #     data = {
-    #             'msg': 'success',
+    #             'msg': 'invalid',
     #         }
-    #     return Response(data,status=200)
+    #     return Response(data,status=400)
 
 
     def post(self, request, *args, **kwargs):

@@ -1,3 +1,10 @@
 from django.db import models
 
-# Create your models here.
+
+class Calendar(models.Model):
+    class Meta:
+        db_table = 'calendar'
+
+    date = models.DateField(auto_now_add=True)
+    meal_type = models.CharField(max_length=30)
+    # recipe_id = models.IntegerField(default=0)

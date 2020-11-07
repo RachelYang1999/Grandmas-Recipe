@@ -1,6 +1,8 @@
+
 from user.models import User
 from django.core.cache import cache
 from rest_framework.authentication import BaseAuthentication
+from rest_framework import exceptions
 
 
 class UserAuth(BaseAuthentication):
@@ -9,7 +11,7 @@ class UserAuth(BaseAuthentication):
         if request.method == 'GET':
             
             try:
-                token = request.query_params.get('token')
+                token = request.META.get('HTTP_TOKEN')
                 print(token)
                 user_id=token.split("$")[1]
                 cache_toke = cache.get(user_id)
@@ -17,6 +19,6 @@ class UserAuth(BaseAuthentication):
                     user = User.objects.get(pk=user_id)
                     return user, token
                 else:
-                    return
+                    raise exceptions.AuthenticationFailed({"code": 405, "error": "invalid 1"})
             except:
-                return
+                raise exceptions.AuthenticationFailed({"code": 405, "error": "invalid 2"})

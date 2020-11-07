@@ -23,4 +23,6 @@ urlpatterns = [
     path('api/', include('uauth.urls')),
     path('api/',include('upload.urls')),
     path('api/',include('profiles.urls')),
+    path('api/', include('category.urls')),
+    path('api/', include('user.urls')),
 ]
