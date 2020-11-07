@@ -1,5 +1,6 @@
 from django.db import models
 from user.models import User
+from recipe_blog.models import Recipe
 
 # Create your models here.
 class Upload_profile(models.Model):
@@ -11,6 +12,6 @@ class Upload_profile(models.Model):
 class Upload_recipe(models.Model):
     class Meta:
         db_table = 'recipe_metadata'
-    # recipe_id = models.IntegerField(max_length=6)
-    # step_id = models.IntegerField(max_length=3)
-    # recipe_image = models.ImageField(upload_to='/upload/recipe_image/', null=True, blank=True )
+    recipe = models.ForeignKey(Recipe, related_name='recipeimage',on_delete=models.CASCADE,default=1)
+    step_id = models.IntegerField(default=1)
+    recipe_image = models.ImageField(upload_to='recipe_image', null=True, blank=True )

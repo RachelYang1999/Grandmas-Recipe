@@ -3,6 +3,7 @@ from django.http import HttpResponse
 from django.core.files.storage import FileSystemStorage
 from uauth.auth import UserAuth
 from user.models import User
+from recipe_blog.models import Recipe
 from upload.models import Upload_profile, Upload_recipe
 from upload.serializers import UploadSerializer,UploadSerializer_recipe
 
@@ -22,10 +23,22 @@ class upload_profile_view(APIView):
     def post(self, request, *args, **kwargs):
         file_uploaded =  request.FILES['document']
         user_id = request.data.get('user_id')
-        # file_storage_system = FileSystemStorage()
-        # name = file_storage_system.save(file_uploaded.name,file_uploaded)
         user=User.objects.get(id=user_id)
 
-
         new_entry = Upload_profile.objects.create(user=user,profile_image = file_uploaded)
+        return Response("success")
+
+class upload_recipe_view(APIView):
+
+    serializer_class = UploadSerializer_recipe
+    queryset = Upload_recipe.objects.all()
+    authentication_classes = (UserAuth,)
+    
+    def post(self, request, *args, **kwargs):
+        file_uploaded =  request.FILES['document']
+        recipe_id = request.data.get('recipe_id')
+        recipe = Recipe.objects.get(id=recipe_id)
+        step_id = request.data.get('step_id')
+
+        new_entry = Upload_recipe.objects.create(recipe=recipe,step_id=step_id,recipe_image = file_uploaded)
         return Response("success")

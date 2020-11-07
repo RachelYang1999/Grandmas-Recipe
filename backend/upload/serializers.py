@@ -11,4 +11,4 @@ class UploadSerializer(serializers.HyperlinkedModelSerializer):
 class UploadSerializer_recipe(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Upload_recipe
-        fields = ('id', 'recipe_id','step_id', 'recipe_image')
+        fields = ('id', 'recipe','step_id', 'recipe_image')
