@@ -24,6 +24,9 @@ def serve_css(css):
 
 @get('/signin')
 def signin():
+    token = getToken()
+    if token is not None:
+        return template("index",backend=get_backend())
     return template("signin",backend=get_backend())
 
 @get('/signup')

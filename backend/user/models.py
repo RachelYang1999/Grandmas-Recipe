@@ -1,5 +1,4 @@
 from django.db import models
-from calendars.models import Calendar
 
 class User(models.Model):
     class Meta:
@@ -25,11 +24,3 @@ class User_follow(models.Model):
 
     from_user =  models.ForeignKey(User, related_name='from_user',on_delete=models.CASCADE)
     to_user =  models.ForeignKey(User, related_name='to_user',on_delete=models.CASCADE)
-
-
-class User_calender(models.Model):
-    class Meta:
-        db_table = 'user_calendar'
-
-    # user =  models.ForeignKey(Calendar, related_name='calendar_user',on_delete=models.CASCADE)
-    # calendar =  models.ForeignKey(Calendar, related_name='user_calender',on_delete=models.CASCADE)
