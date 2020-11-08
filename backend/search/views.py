@@ -19,20 +19,17 @@ class Search(APIView):
     # get recipe
 
     def get(self, request):
+        category_list =["hot", "test"]
         
-        # recipe_id=request.data.get("id")
-        # if recipe_id is True:
-        # recipe=Recipe.objects.get(id=recipe_id)
-        get_title = recipe.recipe_title
-
-        # category_type=request.data.get("category")
-        # if category_type is True:
-        #     c_recipe=Category.objects.get(category=category_type)
-        #     get_total = c_recipe.total_recipe
-
-        # category_id=request.data.get("id")
-        # category=Category.objects.get(id=category_id)
-        # get_category
-
-        print(get_title)
+        category_type=request.data.get("category")
+        if category_type in category_list:
+            c_recipe=Category.objects.get(category=category_type)
+            get_total = c_recipe.total_recipe
+            print(get_total)
+        else:
+            recipe_name=request.data.get("recipe_title")
+            n_recipe=Recipe.objects.get(recipe_title=recipe_name)
+            get_title = n_recipe.recipe_title
+            print(get_title)
+        
         return Response("Search Success")
