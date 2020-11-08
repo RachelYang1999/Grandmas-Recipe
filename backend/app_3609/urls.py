@@ -25,4 +25,5 @@ urlpatterns = [
     path('api/', include('user.urls')),
     path('api/', include('comments.urls')),
     path('api/', include('calendars.urls')),
+    # path('api/', include('recipe_blog.urls')),
 ]
