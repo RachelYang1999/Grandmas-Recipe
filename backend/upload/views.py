@@ -64,3 +64,4 @@ class upload_comment_view(APIView):
         new_entry = Upload_comment_meta.objects.create(
             comment=comment, comment_image=file_uploaded)
         return Response("success")
+
