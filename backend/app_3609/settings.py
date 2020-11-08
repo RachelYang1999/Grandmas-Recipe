@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'calendars',
     'category',
     'recipe_blog',
+    'comments'
 ]
 
 MIDDLEWARE = [

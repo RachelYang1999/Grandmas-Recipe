@@ -23,4 +23,5 @@ urlpatterns = [
     path('api/',include('profiles.urls')),
     path('api/', include('category.urls')),
     path('api/', include('user.urls')),
+    path('api/', include('comments.urls')),
 ]

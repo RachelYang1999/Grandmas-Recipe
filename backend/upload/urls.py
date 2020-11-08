@@ -9,7 +9,7 @@ urlpatterns = [
          name='upload_profile_image'),
     path('upload/recipe_image/', views.upload_recipe_view.as_view(),
          name='upload_recipe_image'),
+    path('upload/comment_image/', views.upload_comment_view.as_view(),
+         name='upload_comment_image'),
 ]
 
-# if settings.DEBUG:
-#     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
