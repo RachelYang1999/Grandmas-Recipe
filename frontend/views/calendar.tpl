@@ -13,8 +13,9 @@
  
 </head>
 <body>
- 
+
     <br>
+
     <header class="layui-elip">Choose the date:</header>
     <input type="text" id="date1" lay-verify="date1" class="layui-input test-item" style="width:300px;" value="" />
     <br>

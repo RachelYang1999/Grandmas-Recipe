@@ -28,13 +28,12 @@ class Calendar_view(APIView):
         return Response(Calendar.objects.filter(user=user,date__gte=start,date__lte=end).values())
 
     def post(self, request, *args, **kwargs):
-        user_id = request.data.get('user_id')
+        user = request.user
         recipe_id = request.data.get('recipe_id')
         date = request.data.get('date')
         meal_type = request.data.get('meal_type')
 
-        calendar = Calendar.objects.create(date=date, meal_type=meal_type, user=User.objects.get(
-            id=user_id), recipe=Recipe.objects.get(id=recipe_id))
+        calendar = Calendar.objects.create(date=date, meal_type=meal_type, user=user, recipe=Recipe.objects.get(id=recipe_id))
         calendar.save()
 
         data = {
