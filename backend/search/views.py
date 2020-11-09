@@ -2,7 +2,7 @@ from uauth.auth import UserAuth
 from django.shortcuts import render
 from django.http import HttpResponse
 # from search.serializers import SearchSerializer
-from recipe_blog.models import Recipe
+from recipe.models import Recipe
 from category.models import Category
 
 from rest_framework import status, exceptions

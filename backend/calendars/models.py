@@ -1,6 +1,6 @@
 from django.db import models
 from user.models import User
-from recipe_blog.models import Recipe
+from recipe.models import Recipe
 
 
 class Calendar(models.Model):

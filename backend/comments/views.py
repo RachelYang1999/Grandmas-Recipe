@@ -3,7 +3,7 @@ from django.http import HttpResponse
 from django.core.files.storage import FileSystemStorage
 from uauth.auth import UserAuth
 from user.models import User
-from recipe_blog.models import Recipe
+from recipe.models import Recipe
 from comments.models import Comment
 from comments.serializers import CommentSerializer
 

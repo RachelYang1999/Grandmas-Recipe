@@ -2,7 +2,7 @@ from uauth.auth import UserAuth
 from django.shortcuts import render
 from django.http import HttpResponse
 from profiles.serializers import ProfileSerializer
-from recipe_blog.models import Recipe
+from recipe.models import Recipe
 
 from rest_framework import status, exceptions
 from rest_framework.views import APIView

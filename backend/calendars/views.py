@@ -1,7 +1,7 @@
 from uauth.auth import UserAuth
 from calendars.models import Calendar
 from user.models import User
-from recipe_blog.models import Recipe
+from recipe.models import Recipe
 from datetime import date
 
 from django.core.cache import cache

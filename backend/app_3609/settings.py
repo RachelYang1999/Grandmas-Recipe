@@ -45,7 +45,7 @@ INSTALLED_APPS = [
     'user',
     'calendars',
     'category',
-    'recipe_blog',
+    'recipe',
     'comments',
     'search',
 ]
