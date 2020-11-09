@@ -13,6 +13,7 @@ from rest_framework import viewsets
 from django.db import transaction
 
 class RecipeView(APIView):
+    authentication_classes = (UserAuth,)
 
     def get(self, request):
         recipe_id = request.data.get("id")
@@ -40,7 +41,7 @@ class RecipeView(APIView):
     @transaction.non_atomic_requests
     def post(self, request):
 
-        user_id = request.data.get("user_id")
+        user = request.user
         # current_user = User.objects.get(id = user_id)
         recipe_title = request.data.get("recipe_title")
         description =request.data.get("description")
@@ -48,8 +49,8 @@ class RecipeView(APIView):
 
         category = request.data.get("category")
 
-        if user_id != None and recipe_title != None and description != None and is_published != None and category != None:
-            new_recipe = Recipe.objects.create(recipe_title = recipe_title, description = description, is_published = is_published, user_id = user_id)
+        if recipe_title != None and description != None and is_published != None and category != None:
+            new_recipe = Recipe.objects.create(recipe_title = recipe_title, description = description, is_published = is_published, user = user)
             new_recipe.save()
             print("yes!!!")
 
@@ -59,6 +60,7 @@ class RecipeView(APIView):
             # Add the total number of recipe amount of a category
             category_object = Category.objects.get(id = category)
             category_object.total_recipe = category_object.total_recipe + 1
+            category_object.save()
             
             recipe_id = new_recipe.id
             modify_recipe_category = Recipe_category.objects.create(category_of_recipe_id = category, recipe_of_category_id = recipe_id)

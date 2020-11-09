@@ -160,7 +160,7 @@
 	"fields": {
 		"date": "2020-11-11",
 		"meal_type": "breakfirst",
-		"recipe": 5,
+		"recipe": 1,
 		"user": 1
 	}
 }, {
@@ -173,11 +173,29 @@
 		"user": 1
 	}
 }, {
+	"model": "calendars.calendar",
+	"pk": 13,
+	"fields": {
+		"date": "2020-11-11",
+		"meal_type": "lunch",
+		"recipe": 1,
+		"user": 1
+	}
+}, {
+	"model": "calendars.calendar",
+	"pk": 14,
+	"fields": {
+		"date": "2020-11-14",
+		"meal_type": "lunch",
+		"recipe": 1,
+		"user": 1
+	}
+}, {
 	"model": "category.category",
 	"pk": 1,
 	"fields": {
 		"category": "test1",
-		"total_recipe": 0
+		"total_recipe": 3
 	}
 }, {
 	"model": "category.category",
@@ -198,32 +216,43 @@
 	}
 }, {
 	"model": "recipe.recipe",
-	"pk": 5,
+	"pk": 2,
 	"fields": {
-		"recipe_title": "Pasta",
-		"description": "Boil and add sauce.",
+		"recipe_title": "bbbb",
+		"description": "aaaaa",
 		"update_date": "2020-11-10",
 		"is_published": 1,
 		"user": 1
 	}
 }, {
 	"model": "recipe.recipe",
-	"pk": 6,
+	"pk": 3,
 	"fields": {
-		"recipe_title": "Fried Rice",
-		"description": "Steam rice and fry!",
+		"recipe_title": "test",
+		"description": "test",
 		"update_date": "2020-11-10",
 		"is_published": 1,
 		"user": 1
 	}
 }, {
-	"model": "recipe.recipe",
-	"pk": 7,
+	"model": "recipe.recipe_category",
+	"pk": 1,
 	"fields": {
-		"recipe_title": "Beef Soup",
-		"description": "Boil beef with water.",
-		"update_date": "2020-11-10",
-		"is_published": 1,
-		"user": 1
+		"recipe_of_category": 1,
+		"category_of_recipe": 1
+	}
+}, {
+	"model": "recipe.recipe_category",
+	"pk": 2,
+	"fields": {
+		"recipe_of_category": 2,
+		"category_of_recipe": 1
+	}
+}, {
+	"model": "recipe.recipe_category",
+	"pk": 3,
+	"fields": {
+		"recipe_of_category": 3,
+		"category_of_recipe": 1
 	}
 }]

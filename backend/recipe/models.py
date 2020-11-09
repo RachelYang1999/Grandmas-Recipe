@@ -13,7 +13,7 @@ class Recipe(models.Model):
     update_date = models.DateField(auto_now_add=True, blank=True)
     is_published = models.IntegerField(default = 0)
 
-    user = models.ForeignKey(User, on_delete = models.CASCADE, default = 1)
+    user = models.ForeignKey(User, on_delete = models.CASCADE, related_name="recipe_user")
 
 class Recipe_category(models.Model):
     class Meta:
