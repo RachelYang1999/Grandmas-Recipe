@@ -2,7 +2,7 @@ from uauth.auth import UserAuth
 from django.shortcuts import render
 from django.http import HttpResponse
 from profiles.serializers import ProfileSerializer
-from recipe.models import Recipe
+from recipe.models import Recipe, Recipe_category
 from category.models import Category
 
 from rest_framework import status, exceptions
@@ -10,34 +10,34 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import viewsets
 
-
-# Create your views here.
+from django.db import transaction
 
 class RecipeView(APIView):
-    # authentication_classes = (UserAuth,)
-    # serializer_class = ProfileSerializer
-    # user = User()
 
     def get(self, request):
         recipe_id = request.data.get("id")
         recipe = Recipe.objects.get(id = recipe_id)
+        category = Recipe_category.objects.get(recipe_of_category_id = recipe_id)
 
         get_recipe_title = recipe.recipe_title
         get_recipe_description = recipe.description
         get_is_published = recipe.is_published
         get_update_date = recipe.update_date
         get_user_id = recipe.user_id
+        get_category = category
 
         get_recipe = {
             "title": get_recipe_title,
             "description": get_recipe_description,
             "is_published": get_is_published,
             "update_date": get_update_date,    
-            "user_id": get_user_id,    
+            "user_id": get_user_id,  
+            "category_id": get_category  
         }
         print(get_recipe)
         return Response("Recipe Get Success")
 
+    @transaction.non_atomic_requests
     def post(self, request):
 
         user_id = request.data.get("user_id")
@@ -48,44 +48,22 @@ class RecipeView(APIView):
 
         category = request.data.get("category")
 
-        print("user_id" + user_id)
-        print("recipe_title" + recipe_title)
-        print("description" + description)
-        print("is_published" + is_published)
-        print("category" + category)
-
         if user_id != None and recipe_title != None and description != None and is_published != None and category != None:
             new_recipe = Recipe.objects.create(recipe_title = recipe_title, description = description, is_published = is_published, user_id = user_id)
             new_recipe.save()
             print("yes!!!")
-        
-        # if current_user != None:
-        #     print("Cannot find the user")
-        #     return
-        # if recipe_title != None:
-        #     recipe.introduction = post_introduction
-        #     user.save()
-        # if recipe_description != None:
-        #     user.gender = post_gender
-        #     user.save()
 
+            if Category.objects.get(id = category) == None:
+                raise exceptions.ValidationError("Sorry, we don't have this category")
+            
+            # Add the total number of recipe amount of a category
+            category_object = Category.objects.get(id = category)
+            category_object.total_recipe = category_object.total_recipe + 1
+            
+            recipe_id = new_recipe.id
+            modify_recipe_category = Recipe_category.objects.create(category_of_recipe_id = category, recipe_of_category_id = recipe_id)
+            modify_recipe_category.save()
 
-        # from_user = request.data.get('from_user')
-        # to_user = request.data.get('to_user')
-
-        # try:
-        #     User_follow.objects.get(from_user=from_user, to_user=to_user)
-        #     raise exceptions.ValidationError("user follow exist")
-        # except User_follow.DoesNotExist:
-        #     from_user_obj = User.objects.get(id=from_user)
-        #     from_user_obj.total_following = from_user_obj.total_following+1
-        #     from_user_obj.save()
-        #     to_user_obj = User.objects.get(id=to_user)
-        #     to_user_obj.total_follower = to_user_obj.total_follower+1
-        #     to_user_obj.save()
-        #     follow = User_follow.objects.create(from_user=from_user_obj, to_user=to_user_obj)
-        #     follow.save()
-        print("what!!!")
         data = {
             'msg': 'success',
         }
