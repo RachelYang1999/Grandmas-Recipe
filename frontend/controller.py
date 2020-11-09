@@ -33,6 +33,10 @@ def signin():
 def signup():
     return template("signup",backend=get_backend())
 
+@get('/calendar')
+def calendar():
+    return template("calendar",backend=get_backend())
+
 @get('/')
 def get_login_controller():
     token = getToken()
