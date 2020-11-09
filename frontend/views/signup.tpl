@@ -5,7 +5,7 @@
  
     <title>Sign Up</title>
     <link rel="stylesheet" href="/css/layui.css">
-    <link rel="stylesheet" href="/css/signup.css">
+    <link rel="stylesheet" href="/css/layui-suit.css">
  
 </head>
 <body>

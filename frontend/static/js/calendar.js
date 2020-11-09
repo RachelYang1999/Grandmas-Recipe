@@ -1,13 +1,12 @@
 layui.use(['laydate'], function () {
     var layer = layui.layer;
     var laydate = layui.laydate;
-
     var date = new Date();
     newDate(date);
     laydate.render({
         elem: '#date1',
         max: "2021-12-31",
-        format: "yyyy-MM-dd~yyyy-MM-dd",
+        format: "yyyy-MM-dd ~ yyyy-MM-dd",
         done: function (value, date, endDate) {
             var today = new Date(value.substring(0, 10));
             newDate(today);
@@ -17,18 +16,46 @@ layui.use(['laydate'], function () {
 });
 
 function get_data(start, end) {
-    console.log(start + " ~ " + end);
+    $.ajax({
+        url: 'http://'+$("#backend").html()+':9999/api/calendar/',
+        type:'get',
+        data: {start: start,
+            end: end},
+        dataType: 'json',
+        headers: {"token": $.cookie("token")},
+        success: function(response) {
+            console.log(response);
+            
+            var tableStr="<td>Breaky</td>";
+            for ( var i = 0; i < 7; i++) {
+                tableStr = tableStr +"<td>"+ get_recipe(response,getNewDay(start,i),"breakfirst") + "</td>";
+            };
+            $("#Breaky").html(tableStr);
 
+            var tableStr="<td>Lunch</td>";
+            for ( var i = 0; i < 7; i++) {
+                tableStr = tableStr +"<td>"+ get_recipe(response,getNewDay(start,i),"lunch") + "</td>";
+            };
+            $("#Lunch").html(tableStr);
 
+            var tableStr="<td>Dinner</td>";
+            for ( var i = 0; i < 7; i++) {
+                tableStr = tableStr +"<td>"+ get_recipe(response,getNewDay(start,i),"dinner") + "</td>";
+            };
+            $("#Dinner").html(tableStr);
+
+        },
+    });
 }
 
-
-
-
-
-
-
-
+function get_recipe(response,date,type){
+    for ( var i = 0; i < response.length; i++) { 
+        if (response[i].date==date && response[i].meal_type==type){
+            return response[i].recipe_id
+        }
+    }
+    return "None"
+}
 
 function newDate(day) {
     var weekday = day.getDay();
@@ -59,11 +86,42 @@ function newDate(day) {
         day2 = "0" + day2;
     }
     var end = "" + sunday.getFullYear() + "-" + month2 + "-" + day2;
-    if (weekday == 0) {
-        $("#date1").val(end + "~" + start);
-    } else {
-        $("#date1").val(start + "~" + end);
-    }
-    get_data(start, end);
+    
+    var first;
 
+    if (weekday == 0) {
+        $("#date1").val(end + " ~ " + start);
+        first = end;
+
+        console.log(end + " ~ " + start);
+        get_data(end, start);
+    } else {
+        $("#date1").val(start + " ~ " + end);
+        first = start;
+
+        console.log(start + " ~ " + end);
+        get_data(start, end);
+    }
+
+    $("#Sunday").val(first);
+    $("#Monday").val(getNewDay(first,1));
+    $("#Tuesday").val(getNewDay(first,2));
+    $("#Wednesday").val(getNewDay(first,3));
+    $("#Thursday").val(getNewDay(first,4));
+    $("#Friday").val(getNewDay(first,5));
+    $("#Saturday").val(getNewDay(first,6));
+}
+
+
+function getNewDay(dateTemp, days) {
+    var dateTemp = dateTemp.split("-");
+    var nDate = new Date(dateTemp[1] + '-' + dateTemp[2] + '-' + dateTemp[0]);
+    var millSeconds = Math.abs(nDate) + (days * 24 * 60 * 60 * 1000);
+    var rDate = new Date(millSeconds);
+    var year = rDate.getFullYear();
+    var month = rDate.getMonth() + 1;
+    if (month < 10) month = "0" + month;
+    var date = rDate.getDate();
+    if (date < 10) date = "0" + date;
+    return (year + "-" + month + "-" + date);
 }

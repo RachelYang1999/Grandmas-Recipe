@@ -1,5 +1,6 @@
 import random
 from hashlib import md5
+import time
 
 def create_salt(length=8):
     salt = ''
@@ -19,3 +20,13 @@ def create_md5(pwd, salt):
     salt = md5_obj.hexdigest()
     md5_obj.update(pwd.encode('utf-8') + salt.encode('utf-8'))
     return md5_obj.hexdigest()
+
+def compare_time(time1,time2):
+    s_time = time.mktime(time.strptime(time1,'%Y-%m-%d'))
+    e_time = time.mktime(time.strptime(time2,'%Y-%m-%d'))
+    # print('s_time is:',s_time)
+    # print('e_time is:',e_time)
+    if int(s_time) - int(e_time) > 0:
+        return time2,time1
+    elif int(s_time) - int(e_time) < 0:
+        return time1,time2
