@@ -1,6 +1,7 @@
 from bottle import route, get, post, request, static_file, response, redirect,template
 import configparser
 import requests
+import json
 
 def get_backend():
     config = configparser.ConfigParser()
@@ -16,9 +17,14 @@ def getToken():
 
         url='http://'+get_backend()+':9999/api/auth/'
         r = requests.get(url,headers=headers)
+        rtv=json.loads(r.text)
 
-        if r
-    return token
+        if rtv["msg"]=="success":
+            return token
+        else:
+            return None
+    else:
+        return None
 
 @route('/js/<js:path>')
 def serve_js(js):

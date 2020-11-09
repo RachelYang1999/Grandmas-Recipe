@@ -51,10 +51,40 @@ function get_data(start, end) {
 function get_recipe(response,date,type){
     for ( var i = 0; i < response.length; i++) { 
         if (response[i].date==date && response[i].meal_type==type){
-            return response[i].recipe_id
+            return response[i].recipe_id + "  <input type='submit' value='change' onclick='add_cal(\""+date+":"+type+"\")'>"
         }
     }
-    return "None"
+    return "<input type='submit' value='add' onclick='add_cal(\""+date+":"+type+"\")'>"
+}
+
+function add_cal(data){
+    var datas = data.split(":");
+
+    var form = new FormData();
+    form.append("recipe_id", "1");
+    form.append("date", datas[0]);
+    form.append("meal_type", datas[1]);
+
+    var settings = {
+        "url": "http://172.17.0.7:9999/api/calendar/",
+        "method": "POST",
+        "timeout": 0,
+        "headers": {
+            "token": $.cookie("token")
+        },
+        "processData": false,
+        "mimeType": "multipart/form-data",
+        "contentType": false,
+        "data": form
+    };
+
+    $.ajax(settings).done(function (response) {
+        var dateTemp = datas[0].split("-");
+        var nDate = new Date(dateTemp[1] + '-' + dateTemp[2] + '-' + dateTemp[0]);
+        var date = new Date(nDate);
+        newDate(date);
+    });
+
 }
 
 function newDate(day) {
