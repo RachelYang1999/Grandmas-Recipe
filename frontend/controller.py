@@ -1,5 +1,6 @@
 from bottle import route, get, post, request, static_file, response, redirect,template
 import configparser
+import requests
 
 def get_backend():
     config = configparser.ConfigParser()
@@ -7,7 +8,16 @@ def get_backend():
     return config['SETTING']['backend']
 
 def getToken():
-    token = request.get_cookie('token')
+    token = request.get_cookie('token').replace("%24","$")
+    if token!=None:
+        headers={}
+        headers['token']=token
+        print(token)
+
+        url='http://'+get_backend()+':9999/api/auth/'
+        r = requests.get(url,headers=headers)
+
+        if r
     return token
 
 @route('/js/<js:path>')
@@ -33,15 +43,24 @@ def signin():
 def signup():
     return template("signup",backend=get_backend())
 
+@get('/signout')
+def signup():
+    response.delete_cookie("token")
+    return template("signin",backend=get_backend())
+
 @get('/calendar')
 def calendar():
-    return template("calendar",backend=get_backend())
-
+    token = getToken()
+    if token is not None:
+        return template("calendar",backend=get_backend())
+    else:
+        redirect('/signin')
+    
 @get('/')
 def get_login_controller():
     token = getToken()
     if token is not None:
-        return template("index",backend=get_backend())
+        redirect('/calendar')
     else:
         redirect('/signin')
 

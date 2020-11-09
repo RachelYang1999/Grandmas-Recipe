@@ -4,11 +4,15 @@ from user.models import User
 from recipe.models import Recipe
 from datetime import date
 
+
 from django.core.cache import cache
+
+import app_3609.util as util
 
 from rest_framework import status, exceptions
 from rest_framework.views import APIView
 from rest_framework.response import Response
+
 
 
 class Calendar_view(APIView):
@@ -16,11 +20,12 @@ class Calendar_view(APIView):
     authentication_classes = (UserAuth,)
 
     def get(self, request, *args, **kwargs):
-        start = request.data.get('start')
-        end = request.data.get('end')
-        user_id = request.data.get('user_id')
+        start = request.query_params.get('start')
+        end = request.query_params.get('end')
+        start,end=util.compare_time(start,end)
+        user = request.user
 
-        return Response(Calendar.objects.filter(user=user_id,date__gte=start,date__lte=end).values())
+        return Response(Calendar.objects.filter(user=user,date__gte=start,date__lte=end).values())
 
     def post(self, request, *args, **kwargs):
         user_id = request.data.get('user_id')

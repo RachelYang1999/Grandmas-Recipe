@@ -1,6 +1,6 @@
 import uuid
 
-from uauth.auth import UserAuth
+from uauth.auth import UserAuth_login
 from user.models import User
 # from uauth.permissions import IsSuperUser
 from uauth.serializers import UserSerializer
@@ -20,15 +20,12 @@ HTTP_ACTION_LOGOUT = "signout"
 class User_auth(APIView):
     serializer_class = UserSerializer
     queryset = User.objects.all()
-    # authentication_classes = (UserAuth,)
+    authentication_classes = (UserAuth_login,)
     # permission_classes = (IsSuperUser,)
 
-    # def get(self, request, *args, **kwargs):
-    #     data = {
-    #             'msg': 'invalid',
-    #         }
-    #     return Response(data,status=400)
-
+    def get(self, request, *args, **kwargs):
+        data = {'msg': 'success',}
+        return Response(data,status=200)
 
     def post(self, request, *args, **kwargs):
         action = request.query_params.get('action')
