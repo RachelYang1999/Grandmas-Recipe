@@ -10,15 +10,14 @@ class Recipe(models.Model):
 
     recipe_title = models.CharField(max_length = 100)
     description = models.CharField(max_length = 1000)
-    update_date = models.DateField(auto_now_add = True)
+    update_date = models.DateField(auto_now_add=True, blank=True)
     is_published = models.IntegerField(default = 0)
 
     user = models.ForeignKey(User, on_delete = models.CASCADE, default = 1)
-    # category = models.ManyToManyField(Category, default = 1)
 
 class Recipe_category(models.Model):
     class Meta:
         db_table = 'recipe_category'
 
-    recipe_id =  models.ForeignKey(Recipe, on_delete = models.CASCADE)
-    category_id =  models.ForeignKey(Category, on_delete = models.CASCADE)
+    recipe_of_category =  models.ForeignKey(Recipe, related_name='recipe_of_category', on_delete = models.CASCADE)
+    category_of_recipe =  models.ForeignKey(Category, related_name='category_of_recipe', on_delete = models.CASCADE)

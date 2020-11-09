@@ -1,4 +1,4 @@
-{
+[{
 	"model": "user.user",
 	"pk": 1,
 	"fields": {
@@ -226,4 +226,4 @@
 		"is_published": 1,
 		"user": 1
 	}
-}
+}]
