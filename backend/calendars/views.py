@@ -33,8 +33,13 @@ class Calendar_view(APIView):
         date = request.data.get('date')
         meal_type = request.data.get('meal_type')
 
-        calendar = Calendar.objects.create(date=date, meal_type=meal_type, user=user, recipe=Recipe.objects.get(id=recipe_id))
-        calendar.save()
+        try:
+            calendar=Calendar.objects.get(date=date, meal_type=meal_type)
+            calendar.recipe=Recipe.objects.get(id=recipe_id)
+            calendar.save()
+        except Calendar.DoesNotExist:
+            calendar = Calendar.objects.create(date=date, meal_type=meal_type, user=user, recipe=Recipe.objects.get(id=recipe_id))
+            calendar.save()
 
         data = {
             'msg': 'success',

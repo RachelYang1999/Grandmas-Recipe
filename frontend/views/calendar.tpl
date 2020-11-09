@@ -24,7 +24,7 @@
         <th style="width:7%"></th>
         <th style="width:11%">Sunday
         <br>
-        <input id="Sunday" type="text" style="width:80px;border:0" value=""" readonly/>
+        <input id="Sunday" type="text" style="width:80px;border:0" value="" readonly/>
         </th>
         <th style="width:11%">Monday
         <br>

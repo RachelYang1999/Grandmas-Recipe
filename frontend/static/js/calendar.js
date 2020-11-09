@@ -52,39 +52,55 @@ function get_data(start, end) {
 function get_recipe(response,date,type){
     for ( var i = 0; i < response.length; i++) { 
         if (response[i].date==date && response[i].meal_type==type){
-            return response[i].recipe_id + "  <input type='submit' value='change' onclick='add_cal(\""+date+":"+type+"\")'>"
+            return  '<input id="'+date+":"+type+'" type="text" style="width:80px;border:0" value="'+response[i].recipe_id+'" readonly/>' + "  <input type='submit' value='change' onclick='add_cal(\""+date+":"+type+"\")'>"
         }
     }
-    return "<input type='submit' value='add' onclick='add_cal(\""+date+":"+type+"\")'>"
+    return '<input id="'+date+":"+type+'" type="text" style="width:80px;border:0" value="" readonly/>' + "<input type='submit' value='add' onclick='add_cal(\""+date+":"+type+"\")'>"
 }
-
+ 
 function add_cal(data){
+    console.log(data);
     var datas = data.split(":");
+    layui.use('layer', function(){
+        layer.open({
+            type:1,
+            content: 'reciep_id: <input id="r_id" type="text" style="width:80px;" value="" />',
+            title:"Select Recipe",
+            btn: ['Confirm', 'Cancel'], 
+  
+            yes:function(index,layero){
+                var form = new FormData();
+                form.append("recipe_id", $('#r_id').val());
+                form.append("date", datas[0]);
+                form.append("meal_type", datas[1]);
 
-    var form = new FormData();
-    form.append("recipe_id", "1");
-    form.append("date", datas[0]);
-    form.append("meal_type", datas[1]);
+                var settings = {
+                    "url": "http://"+$("#backend").html()+":9999/api/calendar/",
+                    "method": "POST",
+                    "timeout": 0,
+                    "headers": {
+                        "token": $.cookie("token")
+                    },
+                    "processData": false,
+                    "mimeType": "multipart/form-data",
+                    "contentType": false,
+                    "data": form
+                };
 
-    var settings = {
-        "url": "http://"+$("#backend").html()+":9999/api/calendar/",
-        "method": "POST",
-        "timeout": 0,
-        "headers": {
-            "token": $.cookie("token")
-        },
-        "processData": false,
-        "mimeType": "multipart/form-data",
-        "contentType": false,
-        "data": form
-    };
+                $.ajax(settings).done(function (response) {
+                    var dateTemp = datas[0].split("-");
+                    var nDate = new Date(dateTemp[1] + '-' + dateTemp[2] + '-' + dateTemp[0]);
+                    var date = new Date(nDate);
+                    newDate(date);
+                });
+                layer.close(index);
+                    
+            }
+        }); 
+    }); 
+    
 
-    $.ajax(settings).done(function (response) {
-        var dateTemp = datas[0].split("-");
-        var nDate = new Date(dateTemp[1] + '-' + dateTemp[2] + '-' + dateTemp[0]);
-        var date = new Date(nDate);
-        newDate(date);
-    });
+    
 }
 
 function newDate(day) {
