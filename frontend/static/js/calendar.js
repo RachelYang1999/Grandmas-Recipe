@@ -15,6 +15,7 @@ layui.use(['laydate'], function () {
     });
 });
 
+
 function get_data(start, end) {
     $.ajax({
         url: 'http://'+$("#backend").html()+':9999/api/calendar/',
@@ -66,7 +67,7 @@ function add_cal(data){
     form.append("meal_type", datas[1]);
 
     var settings = {
-        "url": "http://172.17.0.7:9999/api/calendar/",
+        "url": "http://"+$("#backend").html()+":9999/api/calendar/",
         "method": "POST",
         "timeout": 0,
         "headers": {
@@ -84,7 +85,6 @@ function add_cal(data){
         var date = new Date(nDate);
         newDate(date);
     });
-
 }
 
 function newDate(day) {

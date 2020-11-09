@@ -12,7 +12,7 @@ from rest_framework.response import Response
 class Category_view(APIView):
     serializer_class = CategorySerializer
     queryset = Category.objects.all()
-    authentication_classes = (UserAuth,)
+    # authentication_classes = (UserAuth,)
 
     def get(self, request, *args, **kwargs):
         return Response(Category.objects.all().values())
