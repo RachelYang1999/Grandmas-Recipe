@@ -52,7 +52,9 @@ class RecipeView(APIView):
 
     @transaction.non_atomic_requests
     def post(self, request):
-
+        data = {
+                'msg': 'failed',
+            }
         user = request.user
         # current_user = User.objects.get(id = user_id)
         recipe_title = request.data.get("recipe_title")
@@ -60,30 +62,51 @@ class RecipeView(APIView):
         is_published = request.data.get("is_published")
 
         category = request.data.get("category")
+        category_list = category.split(",")
+        print(category_list)
 
-        step = request.data.get("step")
+        step_decription_list = []
+        step_count = request.data.get("step_count")
+        for i in range(int(step_count)):
+            step_number = i + 1
+            input_step_name = "step-" + str(step_number)
+            step_decription_list.append(request.data.get(input_step_name))
 
         if recipe_title != None and description != None and is_published != None and category != None:
+
             new_recipe = Recipe.objects.create(recipe_title = recipe_title, description = description, is_published = is_published, user = user)
             new_recipe.save()
-            print("yes!!!")
-
-            if Category.objects.get(id = category) == None:
-                raise exceptions.ValidationError("Sorry, we don't have this category")
             
             # Add the total number of recipe amount of a category
-            category_object = Category.objects.get(id = category)
-            category_object.total_recipe = category_object.total_recipe + 1
-            category_object.save()
+            # Add categories for a recipe  
+            category_not_found = ""
+            for c in category_list:
+                try:
+                    category_object = Category.objects.get(id = c)
+                    category_object.total_recipe = category_object.total_recipe + 1
+                    category_object.save()
+                    recipe_category_relationship = Recipe_category.objects.create(category_of_recipe_id = c, recipe_of_category_id = new_recipe.id)
+                    recipe_category_relationship.save()
+                except:
+                    category_not_found += c
+                    data = {
+                        'msg': category_not_found + " category is not found",
+                    }
+                    return Response(data, status=201)
 
-            step_object = Step.objects.create(step_description = step, related_recipe_id = new_recipe.id)
-            step_object.save()
+                # category_object = Category.objects.get(id = c)
+                # category_object.total_recipe = category_object.total_recipe + 1
+                # category_object.save()
+                # recipe_category_relationship = Recipe_category.objects.create(category_of_recipe_id = c, recipe_of_category_id = new_recipe.id)
+                # recipe_category_relationship.save()
+
+            # Add steps for a recipe
+            for s in step_decription_list:
+                step_object = Step.objects.create(step_description = s, related_recipe_id = new_recipe.id)
+                step_object.save()
+
+            data = {
+                'msg': 'success',
+            }
             
-            recipe_id = new_recipe.id
-            modify_recipe_category = Recipe_category.objects.create(category_of_recipe_id = category, recipe_of_category_id = recipe_id)
-            modify_recipe_category.save()
-
-        data = {
-            'msg': 'success',
-        }
         return Response(data, status=201)
