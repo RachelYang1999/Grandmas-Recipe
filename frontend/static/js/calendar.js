@@ -1,6 +1,7 @@
-layui.use(['laydate'], function () {
+layui.use(['laydate','layer'], function () {
     var layer = layui.layer;
     var laydate = layui.laydate;
+
     var date = new Date();
     newDate(date);
     laydate.render({
@@ -11,7 +12,8 @@ layui.use(['laydate'], function () {
             var today = new Date(value.substring(0, 10));
             newDate(today);
         },
-        lang: 'en'
+        lang: 'en',
+        showBottom: false
     });
 });
 
@@ -52,10 +54,10 @@ function get_data(start, end) {
 function get_recipe(response,date,type){
     for ( var i = 0; i < response.length; i++) { 
         if (response[i].date==date && response[i].meal_type==type){
-            return  '<input id="'+date+":"+type+'" type="text" style="width:80px;border:0" value="'+response[i].recipe_id+'" readonly/>' + "  <input type='submit' value='change' onclick='add_cal(\""+date+":"+type+"\")'>"
+            return  '<input id="'+date+":"+type+'" type="text" style="width:80px;border:0" value="'+response[i].recipe_title+'" readonly/>' + "<br><button class='layui-btn' value='change' onclick='add_cal(\""+date+":"+type+"\")'>change</button>"
         }
     }
-    return '<input id="'+date+":"+type+'" type="text" style="width:80px;border:0" value="" readonly/>' + "<input type='submit' value='add' onclick='add_cal(\""+date+":"+type+"\")'>"
+    return '<input id="'+date+":"+type+'" type="hidden" style="width:80px;border:0" value="" readonly/>' + "<button class='layui-btn layui-btn-radius layui-bg-red' onclick='add_cal(\""+date+":"+type+"\")'><i class='layui-icon layui-icon-addition '></i> </button>"
 }
  
 function add_cal(data){

@@ -4,6 +4,7 @@ from uauth.auth import UserAuth_login
 from user.models import User
 # from uauth.permissions import IsSuperUser
 from uauth.serializers import UserSerializer
+from upload.models import Upload_profile
 
 from django.core.cache import cache
 
@@ -24,7 +25,7 @@ class User_auth(APIView):
     # permission_classes = (IsSuperUser,)
 
     def get(self, request, *args, **kwargs):
-        data = {'msg': 'success',}
+        data = {'msg': 'success',"username": request.user.username,"avatar":Upload_profile.objects.filter(user=request.user).values()[0]["profile_image"]}
         return Response(data,status=200)
 
     def post(self, request, *args, **kwargs):
@@ -96,6 +97,7 @@ class User_auth(APIView):
             raise exceptions.ValidationError("username exist")
         except User.DoesNotExist:
             user=User.objects.create(username=username,password=password,salt=salt)
+            upload=Upload_profile.objects.create(user=user)
 
         data = {
                 'msg': 'success',
