@@ -9,26 +9,34 @@ def get_backend():
     return config['SETTING']['backend']
 
 def getToken():
-    token = request.get_cookie('token').replace("%24","$")
+    token = request.get_cookie('token')
     if token!=None:
+        token=token.replace("%24","$")
         headers={}
         headers['token']=token
-        print(token)
 
         url='http://'+get_backend()+':9999/api/auth/'
         r = requests.get(url,headers=headers)
         rtv=json.loads(r.text)
 
         if rtv["msg"]=="success":
-            return token
+            return token,rtv["username"],rtv["avatar"]
         else:
             return None
     else:
         return None
 
+@route('/img/<img:path>')
+def serve_js(img):
+    return static_file(img, root='../upload/')
+
 @route('/js/<js:path>')
 def serve_js(js):
     return static_file(js, root='static/js/')
+
+@route('/icon/<icon:path>')
+def serve_icon(icon):
+    return static_file(icon, root='static/icon/')
 
 @route('/font/<font:path>')
 def serve_font(font):
@@ -40,10 +48,10 @@ def serve_css(css):
 
 @get('/signin')
 def signin():
-    token = getToken()
-    if token is not None:
-        return template("index",backend=get_backend())
-    return template("signin",backend=get_backend())
+    rtv = getToken()
+    if rtv is not None:
+        redirect('/calendar')
+    return template("signin",backend=get_backend(),)
 
 @get('/signup')
 def signup():
@@ -52,20 +60,20 @@ def signup():
 @get('/signout')
 def signup():
     response.delete_cookie("token")
-    return template("signin",backend=get_backend())
+    redirect('/signin')
 
 @get('/calendar')
 def calendar():
-    token = getToken()
-    if token is not None:
-        return template("calendar",backend=get_backend())
+    rtv = getToken()
+    if rtv is not None:
+        return template("calendar",backend=get_backend(),username=rtv[1],avatar=rtv[2])
     else:
         redirect('/signin')
     
 @get('/')
 def get_login_controller():
-    token = getToken()
-    if token is not None:
+    rtv = getToken()
+    if rtv is not None:
         redirect('/calendar')
     else:
         redirect('/signin')

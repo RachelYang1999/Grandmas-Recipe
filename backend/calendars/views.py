@@ -4,7 +4,6 @@ from user.models import User
 from recipe.models import Recipe
 from datetime import date
 
-
 from django.core.cache import cache
 
 import app_3609.util as util
@@ -24,8 +23,11 @@ class Calendar_view(APIView):
         end = request.query_params.get('end')
         start,end=util.compare_time(start,end)
         user = request.user
+        cals=Calendar.objects.filter(user=user,date__gte=start,date__lte=end).values()
+        for i in cals:
+            i["recipe_title"]=Recipe.objects.get(id=i["recipe_id"]).recipe_title
 
-        return Response(Calendar.objects.filter(user=user,date__gte=start,date__lte=end).values())
+        return Response(cals)
 
     def post(self, request, *args, **kwargs):
         user = request.user
@@ -34,7 +36,7 @@ class Calendar_view(APIView):
         meal_type = request.data.get('meal_type')
 
         try:
-            calendar=Calendar.objects.get(date=date, meal_type=meal_type)
+            calendar=Calendar.objects.get(date=date, meal_type=meal_type,user=user)
             calendar.recipe=Recipe.objects.get(id=recipe_id)
             calendar.save()
         except Calendar.DoesNotExist:

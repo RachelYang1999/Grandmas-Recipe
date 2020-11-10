@@ -1,6 +1,54 @@
 @charset "utf-8";
 
-td{
+/* header */
+.logo{
+    width:60px;
+    height:60px;
+}
+
+.logo-text{
+    color:red;
+}
+
+.layui-nav-item .layui-form{
+    margin-left:10px;
+}
+
+.layui-nav-item .layui-form .select-item{
+    width:120px;
+    color:black;
+}
+
+.layui-layout-center{
+    margin-left:780px;
+}
+
+.input-item{
+    width:250px;
+}
+
+.cal-item{
+    margin-left:10px;
+}
+
+/* footer */
+.layui-layout-admin .my-footer {
+    height: 40px;
+    margin-left: -200px;
+    text-align: center;
+}
+
+/* calendar */
+.cal-main th{
+    text-align:center;
+    height: 70px
+}
+
+.cal-main td{
+    text-align:center;
+    height: 110px
+}
+.cal-main input{
     text-align:center;
 }
 
@@ -8,74 +56,36 @@ td{
     background: none;
 }
 
-.layui-layout-admin .my-header {
+.cal-main {
     position: fixed;
     top: 0;
+    right: 0;
+    bottom: 0;
     left: 0;
-    width: 100%;
-    height: 60px;
-    background: #393D49;
-    z-index: 2;
+    width: 1100px;
+    margin: 0 auto;
 }
 
-.layui-layout-admin .my-header .my-header-logo {
-    display: inline-block;
-    width: auto;
-    height: 30px;
-    color: white;
-    font-size: 18px;
-    line-height: 30px;
-    padding: 15px;
-    vertical-align: top;
-}
-
-.layui-layout-admin .my-header img.my-header-logo {
-    width: 150px;
-    height: 40px;
+.cal-main header{
+    margin-top: 150px;
+    height: 35px;
+    line-height: 35px;
+    font-size: 25px;
+    font-weight: 100;
     text-align: center;
-    line-height: 40px;
-    padding: 10px;
-    border: none;
+}
+
+.data-item{
+    margin: auto;
+    text-align: center;
+}
+
+.cal-table{
+    margin-top: 40px;
 }
 
 /* index */
-.my-header-btn {
-    display: inline-block;
-    width: auto;
-    height: 100%;
-    line-height: 60px;
-}
 
-.my-header-btn .layui-btn .layui-icon {
-    margin-right: 0;
-}
-
-.my-header-user-nav {
-    float: right;
-}
-
-.my-header-user-nav img {
-    width: 40px;
-    height: 40px;
-    text-align: center;
-    line-height: 40px;
-    border: none;
-    border-radius: 5px;
-}
-
-.my-header-user-nav .layui-nav-item a.name {
-    padding-left: 5px !important;
-}
-
-.my-header ul.layui-nav {
-    display: inline-block;
-    vertical-align: top;
-    border-radius: 0;
-}
-
-.my-header ul.layui-nav li a {
-    max-height: 60px;
-}
 
 .my-side {
     position: fixed;
@@ -93,6 +103,7 @@ td{
 
 .my-side ul.layui-nav li a i, .layui-nav .layui-nav-child a i, .layui-nav .layui-nav-item a i, .layui-tab-card > .layui-tab-title li span i {
     margin-right: 5px;
+
 }
 
 .my-side ul.layui-nav li dl dd a i {
@@ -155,33 +166,11 @@ td{
     margin-bottom: 10px;
 }
 
-/* welcome */
-.my-index-main button.layui-icon {
-    width: 100%;
-    font-size: 20px;
-}
-
-.my-index-main .my-nav-btn {
-    background: #efefef;
-    cursor: pointer;
-    border-radius: 2px;
-    overflow: hidden;
-}
-
-.my-index-main .my-nav-text:first-child {
-    height: 24px;
-    line-height: 25px;
-    font-size: 16px;
-    font-weight: bold;
-}
-
-.my-index-main .my-nav-text:last-child {
-    height: 20px;
-    line-height: 20px;
-    font-size: 12px;
-}
-
 /* login */
+a.fr{
+   float: right;
+}
+
 .login-body {
     background: url("../image/bg.png") repeat fixed;
 }
@@ -207,7 +196,7 @@ td{
 
 .login-box .layui-input[type='number'] {
     display: inline-block;
-    width: 50%;
+    width: 0%;
     vertical-align: top;
 }
 
@@ -260,15 +249,6 @@ td{
     margin-bottom: 5px;
 }
 
-/* demo */
-.site-demo-button div {
-    margin: 20px 30px 10px;
-}
-
-.site-demo-button .layui-btn {
-    margin: 0 7px 10px 0;
-}
-
 /* check */
 input[type='checkbox'] {
     vertical-align: middle;
@@ -305,203 +285,6 @@ input[type='checkbox'] {
     color: #FFFFFF;
     font-size: 16px;
     font-weight: 600;
-}
-
-/* dblclick css */
-.dblclick-tab tr td {
-    height: 30px;
-    line-height: 30px;
-    padding: 0 6px;
-    border-radius: 2px;
-    cursor: pointer;
-}
-
-.dblclick-tab tr td:hover {
-    color: black;
-    background: white;
-}
-
-.dblclick-tab tr td i {
-    position: relative;
-    top: 2px;
-    display: inline-block;
-    margin-right: 5px;
-}
-
-/* tips 404 */
-.my-page-box {
-    font-family: "Segoe UI", "Lucida Grande", Helvetica, Arial, "Microsoft YaHei", FreeSans, Arimo, "Droid Sans", "wenquanyi micro hei", "Hiragino Sans GB", "Hiragino Sans GB W3", FontAwesome, sans-serif;
-    text-align: center;
-    padding: 20px;
-    background-color: white;
-}
-
-.my-page-box i {
-    font-size: 100px;
-}
-
-.my-page-box h2, .my-page-box h3, .my-page-box h4, .my-page-box h5 {
-    font-size: 80px;
-}
-
-.my-page-box p.msg {
-    color: #dce2ec;
-    font-size: 20px;
-    margin-top: 20px;
-}
-
-.my-page-box p.text {
-    color: #666;
-    font-size: 16px;
-    margin-top: 20px;
-}
-
-.my-page-box .my-btn-box {
-    margin-top: 20px;
-    margin-bottom: 20px;
-}
-
-/* tree table */
-.my-tree-table-box .tree-table-tree-box {
-    width: 20%;
-    min-height: 200px;
-    display: inline-block;
-    vertical-align: top;
-    overflow-y: auto;
-    overflow-x: auto;
-}
-
-.my-tree-table-box .tree-table-table-box {
-    display: inline-block;
-    vertical-align: top;
-    width: 79%;
-    margin-left: 1%;
-}
-
-/* skin0 */
-html .skin-0 .dblclick-tips-box .layui-layer-content {
-    background-color: #009688;
-}
-
-html .skin-0 .dblclick-tips-box i.layui-layer-TipsB {
-    border-right-color: #009688;
-}
-
-/* skin1 */
-html .skin-1 .my-header .my-header-logo,
-html .skin-1 .layui-nav .layui-nav-item a,
-html .skin-1 .layui-nav .layui-nav-item a:hover {
-    color: #444;
-}
-
-html .skin-1 .my-header,
-html .skin-1 .layui-nav,
-html .skin-1 .layui-nav-child {
-    background: white;
-}
-
-html .skin-1 .layui-nav .layui-nav-item .layui-nav-child dd.layui-this a {
-    color: white;
-}
-
-html .skin-1 .layui-nav .layui-nav-item .layui-nav-child dd.layui-this,
-html .skin-1 .layui-nav .layui-nav-item .layui-nav-child dd.layui-this > a,
-html .skin-1 .layui-nav-tree .layui-nav-item > a:hover,
-html .skin-1 .layui-nav .layui-nav-item .layui-nav-child dd:hover > a,
-html .skin-1 .layui-tab-title li .layui-tab-close:hover,
-html .skin-1 .dblclick-tips-box .layui-layer-content {
-    color: white !important;
-    background-color: #666 !important;
-}
-
-html .skin-1 .dblclick-tips-box i.layui-layer-TipsB {
-    border-right-color: #666;
-}
-
-html .skin-1 .layui-nav .layui-nav-itemed > a {
-    background: #444 !important;
-}
-
-html .skin-1 .layui-nav .layui-nav-more {
-    border-color: #444 transparent transparent;
-}
-
-html .skin-1 .layui-nav .layui-nav-mored {
-    border-color: transparent transparent #444;
-}
-
-/* skin2 */
-html .skin-2 .my-header .my-header-logo,
-html .skin-2 .layui-nav .layui-nav-item a,
-html .skin-2 .layui-nav .layui-nav-item a:hover {
-    color: white;
-}
-
-html .skin-2 .my-header,
-html .skin-2 .layui-nav,
-html .skin-2 .layui-nav-child {
-    background-color: #01AAED;
-}
-
-html .skin-2 .layui-nav .layui-nav-item .layui-nav-child dd.layui-this a {
-    color: white;
-}
-
-html .skin-2 .layui-nav .layui-nav-item .layui-nav-child dd.layui-this,
-html .skin-2 .layui-nav .layui-nav-item .layui-nav-child dd.layui-this > a,
-html .skin-2 .layui-nav-tree .layui-nav-item > a:hover,
-html .skin-2 .layui-nav .layui-nav-item .layui-nav-child dd:hover > a,
-html .skin-2 .layui-tab-title li .layui-tab-close:hover,
-html .skin-2 .dblclick-tips-box .layui-layer-content {
-    color: white !important;
-    background-color: #00C0F7 !important;
-}
-
-html .skin-2 .dblclick-tips-box i.layui-layer-TipsB {
-    border-right-color: #00C0F7;
-}
-
-html .skin-2 .layui-nav .layui-nav-itemed > a {
-    background-color: #1684af !important;
-}
-
-/* skin0-2 */
-html .skin-2 .layui-nav .layui-nav-more,
-html .skin-1 .layui-nav-tree .layui-nav-more,
-html .skin-2 .layui-nav-tree .layui-nav-more {
-    border-color: white transparent transparent;
-}
-
-html .skin-2 .layui-nav .layui-nav-mored,
-html .skin-1 .layui-nav-itemed .layui-nav-more,
-html .skin-2 .layui-nav-itemed .layui-nav-more {
-    border-color: transparent transparent white;
-}
-
-/* tools */
-.fl {
-    float: left;
-}
-
-.fr {
-    float: right;
-}
-
-.none {
-    display: none;
-}
-
-.block {
-    display: block;
-}
-
-.tc {
-    text-align: center;
-}
-
-.max-auto {
-    max-height: 450px;
-    overflow-y: auto;
 }
 
 /* layui css cover */
@@ -569,10 +352,6 @@ html body .layui-nav .layui-nav-bar {
 
     .my-body iframe {
         width: 100%;
-    }
-
-    select {
-        background: white;
     }
 
     .layui-layout-admin .layui-footer {

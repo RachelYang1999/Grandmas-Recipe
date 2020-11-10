@@ -25,8 +25,7 @@ class upload_profile_view(APIView):
 
     def post(self, request, *args, **kwargs):
         file_uploaded = request.FILES['document']
-        user_id = request.data.get('user_id')
-        user = User.objects.get(id=user_id)
+        user = request.user
 
         new_entry = Upload_profile.objects.create(
             user=user, profile_image=file_uploaded)

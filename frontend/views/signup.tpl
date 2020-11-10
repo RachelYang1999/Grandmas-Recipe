@@ -10,7 +10,8 @@
 </head>
 <body>
  
-<div class="login-main">
+%include('header_sign.tpl')
+<div class="login-main layui-body">
     <header class="layui-elip">Sign Up</header>
     <form class="layui-form">
         <div class="layui-input-inline">
@@ -31,14 +32,9 @@
 </div>
 
  
-
-
-<script type="text/javascript" src="/js/jquery-3.4.1.min.js"></script>
-<script type="text/javascript" src="/js/jquery.cookie.js"></script>
-<script type="text/javascript" src="/js/layui.js"></script>
+%include('footer.tpl')
 <script type="text/javascript" src="/js/signup.js"></script>
 
-Debug: <label name="backend" id="backend" value="{{backend}}">{{backend}}</label>
 
 </body>
 </html>

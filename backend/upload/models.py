@@ -8,7 +8,7 @@ class Upload_profile(models.Model):
     class Meta:
         db_table = 'user_profile_metadata'
     user = models.ForeignKey(User, related_name='userprofileimage',on_delete=models.CASCADE,default=1)
-    profile_image = models.ImageField(upload_to='avatar', null=True, blank=True,default="default.png")
+    profile_image = models.ImageField(upload_to='avatar', null=True, blank=True,default="avatar/default.png")
 
 class Upload_recipe(models.Model):
     class Meta:

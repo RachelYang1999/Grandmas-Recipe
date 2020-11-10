@@ -4,13 +4,8 @@
     <meta charset="UTF-8">
  
     <title>Sign In</title>
-    <link rel="stylesheet" href="/css/layui.css">
-    <link rel="stylesheet" href="/css/layui-suit.css">
- 
-</head>
-<body>
- 
-<div class="login-main">
+%include('header_sign.tpl')
+<div class="login-main layui-body">
     <header class="layui-elip">Sign In</header>
     <form class="layui-form">
         <div class="layui-input-inline">
@@ -30,15 +25,11 @@
     </form>
 </div>
 
- 
+%include('footer.tpl')
 
-
-<script type="text/javascript" src="/js/jquery-3.4.1.min.js"></script>
-<script type="text/javascript" src="/js/jquery.cookie.js"></script>
-<script type="text/javascript" src="/js/layui.js"></script>
 <script type="text/javascript" src="/js/signin.js"></script>
 
-Debug: <label name="backend" id="backend" value="{{backend}}">{{backend}}</label>
+
 
 </body>
 </html>
