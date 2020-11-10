@@ -4,6 +4,7 @@ from django.http import HttpResponse
 from profiles.serializers import ProfileSerializer
 from recipe.models import Recipe, Recipe_category
 from category.models import Category
+from step.models import Step
 
 from rest_framework import status, exceptions
 from rest_framework.views import APIView
@@ -18,14 +19,23 @@ class RecipeView(APIView):
     def get(self, request):
         recipe_id = request.data.get("id")
         recipe = Recipe.objects.get(id = recipe_id)
-        category = Recipe_category.objects.get(recipe_of_category_id = recipe_id)
+        category = Recipe_category.objects.filter(recipe_of_category_id = recipe_id)
+        step = Step.objects.filter(related_recipe_id = recipe_id)
 
         get_recipe_title = recipe.recipe_title
         get_recipe_description = recipe.description
         get_is_published = recipe.is_published
         get_update_date = recipe.update_date
         get_user_id = recipe.user_id
-        get_category = category
+
+        get_category_list = []
+        for c in category:
+            get_category_list.append(c.category_of_recipe_id)
+            # print(c.category_of_recipe_id)
+
+        get_step_list = []
+        for s in step:
+            get_step_list.append(s.step_description)
 
         get_recipe = {
             "title": get_recipe_title,
@@ -33,8 +43,10 @@ class RecipeView(APIView):
             "is_published": get_is_published,
             "update_date": get_update_date,    
             "user_id": get_user_id,  
-            "category_id": get_category  
+            "category_id_list": get_category_list, 
+            "step_id_list": get_step_list,
         }
+
         print(get_recipe)
         return Response("Recipe Get Success")
 
@@ -49,6 +61,8 @@ class RecipeView(APIView):
 
         category = request.data.get("category")
 
+        step = request.data.get("step")
+
         if recipe_title != None and description != None and is_published != None and category != None:
             new_recipe = Recipe.objects.create(recipe_title = recipe_title, description = description, is_published = is_published, user = user)
             new_recipe.save()
@@ -61,6 +75,9 @@ class RecipeView(APIView):
             category_object = Category.objects.get(id = category)
             category_object.total_recipe = category_object.total_recipe + 1
             category_object.save()
+
+            step_object = Step.objects.create(step_description = step, related_recipe_id = new_recipe.id)
+            step_object.save()
             
             recipe_id = new_recipe.id
             modify_recipe_category = Recipe_category.objects.create(category_of_recipe_id = category, recipe_of_category_id = recipe_id)
