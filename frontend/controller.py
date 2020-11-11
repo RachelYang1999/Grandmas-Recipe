@@ -65,6 +65,11 @@ def signout():
     response.delete_cookie("token")
     redirect('/')
 
+@get('/forget')
+def signout():
+    
+    return template("forget",backend=get_backend(),page="forget")
+
 @get('/calendar')
 def calendar():
     rtv = getToken()
@@ -76,10 +81,16 @@ def calendar():
 @get('/')
 def index():
     rtv = getToken()
+
+    url = "http://172.17.0.7:9999/api/category/"
+
+    r = requests.request("GET", url)
+    category=json.loads(r.text)
+
     if rtv is not None:
-        return template("index",backend=get_backend(),username=rtv[1],avatar=rtv[2],signin=True)
+        return template("index",backend=get_backend(),username=rtv[1],avatar=rtv[2],signin=True,category=category)
     else:
-        return template("index",backend=get_backend(),signin=False)
+        return template("index",backend=get_backend(),signin=False,category=category)
 
 @get('/profile')
 def profile():

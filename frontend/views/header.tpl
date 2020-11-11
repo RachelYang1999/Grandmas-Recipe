@@ -3,9 +3,9 @@
  
 </head>
 
-<body class="layui-layout-body" style="overflow: hidden">
+<body class="layui-layout-body">
     <div class="layui-layout layui-layout-admin">
-        <div class="layui-header ">
+        <div class="layui-header">
             <div class="layui-container">
                 <div class="layui-logo"><img class="logo" src="/icon/logo.png">Grandma's Recipe</div>
                 

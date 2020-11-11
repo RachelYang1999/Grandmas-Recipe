@@ -3,19 +3,17 @@
 <head>
     <meta charset="UTF-8">
  
-    <title>Sign Up</title>
-    <link rel="stylesheet" href="/css/layui.css">
-    <link rel="stylesheet" href="/css/layui-suit.css">
- 
-</head>
-<body>
- 
+    <title>Sign In</title>
 %include('header_sign.tpl')
 <div class="login-main layui-body">
-    <header class="layui-elip">Sign Up</header>
+    <header class="layui-elip">Forget Password</header>
     <form class="layui-form">
         <div class="layui-input-inline">
-            <input type="text" name="username" required lay-verify="required" placeholder="Username" autocomplete="off"
+            <input type="text" name="username" required lay-verify="required" placeholder="E-mail" autocomplete="off"
+                   class="layui-input">
+        </div>
+        <div class="layui-input-inline">
+            <input type="password" name="password" required lay-verify="required" placeholder="Code" autocomplete="off"
                    class="layui-input">
         </div>
         <div class="layui-input-inline">
@@ -27,17 +25,16 @@
                    class="layui-input">
         </div>
         <div class="layui-input-inline login-btn">
-            <button lay-submit lay-filter="login" class="layui-btn">Sign Up</button>
+            <button lay-submit lay-filter="login" class="layui-btn">Submit</button>
         </div>
-        <hr/>
 
-        <a href="signin" class="fl">Have an account? Sign in here.</a></p>
     </form>
 </div>
 
- 
 %include('footer.tpl')
-<script type="text/javascript" src="/js/signup.js"></script>
+
+<script type="text/javascript" src="/js/signin.js"></script>
+
 
 
 </body>

@@ -21,7 +21,7 @@
         </div>
         <hr/>
 
-        <p><a href="signup" class="fl">No account? Sign up here.</a><a href="forget" class="fr">Forget password?</a></p>
+        <p><a href="/signup" class="fl">No account? Sign up here.</a><a href="/forget" class="fr">Forget password?</a></p>
     </form>
 </div>
 

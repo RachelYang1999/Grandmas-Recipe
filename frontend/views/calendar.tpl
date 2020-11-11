@@ -11,7 +11,7 @@
 
         %include('header.tpl')
 
-        <div class="cal-main layui-body">
+        <div class="cal-main layui-body"">
             <header>Choose the date:</header>
             <input type="text" id="date1" lay-verify="date1" class="layui-input data-item" style="width:300px;" value="" />
             <br>

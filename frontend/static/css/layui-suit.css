@@ -1,13 +1,21 @@
 @charset "utf-8";
 
+
+/* index */
+.index-body{
+    margin:30px;
+}
+.center{
+    align:center;
+}
+
 /* profile */
 .profile-body{
-    margin:150px;
-
+    margin: 110px;
 }
 
 .profile-form{
-    margin-top:50px;
+    margin: 50px;
 }
 
 .p_avatar{
@@ -37,7 +45,7 @@
 }
 
 .layui-layout-center{
-    margin-left:700px;
+    margin-left:660px;
 }
 
 .input-item{
@@ -49,7 +57,7 @@
 /* footer */
 .layui-layout-admin .my-footer {
     height: 40px;
-    margin-left: -200px;
+    left: 0px;
     text-align: center;
 }
 
@@ -85,7 +93,7 @@
 }
 
 .cal-main header{
-    margin-top: 150px;
+    margin-top: 110px;
     height: 35px;
     line-height: 35px;
     font-size: 25px;
