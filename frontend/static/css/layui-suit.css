@@ -1,12 +1,23 @@
 @charset "utf-8";
 
-
 /* index */
 .index-body{
     margin:30px;
+    height: 86%;
 }
+
 .center{
     align:center;
+    text-align:center;
+}
+
+.r_i{
+    width:250px;
+    height:250px;
+}
+
+.tree-nav{
+    margin: 100px;
 }
 
 /* profile */
@@ -31,12 +42,16 @@
 
 /* header */
 .logo{
-    width:60px;
-    height:60px;
+    width:50px;
+    height:50px;
+}
+
+.layui-nav-item .layui-nav{
+    height: 25%
 }
 
 .layui-nav-item .layui-form{
-    margin-left:10px;
+    margin-left:100px;
 }
 
 .layui-nav-item .layui-form .select-item{
@@ -44,14 +59,15 @@
     color:black;
 }
 
-.layui-layout-center{
-    margin-left:660px;
-}
-
 .input-item{
-    width:230px;
+    width:320px;
 }
-
+.layui-nav .layui-nav-more{
+    border-top-color:#393D49;
+}
+.layui-nav .layui-nav-mored{
+    border-color: transparent transparent #393D49;
+}
 
 
 /* footer */

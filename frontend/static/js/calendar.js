@@ -57,7 +57,7 @@ function get_recipe(response,date,type){
             return  '<input id="'+date+":"+type+'" type="text" style="width:80px;border:0" value="'+response[i].recipe_title+'" readonly/>' + "<br><button class='layui-btn' value='change' onclick='add_cal(\""+date+":"+type+"\")'>change</button>"
         }
     }
-    return '<input id="'+date+":"+type+'" type="hidden" style="width:80px;border:0" value="" readonly/>' + "<button class='layui-btn layui-btn-radius layui-bg-red' onclick='add_cal(\""+date+":"+type+"\")'><i class='layui-icon layui-icon-addition '></i> </button>"
+    return "<button class='layui-btn layui-btn-radius layui-bg-red' onclick='add_cal(\""+date+":"+type+"\")'><i class='layui-icon layui-icon-addition '></i> </button>"
 }
  
 function add_cal(data){

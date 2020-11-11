@@ -5,6 +5,8 @@ layui.use('carousel', function(){
     elem: '#test1'
     ,width: '100%'
     ,arrow: 'always' 
+    ,height: '400px'
 
   });
+
 });
