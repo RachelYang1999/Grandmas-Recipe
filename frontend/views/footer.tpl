@@ -1,5 +1,5 @@
     <div class="layui-footer my-footer">
-        Powered By Group - © 2020 - Grandma's Recipe
+        Powered By Group100 - © 2020 - Grandma's Recipe
     </div>
 </div>
 Debug: <label name="backend" id="backend" value="{{backend}}">{{backend}}</label>

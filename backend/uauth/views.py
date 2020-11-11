@@ -1,6 +1,6 @@
 import uuid
 
-from uauth.auth import UserAuth_login
+from uauth.auth import UserAuth_Auth
 from user.models import User
 # from uauth.permissions import IsSuperUser
 from uauth.serializers import UserSerializer
@@ -21,7 +21,7 @@ HTTP_ACTION_LOGOUT = "signout"
 class User_auth(APIView):
     serializer_class = UserSerializer
     queryset = User.objects.all()
-    authentication_classes = (UserAuth_login,)
+    authentication_classes = (UserAuth_Auth,)
     # permission_classes = (IsSuperUser,)
 
     def get(self, request, *args, **kwargs):

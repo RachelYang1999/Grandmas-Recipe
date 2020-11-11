@@ -3,6 +3,6 @@ from profiles import views
 from django.urls import path, re_path
 
 urlpatterns = [
-    path('profiles/', views.Profiles.as_view()),
+    path('user/profile/', views.Profiles.as_view()),
 ]
 

@@ -50,31 +50,60 @@ def serve_css(css):
 def signin():
     rtv = getToken()
     if rtv is not None:
-        redirect('/calendar')
-    return template("signin",backend=get_backend(),)
+        redirect('/')
+    return template("signin",backend=get_backend(),page="signin")
 
 @get('/signup')
 def signup():
-    return template("signup",backend=get_backend())
+    return template("signup",backend=get_backend(),page="signup")
 
 @get('/signout')
-def signup():
+def signout():
+    url='http://'+get_backend()+':9999/api/auth/?action=signout'
+    payload={'token': getToken()[0]}
+    r = requests.request("POST", url, data=payload)
     response.delete_cookie("token")
-    redirect('/signin')
+    redirect('/')
 
 @get('/calendar')
 def calendar():
     rtv = getToken()
     if rtv is not None:
-        return template("calendar",backend=get_backend(),username=rtv[1],avatar=rtv[2])
+        return template("calendar",backend=get_backend(),username=rtv[1],avatar=rtv[2],signin=True)
     else:
         redirect('/signin')
     
 @get('/')
-def get_login_controller():
+def index():
     rtv = getToken()
     if rtv is not None:
-        redirect('/calendar')
+        return template("index",backend=get_backend(),username=rtv[1],avatar=rtv[2],signin=True)
     else:
-        redirect('/signin')
+        return template("index",backend=get_backend(),signin=False)
 
+@get('/profile')
+def profile():
+    rtv = getToken()
+    if rtv is not None:
+        url = "http://172.17.0.7:9999/api/user/profile/"
+
+        headers = {
+        'token': rtv[0]
+        }
+
+        r = requests.request("GET", url, headers=headers)
+        u_data=json.loads(r.text)
+
+        checked_male=""
+        checked_female=""
+        checked_other=""
+
+        if u_data['gender']=="male":
+            checked_male="checked"
+        elif u_data['gender']=="female":
+            checked_female="checked"
+        else:
+            checked_other="checked"
+        return template("profile",backend=get_backend(),username=rtv[1],avatar=rtv[2],signin=True,checked_male=checked_male,checked_female=checked_female,checked_other=checked_other,u_data=u_data)
+    else:
+        redirect('/')

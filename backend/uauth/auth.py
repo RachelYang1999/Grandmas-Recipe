@@ -23,7 +23,7 @@ class UserAuth(BaseAuthentication):
             except:
                 raise exceptions.AuthenticationFailed({"msg": "invalid"})
 
-class UserAuth_login(BaseAuthentication):
+class UserAuth_Auth(BaseAuthentication):
 
     def authenticate(self, request):
         if request.method == 'GET':

@@ -17,27 +17,20 @@ class Profiles(APIView):
     # user = User()
     
     def get(self, request):
-        user_id=request.data.get("id")
-        user=User.objects.get(id=user_id)
-
-        get_username = user.username
-        get_email = user.email
-        get_introduction = user.introduction
-        get_gender = user.gender
-        get_date_of_birth = user.date_of_birth
-        get_total_follower = user.total_follower
-        get_total_following = user.total_following
+        user_id=request.query_params.get("user_id")
+        if user_id==None:
+            user=request.user
+        else: 
+            user=User.objects.get(id=user_id)
         get_profile = {
-            "username": get_username,
-            "email": get_email,
-            "introduction": get_introduction,
-            "gender": get_gender,
-            "date_of_birth": get_date_of_birth,
-            "total_follower": get_total_follower,
-            "total_following": get_total_following            
+            "username": user.username,
+            "email": user.email,
+            "introduction": user.introduction,
+            "gender": user.gender,
+            "dob": user.date_of_birth,
+            "dor": user.register_date
         }
-        print(get_profile)
-        return Response("Profile Get Success")
+        return Response(get_profile)
         
     
     def post(self, request):

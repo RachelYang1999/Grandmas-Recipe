@@ -1,13 +1,30 @@
 @charset "utf-8";
 
+/* profile */
+.profile-body{
+    margin:150px;
+
+}
+
+.profile-form{
+    margin-top:50px;
+}
+
+.p_avatar{
+    margin-top:-35px;
+    height:100px;
+    width:100px;
+}
+
+.non_border{
+    border:none;
+    outline:none;
+}
+
 /* header */
 .logo{
     width:60px;
     height:60px;
-}
-
-.logo-text{
-    color:red;
 }
 
 .layui-nav-item .layui-form{
@@ -20,16 +37,14 @@
 }
 
 .layui-layout-center{
-    margin-left:780px;
+    margin-left:700px;
 }
 
 .input-item{
-    width:250px;
+    width:230px;
 }
 
-.cal-item{
-    margin-left:10px;
-}
+
 
 /* footer */
 .layui-layout-admin .my-footer {
@@ -44,6 +59,9 @@
     height: 70px
 }
 
+.cal-item{
+    margin-left:10px;
+}
 .cal-main td{
     text-align:center;
     height: 110px
@@ -84,95 +102,9 @@
     margin-top: 40px;
 }
 
-/* index */
-
-
-.my-side {
-    position: fixed;
-    top: 60px;
-    bottom: 0;
-    width: 200px;
-    z-index: 2;
-    overflow-x: hidden;
-}
-
-.my-side .layui-nav {
-    border-radius: 0;
-    min-height: 100%;
-}
-
-.my-side ul.layui-nav li a i, .layui-nav .layui-nav-child a i, .layui-nav .layui-nav-item a i, .layui-tab-card > .layui-tab-title li span i {
-    margin-right: 5px;
-
-}
-
-.my-side ul.layui-nav li dl dd a i {
-    margin-left: 15px;
-}
-
-.my-body {
-    position: fixed;
-    top: 60px;
-    bottom: 0;
-    left: 200px;
-    right: 0;
-    z-index: 1;
-    overflow: hidden;
-}
-
-.body {
-    padding: 10px;
-}
-
-.my-body .layui-tab, .my-body .layui-tab .layui-tab-content {
-    margin: 0;
-    padding: 0;
-}
-
-.my-body .layui-tab .layui-tab-title li:first-child > i {
-    display: none;
-}
-
-.my-body .layui-tab, .my-body .layui-tab .layui-tab-content, .my-body .layui-tab .layui-tab-item {
-    height: 100%;
-}
-
-.my-body iframe {
-    width: 100%;
-    height: 100%;
-    border: none;
-    outline: none;
-}
-
-.layui-layout-admin .my-footer {
-    height: 40px;
-    padding: 2px 0;
-}
-
-.layui-layout-admin .my-footer p {
-    height: 20px;
-    line-height: 20px;
-    font-size: 12px;
-    text-align: center;
-}
-
-.my-btn-box {
-    height: 38px;
-    margin-bottom: 10px;
-}
-
-.my-pay-box > div p {
-    text-align: center;
-    margin-bottom: 10px;
-}
-
 /* login */
 a.fr{
    float: right;
-}
-
-.login-body {
-    background: url("../image/bg.png") repeat fixed;
 }
 
 .login-box {
@@ -249,44 +181,6 @@ a.fr{
     margin-bottom: 5px;
 }
 
-/* check */
-input[type='checkbox'] {
-    vertical-align: middle;
-}
-
-.my-checkbox {
-    -webkit-appearance: none;
-    position: relative;
-    width: 20px;
-    height: 20px;
-    background-color: #FFFFFF;
-    border: solid 2px #28B779;
-    border-radius: 2px;
-    background-clip: padding-box;
-    display: inline-block;
-    cursor: pointer;
-}
-
-.my-checkbox:checked {
-    background-color: #28B779;
-    border: solid 0 #28B779;
-}
-
-.my-checkbox:checked:before {
-    position: absolute;
-    display: inline-block;
-    right: 50%;
-    bottom: 50%;
-    -webkit-transform: translate(50%, 50%);
-    -ms-transform: translate(50%, 50%);
-    transform: translate(50%, 50%);
-    font-family: "Microsoft Yahei";
-    content: "√";
-    color: #FFFFFF;
-    font-size: 16px;
-    font-weight: 600;
-}
-
 /* layui css cover */
 html body .layui-nav .layui-nav-bar {
     opacity: 0 !important;
@@ -306,61 +200,4 @@ html body .layui-nav .layui-nav-bar {
 
 .layui-layer-tips .layui-layer-content {
     padding: 5px;
-}
-
-/* media */
-@media screen and (max-width: 1023px) {
-    .my-header ul.layui-nav, .my-header-btn, .my-side, .layui-field-title, .my-btn-box .fr {
-        display: none;
-    }
-
-    .layui-side-scroll {
-        width: 170px;
-    }
-
-    body div.my-mobile {
-        background: #393D49;
-    }
-
-    body div.my-mobile .layui-layer-content {
-        overflow-x: hidden;
-    }
-
-    .my-header ul.my-header-user-nav {
-        display: inline-block;
-        padding-left: 0;
-        padding-right: 10px;
-    }
-
-    .my-header ul.my-header-user-nav a {
-        padding: 0 10px;
-    }
-
-    .my-header ul.my-header-user-nav:last-child a:first-child {
-        padding-right: 20px;
-    }
-
-    .my-side, .layui-nav-tree, .my-btn-box input[type='text'] {
-        width: 150px;
-    }
-
-    .my-body {
-        left: 0;
-        width: 100%;
-        overflow-x: auto;
-    }
-
-    .my-body iframe {
-        width: 100%;
-    }
-
-    .layui-layout-admin .layui-footer {
-        left: 0;
-    }
-}
-
-@media screen and ( max-width: 450px) {
-    .my-header ul.my-header-user-nav li a.pay {
-        display: none;
-    }
 }
