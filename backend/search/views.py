@@ -30,6 +30,16 @@ class Search(APIView):
             recipe_name=request.data.get("recipe_title")
             n_recipe=Recipe.objects.get(recipe_title=recipe_name)
             get_title = n_recipe.recipe_title
-            print(get_title)
+            get_description = n_recipe.description
+            get_update_date = n_recipe.update_date 
+            get_userid = n_recipe.user_id
+            
+            result = {
+                "title": get_title,
+                "description": get_description,
+                "update_date": get_update_date,
+                "userid": get_userid,
+            }
+            print(result)
         
         return Response("Search Success")
