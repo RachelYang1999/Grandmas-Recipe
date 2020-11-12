@@ -28,5 +28,7 @@ urlpatterns = [
     path('api/', include('search.urls')),
     path('api/', include('recipe.urls')),
     path('api/', include('step.urls')),
+    path('api/', include('ingredient.urls')),
+
 
 ]

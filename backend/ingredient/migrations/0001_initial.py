@@ -10,21 +10,18 @@ class Migration(migrations.Migration):
 
     dependencies = [
         ('recipe', '0001_initial'),
-        ('user', '0001_initial'),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='Calendar',
+            name='Ingredient',
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('date', models.DateField()),
-                ('meal_type', models.CharField(max_length=30)),
-                ('recipe', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='recipe_cal', to='recipe.recipe')),
-                ('user', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='user_cal', to='user.user')),
+                ('ingredient_name', models.CharField(max_length=100)),
+                ('ingredient_related_recipe', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='ingredient_related_recipe', to='recipe.recipe')),
             ],
             options={
-                'db_table': 'calendar',
+                'db_table': 'ingredient',
             },
         ),
     ]

@@ -1,7 +1,5 @@
 from uauth.auth import UserAuth
-from category.models import Category
-from category.serializers import CategorySerializer
-
+from step.models import Step
 from django.core.cache import cache
 
 from rest_framework import status, exceptions
@@ -10,7 +8,7 @@ from rest_framework.response import Response
 
 class Step_View(APIView):
     authentication_classes = (UserAuth,)
-    step_queryset = Category.objects.all()
+    step_queryset = Step.objects.all()
 
     def get(self, request):
         if step_queryset != None:
