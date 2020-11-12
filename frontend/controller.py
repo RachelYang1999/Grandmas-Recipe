@@ -118,3 +118,33 @@ def profile():
         return template("profile",backend=get_backend(),username=rtv[1],avatar=rtv[2],signin=True,checked_male=checked_male,checked_female=checked_female,checked_other=checked_other,u_data=u_data)
     else:
         redirect('/')
+
+
+@get('/recipe_detail')
+def recipe_detail():
+    rtv = getToken()
+
+    if rtv is not None:
+        url = "http://172.17.0.10:9999/api/recipe/"
+
+        payload = {'id': '9'}
+
+        files = [
+
+        ]
+
+        headers = {
+        'token': rtv[0]
+        }
+        r = requests.request("GET", url, headers=headers, data = payload, files = files)
+        recipe_data=json.loads(r.text)
+
+        # response = requests.request("GET", url, headers = headers, data = payload, files = files)
+        # return response
+
+        return template("recipe_detail", backend=get_backend(), username = rtv[1], avatar = rtv[2], signin = True, recipe_data = recipe_data)
+    else:
+        redirect('/signin')
+
+
+

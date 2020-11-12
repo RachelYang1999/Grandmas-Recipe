@@ -5,6 +5,7 @@ from profiles.serializers import ProfileSerializer
 
 from recipe.models import Recipe, Recipe_category
 from category.models import Category
+from user.models import User
 from step.models import Step
 from ingredient.models import Ingredient
 
@@ -30,10 +31,11 @@ class RecipeView(APIView):
         get_is_published = recipe.is_published
         get_update_date = recipe.update_date
         get_user_id = recipe.user_id
+        get_user_name = User.objects.get(id = recipe.user_id).username
 
         get_category_list = []
         for c in category_queryset:
-            get_category_list.append(Category.objects.get(id = c.category_of_recipe_id))
+            get_category_list.append(Category.objects.get(id = c.category_of_recipe_id).category)
             # get_category_list.append(c.category_of_recipe_id)
             # print(c.category_of_recipe_id)
 
@@ -54,10 +56,11 @@ class RecipeView(APIView):
             "category_id_list": get_category_list, 
             "step_list": get_step_list,
             "ingredient_name_list": get_ingredient_list,
+            "user_name": get_user_name,
         }
 
-        print(get_recipe)
-        return Response("Recipe Get Success")
+        # print(get_recipe)
+        return Response(get_recipe)
 
     @transaction.non_atomic_requests
     def post(self, request):

@@ -1,0 +1,36 @@
+@charset "utf-8";
+
+div.every-divs{
+    border-top: 200px;
+    /* padding: 10px; */
+}
+
+div.recipe-title {
+  font-size: 200%;
+}
+
+div.vertical-distance {
+    margin-top: 20px;
+}
+
+div.on-bottom {
+    /* position: absolute; 
+    bottom: 0px;  */
+    /* text-align: bottom; */
+    /* vertical-align:bottom;
+    vertical-align:baseline; */
+}
+
+div.right-align {
+    margin-left:auto; 
+    margin-right:0;
+
+}
+/* 
+#right-align {
+    margin-left:auto; 
+    margin-right:0;
+
+}
+ */
+
