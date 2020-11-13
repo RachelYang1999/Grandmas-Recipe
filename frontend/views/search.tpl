@@ -7,7 +7,6 @@
 %include('header_sign.tpl') 
 </head>
 <body>
-
 %include('footer.tpl')
 <script type="text/javascript" src="/js/signin.js"></script>
 </body>

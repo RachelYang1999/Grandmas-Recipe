@@ -146,5 +146,11 @@ def recipe_detail():
     else:
         redirect('/signin')
 
+@get('/search')
+def searcj():
+    
+    return template("search", backend=get_backend(), page="signup")
+
+
 
 
