@@ -1,4 +1,5 @@
 from bottle import route, get, post, request, static_file, response, redirect,template
+from django.shortcuts import render
 import configparser
 import requests
 import json
@@ -127,7 +128,7 @@ def recipe_detail():
     if rtv is not None:
         url = "http://172.17.0.10:9999/api/recipe/"
 
-        payload = {'id': '9'}
+        payload = {'id': '14'}
 
         files = [
 

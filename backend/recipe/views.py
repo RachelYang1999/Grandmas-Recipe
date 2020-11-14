@@ -56,7 +56,7 @@ class RecipeView(APIView):
             "category_id_list": get_category_list, 
             "step_list": get_step_list,
             "ingredient_name_list": get_ingredient_list,
-            "user_name": get_user_name,
+            "user_name": get_user_name
         }
 
         # print(get_recipe)
