@@ -10,8 +10,8 @@ class Migration(migrations.Migration):
 
     dependencies = [
         ('comments', '0001_initial'),
-        ('user', '0001_initial'),
         ('recipe', '0001_initial'),
+        ('user', '0001_initial'),
     ]
 
     operations = [
