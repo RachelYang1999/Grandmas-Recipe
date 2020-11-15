@@ -19,14 +19,14 @@ HTTP_ACTION_LOGIN = "signin"
 HTTP_ACTION_LOGOUT = "signout"
 
 class User_auth(APIView):
-    serializer_class = UserSerializer
-    queryset = User.objects.all()
+
     authentication_classes = (UserAuth_Auth,)
-    # permission_classes = (IsSuperUser,)
 
     def get(self, request, *args, **kwargs):
-        data = {'msg': 'success',"username": request.user.username,"avatar":Upload_profile.objects.filter(user=request.user).values()[0]["profile_image"]}
-        return Response(data,status=200)
+        
+        data = {"username": request.user.username,"avatar":Upload_profile.objects.filter(user=request.user).values()[0]["profile_image"]}
+        rst=util.get_response(200,"success",data)
+        return Response(rst)
 
     def post(self, request, *args, **kwargs):
         action = request.query_params.get('action')
@@ -38,21 +38,18 @@ class User_auth(APIView):
         elif action == HTTP_ACTION_LOGOUT:
             return self.logout(request, *args, **kwargs)
         else:
-            raise exceptions.ValidationError
+            return Response(util.get_response(400,"action not exist",[]))
 
     def logout(self, request, *args, **kwargs):
         token = request.data.get('token')
         u_id=token.split("$")[1]
-        data = {
-                'msg': '',
-            }
         if token==cache.get(u_id):
             cache.delete(u_id)
-            data['msg']="success"
+            rst=util.get_response(200,"success",[])
         else:
-            data['msg']="fail"
+            rst=util.get_response(400,"not logged in",[])
             
-        return Response(data,status=201)
+        return Response(rst)
 
 
     def login(self, request, *args, **kwargs):
@@ -62,7 +59,6 @@ class User_auth(APIView):
             user = User.objects.get(username=u_name)
 
             data = {
-                    'msg': 'success',
                     'token': "",
                 }
             if cache.get(user.id)==None:
@@ -72,16 +68,21 @@ class User_auth(APIView):
 
                     cache.set(user.id,token,timeout=3600)
                     data['token']=token
+
+                    rst=util.get_response(200,"success",data)
                     
-                    return Response(data,status=200)
+                    return Response(rst)
                 else:
-                    raise exceptions.AuthenticationFailed
+                    rst=util.get_response(400,"username or password not correct",[])
+                    return Response(rst)
             else:
                 if user.password == util.create_md5(u_password,user.salt):
                     data['token']=cache.get(user.id)
-                    return Response(data)
+                    rst=util.get_response(200,"success",data)
+                    return Response(rst)
                 else:
-                    raise exceptions.AuthenticationFailed
+                    rst=util.get_response(400,"username or password not correct",[])
+                    return Response(rst)
 
         except User.DoesNotExist:
             raise exceptions.NotFound
@@ -94,14 +95,13 @@ class User_auth(APIView):
         
         try:
             user = User.objects.get(username=username)
-            raise exceptions.ValidationError("username exist")
+            rst=util.get_response(400,"username exists",[])
+            return Response(rst)
         except User.DoesNotExist:
             user=User.objects.create(username=username,password=password,salt=salt)
             upload=Upload_profile.objects.create(user=user)
 
-        data = {
-                'msg': 'success',
-            }
-        return Response(data,status=201)
+        rst=util.get_response(200,"success",[])
+        return Response(rst)
 
 
