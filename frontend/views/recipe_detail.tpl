@@ -116,11 +116,11 @@
             }
             window.onload = myFunction;     
         </script> -->
-
+        <hr>
         <h1> Steps </h1>
         <br>
         <div class="layui-row">
-            <div class="layui-col-md7 normal-text", id = "step-text">
+            <div class="layui-col-md7", id = "step-text">
 
                 <!-- Both ways are okay
                 <br>
@@ -131,21 +131,20 @@
                     % count = 1
                     % for step in recipe_data['step_list']:
                         % step_with_count = str(count) + ": " + str(step)
-                        <li>Step {{step_with_count}}</li> <br>
+                        <li class = normal-text>Step {{step_with_count}}</li> 
                         % count += 1
                     % end
                 </ul>
             </div>
-            <div class="layui-col-md5 normal-text", id = "step-image">
+            <div class="layui-col-md5", id = "step-image">
                 <ul>
                     % for step in recipe_data['step_list']:
-                        <li>Put the image here.</li> <br>
+                        <li class = normal-text>Put the image here.</li> 
                     % end
                 </ul>
             </div>
         </div>
-
-        </br>
+        <hr>
         <h1> Comments </h1>
         <div>
             % for comment in recipe_data['comment_dic_list']:
@@ -164,12 +163,26 @@
 
                 
                 <br>
-            % end
-            <img src="https://media.github.sydney.edu.au/user/4849/files/88c7b600-2762-11eb-8c11-c48c77502f32" alt="">
+            % end 
         </div>
-        
-    </div> 
+        <hr>
+        <h2 class = "comment-input-header, left-space ">Write Something</h2>
+        <br>
+        <div class = "comment-block", style = "margin-left: 55px;">
+        <!-- <div style = "border-radius: 7px; box-shadow: 0px 0px 5px 2px black;"> -->
+            <textarea rows="6" cols="30" name="comment"
+                              placeholder="Write your comment here!"
+                              onfocus="this.placeholder = ''"
+                              onblur="this.placeholder = 'Write your comment here!''"
+                    ></textarea>
+        </div>
+        <br>
+        <button class="layui-btn layui-btn-sm layui-btn left-space">
+            Submit
+        </button>
 
+    </div> 
+<img src="https://media.github.sydney.edu.au/user/4849/files/88c7b600-2762-11eb-8c11-c48c77502f32" alt="">
 %include('footer.tpl')
 
 </body>
