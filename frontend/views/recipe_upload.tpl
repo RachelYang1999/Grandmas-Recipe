@@ -57,56 +57,61 @@
                         <textarea name="introduction" placeholder="Please enter your introduction here..." class="layui-textarea" ></textarea>
                     </div>
                 </div>
+                <div>
                 <label class="layui-form-label ingredient-label">Ingredient</label>
-                <input id="in-counter" value="1" style="display:none"/>
-                <div class="layui-form-item" id="test_i">
-                    <div class="ingredient-margin">
-                        <div class="layui-inline ingredient-margin-input" >
-                            <input type="text" name="ingredient-1" placeholder="Please enter your ingredient here..." autocomplete="off" class="layui-input"> 
-                        </div>
-                        <div class="layui-inline ">
-                            <button type="button" class="layui-btn layui-btn-warm layui-btn-sm">
-                                <i class="layui-icon">&#xe640;</i>
-                            </button>
-                        </div>
-                        <div class="layui-inline ingredient-margin-input" >
-                            <input type="text" name="shoppinglink" placeholder="Please enter shopping link here..." autocomplete="off" class="layui-input"> 
+                </div>
+                <div class="layui-form-item ingredient-margin">
+                    <input type="text" value = 1 id="in-counter" style="display: none;" readonly>
+                    <div id="ingredient-block">
+                        <div id="ingre-1"> 
+                            <div class="layui-inline ingredient-input" >
+                                <input type="text" name="ingredient-1" placeholder="Please enter your ingredient here..." autocomplete="off" class="layui-input"> 
+                            </div>
+                            <div class="layui-inline">
+                                <button type="button" onclick= "delete_ingredient(1)" class="layui-btn layui-btn-warm layui-btn-sm"  >
+                                    <i class="layui-icon">&#xe640;</i>
+                                </button>
+                            </div>
+                            <div class="layui-inline ingredient-input" >
+                                <input type="text" name="shoppinglink" placeholder="Please enter shopping link here..." autocomplete="off" class="layui-input"> 
+                            </div>
                         </div>
                     </div>
                 </div>
                 
-                <button type="button" class="layui-btn layui-btn-warm add-ingredient" onclick="add_ingredient()">
+                <button type="button" onclick="add_ingredient()" class="layui-btn layui-btn-warm add-ingredient">
                         <i class="layui-icon">&#xe608;</i> Add More Ingredient
                 </button>
                 
                 <label class="layui-form-label step-label">Step</label>
-                
-                <div class="layui-form-item">
-                    <div class="layui-inline" >
-                        <label class="layui-form-label step-id">1</label>
-                    </div>
+                <input type="text" value=1 id="step-counter" style="display: none;" readonly>
+                <div class="layui-form-item" id="step-block">
                     
-                    <div class="layui-inline" >
-                        <div class="layui-input-block step-explanation" >
-                            <textarea name="step-explanation" placeholder="Step explanation" class="layui-textarea" ></textarea>
+                    <div id="step-1">
+                        <div class="layui-inline" >
+                            <label class="layui-form-label step-id" id="label-1">1</label>
                         </div>
-                    </div>
-                    <div class="layui-inline" >
-                        <div class = "step-pic-boader">
-                            <button type="button" class="layui-btn layui-btn-warm upload-pic-step " id="test1">
-                                <i class="layui-icon">&#xe654;</i>picture
+                        <div class="layui-inline" >
+                            <div class="layui-input-block step-explanation" >
+                                <textarea name="step-explanation" placeholder="Step explanation" class="layui-textarea" ></textarea>
+                            </div>
+                        </div>
+                        <div class="layui-inline" >
+                            <div class = "step-pic-boader">
+                                <button type="button" class="layui-btn layui-btn-warm upload-pic-step ">
+                                    <i class="layui-icon">&#xe654;</i>picture
+                                </button>
+                            </div>
+                        </div>
+                        <div class="layui-inline" >
+                            <button type="button" onclick= "delete_step(1)" class="layui-btn layui-btn-sm layui-btn-primary" style="margin-left: 50px;">
+                                <i class="layui-icon">&#x1006;</i>
                             </button>
                         </div>
                     </div>
-
-                    <div class="layui-inline" >
-                        <button type="button" class="layui-btn layui-btn-sm layui-btn-primary" style="margin-left: 50px;">
-                            <i class="layui-icon">&#x1006;</i>
-                        </button>
-                    </div>
                 </div>
 
-                <button type="button" class="layui-btn layui-btn-warm add-step">
+                <button type="button" onclick="add_step()" class="layui-btn layui-btn-warm add-step">
                         <i class="layui-icon">&#xe608;</i> Add More Step
                 </button>
 
@@ -122,7 +127,7 @@
     </div>
 
 %include('footer.tpl')
-<script type="text/javascript" src="/js/recipe_upload.js"></script>
+<script type="text/javascript" src="/js/upload_recipe.js"></script>
 
 </body>
 </html>
