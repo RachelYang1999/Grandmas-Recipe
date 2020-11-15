@@ -1,4 +1,5 @@
 from uauth.auth import UserAuth
+from datetime import datetime
 from django.shortcuts import render
 from django.http import HttpResponse
 from profiles.serializers import ProfileSerializer
@@ -8,6 +9,7 @@ from category.models import Category
 from user.models import User
 from step.models import Step
 from ingredient.models import Ingredient
+from comments.models import Comment
 
 from rest_framework import status, exceptions
 from rest_framework.views import APIView
@@ -15,6 +17,7 @@ from rest_framework.response import Response
 from rest_framework import viewsets
 
 from django.db import transaction
+
 
 class RecipeView(APIView):
     authentication_classes = (UserAuth,)
@@ -25,6 +28,8 @@ class RecipeView(APIView):
         category_queryset = Recipe_category.objects.filter(recipe_of_category_id = recipe_id)
         step_queryset = Step.objects.filter(related_recipe_id = recipe_id)
         ingredient_queryset = Ingredient.objects.filter(ingredient_related_recipe_id = recipe_id)
+        comment_all_queryset = Comment.objects.filter(comment_recipe_id = recipe_id)
+        # print(Comment.objects.get(comment_recipe_id = recipe_id).comment_content)
 
         get_recipe_title = recipe.recipe_title
         get_recipe_description = recipe.description
@@ -47,6 +52,16 @@ class RecipeView(APIView):
         for i in ingredient_queryset:
             get_ingredient_list.append(i.ingredient_name)
 
+        get_comment_dic_list = []
+        for c in comment_all_queryset:
+            single_comment = {}
+            single_comment['comment_user_id'] = c.comment_user_id
+            single_comment['comment_user_name'] = User.objects.get(id = c.comment_user_id).username
+            single_comment['comment_content'] = c.comment_content
+            single_comment['comment_date'] = c.comment_publish_date.strftime('%Y-%m-%d')
+            # print(single_comment)
+            get_comment_dic_list.append(single_comment)
+
         get_recipe = {
             "title": get_recipe_title,
             "description": get_recipe_description,
@@ -57,6 +72,7 @@ class RecipeView(APIView):
             "step_list": get_step_list,
             "ingredient_name_list": get_ingredient_list,
             "user_name": get_user_name,
+            "comment_dic_list": get_comment_dic_list,
         }
 
         # print(get_recipe)

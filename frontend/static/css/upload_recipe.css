@@ -1,0 +1,142 @@
+@charset "utf-8";
+
+/* index */
+.recipe-title{
+    font-size: 30px;
+    height: 70px !important;
+    width: 400px;
+}
+
+.ingredient-margin{
+    margin-left:120px;
+}
+
+.ingredient-margin-input{
+    width:300px;
+}
+
+.recipe-title-margin{
+    margin:50px;
+}
+
+.button-upload-image{
+    margin-left:120px;
+    margin-top:180px
+}
+
+.main-pic-boarder{
+    margin:50px 110px;
+    width:400px; 
+    height:400px; 
+    border:1px; 
+    border-style: solid;
+    border-color: #e6e6e6;
+    background:transparent; 
+}
+
+.add-to-category{
+    width:200px !important; 
+    margin:40px 0px 0px 20px;
+    font-size: 20px 
+}
+
+.add-to-cat-boarder{
+    margin:90px 110px;
+    width:150px; 
+    height:340px; 
+    border:1px; 
+    border-style: solid;
+    border-color: #e6e6e6;
+    background:transparent; 
+}
+.button-select-category{
+    margin:20px 0px 0px 10px !important;
+}
+
+.introduction-label{
+    width:200px !important; 
+    margin:-50px 0px 0px 0px;
+    font-size: 20px; 
+}
+
+.introduction{
+    margin:20px 0px 0px 0px;
+    width: 600px !important;
+    height: 100px !important;
+}
+
+.ingredient-label{
+    width:200px !important; 
+    margin:20px 0px 15px -20px;
+    font-size: 20px;
+}
+
+.ingredient-margin{
+    margin:20px 0px 0px 110px !important;
+    
+}
+
+.ingredient-input{
+    width:300px !important; 
+}
+
+.ingredient-delete{
+    margin:70px 0px 0px 10px !important;
+}
+
+.shoppinglink-input{
+    width:300px !important; 
+    margin:70px 0px 0px 30px !important;
+}
+
+.add-ingredient{
+    margin:10px 0px 0px -40px !important;
+}
+
+.step-label{
+    width:200px !important; 
+    margin:70px 0px 0px -60px !important;
+    font-size: 20px;
+}
+
+.step-id{
+    width:200px !important; 
+    margin:0px 0px 0px -60px !important;
+    font-size: 20px;
+}
+
+.step-explanation{
+    width:200px !important; 
+    height:100px !important; 
+    margin:0px 20px !important;
+}
+
+.step-pic-boader{
+    
+    width:200px; 
+    height:100px; 
+    border:1px; 
+    border-style: solid;
+    border-color: #e6e6e6;
+    background:transparent; 
+}
+
+.upload-pic-step{
+    margin:30px 50px !important;
+}
+
+.add-step{
+    margin:10px 50px 0px 140px !important;
+}
+
+.submit-button{
+    margin:70px !important;
+}
+
+
+
+
+
+
+
+

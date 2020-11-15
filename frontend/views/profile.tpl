@@ -19,7 +19,7 @@
                 </div>
                 <div class="layui-form-item">
                     <div class="layui-inline">
-                    <label class="layui-form-label">Username: </label>
+                        <label class="layui-form-label">Username: </label>
                         <div class="layui-input-block" style="width:90px;">
                             <input type="text" autocomplete="off" value="{{username}}" class="layui-input non_border" readonly>
                         </div>

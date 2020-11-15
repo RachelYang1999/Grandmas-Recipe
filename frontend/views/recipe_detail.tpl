@@ -5,87 +5,189 @@
     <link rel="stylesheet" href="/css/recipe_detail.css">
     <title>Recipe Detail</title>
     %include('header.tpl')
+    <script type="text/javascript" src="/js/jquery-3.4.1.min.js"></script>
+    <!-- <script>
+        function insertIngredients() {
+            var ages = [3, 10, 18, 20];
+
+            
+            // var recipeJSONArray = ${recipe_data};
+            // $.each(recipeJSONArray, function(idx, obj){
+            //     var ingredient = document.getElementById("ingredient");
+            //     var ingredients = ingredient.firstElementChild || ingredient.firstChild;
+            //     ingredients.innerHTML += '<div><span>'
+            //         + obj.ingredient_name_list + '</span><br>'
+            //         // + obj.name + '</span><br><span style="font-size: 15px; margin-left: 20px; margin-top: 5px">Date: '
+            //         // + new Date(obj.createTime).toDateString()
+            //         + '</span></div>';
+            // });
+        }
+
+        
+    </script> -->
 </head>
-<body>
+<body style = "overflow: scroll", onload = insertIngredients()>
     <div class = "layui-container">
         <div>
             
         </div>   
-
         <div class="layui-row">
             <div class="layui-col-md8">
                 <div class="layui-col-md12 recipe-title">
                     <h1> {{recipe_data.get("title")}} </h1>
                 </div>
                 <div class="layui-col-md12 vertical-distance">
-                    <div class="layui-col-md3">
+                    <div class="layui-col-md3 on-bottom layui-inline">
                         <div class="layui-col-md4">
-                            <i class="layui-icon layui-icon-face-smile"></i>
                         </div>
-                        <div class="layui-col-md8 on-bottom">
-                            <h2> {{recipe_data.get("user_name")}} </h2>
+                        <div style = "margin: 10px">
+                            <h2>
+                                <img src="/img/{{avatar}}" class="layui-nav-img"> 
+                                {{recipe_data.get("user_name")}} 
+                            </h2>
                         </div>
                     </div>
-                    <form class="layui-col-md9 ", action="post">
+                    <div class="layui-col-md9 layui-inline">
                         <button type="submit", class="layui-btn layui-btn-warm", name = "follow">Follow the Author</button>
-                    </form>
+                    </div>
                 </div>
             </div>
             <form class="layui-col-md4 right-align", action="post">
-                <div class="layui-col-md12 vertical-distance", style = "margin-left:auto; margin-right:0">
+                <div class="layui-col-md12 vertical-distance", style = "padding-left: 240px;">
                     <button type="submit", class="layui-btn layui-btn-warm", name = "follow">Add to Calendar</button>
                 </div>
                 <br>
-                <div class="layui-col-md12 vertical-distance ">
+                <div class="layui-col-md12 vertical-distance", style = "padding-left: 240px;">
                     <button type="submit", class="layui-btn layui-btn-warm", name = "favourite">Add to Favourite</button>
                 </div>
             </form>
         </div>
 
         <div class = "center">
-            <img src="https://user-images.githubusercontent.com/54244602/64422294-1c294400-d0e7-11e9-9ec5-560a14ef628a.png" alt="">
+            <img src="https://media.github.sydney.edu.au/user/4849/files/66508100-26ff-11eb-9e66-63155c9c402f" alt="">
+            <br>
         </div>
+        <hr>
         <h1> Description </h1>
-        <p> {{recipe_data.get("description")}}</p>
         <br>
+        <p class = "normal-text">{{recipe_data.get("description")}}</p>
+        <hr>
         <h1> Ingredient </h1>
-        <div class="layui-row", id = "ingredient">
-            {{recipe_data.get("ingredient_name_list")}}
+
+        <br>
+        <div class="layui-row">
+            <div class="layui-col-md6", id = "ingredient-text">
+                    % index = 1
+                    % for i in recipe_data['ingredient_name_list']:
+                        % if index % 2 != 0:
+                            <li class = "layui-col-md6 normal-text">{{i}}</li>
+                            <a class = "layui-col-md6  normal-link" href = "https://www.coles.com.au/"> Shopping Link </a>
+                        % end
+                        % index += 1  
+                    % end
+            </div>
+            <div class="layui-col-md6", id = "step-image">
+                <ul>
+                    % index = 1
+                    % for i in recipe_data['ingredient_name_list']:
+                        % if index % 2 == 0:
+                            <li class = "layui-col-md6  normal-text">{{i}}</li>
+                            <a class = "layui-col-md6  normal-link" href = "https://www.coles.com.au/"> Shopping Link </a>
+                        % end
+                        % index += 1  
+                    % end
+                </ul>
+                
+            </div>
         </div>
-        </br>
+
+        <!-- <button onclick="myFunction()">Try it</button> -->
+        <!-- <p id="demo"> </p>
 
         <script>
-                    
-            var wrapper = document.getElementById("ingredient");
+            var ages = [3, 10, 18, 20];
 
-            var myHTML = '';
-
-            var ingredientList ={{recipe_data.get("")}}
-            document.getElementById("ingredient").innerHTML = ingredientList;
-            for (i of ingredientList) {
-                myHTML += '<h2>' + i + '</h2><br/><br/>';
+            function checkAdult(age) {
+                return age >= 18;
             }
 
-            wrapper.innerHTML = myHTML;
-
-        </script>
+            function myFunction() {
+                document.getElementById("demo").innerHTML = ages.find(checkAdult);
+                console.log("myfunction");
+            }
+            window.onload = myFunction;     
+        </script> -->
+        <hr>
         <h1> Steps </h1>
-        <div class="layui-row", id = "ingredient">
-            <div class="layui-col-md7", id = "ingredient">
-                {{recipe_data.get("step_list")}}
+        <br>
+        <div class="layui-row">
+            <div class="layui-col-md7", id = "step-text">
+
+                <!-- Both ways are okay
+                <br>
+                {{recipe_data['step_list'][0]}}
+                <br>
+                {{recipe_data.get("step_list")[1]}} -->
+                <ul>
+                    % count = 1
+                    % for step in recipe_data['step_list']:
+                        % step_with_count = str(count) + ": " + str(step)
+                        <li class = normal-text>Step {{step_with_count}}</li> 
+                        % count += 1
+                    % end
+                </ul>
             </div>
-            <div class="layui-col-md5">
-                Put the image here.
+            <div class="layui-col-md5", id = "step-image">
+                <ul>
+                    % for step in recipe_data['step_list']:
+                        <li class = normal-text>Put the image here.</li> 
+                    % end
+                </ul>
             </div>
         </div>
-        </br>
-
+        <hr>
         <h1> Comments </h1>
+        <div>
+            % for comment in recipe_data['comment_dic_list']:
+                <!-- <li>{{comment}}</li> <br> -->
+            
+                <div style = "margin: 10px">
+                    
+                    <h2>
+                        <img src="/img/{{avatar}}" class="layui-nav-img"> 
+                        {{comment['comment_user_name']}} 
+                    </h2>
+                </div>
+                <div style = "padding-left: 55px;">
+                    <p class = "normal-text">{{comment['comment_content']}}</p>
+                </div>
 
+                
+                <br>
+            % end 
+        </div>
+        <hr>
+        <h2 class = "comment-input-header, left-space ">Write Something</h2>
+        <br>
+        <div class = "comment-block", style = "margin-left: 55px;">
+        <!-- <div style = "border-radius: 7px; box-shadow: 0px 0px 5px 2px black;"> -->
+            <textarea rows="6" cols="30" name="comment"
+                              placeholder="Write your comment here!"
+                              onfocus="this.placeholder = ''"
+                              onblur="this.placeholder = 'Write your comment here!''"
+                    ></textarea>
+        </div>
+        <br>
+        <button class="layui-btn layui-btn-sm layui-btn left-space">
+            Submit
+        </button>
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 7e54e9222415b474b147e29f2dda1a86ae7d678a
     </div> 
-
+<img src="https://media.github.sydney.edu.au/user/4849/files/88c7b600-2762-11eb-8c11-c48c77502f32" alt="">
 %include('footer.tpl')
 
 </body>
