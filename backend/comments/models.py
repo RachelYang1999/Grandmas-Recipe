@@ -6,7 +6,7 @@ class Comment(models.Model):
     class Meta:
         db_table = 'comment'
     comment_content = models.CharField(max_length=500)
-    publish_date = models.DateTimeField(auto_now_add=True)
-    recipe = models.ForeignKey(Recipe, related_name='referenceRecipe',on_delete=models.CASCADE,default=1)
-    user = models.ForeignKey(User, related_name='referenceUser',on_delete=models.CASCADE,default=1)
+    comment_publish_date = models.DateTimeField(auto_now_add=True)
+    comment_recipe = models.ForeignKey(Recipe, related_name='referenceRecipe',on_delete=models.CASCADE,default=1)
+    comment_user = models.ForeignKey(User, related_name='referenceUser',on_delete=models.CASCADE,default=1)
 
