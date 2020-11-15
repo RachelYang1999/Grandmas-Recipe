@@ -57,6 +57,7 @@
                         <textarea name="introduction" placeholder="Please enter your introduction here..." class="layui-textarea" ></textarea>
                     </div>
                 </div>
+<<<<<<< HEAD
                 <label class="layui-form-label ingredient-label">Ingredient</label>
                 <input id="in-counter" value="1" style="display:none"/>
                 <div class="layui-form-item" id="test_i">
@@ -71,11 +72,35 @@
                         </div>
                         <div class="layui-inline ingredient-margin-input" >
                             <input type="text" name="shoppinglink" placeholder="Please enter shopping link here..." autocomplete="off" class="layui-input"> 
+=======
+                <div>
+                <label class="layui-form-label ingredient-label">Ingredient</label>
+                </div>
+                <div class="layui-form-item ingredient-margin">
+                    <input type="text" value = 1 id="in-counter" style="display: none;" readonly>
+                    <div id="ingredient-block">
+                        <div id="ingre-1"> 
+                            <div class="layui-inline ingredient-input" >
+                                <input type="text" name="ingredient-1" placeholder="Please enter your ingredient here..." autocomplete="off" class="layui-input"> 
+                            </div>
+                            <div class="layui-inline">
+                                <button type="button" onclick= "delete_ingredient(1)" class="layui-btn layui-btn-warm layui-btn-sm"  >
+                                    <i class="layui-icon">&#xe640;</i>
+                                </button>
+                            </div>
+                            <div class="layui-inline ingredient-input" >
+                                <input type="text" name="shoppinglink" placeholder="Please enter shopping link here..." autocomplete="off" class="layui-input"> 
+                            </div>
+>>>>>>> b402eacd1a4859d9297ec17d2ff3396e4facb91d
                         </div>
                     </div>
                 </div>
                 
+<<<<<<< HEAD
                 <button type="button" class="layui-btn layui-btn-warm add-ingredient" onclick="add_ingredient()">
+=======
+                <button type="button" onclick="add_ingredient()" class="layui-btn layui-btn-warm add-ingredient">
+>>>>>>> b402eacd1a4859d9297ec17d2ff3396e4facb91d
                         <i class="layui-icon">&#xe608;</i> Add More Ingredient
                 </button>
                 

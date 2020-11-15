@@ -27,9 +27,10 @@ class Comment_view(APIView):
     
     def post(self, request, *args, **kwargs):
         comment_content = request.data.get('comment_content')
-        user_id = request.data.get('user_id')
-        user = User.objects.get(id=user_id)
-        recipe_id = request.data.get('recipe_id')
-        recipe = Recipe.objects.get(id=recipe_id)
+        user_name = request.data.get('user_name')
+        # user_id = User.objects.get(user_name = user_name).id
+        user = User.objects.get(username = user_name)
+        recipe_name = request.data.get('recipe_name')
+        recipe = Recipe.objects.get(recipe_title=recipe_name)
         new_entry = Comment.objects.create(comment_user = user, comment_content = comment_content, comment_recipe = recipe)
         return Response('success')
