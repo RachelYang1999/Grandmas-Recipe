@@ -80,33 +80,34 @@
                 </button>
                 
                 <label class="layui-form-label step-label">Step</label>
-                
-                <div class="layui-form-item">
-                    <div class="layui-inline" >
-                        <label class="layui-form-label step-id">1</label>
-                    </div>
+                <input type="text" value=1 id="step-counter" style="display: none;" readonly>
+                <div class="layui-form-item" id="step-block">
                     
-                    <div class="layui-inline" >
-                        <div class="layui-input-block step-explanation" >
-                            <textarea name="step-explanation" placeholder="Step explanation" class="layui-textarea" ></textarea>
+                    <div id="step-1">
+                        <div class="layui-inline" >
+                            <label class="layui-form-label step-id" id="label-1">1</label>
                         </div>
-                    </div>
-                    <div class="layui-inline" >
-                        <div class = "step-pic-boader">
-                            <button type="button" class="layui-btn layui-btn-warm upload-pic-step " id="test1">
-                                <i class="layui-icon">&#xe654;</i>picture
+                        <div class="layui-inline" >
+                            <div class="layui-input-block step-explanation" >
+                                <textarea name="step-explanation" placeholder="Step explanation" class="layui-textarea" ></textarea>
+                            </div>
+                        </div>
+                        <div class="layui-inline" >
+                            <div class = "step-pic-boader">
+                                <button type="button" class="layui-btn layui-btn-warm upload-pic-step ">
+                                    <i class="layui-icon">&#xe654;</i>picture
+                                </button>
+                            </div>
+                        </div>
+                        <div class="layui-inline" >
+                            <button type="button" onclick= "delete_step(1)" class="layui-btn layui-btn-sm layui-btn-primary" style="margin-left: 50px;">
+                                <i class="layui-icon">&#x1006;</i>
                             </button>
                         </div>
                     </div>
-
-                    <div class="layui-inline" >
-                        <button type="button" class="layui-btn layui-btn-sm layui-btn-primary" style="margin-left: 50px;">
-                            <i class="layui-icon">&#x1006;</i>
-                        </button>
-                    </div>
                 </div>
 
-                <button type="button" class="layui-btn layui-btn-warm add-step">
+                <button type="button" onclick="add_step()" class="layui-btn layui-btn-warm add-step">
                         <i class="layui-icon">&#xe608;</i> Add More Step
                 </button>
 
@@ -122,7 +123,7 @@
     </div>
 
 %include('footer.tpl')
-<script type="text/javascript" src="/js/recipe_upload.js"></script>
+<script type="text/javascript" src="/js/upload_recipe.js"></script>
 
 </body>
 </html>
