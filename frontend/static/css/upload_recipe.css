@@ -7,6 +7,14 @@
     width: 400px;
 }
 
+.ingredient-margin{
+    margin-left:120px;
+}
+
+.ingredient-margin-input{
+    width:300px;
+}
+
 .recipe-title-margin{
     margin:50px;
 }

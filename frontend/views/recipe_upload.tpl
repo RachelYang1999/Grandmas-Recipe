@@ -30,7 +30,7 @@
 
                         <div class="layui-col-md6">
                             <div class="main-pic-boarder">
-                                <button type="button" class="layui-btn layui-btn-warm button-upload-image" id="test1">
+                                <button type="button" class="layui-btn layui-btn-warm button-upload-image">
                                     <i class="layui-icon">&#xe67c;</i>Upload Image
                                 </button>
                             </div>
@@ -57,24 +57,25 @@
                         <textarea name="introduction" placeholder="Please enter your introduction here..." class="layui-textarea" ></textarea>
                     </div>
                 </div>
-                
-                <div class="layui-form-item">
-                    <label class="layui-form-label ingredient-label">Ingredient</label>
-                    
-                    <div class="layui-inline ingredient-input" >
-                        <input type="text" name="ingredient" placeholder="Please enter your ingredient here..." autocomplete="off" class="layui-input"> 
-                    </div>
-                    <div class="layui-inline ingredient-delete">
-                        <button type="button" class="layui-btn layui-btn-warm layui-btn-sm">
-                            <i class="layui-icon">&#xe640;</i>
-                        </button>
-                    </div>
-                    <div class="layui-inline shoppinglink-input" >
-                        <input type="text" name="shoppinglink" placeholder="Please enter shopping link here..." autocomplete="off" class="layui-input"> 
+                <label class="layui-form-label ingredient-label">Ingredient</label>
+                <input id="in-counter" value="1" style="display:none"/>
+                <div class="layui-form-item" id="test_i">
+                    <div class="ingredient-margin">
+                        <div class="layui-inline ingredient-margin-input" >
+                            <input type="text" name="ingredient-1" placeholder="Please enter your ingredient here..." autocomplete="off" class="layui-input"> 
+                        </div>
+                        <div class="layui-inline ">
+                            <button type="button" class="layui-btn layui-btn-warm layui-btn-sm">
+                                <i class="layui-icon">&#xe640;</i>
+                            </button>
+                        </div>
+                        <div class="layui-inline ingredient-margin-input" >
+                            <input type="text" name="shoppinglink" placeholder="Please enter shopping link here..." autocomplete="off" class="layui-input"> 
+                        </div>
                     </div>
                 </div>
                 
-                <button type="button" class="layui-btn layui-btn-warm add-ingredient">
+                <button type="button" class="layui-btn layui-btn-warm add-ingredient" onclick="add_ingredient()">
                         <i class="layui-icon">&#xe608;</i> Add More Ingredient
                 </button>
                 
@@ -121,7 +122,7 @@
     </div>
 
 %include('footer.tpl')
-<script type="text/javascript" src="/js/profile.js"></script>
+<script type="text/javascript" src="/js/recipe_upload.js"></script>
 
 </body>
 </html>
