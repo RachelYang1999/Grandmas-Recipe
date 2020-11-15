@@ -67,10 +67,11 @@
             <img src="https://media.github.sydney.edu.au/user/4849/files/66508100-26ff-11eb-9e66-63155c9c402f" alt="">
             <br>
         </div>
+        <hr>
         <h1> Description </h1>
         <br>
         <p class = "normal-text">{{recipe_data.get("description")}}</p>
-        
+        <hr>
         <h1> Ingredient </h1>
 
         <br>
