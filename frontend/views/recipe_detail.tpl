@@ -101,7 +101,6 @@
         </div>
 
         <!-- <button onclick="myFunction()">Try it</button> -->
-
         <!-- <p id="demo"> </p>
 
         <script>
@@ -115,8 +114,7 @@
                 document.getElementById("demo").innerHTML = ages.find(checkAdult);
                 console.log("myfunction");
             }
-            window.onload = myFunction;
-            
+            window.onload = myFunction;     
         </script> -->
 
         <h1> Steps </h1>
@@ -129,7 +127,6 @@
                 {{recipe_data['step_list'][0]}}
                 <br>
                 {{recipe_data.get("step_list")[1]}} -->
-                
                 <ul>
                     % count = 1
                     % for step in recipe_data['step_list']:
@@ -151,14 +148,26 @@
         </br>
         <h1> Comments </h1>
         <div>
-            <img src="https://media.github.sydney.edu.au/user/4849/files/66508100-26ff-11eb-9e66-63155c9c402f" alt="">
-            <br>
-        </div>
+            % for comment in recipe_data['comment_dic_list']:
+                <!-- <li>{{comment}}</li> <br> -->
+            
+                <div style = "margin: 10px">
+                    
+                    <h2>
+                        <img src="/img/{{avatar}}" class="layui-nav-img"> 
+                        {{comment['comment_user_name']}} 
+                    </h2>
+                </div>
+                <div style = "padding-left: 55px;">
+                    <p class = "normal-text">{{comment['comment_content']}}</p>
+                </div>
 
+                
+                <br>
+            % end
+            <img src="https://media.github.sydney.edu.au/user/4849/files/88c7b600-2762-11eb-8c11-c48c77502f32" alt="">
+        </div>
         
-
-        <div>
-        </div>
     </div> 
 
 %include('footer.tpl')
