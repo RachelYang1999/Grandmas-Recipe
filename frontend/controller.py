@@ -83,7 +83,8 @@ def calendar():
 def index():
     rtv = getToken()
 
-    url = "http://172.17.0.7:9999/api/category/"
+    # url = "http://172.17.0.7:9999/api/category/"
+    url = 'http://'+get_backend()+':9999/api/category/'
 
     r = requests.request("GET", url)
     category=json.loads(r.text)
@@ -97,8 +98,10 @@ def index():
 def profile():
     rtv = getToken()
     if rtv is not None:
-        url = "http://172.17.0.7:9999/api/user/profile/"
+        # url = "http://172.17.0.7:9999/api/user/profile/"
+        url = 'http://'+get_backend()+':9999/api/user/profile/'
 
+        
         headers = {
         'token': rtv[0]
         }
@@ -126,7 +129,8 @@ def recipe_detail():
     rtv = getToken()
 
     if rtv is not None:
-        url = "http://172.17.0.10:9999/api/recipe/"
+        url = 'http://'+get_backend()+':9999/api/recipe/'
+        # url = "http://172.17.0.10:9999/api/recipe/"
 
         payload = {'id': '14'}
 
@@ -156,7 +160,8 @@ def search():
 def upload_recipe():
     rtv = getToken()
     if rtv is not None:
-        url = "http://172.17.0.7:9999/api/user/profile/"
+        url = 'http://'+get_backend()+':9999/api/user/profile//'
+        # url = "http://172.17.0.7:9999/api/user/profile/"
 
         headers = {
         'token': rtv[0]
