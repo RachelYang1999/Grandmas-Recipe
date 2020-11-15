@@ -19,11 +19,11 @@ class Comment_view(APIView):
     queryset = Comment.objects.all()
     authentication_classes = (UserAuth,)
 
-    def get(self, request, *args, **kwargs):
-        recipe_id = request.data.get('recipe_id')
-        comment_all = Comment.objects.filter(recipe_id=recipe_id)
-        #print(comment_all.values())
-        return Response(comment_all.values())
+    # def get(self, request, *args, **kwargs):
+    #     recipe_id = request.data.get('recipe_id')
+    #     comment_all = Comment.objects.filter(recipe_id=recipe_id)
+    #     #print(comment_all.values())
+    #     return Response(comment_all.values())
     
     def post(self, request, *args, **kwargs):
         comment_content = request.data.get('comment_content')
@@ -31,5 +31,5 @@ class Comment_view(APIView):
         user = User.objects.get(id=user_id)
         recipe_id = request.data.get('recipe_id')
         recipe = Recipe.objects.get(id=recipe_id)
-        new_entry = Comment.objects.create(user=user,comment_content = comment_content, recipe = recipe)
+        new_entry = Comment.objects.create(comment_user = user, comment_content = comment_content, comment_recipe = recipe)
         return Response('success')
