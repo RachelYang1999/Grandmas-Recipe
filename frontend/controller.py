@@ -87,7 +87,7 @@ def calendar():
     if rtv is not None:
         return template("calendar",backend=get_backend(),username=rtv[1],avatar=rtv[2],signin=True)
     else:
-        redirect('/signin')
+        redirect('/signin?redirect_url=calendar')
     
 @get('/')
 def index():
