@@ -128,7 +128,7 @@ def recipe_detail():
     if rtv is not None:
         url = "http://"+get_backend()+ ":9999/api/recipe/"
 
-        payload = {'id': '12'}
+        payload = {'id': '14'}
 
         files = [
 
@@ -147,10 +147,51 @@ def recipe_detail():
     else:
         redirect('/signin')
 
-@get('/search')
-def search():
+# @get('/search')
+@get('/search/<title>/<category>')
+def search(title,category):
+
+    # url = "http://172.17.0.8:9999/api/search/"
+
+    # payload = 'recipe_title=Fried%20Rice'
+    # headers = {
+    # 'token': '$1$80f10c9c7f4047a79cf5be667378bac5',
+    # 'Content-Type': 'application/x-www-form-urlencoded'
+    # }
+
+    # response = requests.request("GET", url, headers=headers, data = payload)
+
+
+    # rtv = getToken()
+    # if rtv is not None:
+    url = "http://172.17.0.8:9999/api/search/"
+    # payload = 'recipe_title=Fried%20Rice'
+    payload = 'recipe_title=param'
+        
+        # files = [
+
+        # ]
+
+    # headers = {
+    #     'token': rtv[0]
+    #     }
+    headers = {
+        # 'token': '$1$53ec7a0b425549cb9be7ce998105fb53',
+        'Content-Type': 'application/x-www-form-urlencoded'
+    }
+
+    r = requests.request("GET", url, headers=headers,data = payload)
+    search_data=json.loads(r.text)
+
     
-    return template("search", backend=get_backend(), page="signup")
+# response = requests.request("GET", url, headers=headers, data = payload)
+
+# print(response.text.encode('utf8'))
+    
+    return template("search", backend=get_backend(), page="signup", signin = False, search_data = search_data)
+    # return template("search", backend=get_backend(), page="signup", signin = True)
+    # else:
+    #     redirect('/')
 
 @get('/upload_recipe')
 def upload_recipe():
