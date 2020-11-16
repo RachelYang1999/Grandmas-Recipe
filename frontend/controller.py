@@ -82,7 +82,7 @@ def calendar():
 def index():
     rtv = getToken()
 
-    url = "http://"+get_backend()+ ":9999/api/category/"
+    url = 'http://'+get_backend()+':9999/api/category/'
 
     r = requests.request("GET", url)
     category=json.loads(r.text)
@@ -96,7 +96,7 @@ def index():
 def profile():
     rtv = getToken()
     if rtv is not None:
-        url = "http://"+get_backend()+ ":9999/api/user/profile/"
+        url = "http://172.17.0.7:9999/api/user/profile/"
 
         headers = {
         'token': rtv[0]
@@ -125,7 +125,7 @@ def recipe_detail():
     rtv = getToken()
 
     if rtv is not None:
-        url = "http://"+get_backend()+ ":9999/api/recipe/"
+        url = "http://172.17.0.10:9999/api/recipe/"
 
         payload = {'id': '9'}
 
@@ -147,8 +147,8 @@ def recipe_detail():
         redirect('/signin')
 
 # @get('/search')
-@get('/search/<title>/<category>')
-def search(title,category):
+@get('/search/<keyword>')
+def search(keyword):
 
     # url = "http://172.17.0.8:9999/api/search/"
 
@@ -165,7 +165,7 @@ def search(title,category):
     # if rtv is not None:
     url = "http://172.17.0.8:9999/api/search/"
     # payload = 'recipe_title=Fried%20Rice'
-    payload = 'recipe_title=param'
+    payload = 'recipe_title={}'.format(keyword)
         
         # files = [
 
@@ -174,6 +174,7 @@ def search(title,category):
     # headers = {
     #     'token': rtv[0]
     #     }
+
     headers = {
         # 'token': '$1$53ec7a0b425549cb9be7ce998105fb53',
         'Content-Type': 'application/x-www-form-urlencoded'
@@ -191,44 +192,6 @@ def search(title,category):
     # return template("search", backend=get_backend(), page="signup", signin = True)
     # else:
     #     redirect('/')
-
-@get('/upload_recipe')
-def upload_recipe():
-    rtv = getToken()
-    if rtv is not None:
-        url = "http://"+get_backend()+ ":9999/api/user/profile/"
-
-        headers = {
-        'token': rtv[0]
-        }
-
-        r = requests.request("GET", url, headers=headers)
-        u_data=json.loads(r.text)
-
-        checked_male=""
-        checked_female=""
-        checked_other=""
-
-        if u_data['gender']=="male":
-            checked_male="checked"
-        elif u_data['gender']=="female":
-            checked_female="checked"
-        else:
-            checked_other="checked"
-
-        url2 = "http://"+get_backend()+ ":9999/api/category/"
-
-        r2 = requests.request("GET", url2)
-        category=json.loads(r2.text)
-
-        
-        #return template("index",backend=get_backend(),username=rtv[1],avatar=rtv[2],signin=True,category=category)
-
-
-        return template("recipe_upload",backend=get_backend(),username=rtv[1],avatar=rtv[2],signin=True,category=category, checked_male=checked_male,checked_female=checked_female,checked_other=checked_other,u_data=u_data)
-    else:
-        redirect('/')
-
 
 
 

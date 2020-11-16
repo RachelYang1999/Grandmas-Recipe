@@ -19,7 +19,7 @@ class Search(APIView):
     # get recipe
 
     def get(self, request):
-        category_list =["hot", "test1","tttt"]
+        category_list =["hot", "test1","tttt","dinner", "meatlovers", "vegetarian", "asian", "western","dessert","seafood"]
         
         category_type=request.data.get("category")
         # From Category table get corresponding id of input category string  
@@ -34,7 +34,7 @@ class Search(APIView):
             recipe_list =[]
             for c in category_recipe_queryset:
                 recipe_list.append(Recipe.objects.get(id = c.recipe_of_category_id).id)
-            print(recipe_list)
+            # print(recipe_list)
             
             result_list = []
             for r in recipe_list:
@@ -50,7 +50,7 @@ class Search(APIView):
                 "userid": get_userid,
                 }
                 result_list.append(result)
-            
+            print(result_list)
             return Response(result_list)
             # get_total = Recipe_category.category_of_recipe
             # c_recipe=Recipe_category.objects.filter(category_of_recipe=category_type.lower())
