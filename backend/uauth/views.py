@@ -14,9 +14,6 @@ from rest_framework.response import Response
 
 import app_3609.util as util
 
-# HTTP_ACTION_REGISTER = "signup"
-# HTTP_ACTION_LOGIN = "signin"
-# HTTP_ACTION_LOGOUT = "signout"
 
 class User_auth(APIView):
 
@@ -27,18 +24,6 @@ class User_auth(APIView):
         data = {"username": request.user.username,"avatar":Upload_profile.objects.filter(user=request.user).values()[0]["profile_image"]}
         rst=util.get_response(100,"success",data)
         return Response(rst)
-
-    # def post(self, request, *args, **kwargs):
-    #     action = request.query_params.get('action')
-
-    #     if action == HTTP_ACTION_REGISTER:
-    #         return self.register(request, *args, **kwargs)
-    #     elif action == HTTP_ACTION_LOGIN:
-    #         return self.login(request, *args, **kwargs)
-    #     elif action == HTTP_ACTION_LOGOUT:
-    #         return self.logout(request, *args, **kwargs)
-    #     else:
-    #         return Response(util.get_response(400,"action not exist",[]))
 
     def delete(self, request, *args, **kwargs):
         token = request.META.get('HTTP_TOKEN')

@@ -164,7 +164,7 @@ def search():
     }
 
     r = requests.request("GET", url, headers=headers,data = payload)
-    search_data=json.loads(r.text)
+    search_data=json.loads(r.text)["data"]
 
     rtv = getToken()
 
