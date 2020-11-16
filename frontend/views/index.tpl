@@ -35,7 +35,7 @@
                     <li>Hotest</li>
                     <li>Simplest</li>
                 </ul>
-                <div class="layui-tab-content" style="height: 100px;">
+                <div class="layui-tab-content center">
                     <div class="layui-tab-item layui-show">
                         % for i in range (0,3):
                         <div class="layui-row layui-col-space10">
@@ -48,8 +48,10 @@
                         </div>
                         <br>
                         % end
+                        <br>
+                        <button class="layui-btn layui-bg-orange">More</button>
                     </div>
-                    <div class="layui-tab-item">
+                    <div class="layui-tab-item center">
                         % for i in range (0,3):
                         <div class="layui-row layui-col-space10">
                             % for i in range (0,4):
@@ -61,19 +63,23 @@
                         </div>
                         <br>
                         % end
+                        <br>
+                        <button class="layui-btn layui-bg-orange">More</button>
                     </div>
-                    <div class="layui-tab-item">
+                    <div class="layui-tab-item center">
                         % for i in range (0,3):
                         <div class="layui-row layui-col-space10">
                             % for i in range (0,4):
                             <div class="layui-col-md3">
                                 <img class="r_i" src="/icon/logo.png">
-                                <div class="center">Simplest 2</div>
+                                <div class="center">Simplest 3</div>
                             </div>
                             % end
                         </div>
                         <br>
                         % end
+                        <br>
+                        <button class="layui-btn layui-bg-orange">More</button>
                     </div>
                 </div>
             </div> 

@@ -31,19 +31,19 @@ function get_data(start, end) {
             
             var tableStr="<td>Breaky</td>";
             for ( var i = 0; i < 7; i++) {
-                tableStr = tableStr +"<td>"+ get_recipe(response,getNewDay(start,i),"breakfirst") + "</td>";
+                tableStr = tableStr +"<td>"+ get_recipe(response.data,getNewDay(start,i),"breakfirst") + "</td>";
             };
             $("#Breaky").html(tableStr);
 
             var tableStr="<td>Lunch</td>";
             for ( var i = 0; i < 7; i++) {
-                tableStr = tableStr +"<td>"+ get_recipe(response,getNewDay(start,i),"lunch") + "</td>";
+                tableStr = tableStr +"<td>"+ get_recipe(response.data,getNewDay(start,i),"lunch") + "</td>";
             };
             $("#Lunch").html(tableStr);
 
             var tableStr="<td>Dinner</td>";
             for ( var i = 0; i < 7; i++) {
-                tableStr = tableStr +"<td>"+ get_recipe(response,getNewDay(start,i),"dinner") + "</td>";
+                tableStr = tableStr +"<td>"+ get_recipe(response.data,getNewDay(start,i),"dinner") + "</td>";
             };
             $("#Dinner").html(tableStr);
 
@@ -57,7 +57,7 @@ function get_recipe(response,date,type){
             return  '<input id="'+date+":"+type+'" type="text" style="width:80px;border:0" value="'+response[i].recipe_title+'" readonly/>' + "<br><button class='layui-btn' value='change' onclick='add_cal(\""+date+":"+type+"\")'>change</button>"
         }
     }
-    return "<button class='layui-btn layui-btn-radius layui-bg-red' onclick='add_cal(\""+date+":"+type+"\")'><i class='layui-icon layui-icon-addition '></i> </button>"
+    return "<button class='layui-btn layui-btn-radius layui-bg-red' onclick='add_cal(\""+date+":"+type+"\")'><i class='layui-icon layui-icon-add-1 '></i> </button>"
 }
  
 function add_cal(data){

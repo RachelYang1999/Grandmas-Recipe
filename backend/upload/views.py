@@ -28,7 +28,7 @@ class upload_profile_view(APIView):
         new_entry = Upload_profile.objects.create(
             user=user, profile_image=file_uploaded)
 
-        rst=util.get_response(200,"success",[])
+        rst=util.get_response(100,"success",None)
         
         return Response(rst)
 
@@ -46,7 +46,7 @@ class upload_recipe_view(APIView):
         new_entry = Upload_recipe.objects.create(
             recipe=recipe, step_id=step_id, recipe_image=file_uploaded)
         
-        rst=util.get_response(200,"success",[])
+        rst=util.get_response(100,"success",None)
         
         return Response(rst)
 
@@ -63,7 +63,7 @@ class upload_comment_view(APIView):
         new_entry = Upload_comment_meta.objects.create(
             comment=comment, comment_image=file_uploaded)
         
-        rst=util.get_response(200,"success",[])
+        rst=util.get_response(100,"success",None)
         
         return Response(rst)
 

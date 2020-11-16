@@ -14,5 +14,5 @@ import app_3609.util as util
 class Category_view(APIView):
 
     def get(self, request, *args, **kwargs):
-        rst=util.get_response(200,"success",Category.objects.all().values())
+        rst=util.get_response(100,"success",Category.objects.all().values())
         return Response(rst)

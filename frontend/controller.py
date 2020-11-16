@@ -3,10 +3,14 @@ import configparser
 import requests
 import json
 
+
+
 def get_backend():
     config = configparser.ConfigParser()
     config.read('config.ini')
     return config['SETTING']['backend']
+
+root='http://'+get_backend()+':9999/api/'
 
 def getToken():
     token = request.get_cookie('token')
@@ -15,7 +19,7 @@ def getToken():
         headers={}
         headers['token']=token
 
-        url='http://'+get_backend()+':9999/api/auth/'
+        url=root+'auth/'
         r = requests.get(url,headers=headers)
         rtv=json.loads(r.text)
         print(r.text)
@@ -60,9 +64,9 @@ def signup():
 
 @get('/signout')
 def signout():
-    url='http://'+get_backend()+':9999/api/auth/?action=signout'
-    payload={'token': getToken()[0]}
-    r = requests.request("DELETE", url, data=payload)
+    url=root+'auth/'
+    header={'token': getToken()[0]}
+    r = requests.request("DELETE", url, headers=header)
     response.delete_cookie("token")
     redirect('/')
 
@@ -83,7 +87,7 @@ def calendar():
 def index():
     rtv = getToken()
 
-    url = 'http://'+get_backend()+':9999/api/category/'
+    url=root+'category/'
 
     r = requests.request("GET", url)
     category=json.loads(r.text)["data"]
@@ -97,7 +101,7 @@ def index():
 def profile():
     rtv = getToken()
     if rtv is not None:
-        url = "http://172.17.0.7:9999/api/user/profile/"
+        url=root+'profile/'
 
         
         headers = {
@@ -127,7 +131,7 @@ def recipe_detail():
     rtv = getToken()
 
     if rtv is not None:
-        url = "http://172.17.0.10:9999/api/recipe/"
+        url=root+'recipe/'
 
         payload = {'id': '14'}
 
@@ -148,52 +152,27 @@ def recipe_detail():
     else:
         redirect('/signin')
 
-# @get('/search')
-@get('/search/<keyword>')
-def search(keyword):
+@get('/search')
+def search():
+    keyword=request.query.keyword
 
-    # url = "http://172.17.0.8:9999/api/search/"
+    url=root+'search/'
 
-    # payload = 'recipe_title=Fried%20Rice'
-    # headers = {
-    # 'token': '$1$80f10c9c7f4047a79cf5be667378bac5',
-    # 'Content-Type': 'application/x-www-form-urlencoded'
-    # }
-
-    # response = requests.request("GET", url, headers=headers, data = payload)
-
-
-    # rtv = getToken()
-    # if rtv is not None:
-    url = "http://172.17.0.8:9999/api/search/"
-    # payload = 'recipe_title=Fried%20Rice'
     payload = 'recipe_title={}'.format(keyword)
-        
-        # files = [
-
-        # ]
-
-    # headers = {
-    #     'token': rtv[0]
-    #     }
-
     headers = {
-        # 'token': '$1$53ec7a0b425549cb9be7ce998105fb53',
         'Content-Type': 'application/x-www-form-urlencoded'
     }
 
     r = requests.request("GET", url, headers=headers,data = payload)
     search_data=json.loads(r.text)
 
-    
-# response = requests.request("GET", url, headers=headers, data = payload)
+    rtv = getToken()
 
-# print(response.text.encode('utf8'))
+    if rtv is not None:
+        return template("search",backend=get_backend(),username=rtv[1],avatar=rtv[2],signin=True,search_data = search_data)
+    else:
+        return template("search", backend=get_backend(), signin = False, search_data = search_data)
     
-    return template("search", backend=get_backend(), page="signup", signin = False, search_data = search_data)
-    # return template("search", backend=get_backend(), page="signup", signin = True)
-    # else:
-    #     redirect('/')
 
 
 

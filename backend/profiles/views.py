@@ -28,7 +28,7 @@ class Profiles(APIView):
             "dob": user.date_of_birth,
             "dor": user.register_date
         }
-        rst=util.get_response(200,"success",get_profile)
+        rst=util.get_response(100,"success",get_profile)
         return Response(rst)
         
     
@@ -50,6 +50,6 @@ class Profiles(APIView):
             user.gender = post_gender
             user.save()
 
-        rst=util.get_response(200,"success",[])
+        rst=util.get_response(100,"success",None)
         
         return Response(rst)

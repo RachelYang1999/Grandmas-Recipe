@@ -19,14 +19,14 @@ class Follow_view(APIView):
         try:
             user = User.objects.get(id=user_id)
         except User_follow.DoesNotExist:
-            return Response(util.get_response(400,"user not exist",[]))
+            return Response(util.get_response(400,"user not exist",None))
 
         data = {
             "follower": user.total_follower,
             "following": user.total_following
         }
 
-        rst=util.get_response(200,"success",data)
+        rst=util.get_response(100,"success",data)
 
         return Response(rst)
 
@@ -36,7 +36,7 @@ class Follow_view(APIView):
 
         try:
             User_follow.objects.get(from_user=from_user, to_user=to_user)
-            return Response(util.get_response(400,"user follow exist",[]))
+            return Response(util.get_response(400,"user follow exist",None))
         except User_follow.DoesNotExist:
             from_user_obj = User.objects.get(id=from_user)
             from_user_obj.total_following = from_user_obj.total_following+1
@@ -47,5 +47,5 @@ class Follow_view(APIView):
             follow = User_follow.objects.create(from_user=from_user_obj, to_user=to_user_obj)
             follow.save()
 
-        rst=util.get_response(200,"success",[])
+        rst=util.get_response(100,"success",None)
         return Response(rst)

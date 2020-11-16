@@ -22,7 +22,7 @@ class UserAuth(BaseAuthentication):
                 else:
                     raise exceptions.AuthenticationFailed()
             except:
-                raise exceptions.AuthenticationFailed({"code":400,"msg": "invalid","data":[]})
+                raise exceptions.AuthenticationFailed({"code":400,"msg": "Access invalid","data":None})
 
 class UserAuth_Auth(BaseAuthentication):
 
@@ -40,4 +40,4 @@ class UserAuth_Auth(BaseAuthentication):
                 else:
                     raise exceptions.AuthenticationFailed()
             except:
-                raise exceptions.AuthenticationFailed({"code":400,"msg": "invalid","data":[]})
+                raise exceptions.AuthenticationFailed({"code":400,"msg": "Access invalid","data":None})

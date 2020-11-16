@@ -14,9 +14,9 @@ from rest_framework.response import Response
 
 import app_3609.util as util
 
-HTTP_ACTION_REGISTER = "signup"
-HTTP_ACTION_LOGIN = "signin"
-HTTP_ACTION_LOGOUT = "signout"
+# HTTP_ACTION_REGISTER = "signup"
+# HTTP_ACTION_LOGIN = "signin"
+# HTTP_ACTION_LOGOUT = "signout"
 
 class User_auth(APIView):
 
@@ -25,7 +25,7 @@ class User_auth(APIView):
     def get(self, request, *args, **kwargs):
         
         data = {"username": request.user.username,"avatar":Upload_profile.objects.filter(user=request.user).values()[0]["profile_image"]}
-        rst=util.get_response(200,"success",data)
+        rst=util.get_response(100,"success",data)
         return Response(rst)
 
     # def post(self, request, *args, **kwargs):
@@ -45,9 +45,9 @@ class User_auth(APIView):
         u_id=token.split("$")[1]
         if token==cache.get(u_id):
             cache.delete(u_id)
-            rst=util.get_response(200,"success",[])
+            rst=util.get_response(100,"success",None)
         else:
-            rst=util.get_response(400,"not logged in",[])
+            rst=util.get_response(400,"not logged in",None)
             
         return Response(rst)
 
@@ -69,19 +69,19 @@ class User_auth(APIView):
                     cache.set(user.id,token,timeout=3600)
                     data['token']=token
 
-                    rst=util.get_response(200,"success",data)
+                    rst=util.get_response(100,"success",data)
                     
                     return Response(rst)
                 else:
-                    rst=util.get_response(400,"username or password not correct",[])
+                    rst=util.get_response(400,"username or password not correct",None)
                     return Response(rst)
             else:
                 if user.password == util.create_md5(u_password,user.salt):
                     data['token']=cache.get(user.id)
-                    rst=util.get_response(200,"success",data)
+                    rst=util.get_response(100,"success",data)
                     return Response(rst)
                 else:
-                    rst=util.get_response(400,"username or password not correct",[])
+                    rst=util.get_response(400,"username or password not correct",None)
                     return Response(rst)
 
         except User.DoesNotExist:
@@ -95,13 +95,12 @@ class User_auth(APIView):
         
         try:
             user = User.objects.get(username=username)
-            rst=util.get_response(400,"username exists",[])
+            rst=util.get_response(400,"username exists",None)
             return Response(rst)
         except User.DoesNotExist:
             user=User.objects.create(username=username,password=password,salt=salt)
             upload=Upload_profile.objects.create(user=user)
 
-        rst=util.get_response(200,"success",[])
         return Response(rst)
 
 

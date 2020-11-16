@@ -26,8 +26,8 @@ class Calendar_view(APIView):
         cals=Calendar.objects.filter(user=user,date__gte=start,date__lte=end).values()
         for i in cals:
             i["recipe_title"]=Recipe.objects.get(id=i["recipe_id"]).recipe_title
-
-        return Response(cals)
+        rst=util.get_response(100,"success",cals)
+        return Response(rst)
 
     def post(self, request, *args, **kwargs):
         user = request.user
@@ -43,8 +43,6 @@ class Calendar_view(APIView):
             calendar = Calendar.objects.create(date=date, meal_type=meal_type, user=user, recipe=Recipe.objects.get(id=recipe_id))
             calendar.save()
 
-        data = {
-            'msg': 'success',
-        }
+        rst=util.get_response(100,"success",None)
 
-        return Response(data, status=201)
+        return Response(rst)

@@ -41,27 +41,39 @@
 }
 
 /* header */
+.cal-header{
+    margin-left:-15px;
+    font-size: 40px; 
+    color: #393D49;
+}
+
 .logo{
     width:50px;
     height:50px;
 }
 
-.layui-nav-item .layui-nav{
-    height: 25%
-}
-
-.layui-nav-item .layui-form{
+.search-bar{
     margin-left:100px;
 }
-
-.layui-nav-item .layui-form .select-item{
-    width:120px;
-    color:black;
-}
-
-.input-item{
+.search-bar .input-item{
     width:320px;
 }
+
+.header-up{
+    margin-top: -5px;
+}
+
+.seperater{
+    margin:-10px 10px 0px 10px;
+    color:#393D49;
+}
+
+/* .layui-nav-item .layui-form .select-item{
+    width:120px;
+    color:black;
+} */
+
+
 .layui-nav .layui-nav-more{
     border-top-color:#393D49;
 }
