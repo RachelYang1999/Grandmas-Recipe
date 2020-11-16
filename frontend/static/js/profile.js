@@ -20,7 +20,6 @@ layui.use(['upload','laydate'], function(){
   });
 });
 
-
 function change(){
 
     layui.use('layer', function(){

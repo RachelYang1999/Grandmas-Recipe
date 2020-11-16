@@ -79,7 +79,11 @@
                     </div>
                 </div>
                 
+<<<<<<< HEAD
+                <button type="button" class="layui-btn layui-btn-warm add-ingredient" onclick="add_ingredient()">
+=======
                 <button type="button" onclick="add_ingredient()" class="layui-btn layui-btn-warm add-ingredient">
+>>>>>>> b402eacd1a4859d9297ec17d2ff3396e4facb91d
                         <i class="layui-icon">&#xe608;</i> Add More Ingredient
                 </button>
                 
