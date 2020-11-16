@@ -183,6 +183,10 @@
         </form>
             
 
+<<<<<<< HEAD
+
+=======
+>>>>>>> 7e54e9222415b474b147e29f2dda1a86ae7d678a
     </div> 
 <img src="https://media.github.sydney.edu.au/user/4849/files/88c7b600-2762-11eb-8c11-c48c77502f32" alt="">
 %include('footer.tpl')

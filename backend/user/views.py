@@ -7,21 +7,28 @@ from rest_framework import status, exceptions
 from rest_framework.views import APIView
 from rest_framework.response import Response
 
+import app_3609.util as util
+
 
 class Follow_view(APIView):
-    queryset = User.objects.all()
+
     authentication_classes = (UserAuth,)
 
     def get(self, request, *args, **kwargs):
         user_id = request.data.get('user_id')
-        user = User.objects.get(id=user_id)
+        try:
+            user = User.objects.get(id=user_id)
+        except User_follow.DoesNotExist:
+            return Response(util.get_response(400,"user not exist",[]))
+
         data = {
-            "id": user_id,
             "follower": user.total_follower,
             "following": user.total_following
         }
 
-        return Response(data)
+        rst=util.get_response(200,"success",data)
+
+        return Response(rst)
 
     def post(self, request, *args, **kwargs):
         from_user = request.data.get('from_user')
@@ -29,7 +36,7 @@ class Follow_view(APIView):
 
         try:
             User_follow.objects.get(from_user=from_user, to_user=to_user)
-            raise exceptions.ValidationError("user follow exist")
+            return Response(util.get_response(400,"user follow exist",[]))
         except User_follow.DoesNotExist:
             from_user_obj = User.objects.get(id=from_user)
             from_user_obj.total_following = from_user_obj.total_following+1
@@ -40,7 +47,5 @@ class Follow_view(APIView):
             follow = User_follow.objects.create(from_user=from_user_obj, to_user=to_user_obj)
             follow.save()
 
-        data = {
-            'msg': 'success',
-        }
-        return Response(data, status=201)
+        rst=util.get_response(200,"success",[])
+        return Response(rst)
