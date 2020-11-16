@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="/css/recipe_detail.css">
-    <title>Recipe Detail</title>
+    <title>Recipe Detail - {{recipe_data.get("title")}}</title>
     %include('header.tpl')
 
 <div class="layui-body">
