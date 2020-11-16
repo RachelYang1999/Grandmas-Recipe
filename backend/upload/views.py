@@ -14,13 +14,11 @@ from rest_framework import status, exceptions
 from rest_framework.views import APIView
 from rest_framework.response import Response
 
-# Create your views here.
+import app_3609.util as util
 
 
 class upload_profile_view(APIView):
 
-    serializer_class = UploadSerializer
-    queryset = Upload_profile.objects.all()
     authentication_classes = (UserAuth,)
 
     def post(self, request, *args, **kwargs):
@@ -29,13 +27,14 @@ class upload_profile_view(APIView):
 
         new_entry = Upload_profile.objects.create(
             user=user, profile_image=file_uploaded)
-        return Response("success")
+
+        rst=util.get_response(200,"success",[])
+        
+        return Response(rst)
 
 
 class upload_recipe_view(APIView):
 
-    serializer_class = UploadSerializer_recipe
-    queryset = Upload_recipe.objects.all()
     authentication_classes = (UserAuth,)
 
     def post(self, request, *args, **kwargs):
@@ -46,13 +45,14 @@ class upload_recipe_view(APIView):
 
         new_entry = Upload_recipe.objects.create(
             recipe=recipe, step_id=step_id, recipe_image=file_uploaded)
-        return Response("success")
+        
+        rst=util.get_response(200,"success",[])
+        
+        return Response(rst)
 
 
 class upload_comment_view(APIView):
 
-    serializer_class = UploadSerializer_commentmeta
-    queryset = Upload_comment_meta.objects.all()
     authentication_classes = (UserAuth,)
 
     def post(self, request, *args, **kwargs):
@@ -62,5 +62,8 @@ class upload_comment_view(APIView):
 
         new_entry = Upload_comment_meta.objects.create(
             comment=comment, comment_image=file_uploaded)
-        return Response("success")
+        
+        rst=util.get_response(200,"success",[])
+        
+        return Response(rst)
 

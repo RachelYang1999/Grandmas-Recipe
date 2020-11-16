@@ -30,3 +30,12 @@ def compare_time(time1,time2):
         return time2,time1
     elif int(s_time) - int(e_time) < 0:
         return time1,time2
+
+def get_response(code,msg,data):
+    dic={ "code": 0,"msg": "","data":None}
+    dic["code"]=code
+    dic["msg"]=msg
+    dic["data"]=data
+
+    return dic
+

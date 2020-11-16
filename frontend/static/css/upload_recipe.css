@@ -7,6 +7,14 @@
     width: 400px;
 }
 
+.ingredient-margin{
+    margin-left:120px;
+}
+
+.ingredient-margin-input{
+    width:300px;
+}
+
 .recipe-title-margin{
     margin:50px;
 }
@@ -59,13 +67,17 @@
 
 .ingredient-label{
     width:200px !important; 
-    margin:20px 0px 0px -20px;
+    margin:20px 0px 15px -20px;
     font-size: 20px;
+}
+
+.ingredient-margin{
+    margin:20px 0px 0px 110px !important;
+    
 }
 
 .ingredient-input{
     width:300px !important; 
-    margin:70px 0px 0px -100px !important;
 }
 
 .ingredient-delete{

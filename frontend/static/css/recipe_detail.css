@@ -38,3 +38,28 @@ div.right-align {
     margin-bottom: 10px;
     color: rgba(56, 114, 191, 0.8);
 }
+
+.comment-block{
+    display: grid;
+    /* background-color: #ded2be;; */
+    border-radius: 7px;
+    box-shadow: 0px 0px 5px 2px black;
+    /* margin-left: 55px; */
+}
+
+.comment-input-header{
+    margin-bottom: 10px !important;
+    margin-left: 55px;
+}
+
+.left-space {
+    margin-left: 55px;
+}
+
+.place-right {
+  position: absolute;
+  right: 0px;
+  /* width: 300px;
+  border: 3px solid #73AD21;
+  padding: 10px; */
+}
