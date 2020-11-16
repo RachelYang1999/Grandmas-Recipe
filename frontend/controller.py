@@ -1,4 +1,4 @@
-from bottle import route, get, post, request, static_file, response, redirect,template
+from bottle import route, get, post, request, static_file, response, redirect,template,error
 import configparser
 import requests
 import json
@@ -51,12 +51,18 @@ def serve_font(font):
 def serve_css(css):
     return static_file(css, root='static/css/')
 
+@error(404)
+def error404(error):
+   return 'Page not Found'
+
 @get('/signin')
 def signin():
+    url=request.query.redirect_url
+
     rtv = getToken()
     if rtv is not None:
         redirect('/')
-    return template("signin",backend=get_backend(),page="signin")
+    return template("signin",backend=get_backend(),page="signin",redirect_url=url)
 
 @get('/signup')
 def signup():
@@ -92,10 +98,16 @@ def index():
     r = requests.request("GET", url)
     category=json.loads(r.text)["data"]
 
+    url=root+'index_recipe/'
+    payload = {'position': "banner"}
+
+    r = requests.request("GET", url,data=payload)
+    banner=json.loads(r.text)["data"]
+
     if rtv is not None:
-        return template("index",backend=get_backend(),username=rtv[1],avatar=rtv[2],signin=True,category=category)
+        return template("index",backend=get_backend(),username=rtv[1],avatar=rtv[2],signin=True,category=category,banner=banner)
     else:
-        return template("index",backend=get_backend(),signin=False,category=category)
+        return template("index",backend=get_backend(),signin=False,category=category,banner=banner)
 
 @get('/profile')
 def profile():
@@ -123,95 +135,78 @@ def profile():
             checked_other="checked"
         return template("profile",backend=get_backend(),username=rtv[1],avatar=rtv[2],signin=True,checked_male=checked_male,checked_female=checked_female,checked_other=checked_other,u_data=u_data)
     else:
-        redirect('/')
+        redirect('/signin?redirect_url=profile')
 
 
 @get('/recipe_detail')
 def recipe_detail():
+    rid=request.query.id
+
+    if len(rid)==0:
+        redirect('/') 
+
     rtv = getToken()
 
     if rtv is not None:
         url=root+'recipe/'
 
-        payload = {'id': '14'}
-
-        files = [
-
-        ]
+        payload = {'id': rid}
 
         headers = {
         'token': rtv[0]
         }
-        r = requests.request("GET", url, headers=headers, data = payload, files = files)
-        recipe_data=json.loads(r.text)
+        r = requests.request("GET", url, headers=headers, data = payload)
+        recipe_data=json.loads(r.text)["data"]
 
-        # response = requests.request("GET", url, headers = headers, data = payload, files = files)
-        # return response
+        # print(recipe_data)
 
         return template("recipe_detail", backend=get_backend(), username = rtv[1], avatar = rtv[2], signin = True, recipe_data = recipe_data)
     else:
-        redirect('/signin')
+        redirect('/signin?redirect_url=recipe_detail?id='+rid)
 
 @get('/search')
 def search():
     keyword=request.query.keyword
+    category=request.query.category
+
+    if len(keyword)==0:
+        redirect('/') 
+
+    payload={}
+
+    if category == "true":
+        payload["category"] = keyword
+    else:
+        payload['recipe_title'] = keyword
 
     url=root+'search/'
 
-    payload = 'recipe_title={}'.format(keyword)
-    headers = {
-        'Content-Type': 'application/x-www-form-urlencoded'
-    }
-
-    r = requests.request("GET", url, headers=headers,data = payload)
+    r = requests.request("GET", url, data = payload)
     search_data=json.loads(r.text)["data"]
+    # print(search_data)
 
     rtv = getToken()
 
+    if search_data==None or search_data==[]:
+        redirect("/")
+        
+
     if rtv is not None:
-        return template("search",backend=get_backend(),username=rtv[1],avatar=rtv[2],signin=True,search_data = search_data)
+        return template("search",backend=get_backend(),username=rtv[1],avatar=rtv[2],signin=True,search_data = search_data,keyword=keyword)
     else:
-        return template("search", backend=get_backend(), signin = False, search_data = search_data)
+        return template("search", backend=get_backend(), signin = False, search_data = search_data, keyword=keyword)
     
-
-
-
-
 
 @get('/upload_recipe')
 def upload_recipe():
     rtv = getToken()
     if rtv is not None:
-        url = "http://"+get_backend()+ ":9999/api/user/profile/"
+        url=root+'category/'
 
-        headers = {
-        'token': rtv[0]
-        }
+        r2 = requests.request("GET", url)
+        category=json.loads(r2.text)["data"]
 
-        r = requests.request("GET", url, headers=headers)
-        u_data=json.loads(r.text)
-
-        checked_male=""
-        checked_female=""
-        checked_other=""
-
-        if u_data['gender']=="male":
-            checked_male="checked"
-        elif u_data['gender']=="female":
-            checked_female="checked"
-        else:
-            checked_other="checked"
-
-        url2 = "http://"+get_backend()+ ":9999/api/category/"
-
-        r2 = requests.request("GET", url2)
-        category=json.loads(r2.text)
-
-        
-        #return template("index",backend=get_backend(),username=rtv[1],avatar=rtv[2],signin=True,category=category)
-
-
-        return template("recipe_upload",backend=get_backend(),username=rtv[1],avatar=rtv[2],signin=True,category=category, checked_male=checked_male,checked_female=checked_female,checked_other=checked_other,u_data=u_data)
+        return template("upload_recipe",backend=get_backend(),username=rtv[1],avatar=rtv[2],signin=True,category=category)
     else:
-        redirect('/')
+        redirect('/signin?redirect_url=upload_recipe')
 

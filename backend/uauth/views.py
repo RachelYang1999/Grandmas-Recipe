@@ -2,8 +2,6 @@ import uuid
 
 from uauth.auth import UserAuth_Auth
 from user.models import User
-# from uauth.permissions import IsSuperUser
-from uauth.serializers import UserSerializer
 from upload.models import Upload_profile
 
 from django.core.cache import cache

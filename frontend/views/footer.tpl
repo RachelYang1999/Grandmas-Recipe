@@ -6,3 +6,4 @@
 <script type="text/javascript" src="/js/jquery.cookie.js"></script>
 <script type="text/javascript" src="/js/layui.js"></script>
 <script type="text/javascript" src="/js/header.js"></script>
+<script type="text/javascript" src="/js/search.js"></script>

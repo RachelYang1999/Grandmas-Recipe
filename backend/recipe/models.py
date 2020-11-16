@@ -21,3 +21,10 @@ class Recipe_category(models.Model):
 
     recipe_of_category =  models.ForeignKey(Recipe, related_name='recipe_of_category', on_delete = models.CASCADE)
     category_of_recipe =  models.ForeignKey(Category, related_name='category_of_recipe', on_delete = models.CASCADE)
+
+class Recipe_mark(models.Model):
+    class Meta:
+        db_table = 'recipe_mark'
+
+    recipe =  models.ForeignKey(Recipe, related_name='recipe_mark', on_delete = models.CASCADE)
+    mark =  models.CharField(max_length = 100)

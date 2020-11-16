@@ -7,6 +7,7 @@
 %include('header_sign.tpl')
 <div class="login-main layui-body">
     <header class="layui-elip">Sign In</header>
+    <input type="text" value="{{redirect_url}}" id="redirect" style="display:none" readonly>
     <form class="layui-form">
         <div class="layui-input-inline">
             <input type="text" name="username" required lay-verify="input" placeholder="Username" autocomplete="off"

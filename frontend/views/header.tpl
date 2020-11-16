@@ -15,9 +15,9 @@
                         
                         <div class="layui-inline search-bar">
                             <div class="layui-inline input-item">
-                                <input type="text" name="title" required lay-verify="input" placeholder="Type in keywords" autocomplete="off" class="layui-input" />
+                                <input type="text" id="r_title" required lay-verify="input" placeholder="Type in keywords" autocomplete="off" class="layui-input" />
                             </div>
-                            <button class="layui-btn layui-bg-orange">Search</button>
+                            <button class="layui-btn layui-bg-orange" onclick="search()">Search</button>
 
                         </div>  
 
@@ -26,7 +26,7 @@
 
                 <ul id="changeable" class="layui-nav layui-layout-right" >
                     <li class="layui-nav-item header-up">
-                        <button class="layui-btn layui-bg-orange"><i class='layui-icon layui-icon-add-1'></i>NEW</button>
+                        <a href="/upload_recipe"><button class="layui-btn layui-bg-orange"><i class='layui-icon layui-icon-add-1'></i>NEW</button></a>
                     </li>
                     % if signin:
                     <li class="layui-nav-item header-up" lay-unselect="">
@@ -35,15 +35,16 @@
                         <dd><a href="/profile">My Profile</a></dd>
                         <dd><a href="javascript:;">My Favourite</a></dd>
                         <dd><a href="javascript:;">My Recipe</a></dd>
-                        <dd><a href="/signout">Signout</a></dd>
+                        <hr>
+                        <dd><a href="/signout">Sign Out</a></dd>
                         </dl>
                     </li>
                     <li class="layui-nav-item seperater">|</li>
                     <li class="layui-nav-item"><a href="/calendar"><i class="layui-icon layui-icon-date cal-header" ></i></a></li>
                     % else:
 
-                    <li class="layui-nav-item"><a style="color:#393D49;" href="/signin">Signin</a></li>
-                    <li class="layui-nav-item"><a style="color:#393D49;" href="/signup">Signup</a></li>
+                    <li class="layui-nav-item"><a style="color:#393D49;" href="/signin">Sign In</a></li>
+                    <li class="layui-nav-item"><a style="color:#393D49;" href="/signup">Sign Up</a></li>
                     % end
                     
                 </ul>

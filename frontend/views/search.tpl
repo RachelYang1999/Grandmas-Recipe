@@ -11,7 +11,7 @@
         <div class="layui-container">
             <div class = "margin_to_header">
                 <div class = "layui-row">
-                    <h1> Related results</h1>
+                    <h1> "{{keyword}}" Related results</h1>
                 </div>
             </div>
             <div class="center">
@@ -25,7 +25,7 @@
                                 <div class = "layui-row grid-demo"> 
                                    
                                     <div class = "height_width">
-                                        <a href = "http://172.17.0.8:8080/">
+                                        <a href = "/recipe_detail?id={{r['id']}}">
                                             <div class="layui-col-md5">
                                                 picture
                                             </div>

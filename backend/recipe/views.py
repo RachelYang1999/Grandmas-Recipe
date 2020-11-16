@@ -1,22 +1,19 @@
 from uauth.auth import UserAuth
 from datetime import datetime
-from django.shortcuts import render
-from django.http import HttpResponse
-from profiles.serializers import ProfileSerializer
 
-from recipe.models import Recipe, Recipe_category
+from recipe.models import Recipe, Recipe_category, Recipe_mark
 from category.models import Category
 from user.models import User
 from step.models import Step
 from ingredient.models import Ingredient
+from upload.models import Upload_recipe
 from comments.models import Comment
 
 from rest_framework import status, exceptions
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from rest_framework import viewsets
 
-from django.db import transaction
+import app_3609.util as util
 
 
 class RecipeView(APIView):
@@ -30,6 +27,8 @@ class RecipeView(APIView):
         ingredient_queryset = Ingredient.objects.filter(ingredient_related_recipe_id = recipe_id)
         comment_all_queryset = Comment.objects.filter(comment_recipe_id = recipe_id)
         # print(Comment.objects.get(comment_recipe_id = recipe_id).comment_content)
+
+        get_recipe_id = recipe.id
 
         get_recipe_title = recipe.recipe_title
         get_recipe_description = recipe.description
@@ -63,6 +62,7 @@ class RecipeView(APIView):
             get_comment_dic_list.append(single_comment)
 
         get_recipe = {
+            "id": get_recipe_id,
             "title": get_recipe_title,
             "description": get_recipe_description,
             "is_published": get_is_published,
@@ -76,13 +76,11 @@ class RecipeView(APIView):
         }
 
         # print(get_recipe)
-        return Response(get_recipe)
+        rst=util.get_response(100,"success",get_recipe)
+        return Response(rst)
 
-    @transaction.non_atomic_requests
     def post(self, request):
-        data = {
-                'msg': 'failed',
-            }
+        
         user = request.user
         # current_user = User.objects.get(id = user_id)
         recipe_title = request.data.get("recipe_title")
@@ -126,10 +124,9 @@ class RecipeView(APIView):
                     recipe_category_relationship.save()
                 except:
                     category_not_found += c
-                    data = {
-                        'msg': category_not_found + " category is not found",
-                    }
-                    return Response(data, status=201)
+                    rst=util.get_response(400,category_not_found + " category is not found",None)
+                    return Response(rst)
+
             # Add ingredients for a recipe
             for i in ingredient_name_list:
                 ingredient_object = Ingredient.objects.create(ingredient_name = i, ingredient_related_recipe_id = new_recipe.id)
@@ -139,9 +136,26 @@ class RecipeView(APIView):
             for s in step_decription_list:
                 step_object = Step.objects.create(step_description = s,	related_recipe_id = new_recipe.id)
                 step_object.save()
-
-            data = {
-                'msg': 'success',
-            }
             
-        return Response(data, status=201)
+            rst=util.get_response(100,"success",None)
+            return Response(rst)
+
+class RecipeIndexView(APIView):
+    def get(self, request):
+        position = request.data.get("position")
+        recipes=Recipe_mark.objects.filter(mark=position)
+        data=[]
+        for r in recipes:
+            temp={}
+            temp["id"]=r.recipe_id
+
+            meta=Upload_recipe.objects.filter(recipe=Recipe.objects.get(id=r.recipe_id),step_id=0).values()[0]["recipe_image"]
+            # print(meta)
+            temp["meta"]=meta
+            data.append(temp)
+
+        rst=util.get_response(100,"success",data)
+
+        return Response(rst)
+
+

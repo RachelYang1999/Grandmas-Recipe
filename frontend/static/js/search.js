@@ -1,4 +1,4 @@
-function redirect(){
-    window.location.href='http://172.17.0.8:8080/';
+function search(){
+    window.location.href='/search?keyword='+$("#r_title").val();
 }
 

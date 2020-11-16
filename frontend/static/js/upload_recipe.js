@@ -67,29 +67,26 @@ function delete_step(del_id){
 function upload_image(){
     layui.use('upload', function(){
         var upload = layui.upload;
-        
-        //执行实例
+    
         var uploadInst = upload.render({
-            elem: '#main-pic' //绑定元素
+            elem: '#main-pic'
             ,url:'http://'+$("#backend").html()+':9999/api/upload/recipe_image/'
             ,auto:false
             ,field: "document"
             ,headers:{"token":$.cookie("token")}
             ,bindAction:'#submit'
-            ,choose:function(obj){//选择文件的回调，obj为选中的文件
-				    	//将每次选择的文件追加到文件队列
+            ,choose:function(obj){
                 var files = obj.pushFile();
-                
-                //预览选中的文件（本地文件）
+            
                 obj.preview(function(index,file,result){
                     $('#demo1').attr('src', result); 
                 });
             }
             ,done: function(res){
-            //上传完毕回调
+
             }
             ,error: function(){
-            //请求异常回调
+   
             }
         });
     });
