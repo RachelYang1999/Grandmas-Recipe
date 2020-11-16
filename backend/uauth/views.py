@@ -28,20 +28,20 @@ class User_auth(APIView):
         rst=util.get_response(200,"success",data)
         return Response(rst)
 
-    def post(self, request, *args, **kwargs):
-        action = request.query_params.get('action')
+    # def post(self, request, *args, **kwargs):
+    #     action = request.query_params.get('action')
 
-        if action == HTTP_ACTION_REGISTER:
-            return self.register(request, *args, **kwargs)
-        elif action == HTTP_ACTION_LOGIN:
-            return self.login(request, *args, **kwargs)
-        elif action == HTTP_ACTION_LOGOUT:
-            return self.logout(request, *args, **kwargs)
-        else:
-            return Response(util.get_response(400,"action not exist",[]))
+    #     if action == HTTP_ACTION_REGISTER:
+    #         return self.register(request, *args, **kwargs)
+    #     elif action == HTTP_ACTION_LOGIN:
+    #         return self.login(request, *args, **kwargs)
+    #     elif action == HTTP_ACTION_LOGOUT:
+    #         return self.logout(request, *args, **kwargs)
+    #     else:
+    #         return Response(util.get_response(400,"action not exist",[]))
 
-    def logout(self, request, *args, **kwargs):
-        token = request.data.get('token')
+    def delete(self, request, *args, **kwargs):
+        token = request.META.get('HTTP_TOKEN')
         u_id=token.split("$")[1]
         if token==cache.get(u_id):
             cache.delete(u_id)
@@ -52,7 +52,7 @@ class User_auth(APIView):
         return Response(rst)
 
 
-    def login(self, request, *args, **kwargs):
+    def post(self, request, *args, **kwargs):
         u_name = request.data.get('username')
         u_password = request.data.get('password')
         try:
@@ -87,7 +87,7 @@ class User_auth(APIView):
         except User.DoesNotExist:
             raise exceptions.NotFound
 
-    def register(self, request, *args, **kwargs):
+    def put(self, request, *args, **kwargs):
         username = request.data.get('username')
         password = request.data.get('password')
         salt = util.create_salt()

@@ -12,7 +12,7 @@ layui.use(['form','layer','jquery'], function () {
                 success: function (data) {
                     var result = JSON.parse(data)
                     if (result.msg == "success"){
-                        $.cookie("token",result.token);
+                        $.cookie("token",result.data.token);
                         window.location.href="/";
                     }
                 },

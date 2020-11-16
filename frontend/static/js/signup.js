@@ -7,7 +7,7 @@ layui.use(['form','layer','jquery'], function () {
                 url:'http://'+$("#backend").html()+':9999/api/auth/?action=signup',
                 data:data.field,
                 dataType:'text',
-                type:'post',
+                type:'put',
                 success: function (data) {
                     var result = JSON.parse(data)
                     console.log(result);

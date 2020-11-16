@@ -18,9 +18,10 @@ def getToken():
         url='http://'+get_backend()+':9999/api/auth/'
         r = requests.get(url,headers=headers)
         rtv=json.loads(r.text)
+        print(r.text)
 
         if rtv["msg"]=="success":
-            return token,rtv["username"],rtv["avatar"]
+            return token,rtv["data"]["username"],rtv["data"]["avatar"]
         else:
             return None
     else:
@@ -61,7 +62,7 @@ def signup():
 def signout():
     url='http://'+get_backend()+':9999/api/auth/?action=signout'
     payload={'token': getToken()[0]}
-    r = requests.request("POST", url, data=payload)
+    r = requests.request("DELETE", url, data=payload)
     response.delete_cookie("token")
     redirect('/')
 
@@ -85,7 +86,7 @@ def index():
     url = "http://"+get_backend()+ ":9999/api/category/"
 
     r = requests.request("GET", url)
-    category=json.loads(r.text)
+    category=json.loads(r.text)["data"]
 
     if rtv is not None:
         return template("index",backend=get_backend(),username=rtv[1],avatar=rtv[2],signin=True,category=category)
@@ -103,7 +104,7 @@ def profile():
         }
 
         r = requests.request("GET", url, headers=headers)
-        u_data=json.loads(r.text)
+        u_data=json.loads(r.text)["data"]
 
         checked_male=""
         checked_female=""
