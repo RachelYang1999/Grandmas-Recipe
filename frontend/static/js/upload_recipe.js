@@ -1,3 +1,8 @@
+function change_is_publish(){
+    $("#is-pub").val(0);
+}
+
+
 function add_ingredient(){
     var in_block = $("#ingredient-block").html();
     
@@ -21,24 +26,7 @@ function add_ingredient(){
 }
 
 function delete_ingredient(del_id){
-    var in_counter = Number($("#in-counter").val());
-    var counter = in_counter;
-    in_counter=in_counter-1;
-    if (in_counter<1){
-        in_counter=1;
-    }
-    $("#in-counter").val(in_counter);
     $("#ingre-"+del_id).remove();
-    var j=1;
-    for(var i=0; i<=counter;i++){
-        if($("#ingre-"+String(i+1)).html()!=undefined){
-            
-            $("#ingre-"+String(i+1)).attr("id","ingre-"+String(j));
-
-            j=j+1;
-        }
-        
-    }
 }
 
 function add_step(){
@@ -50,9 +38,6 @@ function add_step(){
     console.log("add"+step_counter);
 
     step_block=step_block+'<div id="step-'+step_counter+'">\
-                        <div class="layui-inline" >\
-                            <label class="layui-form-label step-id" id="label-'+step_counter+'">'+step_counter+'</label>\
-                        </div>\
                         <div class="layui-inline" >\
                             <div class="layui-input-block step-explanation" >\
                                 <textarea name="step-explanation" placeholder="Step explanation" class="layui-textarea" ></textarea>\
@@ -76,30 +61,68 @@ function add_step(){
 
 function delete_step(del_id){
     
-    var step_counter = Number($("#step-counter").val());
-    var counter = step_counter;
-    step_counter=step_counter-1;
-    if (step_counter<1){
-        step_counter=1;
-    }
-
-    $("#step-counter").val(step_counter);
     $("#step-"+del_id).remove();
-    var j=1;
-    for(var i=0; i<=counter;i++){
-       console.log($("#label-"+String(i+1)).html());
-        if($("#label-"+String(i+1)).html()!=undefined){
-            
-            $("#label-"+String(i+1)).html(j);
-            $("#label-"+String(i+1)).attr("id","label-"+String(j));
-            $("#step-"+String(i+1)).attr("id","step-"+String(j));
-
-            j=j+1;
-        }
-        
-    }
-
-    
-    
 }
 
+function upload_image(){
+    layui.use('upload', function(){
+        var upload = layui.upload;
+        
+        //执行实例
+        var uploadInst = upload.render({
+            elem: '#main-pic' //绑定元素
+            ,url:'http://'+$("#backend").html()+':9999/api/upload/recipe_image/'
+            ,auto:false
+            ,field: "document"
+            ,headers:{"token":$.cookie("token")}
+            ,bindAction:'#submit'
+            ,choose:function(obj){//选择文件的回调，obj为选中的文件
+				    	//将每次选择的文件追加到文件队列
+                var files = obj.pushFile();
+                
+                //预览选中的文件（本地文件）
+                obj.preview(function(index,file,result){
+                    $('#demo1').attr('src', result); 
+                });
+            }
+            ,done: function(res){
+            //上传完毕回调
+            }
+            ,error: function(){
+            //请求异常回调
+            }
+        });
+    });
+}
+
+    layui.use(['form','jquery'], function () {
+
+        var form = layui.form;
+        var $ = layui.jquery;
+        form.on('submit(submit)',function (data) {
+            var arr_box = [];
+            $('input[type=checkbox]:checked').each(function() {
+                arr_box.push($(this).val());
+            });
+            console.log(arr_box.join(","));
+            // $.ajax({
+                
+            //     url:'http://'+$("#backend").html()+':9999/api/auth/?action=signin',
+            //     data:data.field,
+            //     dataType:'text',
+            //     type:'post',
+            //     success: function (data) {
+            //         // var result = JSON.parse(data)
+            //         // if (result.msg == "success"){
+            //         //     $.cookie("token",result.token);
+            //         //     window.location.href="/";
+            //         // }
+            //     },
+            //     error: function(data){
+            //         console.log(data);
+            //     }
+            // })
+            // return false;
+        })
+ 
+    });

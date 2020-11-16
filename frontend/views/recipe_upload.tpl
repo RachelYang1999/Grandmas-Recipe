@@ -15,11 +15,12 @@
                 <div class="layui-form-item">
                     <div class="layui-inline">
                         <div class="layui-input-block ">
-                            <input type="text" name="title" required  lay-verify="required" placeholder="Recipe Title" autocomplete="off" class="layui-input recipe-title">
+                            <input type="text" name="recipe_title" required  lay-verify="required" placeholder="Recipe Title" autocomplete="off" class="layui-input recipe-title">
                         </div>
                     </div>
                     <div class="layui-inline">
-                        <button type="button" class="layui-btn layui-btn-warm">
+                        <input type="text" name="is_published" id="is-pub" style="display:none" readonly>
+                        <button type="button" onclick="change_is_publish()" class="layui-btn layui-btn-warm">
                             <i class="layui-icon">&#xe608;</i> Add to Draft
                         </button>
                     </div>
@@ -30,9 +31,15 @@
 
                         <div class="layui-col-md6">
                             <div class="main-pic-boarder">
-                                <button type="button" class="layui-btn layui-btn-warm button-upload-image">
+                                <button type="button" id="main-pic" onclick="upload_image()" class="layui-btn layui-btn-warm button-upload-image">
                                     <i class="layui-icon">&#xe67c;</i>Upload Image
                                 </button>
+                                <div class="layui-upload-list">
+                                    <!--预览图片-->
+                                    <img class="layui-upload-img" id="demo1">
+                                    <!--提示上传信息-->
+                                    <p id="demoText"></p>
+                                </div>
                             </div>
                         </div>
 
@@ -42,19 +49,18 @@
                             <div class="add-to-cat-boarder" >
                                 <div class="layui-input-block button-select-category">
                                     % for c in category:
-                                    <input type="checkbox" name="{{c['id']}}" title="{{c['category']}}">
+                                    <input type="checkbox" name="category" title="{{c['category']}}" value="{{c['id']}}">
                                     % end
                                 </div>
                             </div>
                         </div>
                     </div>
-
                 </div>
                                
                 <div class="layui-form-item" >
                     <label class="layui-form-label introduction-label">Introduction</label>
                     <div class="layui-input-block introduction" >
-                        <textarea name="introduction" placeholder="Please enter your introduction here..." class="layui-textarea" ></textarea>
+                        <textarea name="description" placeholder="Please enter your introduction here..." class="layui-textarea" ></textarea>
                     </div>
                 </div>
                 <div>
@@ -85,12 +91,8 @@
                 
                 <label class="layui-form-label step-label">Step</label>
                 <input type="text" value=1 id="step-counter" style="display: none;" readonly>
-                <div class="layui-form-item" id="step-block">
-                    
+                <div class="layui-form-item step-block" id="step-block"> 
                     <div id="step-1">
-                        <div class="layui-inline" >
-                            <label class="layui-form-label step-id" id="label-1">1</label>
-                        </div>
                         <div class="layui-inline" >
                             <div class="layui-input-block step-explanation" >
                                 <textarea name="step-explanation" placeholder="Step explanation" class="layui-textarea" ></textarea>
@@ -117,7 +119,7 @@
 
                 <div class="layui-form-item" style="margin: 0px 0px 0px 100px;">
                     <div class="layui-input-block">
-                        <button class="layui-btn submit-button" lay-submit lay-filter="*">Submit</button>
+                        <button class="layui-btn submit-button" id="submit" lay-submit lay-filter="submit">Submit</button>
                         <button type="reset submit-button" class="layui-btn layui-btn-primary">Reset</button>
                     </div>
                 </div>

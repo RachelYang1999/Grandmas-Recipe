@@ -41,7 +41,7 @@ class upload_recipe_view(APIView):
     def post(self, request, *args, **kwargs):
         file_uploaded = request.FILES['document']
         recipe_id = request.data.get('recipe_id')
-        recipe = Recipe.objects.get(id=recipe_id)
+        recipe = Recipe.objects.get(id=1)
         step_id = request.data.get('step_id')
 
         new_entry = Upload_recipe.objects.create(
