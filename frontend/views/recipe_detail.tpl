@@ -26,22 +26,22 @@
         
     </script> -->
 </head>
-<body style = "overflow: scroll", onload = insertIngredients()>
+<body style = "overflow: scroll">
     <div class = "layui-container">
         <div>
             
         </div>   
         <div class="layui-row">
             <div class="layui-col-md8">
-                <div class="layui-col-md12 recipe-title">
-                    <h1> {{recipe_data.get("title")}} </h1>
+                <div class="layui-col-md12 recipe-title" >
+                    <h1 id = "recipe_title"> {{recipe_data.get("title")}} </h1>
                 </div>
                 <div class="layui-col-md12 vertical-distance">
                     <div class="layui-col-md3 on-bottom layui-inline">
                         <div class="layui-col-md4">
                         </div>
                         <div style = "margin: 10px">
-                            <h2>
+                            <h2 id = "user_name">
                                 <img src="/img/{{avatar}}" class="layui-nav-img"> 
                                 {{recipe_data.get("user_name")}} 
                             </h2>
@@ -81,7 +81,7 @@
                     % for i in recipe_data['ingredient_name_list']:
                         % if index % 2 != 0:
                             <li class = "layui-col-md6 normal-text">{{i}}</li>
-                            <a class = "layui-col-md6  normal-link" href = "https://www.coles.com.au/"> Shopping Link </a>
+                            <a class = "layui-col-md6 normal-link" href = "https://www.coles.com.au/"> Shopping Link </a>
                         % end
                         % index += 1  
                     % end
@@ -169,22 +169,25 @@
         <hr>
         <h2 class = "comment-input-header, left-space ">Write Something</h2>
         <br>
-        <div class = "comment-block", style = "margin-left: 55px;">
-        <!-- <div style = "border-radius: 7px; box-shadow: 0px 0px 5px 2px black;"> -->
-            <textarea rows="6" cols="30" name="comment"
-                              placeholder="Write your comment here!"
-                              onfocus="this.placeholder = ''"
-                              onblur="this.placeholder = 'Write your comment here!''"
-                    ></textarea>
-        </div>
-        <br>
-        <button class="layui-btn layui-btn-sm layui-btn left-space">
-            Submit
-        </button>
+        <form action="post">
+            <div class = "comment-block", style = "margin-left: 55px;">
+            <!-- <div style = "border-radius: 7px; box-shadow: 0px 0px 5px 2px black;"> -->
+                <textarea required lay-verify="input" rows="6" cols="30" name="comment"
+                                placeholder="Write your comment here!"></textarea>
+               
+            </div>
+            <br>
+            <button lay-submit lay-filter="comment" class="layui-btn layui-btn-sm layui-btn left-space">
+                Submit
+            </button>
+        </form>
+            
 
     </div> 
 <img src="https://media.github.sydney.edu.au/user/4849/files/88c7b600-2762-11eb-8c11-c48c77502f32" alt="">
 %include('footer.tpl')
+<script type="text/javascript" src="/js/recipe_detail.js"></script>
+
 
 </body>
 </html>

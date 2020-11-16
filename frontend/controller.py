@@ -3,10 +3,14 @@ import configparser
 import requests
 import json
 
+
+
 def get_backend():
     config = configparser.ConfigParser()
     config.read('config.ini')
     return config['SETTING']['backend']
+
+root='http://'+get_backend()+':9999/api/'
 
 def getToken():
     token = request.get_cookie('token')
@@ -15,12 +19,13 @@ def getToken():
         headers={}
         headers['token']=token
 
-        url='http://'+get_backend()+':9999/api/auth/'
+        url=root+'auth/'
         r = requests.get(url,headers=headers)
         rtv=json.loads(r.text)
+        print(r.text)
 
         if rtv["msg"]=="success":
-            return token,rtv["username"],rtv["avatar"]
+            return token,rtv["data"]["username"],rtv["data"]["avatar"]
         else:
             return None
     else:
@@ -59,9 +64,9 @@ def signup():
 
 @get('/signout')
 def signout():
-    url='http://'+get_backend()+':9999/api/auth/?action=signout'
-    payload={'token': getToken()[0]}
-    r = requests.request("POST", url, data=payload)
+    url=root+'auth/'
+    header={'token': getToken()[0]}
+    r = requests.request("DELETE", url, headers=header)
     response.delete_cookie("token")
     redirect('/')
 
@@ -82,10 +87,10 @@ def calendar():
 def index():
     rtv = getToken()
 
-    url = "http://"+get_backend()+ ":9999/api/category/"
+    url=root+'category/'
 
     r = requests.request("GET", url)
-    category=json.loads(r.text)
+    category=json.loads(r.text)["data"]
 
     if rtv is not None:
         return template("index",backend=get_backend(),username=rtv[1],avatar=rtv[2],signin=True,category=category)
@@ -96,14 +101,15 @@ def index():
 def profile():
     rtv = getToken()
     if rtv is not None:
-        url = "http://"+get_backend()+ ":9999/api/user/profile/"
+        url=root+'profile/'
 
+        
         headers = {
         'token': rtv[0]
         }
 
         r = requests.request("GET", url, headers=headers)
-        u_data=json.loads(r.text)
+        u_data=json.loads(r.text)["data"]
 
         checked_male=""
         checked_female=""
@@ -125,9 +131,9 @@ def recipe_detail():
     rtv = getToken()
 
     if rtv is not None:
-        url = "http://"+get_backend()+ ":9999/api/recipe/"
+        url=root+'recipe/'
 
-        payload = {'id': '9'}
+        payload = {'id': '14'}
 
         files = [
 
@@ -148,46 +154,25 @@ def recipe_detail():
 
 @get('/search')
 def search():
-    
-    return template("search", backend=get_backend(), page="signup")
+    keyword=request.query.keyword
 
-@get('/upload_recipe')
-def upload_recipe():
+    url=root+'search/'
+
+    payload = 'recipe_title={}'.format(keyword)
+    headers = {
+        'Content-Type': 'application/x-www-form-urlencoded'
+    }
+
+    r = requests.request("GET", url, headers=headers,data = payload)
+    search_data=json.loads(r.text)["data"]
+
     rtv = getToken()
+
     if rtv is not None:
-        url = "http://"+get_backend()+ ":9999/api/user/profile/"
-
-        headers = {
-        'token': rtv[0]
-        }
-
-        r = requests.request("GET", url, headers=headers)
-        u_data=json.loads(r.text)
-
-        checked_male=""
-        checked_female=""
-        checked_other=""
-
-        if u_data['gender']=="male":
-            checked_male="checked"
-        elif u_data['gender']=="female":
-            checked_female="checked"
-        else:
-            checked_other="checked"
-
-        url2 = "http://"+get_backend()+ ":9999/api/category/"
-
-        r2 = requests.request("GET", url2)
-        category=json.loads(r2.text)
-
-        
-        #return template("index",backend=get_backend(),username=rtv[1],avatar=rtv[2],signin=True,category=category)
-
-
-        return template("recipe_upload",backend=get_backend(),username=rtv[1],avatar=rtv[2],signin=True,category=category, checked_male=checked_male,checked_female=checked_female,checked_other=checked_other,u_data=u_data)
+        return template("search",backend=get_backend(),username=rtv[1],avatar=rtv[2],signin=True,search_data = search_data)
     else:
-        redirect('/')
-
+        return template("search", backend=get_backend(), signin = False, search_data = search_data)
+    
 
 
 

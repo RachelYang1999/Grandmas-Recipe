@@ -14,55 +14,36 @@ from rest_framework.response import Response
 
 import app_3609.util as util
 
-HTTP_ACTION_REGISTER = "signup"
-HTTP_ACTION_LOGIN = "signin"
-HTTP_ACTION_LOGOUT = "signout"
 
 class User_auth(APIView):
-    serializer_class = UserSerializer
-    queryset = User.objects.all()
+
     authentication_classes = (UserAuth_Auth,)
-    # permission_classes = (IsSuperUser,)
 
     def get(self, request, *args, **kwargs):
-        data = {'msg': 'success',"username": request.user.username,"avatar":Upload_profile.objects.filter(user=request.user).values()[0]["profile_image"]}
-        return Response(data,status=200)
+        
+        data = {"username": request.user.username,"avatar":Upload_profile.objects.filter(user=request.user).values()[0]["profile_image"]}
+        rst=util.get_response(100,"success",data)
+        return Response(rst)
 
-    def post(self, request, *args, **kwargs):
-        action = request.query_params.get('action')
-
-        if action == HTTP_ACTION_REGISTER:
-            return self.register(request, *args, **kwargs)
-        elif action == HTTP_ACTION_LOGIN:
-            return self.login(request, *args, **kwargs)
-        elif action == HTTP_ACTION_LOGOUT:
-            return self.logout(request, *args, **kwargs)
-        else:
-            raise exceptions.ValidationError
-
-    def logout(self, request, *args, **kwargs):
-        token = request.data.get('token')
+    def delete(self, request, *args, **kwargs):
+        token = request.META.get('HTTP_TOKEN')
         u_id=token.split("$")[1]
-        data = {
-                'msg': '',
-            }
         if token==cache.get(u_id):
             cache.delete(u_id)
-            data['msg']="success"
+            rst=util.get_response(100,"success",None)
         else:
-            data['msg']="fail"
+            rst=util.get_response(400,"not logged in",None)
             
-        return Response(data,status=201)
+        return Response(rst)
 
 
-    def login(self, request, *args, **kwargs):
+    def post(self, request, *args, **kwargs):
         u_name = request.data.get('username')
         u_password = request.data.get('password')
         try:
             user = User.objects.get(username=u_name)
 
             data = {
-                    'msg': 'success',
                     'token': "",
                 }
             if cache.get(user.id)==None:
@@ -72,21 +53,26 @@ class User_auth(APIView):
 
                     cache.set(user.id,token,timeout=3600)
                     data['token']=token
+
+                    rst=util.get_response(100,"success",data)
                     
-                    return Response(data,status=200)
+                    return Response(rst)
                 else:
-                    raise exceptions.AuthenticationFailed
+                    rst=util.get_response(400,"username or password not correct",None)
+                    return Response(rst)
             else:
                 if user.password == util.create_md5(u_password,user.salt):
                     data['token']=cache.get(user.id)
-                    return Response(data)
+                    rst=util.get_response(100,"success",data)
+                    return Response(rst)
                 else:
-                    raise exceptions.AuthenticationFailed
+                    rst=util.get_response(400,"username or password not correct",None)
+                    return Response(rst)
 
         except User.DoesNotExist:
             raise exceptions.NotFound
 
-    def register(self, request, *args, **kwargs):
+    def put(self, request, *args, **kwargs):
         username = request.data.get('username')
         password = request.data.get('password')
         salt = util.create_salt()
@@ -94,14 +80,12 @@ class User_auth(APIView):
         
         try:
             user = User.objects.get(username=username)
-            raise exceptions.ValidationError("username exist")
+            rst=util.get_response(400,"username exists",None)
+            return Response(rst)
         except User.DoesNotExist:
             user=User.objects.create(username=username,password=password,salt=salt)
             upload=Upload_profile.objects.create(user=user)
 
-        data = {
-                'msg': 'success',
-            }
-        return Response(data,status=201)
+        return Response(rst)
 
 

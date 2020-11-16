@@ -9,12 +9,10 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import viewsets
 
-# Create your views here.
+import app_3609.util as util
 
 class Profiles(APIView):
     authentication_classes = (UserAuth,)
-    serializer_class = ProfileSerializer
-    # user = User()
     
     def get(self, request):
         user_id=request.query_params.get("user_id")
@@ -30,7 +28,8 @@ class Profiles(APIView):
             "dob": user.date_of_birth,
             "dor": user.register_date
         }
-        return Response(get_profile)
+        rst=util.get_response(100,"success",get_profile)
+        return Response(rst)
         
     
     def post(self, request):
@@ -50,5 +49,7 @@ class Profiles(APIView):
         if post_gender != None:
             user.gender = post_gender
             user.save()
+
+        rst=util.get_response(100,"success",None)
         
-        return Response("Success")
+        return Response(rst)

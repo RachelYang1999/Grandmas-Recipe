@@ -5,6 +5,7 @@ from rest_framework.authentication import BaseAuthentication
 from rest_framework import exceptions
 
 
+
 class UserAuth(BaseAuthentication):
 
     def authenticate(self, request):
@@ -21,12 +22,12 @@ class UserAuth(BaseAuthentication):
                 else:
                     raise exceptions.AuthenticationFailed()
             except:
-                raise exceptions.AuthenticationFailed({"msg": "invalid"})
+                raise exceptions.AuthenticationFailed({"code":400,"msg": "Access invalid","data":None})
 
 class UserAuth_Auth(BaseAuthentication):
 
     def authenticate(self, request):
-        if request.method == 'GET':
+        if request.method == 'GET' or request.method == 'DELETE':
             
             try:
                 token = request.META.get('HTTP_TOKEN')
@@ -39,4 +40,4 @@ class UserAuth_Auth(BaseAuthentication):
                 else:
                     raise exceptions.AuthenticationFailed()
             except:
-                raise exceptions.AuthenticationFailed({"msg": "invalid"})
+                raise exceptions.AuthenticationFailed({"code":400,"msg": "Access invalid","data":None})
