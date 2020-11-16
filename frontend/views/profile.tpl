@@ -12,7 +12,7 @@
             <form class="layui-form profile-form">
                 <div class="layui-form-item">
                     <label class="layui-form-label">Avatar: </label> 
-                    <img class="p_avatar" src="/img/{{avatar}}" />
+                    <img class="p_avatar" id="avatar"" src="/img/{{avatar}}" />
                     <button type="button" class="layui-btn" id="test1">
                         <i class="layui-icon">&#xe67c;</i>Upload new avatar
                     </button>
@@ -31,9 +31,9 @@
                 <div class="layui-form-item">
                     <label class="layui-form-label">Gender: </label>
                     <div class="layui-input-block">
-                        <input type="radio" name="sex" value="male" title="Male" {{checked_male}}>
-                        <input type="radio" name="sex" value="female" title="Female" {{checked_female}}>
-                        <input type="radio" name="sex" value="other" title="Other" {{checked_other}}>
+                        <input type="radio" name="gender" value="male" title="Male" {{checked_male}}>
+                        <input type="radio" name="gender" value="female" title="Female" {{checked_female}}>
+                        <input type="radio" name="gender" value="other" title="Other" {{checked_other}}>
                     </div>
                 </div>
                 <div class="layui-form-item">
@@ -51,18 +51,18 @@
                 <div class="layui-form-item">
                     <label class="layui-form-label">E-mail: </label>
                     <div class="layui-input-block" style="width: 200px;">
-                        <input type="text" autocomplete="off" value="{{u_data['email']}}" class="layui-input">
+                        <input type="text" autocomplete="off" name="email" value="{{u_data['email']}}" class="layui-input">
                     </div>
                 </div>
                 <div class="layui-form-item layui-form-text">
                     <label class="layui-form-label">Introduction: </label>
                     <div class="layui-input-block" style="width: 600px;">
-                        <textarea name="desc" placeholder="Write your introduction" class="layui-textarea" >{{u_data['introduction']}}</textarea>
+                        <textarea name="introduction" placeholder="Write your introduction" class="layui-textarea" >{{u_data['introduction']}}</textarea>
                     </div>
                 </div>
                 <div class="layui-form-item" style="margin: 0px 0px 0px 100px;">
                     <div class="layui-input-block">
-                        <button class="layui-btn" lay-submit lay-filter="*">Submit</button>
+                        <button class="layui-btn" lay-submit lay-filter="profile-submit">Submit</button>
                         <button type="reset" class="layui-btn layui-btn-primary">Reset</button>
                     </div>
                 </div>

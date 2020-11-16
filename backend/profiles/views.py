@@ -33,22 +33,27 @@ class Profiles(APIView):
         
     
     def post(self, request):
-        user_id=request.data.get("id")
-        user=User.objects.get(id=user_id)
+        # user_id=request.data.get("id")
+        # user=User.objects.get(id=user_id)
+        user=request.user
 
         post_email=request.data.get("email")
+        post_dob=request.data.get("dob")
         post_introduction=request.data.get("introduction")
         post_gender = request.data.get("gender")
+
+        print(post_email,post_introduction,post_gender)
         
         if post_email != None:
             user.email = post_email
-            user.save()
         if post_introduction != None:
             user.introduction = post_introduction
-            user.save()
         if post_gender != None:
             user.gender = post_gender
-            user.save()
+        if post_dob != None:
+            user.date_of_birth = post_dob
+        
+        user.save()
 
         rst=util.get_response(100,"success",None)
         

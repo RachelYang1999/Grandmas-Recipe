@@ -25,10 +25,18 @@ class upload_profile_view(APIView):
         file_uploaded = request.FILES['document']
         user = request.user
 
-        new_entry = Upload_profile.objects.create(
-            user=user, profile_image=file_uploaded)
+        try:
+            user_image = Upload_profile.objects.get(user=user)
+            user_image.profile_image=file_uploaded
+            user_image.save()
+        except User_follow.DoesNotExist:
+            new_entry = Upload_profile.objects.create(user=user, profile_image=file_uploaded)
 
-        rst=util.get_response(100,"success",None)
+        data={
+            "src": Upload_profile.objects.filter(user=user).values()[0]["profile_image"]
+        }
+
+        rst=util.get_response(100,"success",data)
         
         return Response(rst)
 
