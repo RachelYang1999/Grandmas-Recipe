@@ -29,7 +29,7 @@ class upload_profile_view(APIView):
             user_image = Upload_profile.objects.get(user=user)
             user_image.profile_image=file_uploaded
             user_image.save()
-        except User_follow.DoesNotExist:
+        except Upload_profile.DoesNotExist:
             new_entry = Upload_profile.objects.create(user=user, profile_image=file_uploaded)
 
         data={

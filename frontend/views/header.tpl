@@ -30,7 +30,7 @@
                     </li>
                     % if signin:
                     <li class="layui-nav-item header-up" lay-unselect="">
-                        <a style="color:#393D49;" href="javascript:;"><img src="/img/{{avatar}}" class="layui-nav-img">{{username}}</a>
+                        <a style="color:#393D49;" href="javascript:;"><img id="avatar-header" src="/img/{{avatar}}" class="layui-nav-img">{{username}}</a>
                         <dl class="layui-nav-child">
                         <dd><a href="/profile">My Profile</a></dd>
                         <dd><a href="javascript:;">My Favourite</a></dd>

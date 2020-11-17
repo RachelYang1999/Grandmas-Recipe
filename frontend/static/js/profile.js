@@ -12,6 +12,8 @@ layui.use(['upload','laydate'], function(){
         ,done: function(res){
             layer.msg('success');
             $("#avatar").attr("src","/img/"+res.data.src);
+            $("#avatar-header").attr("src","/img/"+res.data.src);
+
         }
         ,error: function(){
 

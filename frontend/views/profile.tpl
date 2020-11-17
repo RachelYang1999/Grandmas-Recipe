@@ -12,7 +12,7 @@
             <form class="layui-form profile-form">
                 <div class="layui-form-item">
                     <label class="layui-form-label">Avatar: </label> 
-                    <img class="p_avatar" id="avatar"" src="/img/{{avatar}}" />
+                    <img class="p_avatar" id="avatar" src="/img/{{avatar}}" />
                     <button type="button" class="layui-btn" id="test1">
                         <i class="layui-icon">&#xe67c;</i>Upload new avatar
                     </button>
