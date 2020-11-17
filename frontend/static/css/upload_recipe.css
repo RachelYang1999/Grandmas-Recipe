@@ -20,8 +20,13 @@
 }
 
 .button-upload-image{
-    margin-left:120px;
-    margin-top:180px
+    position: Absolute;
+    margin-top:-100px !important;
+    margin-left:240px !important;
+    
+}
+.main-pic-margin{
+    text-align:center;
 }
 
 .main-pic-boarder{
@@ -136,8 +141,12 @@
 
 .submit-button{
     margin:70px !important;
+    margin-left: 20px;
 }
 
+.cancel-button{
+    margin-left:70px !important;
+}
 
 
 

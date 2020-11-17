@@ -19,7 +19,7 @@
                         </div>
                     </div>
                     <div class="layui-inline">
-                        <input type="text" name="is_published" id="is-pub" style="display:none" readonly>
+                        <input type="text" name="is_published" value=1 id="is-pub" style="display:none" readonly>
                         <button type="button" onclick="change_is_publish()" class="layui-btn layui-btn-warm">
                             <i class="layui-icon">&#xe608;</i> Add to Draft
                         </button>
@@ -30,16 +30,13 @@
                     <div class="layui-row">
 
                         <div class="layui-col-md6">
-                            <div class="main-pic-boarder">
-                                <button type="button" id="main-pic" onclick="upload_image()" class="layui-btn layui-btn-warm button-upload-image">
+                            <div class="main-pic-boarder main-pic-margin">
+                                <img class="layui-upload-img " id="demo1" src="" style="max-height: 300px;max-width: 400px;">
+                            </div>
+                            <div class="button-upload-image">
+                                <button type="button" id="main-pic" class="layui-btn layui-btn-warm ">
                                     <i class="layui-icon">&#xe67c;</i>Upload Image
                                 </button>
-                                <div class="layui-upload-list">
-                                    <!--预览图片-->
-                                    <img class="layui-upload-img" id="demo1">
-                                    <!--提示上传信息-->
-                                    <p id="demoText"></p>
-                                </div>
                             </div>
                         </div>
 
@@ -67,7 +64,7 @@
                 <label class="layui-form-label ingredient-label">Ingredient</label>
                 </div>
                 <div class="layui-form-item ingredient-margin">
-                    <input type="text" value = 1 id="in-counter" style="display: none;" readonly>
+                    <input type="text" value = 1 name="ingredient_count" id="in-counter" style="display: none;" readonly>
                     <div id="ingredient-block">
                         <div id="ingre-1"> 
                             <div class="layui-inline ingredient-input" >
@@ -90,12 +87,12 @@
                 </button>
                 
                 <label class="layui-form-label step-label">Step</label>
-                <input type="text" value=1 id="step-counter" style="display: none;" readonly>
+                <input type="text" value=1 id="step-counter" name="step_count" style="display: none;" readonly>
                 <div class="layui-form-item step-block" id="step-block"> 
                     <div id="step-1">
                         <div class="layui-inline" >
                             <div class="layui-input-block step-explanation" >
-                                <textarea name="step-explanation" placeholder="Step explanation" class="layui-textarea" ></textarea>
+                                <textarea name="step-1" placeholder="Step explanation" class="layui-textarea" ></textarea>
                             </div>
                         </div>
                         <div class="layui-inline" >
@@ -117,10 +114,12 @@
                         <i class="layui-icon">&#xe608;</i> Add More Step
                 </button>
 
-                <div class="layui-form-item" style="margin: 0px 0px 0px 100px;">
+                <div class="layui-form-item" style="margin: 0px 0px 0px 50px;">
                     <div class="layui-input-block">
                         <button class="layui-btn submit-button" id="submit" lay-submit lay-filter="submit">Submit</button>
-                        <button type="reset submit-button" class="layui-btn layui-btn-primary">Reset</button>
+                        <button type="reset" class="layui-btn layui-btn-primary">Reset</button>
+                        <a href="/"><button type="button" class="layui-btn layui-btn-primary cancel-button">Cancel</button></a>
+
                     </div>
                 </div>
 

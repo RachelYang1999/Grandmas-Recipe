@@ -2,6 +2,10 @@ function change_is_publish(){
     $("#is-pub").val(0);
 }
 
+function cate(){
+    console.log($('input[type=checkbox]:checked').val())
+}
+
 
 function add_ingredient(){
     var in_block = $("#ingredient-block").html();
@@ -64,7 +68,7 @@ function delete_step(del_id){
     $("#step-"+del_id).remove();
 }
 
-function upload_image(){
+
     layui.use('upload', function(){
         var upload = layui.upload;
     
@@ -80,9 +84,14 @@ function upload_image(){
             
                 obj.preview(function(index,file,result){
                     $('#demo1').attr('src', result); 
+                    console.log(result);
                 });
+                
             }
             ,done: function(res){
+                layer.msg('success');
+                $("#demo1").attr("src","/img/"+res.data.src);
+
 
             }
             ,error: function(){
@@ -90,7 +99,7 @@ function upload_image(){
             }
         });
     });
-}
+
 
     layui.use(['form','jquery'], function () {
 
@@ -102,24 +111,28 @@ function upload_image(){
                 arr_box.push($(this).val());
             });
             console.log(arr_box.join(","));
-            // $.ajax({
+            data.field.category=arr_box.join(",");
+            console.log(data.field);
+            
+            $.ajax({
                 
-            //     url:'http://'+$("#backend").html()+':9999/api/auth/?action=signin',
-            //     data:data.field,
-            //     dataType:'text',
-            //     type:'post',
-            //     success: function (data) {
-            //         // var result = JSON.parse(data)
-            //         // if (result.msg == "success"){
-            //         //     $.cookie("token",result.token);
-            //         //     window.location.href="/";
-            //         // }
-            //     },
-            //     error: function(data){
-            //         console.log(data);
-            //     }
-            // })
-            // return false;
+                url:'http://'+$("#backend").html()+':9999/api/recipe/',
+                data:data.field,
+                type:'post',
+                headers:{"token":$.cookie("token")},
+                success: function (data) {
+                    // var result = JSON.parse(data)
+                    // if (result.msg == "success"){
+                    //     $.cookie("token",result.token);
+                    //     window.location.href="/";
+                    // }
+                    console.log("success")
+                },
+                error: function(data){
+                    console.log(data);
+                }
+            })
+            return false;
         })
  
     });

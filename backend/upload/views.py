@@ -49,12 +49,12 @@ class upload_recipe_view(APIView):
         file_uploaded = request.FILES['document']
         recipe_id = request.data.get('recipe_id')
         recipe = Recipe.objects.get(id=recipe_id)
-        step_id = request.data.get('step_id')
-
-        new_entry = Upload_recipe.objects.create(
-            recipe=recipe, step_id=step_id, recipe_image=file_uploaded)
-        
-        rst=util.get_response(100,"success",None)
+        step = request.data.get('step_id')
+        try:
+            step_image = Upload_recipe.objects.get(recipe=recipe, step=step)
+        except Upload_recipe.DoesNotExist:
+            new_entry = Upload_recipe.objects.create(recipe=recipe, step_id=step_id, recipe_image=file_uploaded)
+            rst=util.get_response(100,"success",None)
         
         return Response(rst)
 

@@ -1,6 +1,5 @@
 from uauth.auth import UserAuth
 from datetime import datetime
-
 from recipe.models import Recipe, Recipe_category, Recipe_mark
 from category.models import Category
 from user.models import User
