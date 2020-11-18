@@ -66,17 +66,17 @@
                 <div class="layui-form-item ingredient-margin">
                     <input type="text" value = 1 name="ingredient_count" id="in-counter" style="display: none;" readonly>
                     <div id="ingredient-block">
-                        <div id="ingre-1"> 
+                        <div id="ingredient-1"> 
                             <div class="layui-inline ingredient-input" >
-                                <input type="text" name="ingredient-1" placeholder="Please enter your ingredient here..." autocomplete="off" class="layui-input"> 
+                                <input type="text" id="ingredient-input-1" name="ingredient-1" placeholder="Please enter your ingredient here..." autocomplete="off" class="layui-input"> 
                             </div>
                             <div class="layui-inline">
-                                <button type="button" onclick= "delete_ingredient(1)" class="layui-btn layui-btn-warm layui-btn-sm"  >
+                                <button type="button" id="ingredient-delete-1" onclick= "delete_ingredient(1)" class="layui-btn layui-btn-warm layui-btn-sm"  >
                                     <i class="layui-icon">&#xe640;</i>
                                 </button>
                             </div>
                             <div class="layui-inline ingredient-input" >
-                                <input type="text" name="shoppinglink" placeholder="Please enter shopping link here..." autocomplete="off" class="layui-input"> 
+                                <input type="text" id="ingredient-shoppinglink-1" name="ingredient-1-shoppinglink" placeholder="Please enter shopping link here..." autocomplete="off" class="layui-input"> 
                             </div>
                         </div>
                     </div>
