@@ -214,11 +214,16 @@ def upload_recipe():
 def profile_view():
     rtv = getToken()
     if rtv is not None:
-        url=root+'category/'
+        headers = {
+        'token': rtv[0]
+        }
+        url=root+'follow/'
 
-        r2 = requests.request("GET", url)
-        category=json.loads(r2.text)["data"]
+        r2 = requests.request("GET", url,headers=headers)
+        print(r2.text)
+        follower=json.loads(r2.text)["data"]["follower"]
+        following=json.loads(r2.text)["data"]["following"]
 
-        return template("profile_view",backend=get_backend(),username=rtv[1],avatar=rtv[2],signin=True,category=category)
+        return template("profile_view",backend=get_backend(),username=rtv[1],avatar=rtv[2],signin=True,follower=follower,following=following)
     else:
-        redirect('/signin?redirect_url=upload_recipe')
+        redirect('/signin?redirect_url=profile_view')

@@ -101,7 +101,6 @@
         <h1> Comments </h1>
         <div>
             % for comment in recipe_data['comment_dic_list']:
-                <!-- <li>{{comment}}</li> <br> -->
             
                 <div style = "margin: 10px">
                     
