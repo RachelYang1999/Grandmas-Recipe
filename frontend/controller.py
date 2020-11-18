@@ -3,8 +3,6 @@ import configparser
 import requests
 import json
 
-
-
 def get_backend():
     config = configparser.ConfigParser()
     config.read('config.ini')
@@ -223,6 +221,8 @@ def profile_view():
         print(r2.text)
         follower=json.loads(r2.text)["data"]["follower"]
         following=json.loads(r2.text)["data"]["following"]
+
+        
 
         return template("profile_view",backend=get_backend(),username=rtv[1],avatar=rtv[2],signin=True,follower=follower,following=following)
     else:

@@ -10,3 +10,4 @@ class Ingredient(models.Model):
 
     ingredient_name = models.CharField(max_length = 100)
     ingredient_related_recipe = models.ForeignKey(Recipe, on_delete = models.CASCADE, related_name="ingredient_related_recipe")
+    ingredient_link = models.CharField(max_length = 1000)

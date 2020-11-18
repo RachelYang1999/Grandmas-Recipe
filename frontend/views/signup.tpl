@@ -19,11 +19,11 @@
                    class="layui-input">
         </div>
         <div class="layui-input-inline">
-            <input type="password" id="password-first" name="password" required lay-verify="content|pass" placeholder="Password" autocomplete="off"
+            <input type="password" id="password-first" name="password" required lay-verify="content|" placeholder="Password" autocomplete="off"
                    class="layui-input">
         </div>
         <div class="layui-input-inline">
-            <input type="password" id="password-second" name="password-second" required lay-verify="content|pass|same" placeholder="Re-type Password" autocomplete="off"
+            <input type="password" id="password-second" name="password-second" required lay-verify="content|same" placeholder="Re-type Password" autocomplete="off"
                    class="layui-input">
         </div>
         <div class="layui-input-inline login-btn">

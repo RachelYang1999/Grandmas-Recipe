@@ -3,17 +3,30 @@
 <head>
 <meta charset="UTF-8">
 <link rel="stylesheet" href="/css/profile_view.css">
-<title>Search</title>
+<title>Profile</title>
 %include('header.tpl') 
 <div class="layui-body index-body">
     <div class="layui-container">
-        <div>
-            <img id="avatar-header" src="/img/{{avatar}}" class="avarta-margin">
+        <div class="layui-row">
+            <div class="layui-col-md9">
+                <div>
+                    <img id="avatar-header" src="/img/{{avatar}}" class="avarta-margin">
+                </div>
+                <div>
+                    <label class="layui-form-label title">{{username}}'s Recipes</label>
+                </div>
+            </div>
+            <div class="layui-col-md3">
+                <div class="follow-box">
+                    <div class="">
+                        <a class="layui-form-label" onclick="following_layer()">Following<br/>{{following}}</a>
+                        <div class="middle-line"></div> 
+                        <a class="layui-form-label"  onclick="">Follower<br />{{follower}}</a>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div>
-            <label class="layui-form-label title">{{username}}'s Recipes</label>
-        </div>
-        <div class="tab-margin">
+        
         <div class="layui-tab tab">
             <ul class="layui-tab-title">
                 <li class="layui-this">My Recipes</li>
@@ -28,21 +41,10 @@
                 <div class="layui-tab-item">内容2</div>
                 <div class="layui-tab-item">内容3</div>
             </div>
-            </div>
         </div>
-        <div>
-            <div class="follow-box">
-                <div style="float:left;width: 1px;height: 45px; background-color:Gray;" class="middle-line"></div> 
-                <div style="margin-top: 10px;">
-                    <label></label>
-                    <a href="javascript:void(0);" class="layui-form-label" style="display: inline-block;text-align: center; margin-top: -50px;margin-left: -10px; color: grey;" onclick="following_layer()">Following<br/>{{following}}</a>
-                    
-                    <label class="layui-form-label" style="display: inline-block;text-align: center; margin-left: 75px;margin-top: -57px; color: grey" onclick="">Follower<br />{{follower}}</label>
-                </div>
-            </div>
-        </div>
+            
     </div>
-    </div>
+</div>
     
 %include('footer.tpl')
 <script type="text/javascript" src="/js/profile_view.js"></script>

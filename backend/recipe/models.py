@@ -12,7 +12,7 @@ class Recipe(models.Model):
     description = models.CharField(max_length = 1000)
     update_date = models.DateField(auto_now_add=True, blank=True)
     is_published = models.IntegerField(default = 0)
-
+    intro_image = models.ImageField(upload_to='intro_image', null=True, blank=True,default="intro_image/default.png")
     user = models.ForeignKey(User, on_delete = models.CASCADE, related_name="recipe_user")
 
 class Recipe_category(models.Model):

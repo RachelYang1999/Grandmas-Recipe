@@ -58,8 +58,8 @@
                     % index = 1
                     % for i in recipe_data['ingredient_name_list']:
                         % if index % 2 != 0:
-                            <li class = "layui-col-md6 normal-text">{{i}}</li>
-                            <a class = "layui-col-md6 normal-link" href = "https://www.coles.com.au/"> Shopping Link </a>
+                            <li class = "layui-col-md6 normal-text">{{i[0]}}</li>
+                            <a class = "layui-col-md6 normal-link" href = "{{i[1]}}"> Shopping Link </a>
                         % end
                         % index += 1  
                     % end
@@ -69,8 +69,8 @@
                     % index = 1
                     % for i in recipe_data['ingredient_name_list']:
                         % if index % 2 == 0:
-                            <li class = "layui-col-md6  normal-text">{{i}}</li>
-                            <a class = "layui-col-md6  normal-link" href = "https://www.coles.com.au/"> Shopping Link </a>
+                            <li class = "layui-col-md6  normal-text">{{i[0]}}</li>
+                            <a class = "layui-col-md6  normal-link" href = "{{i[1]}}"> Shopping Link </a>
                         % end
                         % index += 1  
                     % end
@@ -92,7 +92,7 @@
                     
                 </div>
                 <div class="layui-col-md5", id = "step-image">
-                    <div><img src='/img/{{step[1]}}''></div>
+                    <div><img src='/img/{{step[1]}}'></div>
                 </div>
             </div>
             % count += 1

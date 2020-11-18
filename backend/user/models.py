@@ -15,7 +15,7 @@ class User(models.Model):
     register_date = models.DateTimeField(auto_now_add=True)
     total_follower = models.IntegerField(default=0)
     total_following = models.IntegerField(default=0)
-    # avatar = models.FileField(max_length=300, upload_to="avatar/", default="default.png")
+    profile_image = models.ImageField(upload_to='avatar', null=True, blank=True,default="avatar/default.png")
 
 
 class User_follow(models.Model):

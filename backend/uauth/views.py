@@ -2,7 +2,7 @@ import uuid
 
 from uauth.auth import UserAuth_Auth
 from user.models import User
-from upload.models import Upload_profile
+# from upload.models import Upload_profile
 
 from django.core.cache import cache
 
@@ -19,7 +19,7 @@ class User_auth(APIView):
 
     def get(self, request, *args, **kwargs):
         
-        data = {"username": request.user.username,"avatar":Upload_profile.objects.filter(user=request.user).values()[0]["profile_image"]}
+        data = {"username": request.user.username,"avatar":User.objects.filter(id=request.user.id).values()[0]["profile_image"]}
         rst=util.get_response(100,"success",data)
         return Response(rst)
 
@@ -49,7 +49,7 @@ class User_auth(APIView):
 
                     token = "${}$".format(user.id)+uuid.uuid4().hex
 
-                    cache.set(user.id,token,timeout=3600)
+                    cache.set(user.id,token) #,timeout=3600
                     data['token']=token
 
                     rst=util.get_response(100,"success",data)
@@ -82,7 +82,7 @@ class User_auth(APIView):
             return Response(rst)
         except User.DoesNotExist:
             user=User.objects.create(username=username,password=password,salt=salt)
-            upload=Upload_profile.objects.create(user=user)
+            rst=util.get_response(100,"success",None)
 
         return Response(rst)
 

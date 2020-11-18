@@ -6,7 +6,7 @@ from user.models import User
 from recipe.models import Recipe
 from step.models import Step
 from comments.models import Comment
-from upload.models import Upload_profile,  Upload_comment_meta,Upload_intro
+from upload.models import Upload_comment_meta
 # from upload.serializers import UploadSerializer, UploadSerializer_recipe, UploadSerializer_commentmeta
 
 from django.core.cache import cache
@@ -28,15 +28,11 @@ class upload_profile_view(APIView):
         file_uploaded = request.FILES['document']
         user = request.user
 
-        try:
-            user_image = Upload_profile.objects.get(user=user)
-            user_image.profile_image=file_uploaded
-            user_image.save()
-        except Upload_profile.DoesNotExist:
-            new_entry = Upload_profile.objects.create(user=user, profile_image=file_uploaded)
+        user.profile_image=file_uploaded
+        user.save()
 
         data={
-            "src": Upload_profile.objects.filter(user=user).values()[0]["profile_image"]
+            "src": User.objects.filter(id=user.id).values()[0]["profile_image"]
         }
 
         rst=util.get_response(100,"success",data)
@@ -51,14 +47,9 @@ class upload_intro_view(APIView):
         file_uploaded = request.FILES['document']
         recipe_id = request.data.get('recipe_id')
         recipe = Recipe.objects.get(id=recipe_id)
+        recipe.intro_image=file_uploaded
+        recipe.save()
 
-        try:
-            entry = Upload_intro.objects.get(recipe=recipe)
-            entry.intro_image=file_uploaded
-            entry.save()
-        except Upload_intro.DoesNotExist:
-            new_entry = Upload_intro.objects.create(recipe=recipe, intro_image=file_uploaded)
-        
         rst=util.get_response(100,"success",None)
         
         return Response(rst)
@@ -78,15 +69,7 @@ class upload_recipe_view(APIView):
         step=Step.objects.get(id=step_id)
         step.step_image=file_uploaded
         step.save()
-        
     
-        # try:
-        #     step_image = Step.objects.get(recipe=recipe, step=step)
-        #     step_image.recipe_image=file_uploaded
-        #     step_image.save()
-        # except Upload_recipe.DoesNotExist:
-        #     new_entry = Upload_recipe.objects.create(recipe=recipe, step=step, recipe_image=file_uploaded)
-        
         rst=util.get_response(100,"success",None)
         
         return Response(rst)

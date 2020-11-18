@@ -9,21 +9,22 @@
     font-size:250%;
     white-space: nowrap;
 }
-
+/* 
 .tab-margin{
     margin-top: 50px;
     margin-right:55px !important;
-}
+} */
 
 .follow-box{
     border-style: outset;
     width:170px;
     height:50px;
-    margin-top: -170px;
-    margin-left:700px;
+    margin-top: 30px;
+
 }
 
 .middle-line{
-    margin-left:85px;
-    margin-top:-23px;
+    width: 1px;
+    height: 45px; 
+    background-color:Gray;
 }

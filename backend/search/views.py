@@ -89,7 +89,7 @@ class Search(APIView):
 
 
         # search by category
-        category_list =["Breakfirst", "Lunch","tttt","dinner", "meatlovers", "vegetarian", "asian", "western","dessert","seafood"]
+        category_list =["Breakfirst", "Lunch","Dinner", "Meatlovers", "Vegetarian", "Asian", "Italian","Dessert","Seafood"]
         category_type=request.data.get("category")
         # From Category table get corresponding id of input category string  
         if category_type!=None:

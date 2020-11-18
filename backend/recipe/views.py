@@ -5,7 +5,7 @@ from category.models import Category
 from user.models import User
 from step.models import Step
 from ingredient.models import Ingredient
-from upload.models import Upload_intro
+
 from comments.models import Comment
 
 from rest_framework import status, exceptions
@@ -36,7 +36,7 @@ class RecipeView(APIView):
         get_update_date = recipe.update_date
         get_user_id = recipe.user_id
         get_user_name = User.objects.get(id = recipe.user_id).username
-        get_recipe_src=Upload_intro.objects.filter(recipe=recipe).values()[0]["intro_image"]
+        get_recipe_src=Recipe.objects.filter(id=recipe.id).values()[0]["intro_image"]
         
 
         get_category_list = []
@@ -51,7 +51,7 @@ class RecipeView(APIView):
 
         get_ingredient_list = []
         for i in ingredient_queryset:
-            get_ingredient_list.append(i.ingredient_name)
+            get_ingredient_list.append((i.ingredient_name,i.ingredient_link))
 
         get_comment_dic_list = []
         for c in comment_all_queryset:
@@ -111,11 +111,16 @@ class RecipeView(APIView):
 
         # Save mutiple ingredient inputs into a list
         ingredient_name_list = []
+        ingredient_link_list = []
         ingredient_count = request.data.get("ingredient_count")
+        print(ingredient_count)
         for i in range(int(ingredient_count)):
             ingredient_number = i + 1
             input_ingredient_name = "ingredient-" + str(ingredient_number)
             ingredient_name_list.append(request.data.get(input_ingredient_name))
+            input_ingredient_link = "ingredient-" + str(ingredient_number)+"-shoppinglink"
+            ingredient_link_list.append(request.data.get(input_ingredient_link))
+            print(ingredient_link_list)
 
         if recipe_title != None and description != None and is_published != None and category != None:
 
@@ -132,8 +137,8 @@ class RecipeView(APIView):
                 recipe_category_relationship.save()
 
             # Add ingredients for a recipe
-            for i in ingredient_name_list:
-                ingredient_object = Ingredient.objects.create(ingredient_name = i, ingredient_related_recipe_id = new_recipe.id)
+            for i in range(0,len(ingredient_name_list)):
+                ingredient_object = Ingredient.objects.create(ingredient_name = ingredient_name_list[i],ingredient_related_recipe_id = new_recipe.id, ingredient_link=ingredient_link_list[i])
                 ingredient_object.save()
 
             # Add steps for a recipe
