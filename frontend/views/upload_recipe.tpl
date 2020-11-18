@@ -15,7 +15,7 @@
                 <div class="layui-form-item">
                     <div class="layui-inline">
                         <div class="layui-input-block ">
-                            <input type="text" name="recipe_title" required  lay-verify="required" placeholder="Recipe Title" autocomplete="off" class="layui-input recipe-title">
+                            <input type="text" name="recipe_title" required  lay-verify="content" placeholder="Recipe Title" autocomplete="off" class="layui-input recipe-title">
                         </div>
                     </div>
                     <div class="layui-inline">
@@ -31,12 +31,14 @@
 
                         <div class="layui-col-md6">
                             <div class="main-pic-boarder main-pic-margin">
-                                <img class="layui-upload-img " id="demo1" src="" style="max-height: 300px;max-width: 400px;">
-                            </div>
-                            <div class="button-upload-image">
-                                <button type="button" id="main-pic" class="layui-btn layui-btn-warm ">
-                                    <i class="layui-icon">&#xe67c;</i>Upload Image
-                                </button>
+                                <div class="layui-upload-drag" id="main-pic">
+                                    <i class="layui-icon"></i>
+                                    <p>Click or Drag Here</p>
+                                    <div class="layui-hide" id="intro-pic-view">
+                                        <hr>
+                                        <img id="intro-pic" name="intro-pic" src="" style="max-width: 400px">
+                                    </div>
+                                </div>
                             </div>
                         </div>
 
@@ -57,7 +59,7 @@
                 <div class="layui-form-item" >
                     <label class="layui-form-label introduction-label">Introduction</label>
                     <div class="layui-input-block introduction" >
-                        <textarea name="description" placeholder="Please enter your introduction here..." class="layui-textarea" ></textarea>
+                        <textarea name="description" required lay-verify="content" placeholder="Please enter your introduction here..." class="layui-textarea" ></textarea>
                     </div>
                 </div>
                 <div>
@@ -68,15 +70,15 @@
                     <div id="ingredient-block">
                         <div id="ingredient-1"> 
                             <div class="layui-inline ingredient-input" >
-                                <input type="text" id="ingredient-input-1" name="ingredient-1" placeholder="Please enter your ingredient here..." autocomplete="off" class="layui-input"> 
-                            </div>
-                            <div class="layui-inline">
-                                <button type="button" id="ingredient-delete-1" onclick= "delete_ingredient(1)" class="layui-btn layui-btn-warm layui-btn-sm"  >
-                                    <i class="layui-icon">&#xe640;</i>
-                                </button>
+                                <input type="text" required lay-verify="content" id="ingredient-input-1" name="ingredient-1" placeholder="Please enter your ingredient here..." autocomplete="off" class="layui-input"> 
                             </div>
                             <div class="layui-inline ingredient-input" >
-                                <input type="text" id="ingredient-shoppinglink-1" name="ingredient-1-shoppinglink" placeholder="Please enter shopping link here..." autocomplete="off" class="layui-input"> 
+                                <input type="text" required lay-verify="content" id="ingredient-shoppinglink-1" name="ingredient-1-shoppinglink" placeholder="Please enter shopping link here..." autocomplete="off" class="layui-input"> 
+                            </div>
+                            <div class="layui-inline">
+                                <button type="button" id="ingredient-delete-1" onclick= "delete_ingredient(1)" class="layui-btn layui-btn-sm layui-btn-primary"  >
+                                    <i class="layui-icon">&#xe640;</i>
+                                </button>
                             </div>
                         </div>
                     </div>
@@ -89,28 +91,36 @@
                 <label class="layui-form-label step-label">Step</label>
                 <input type="text" value=1 id="step-counter" name="step_count" style="display: none;" readonly>
                 <div class="layui-form-item step-block" id="step-block"> 
+
+
                     <div id="step-1">
                         <div class="layui-inline" >
                             <div class="layui-input-block step-explanation" >
-                                <textarea name="step-1" placeholder="Step explanation" class="layui-textarea" ></textarea>
+                                <textarea id="step-input-1" required lay-verify="content" name="step-1" placeholder="Step explanation" class="layui-textarea" ></textarea>
                             </div>
                         </div>
                         <div class="layui-inline" >
-                            <div class = "step-pic-boader">
-                                <button type="button" class="layui-btn layui-btn-warm upload-pic-step ">
-                                    <i class="layui-icon">&#xe654;</i>picture
-                                </button>
+                            <div class="layui-upload-drag " id="step-addpic-1">
+                                <i class="layui-icon"></i>
+                                <p>Click or Drag Here</p>
+                            </div>
+                        </div>
+                        <div class="layui-inline" > 
+                            <div class="layui-hide" id="uploadDemoView-1">
+                                <img id="step-pic-1" name="step-1-pic" src="" style="max-width: 180px">
                             </div>
                         </div>
                         <div class="layui-inline" >
-                            <button type="button" onclick= "delete_step(1)" class="layui-btn layui-btn-sm layui-btn-primary" style="margin-left: 50px;">
-                                <i class="layui-icon">&#x1006;</i>
-                            </button>
+                            <a class="layui-btn layui-btn-sm layui-btn-primary" id="step-delete-1" href="javascript:;" onclick= "delete_step(1)" >
+                                <i class="layui-icon">&#xe640;</i>
+                            </a>
                         </div>
                     </div>
+                    
+
                 </div>
 
-                <button type="button" onclick="add_step()" class="layui-btn layui-btn-warm add-step">
+                <button id="add-step-btn" type="button" class="layui-btn layui-btn-warm add-step">
                         <i class="layui-icon">&#xe608;</i> Add More Step
                 </button>
 

@@ -10,11 +10,11 @@
     <input type="text" value="{{redirect_url}}" id="redirect" style="display:none" readonly>
     <form class="layui-form">
         <div class="layui-input-inline">
-            <input type="text" name="username" required lay-verify="input" placeholder="Username" autocomplete="off"
+            <input type="text" name="username" required lay-verify="content" placeholder="Username" autocomplete="off"
                    class="layui-input">
         </div>
         <div class="layui-input-inline">
-            <input type="password" name="password" required lay-verify="input" placeholder="Password" autocomplete="off"
+            <input type="password" name="password" required lay-verify="content" placeholder="Password" autocomplete="off"
                    class="layui-input">
         </div>
         <div class="layui-input-inline login-btn">

@@ -66,7 +66,7 @@
 
 .introduction{
     margin:20px 0px 0px 0px;
-    width: 600px !important;
+    width: 720px !important;
     height: 100px !important;
 }
 
@@ -82,7 +82,7 @@
 }
 
 .ingredient-input{
-    width:300px !important; 
+    width:330px !important; 
 }
 
 .ingredient-delete{
@@ -90,7 +90,7 @@
 }
 
 .shoppinglink-input{
-    width:300px !important; 
+    width:330px !important; 
     margin:70px 0px 0px 30px !important;
 }
 
@@ -116,7 +116,7 @@
 }
 
 .step-explanation{
-    width:200px !important; 
+    width:260px !important; 
     height:100px !important; 
     margin:0px 20px !important;
 }
@@ -131,9 +131,9 @@
     background:transparent; 
 }
 
-.upload-pic-step{
+/* .upload-pic-step{
     margin:30px 50px !important;
-}
+} */
 
 .add-step{
     margin:10px 50px 0px 140px !important;
@@ -148,9 +148,7 @@
     margin-left:70px !important;
 }
 
-
-
-
-
-
-
+.button-upload-step-image{
+    position: Absolute;
+    margin:30px 50px !important;
+}
