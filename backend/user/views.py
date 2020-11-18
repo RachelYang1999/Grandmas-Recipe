@@ -15,7 +15,7 @@ class Follow_view(APIView):
     authentication_classes = (UserAuth,)
 
     def get(self, request, *args, **kwargs):
-        user_id = request.data.get('user_id')
+        user = request.user
         try:
             user = User.objects.get(id=user_id)
         except User_follow.DoesNotExist:
