@@ -1,79 +1,36 @@
-function change_is_publish(){
-    $("#is-pub").val(0);
-}
+layui.use(['form','jquery','upload'], function(){
+    var upload = layui.upload;
+    var form = layui.form;
+    var $ = layui.jquery;
 
-function cate(){
-    console.log($('input[type=checkbox]:checked').val())
-}
+    var uploadInst = upload.render({
+        elem: '#main-pic'
+        ,url:'http://'+$("#backend").html()+':9999/api/upload/recipe_image/'
+        ,auto:false
+        ,field: "document"
+        ,headers:{"token":$.cookie("token")}
+        ,bindAction:'#submit'
+        ,choose:function(obj){
+            var files = obj.pushFile();
+            $('#intro-pic-view').removeClass('layui-hide');
+        
+            obj.preview(function(index,file,result){
+                $('#intro-pic').attr('src', result); 
+            });
+            
+        }
+        ,done: function(res){
+            layer.msg('success');
+            $("#intro-pic").attr("src","/img/"+res.data.src);
+        }
+        ,error: function(){
 
+        }
+    });
 
-function add_ingredient(){
-    var in_block = $("#ingredient-block").html();
-    
-    var in_counter = Number($("#in-counter").val());
-    in_counter = in_counter+1;
-    $("#in-counter").val(in_counter);
-    console.log(in_counter);
-
-    in_block=in_block+' <div id="ingre-'+in_counter+'"><div class="layui-inline ingredient-input" >\
-                            <input type="text" name="ingredient-'+in_counter+'" placeholder="Please enter your ingredient here..." autocomplete="off" class="layui-input"> \
-                        </div>\
-                        <div class="layui-inline">\
-                            <button type="button" onclick= "delete_ingredient('+in_counter+')" class="layui-btn layui-btn-warm layui-btn-sm"  >\
-                                <i class="layui-icon">&#xe640;</i>\
-                            </button>\
-                        </div>\
-                        <div class="layui-inline ingredient-input" >\
-                            <input type="text" name="shoppinglink" placeholder="Please enter shopping link here..." autocomplete="off" class="layui-input"> \
-                        </div></div>'
-    $("#ingredient-block").html(in_block);
-}
-
-function delete_ingredient(del_id){
-    $("#ingre-"+del_id).remove();
-}
-
-function add_step(){
-    var step_block = $("#step-block").html();
-    
-    var step_counter = Number($("#step-counter").val());
-    step_counter = step_counter+1;
-    $("#step-counter").val(step_counter);
-    console.log("add"+step_counter);
-
-    step_block=step_block+'<div id="step-'+step_counter+'">\
-                        <div class="layui-inline" >\
-                            <div class="layui-input-block step-explanation" >\
-                                <textarea name="step-explanation" placeholder="Step explanation" class="layui-textarea" ></textarea>\
-                            </div>\
-                        </div>\
-                        <div class="layui-inline" >\
-                            <div class = "step-pic-boader">\
-                                <button type="button" class="layui-btn layui-btn-warm upload-pic-step ">\
-                                    <i class="layui-icon">&#xe654;</i>picture\
-                                </button>\
-                            </div>\
-                        </div>\
-                        <div class="layui-inline" >\
-                            <button type="button" onclick= "delete_step('+step_counter+')" class="layui-btn layui-btn-sm layui-btn-primary" style="margin-left: 50px;">\
-                                <i class="layui-icon">&#x1006;</i>\
-                            </button>\
-                        </div>\
-                    </div>'
-    $("#step-block").html(step_block);
-}
-
-function delete_step(del_id){
-    
-    $("#step-"+del_id).remove();
-}
-
-
-    layui.use('upload', function(){
-        var upload = layui.upload;
-    
-        var uploadInst = upload.render({
-            elem: '#main-pic'
+    var uploadStep = function(element){
+        upload.render({
+            elem: "#step-addpic-"+element
             ,url:'http://'+$("#backend").html()+':9999/api/upload/recipe_image/'
             ,auto:false
             ,field: "document"
@@ -81,58 +38,161 @@ function delete_step(del_id){
             ,bindAction:'#submit'
             ,choose:function(obj){
                 var files = obj.pushFile();
+                $('#uploadDemoView-'+element).removeClass('layui-hide');
             
                 obj.preview(function(index,file,result){
-                    $('#demo1').attr('src', result); 
-                    console.log(result);
+                    $('#step-pic-'+element).attr('src', result); 
                 });
                 
             }
             ,done: function(res){
                 layer.msg('success');
-                $("#demo1").attr("src","/img/"+res.data.src);
-
-
+                $("#step-pic-"+element).attr("src","/img/"+res.data.src);
             }
             ,error: function(){
-   
+
             }
         });
+    };
+    uploadStep("1");
+
+    $("#add-step-btn").click(function(){
+    
+        var step_counter = Number($("#step-counter").val());
+        step_counter = step_counter+1;
+        $("#step-counter").val(step_counter);
+        console.log("add"+step_counter);
+
+        step_block='<div id="step-'+step_counter+'">\
+                            <div class="layui-inline" >\
+                                <div class="layui-input-block step-explanation" >\
+                                    <textarea required lay-verify="content" id="step-input-'+step_counter+'" name="step-'+step_counter+'" placeholder="Step explanation" class="layui-textarea" ></textarea>\
+                                </div>\
+                            </div>\
+                            <div class="layui-inline" >\
+                                <div class="layui-upload-drag " id="step-addpic-'+step_counter+'">\
+                                    <i class="layui-icon"></i>\
+                                    <p>Click or Drag Here</p>\
+                                </div>\
+                            </div>\
+                            <div class="layui-inline" > \
+                                <div class="layui-hide" id="uploadDemoView-'+step_counter+'">\
+                                    <img id="step-pic-'+step_counter+'" name="step-'+step_counter+'-pic" src="" style="max-width: 180px">\
+                                </div>\
+                            </div>\
+                            <div class="layui-inline" >\
+                                <button type="button" id="step-delete-'+step_counter+'" onclick= "delete_step('+step_counter+')" class="layui-btn layui-btn-sm layui-btn-primary">\
+                                    <i class="layui-icon">&#xe640;</i>\
+                                </button>\
+                            </div>\
+                        </div>'
+
+        $("#step-block").append(step_block);
+        uploadStep(step_counter);
     });
 
+    window.delete_step=function(del_id){
+        $("#step-"+del_id).remove();
 
-    layui.use(['form','jquery'], function () {
+        var step_counter = Number($("#step-counter").val());
+        for (var i=del_id+1;i<=step_counter;i++){
+            $("#step-"+i).attr("id","step-"+String(i-1));
 
-        var form = layui.form;
-        var $ = layui.jquery;
-        form.on('submit(submit)',function (data) {
-            var arr_box = [];
-            $('input[type=checkbox]:checked').each(function() {
-                arr_box.push($(this).val());
-            });
-            console.log(arr_box.join(","));
-            data.field.category=arr_box.join(",");
-            console.log(data.field);
+            $("#step-input-"+i).attr("name","step-"+String(i-1));
+            $("#step-input-"+i).attr("id","step-input-"+String(i-1));
+
+            $("#step-addpic-"+i).attr("id","step-addpic-"+String(i-1));
+
+            $("#uploadDemoView-"+i).attr("id","uploadDemoView-"+String(i-1));
             
-            $.ajax({
-                
-                url:'http://'+$("#backend").html()+':9999/api/recipe/',
-                data:data.field,
-                type:'post',
-                headers:{"token":$.cookie("token")},
-                success: function (data) {
-                    // var result = JSON.parse(data)
-                    // if (result.msg == "success"){
-                    //     $.cookie("token",result.token);
-                    //     window.location.href="/";
-                    // }
-                    console.log("success")
-                },
-                error: function(data){
-                    console.log(data);
-                }
-            })
-            return false;
+
+            $("#step-pic-"+i).attr("name",'step-'+String(i-1)+'-pic');
+            $("#step-pic-"+i).attr("id","step-pic-"+String(i-1));
+
+            $("#step-delete-"+i).attr("onclick",'delete_step('+String(i-1)+')');
+            $("#step-delete-"+i).attr("id","step-delete-"+String(i-1));
+            uploadStep(i-1);
+        }
+
+        step_counter-=1;
+        $("#step-counter").val(String(step_counter));  
+    }
+
+
+    form.on('submit(submit)',function (data) {
+        var arr_box = [];
+        $('input[type=checkbox]:checked').each(function() {
+            arr_box.push($(this).val());
+        });
+        data.field.category=arr_box.join(",");
+        
+        $.ajax({
+            url:'http://'+$("#backend").html()+':9999/api/recipe/',
+            data:data.field,
+            type:'post',
+            headers:{"token":$.cookie("token")},
+            success: function (data) {
+                window.location.href="/recipe_detail?id="+data.data.recipe_id;
+                console.log(data)
+            },
+            error: function(data){
+                layer.msg(data.responseJSON.msg);
+                console.log(data.responseJSON);
+            }
         })
- 
-    });
+        return false;
+    })
+});
+
+function change_is_publish(){
+    $("#is-pub").val(0);
+}
+
+function add_ingredient(){
+    
+    var in_counter = Number($("#in-counter").val());
+    in_counter = in_counter+1;
+    $("#in-counter").val(String(in_counter));
+
+    var in_block=' <div id="ingredient-'+in_counter+'"> \
+                            <div class="layui-inline ingredient-input" >\
+                                <input type="text" required lay-verify="content" id="ingredient-input-'+in_counter+'" name="ingredient-'+in_counter+'" placeholder="Please enter your ingredient here..." autocomplete="off" class="layui-input"> \
+                            </div>\
+                            <div class="layui-inline ingredient-input" >\
+                                <input type="text" required lay-verify="content" id="ingredient-shoppinglink-'+in_counter+'" name="ingredient-'+in_counter+'-shoppinglink" placeholder="Please enter shopping link here..." autocomplete="off" class="layui-input"> \
+                            </div>\
+                            <div class="layui-inline">\
+                                <button type="button" id="ingredient-delete-'+in_counter+'" onclick= "delete_ingredient('+in_counter+')" class="layui-btn layui-btn-primary layui-btn-sm"  >\
+                                    <i class="layui-icon">&#xe640;</i>\
+                                </button>\
+                            </div>\
+                        </div>'
+    $("#ingredient-block").append(in_block);
+}
+
+function delete_ingredient(del_id){
+    $("#ingredient-"+del_id).remove();
+
+    var in_counter = Number($("#in-counter").val());
+    for (var i=del_id+1;i<=in_counter;i++){
+        $("#ingredient-"+i).attr("id","ingredient-"+String(i-1));
+        $("#ingredient-input-"+i).attr("name","ingredient-"+String(i-1));
+        $("#ingredient-input-"+i).attr("id","ingredient-input-"+String(i-1));
+
+        $("#ingredient-delete-"+i).attr("onclick",'delete_ingredient('+String(i-1)+')');
+        $("#ingredient-delete-"+i).attr("id","ingredient-delete-"+String(i-1));
+
+        $("#ingredient-shoppinglink-"+i).attr("name",'ingredient-'+String(i-1)+'-shoppinglink');
+        $("#ingredient-shoppinglink-"+i).attr("id","ingredient-shoppinglink-"+String(i-1));
+    }
+
+    in_counter-=1;
+    $("#in-counter").val(String(in_counter));  
+
+}
+
+
+
+
+
+    

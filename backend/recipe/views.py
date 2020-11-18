@@ -88,7 +88,13 @@ class RecipeView(APIView):
 
         category = request.data.get("category")
         category_list = category.split(",")
-        print(category_list)
+
+        for c in category_list:
+            try:
+                category_object = Category.objects.get(id = c)
+            except:
+                rst=util.get_response(400,"You must choose at least one category!",None)
+                return Response(rst,status=400)
 
         # Save mutiple step inputs into a list
         step_decription_list = []
@@ -113,18 +119,12 @@ class RecipeView(APIView):
             
             # Add the total number of recipe amount of a category
             # Add categories for a recipe  
-            category_not_found = ""
             for c in category_list:
-                try:
-                    category_object = Category.objects.get(id = c)
-                    category_object.total_recipe = category_object.total_recipe + 1
-                    category_object.save()
-                    recipe_category_relationship = Recipe_category.objects.create(category_of_recipe_id = c, recipe_of_category_id = new_recipe.id)
-                    recipe_category_relationship.save()
-                except:
-                    category_not_found += c
-                    rst=util.get_response(400,category_not_found + " category is not found",None)
-                    return Response(rst)
+                category_object = Category.objects.get(id = c)
+                category_object.total_recipe = category_object.total_recipe + 1
+                category_object.save()
+                recipe_category_relationship = Recipe_category.objects.create(category_of_recipe_id = c, recipe_of_category_id = new_recipe.id)
+                recipe_category_relationship.save()
 
             # Add ingredients for a recipe
             for i in ingredient_name_list:
@@ -135,8 +135,12 @@ class RecipeView(APIView):
             for s in step_decription_list:
                 step_object = Step.objects.create(step_description = s,	related_recipe_id = new_recipe.id)
                 step_object.save()
+
+            data={
+                "recipe_id":new_recipe.id
+            }
             
-            rst=util.get_response(100,"success",None)
+            rst=util.get_response(100,"success",data)
             return Response(rst)
 
 class RecipeIndexView(APIView):

@@ -9,7 +9,7 @@
     <header class="layui-elip">Forget Password</header>
     <form class="layui-form">
         <div class="layui-input-inline">
-            <input type="text" name="username" required lay-verify="input" placeholder="E-mail" autocomplete="off"
+            <input type="text" name="username" required lay-verify="content" placeholder="E-mail" autocomplete="off"
                    class="layui-input">
         </div>
         <div class="layui-input-inline">
@@ -17,11 +17,11 @@
                    class="layui-input">
         </div>
         <div class="layui-input-inline">
-            <input type="password" name="password" required lay-verify="input|pass" placeholder="Password" autocomplete="off"
+            <input type="password" name="password" required lay-verify="content|pass" placeholder="Password" autocomplete="off"
                    class="layui-input">
         </div>
         <div class="layui-input-inline">
-            <input type="password" name="password" required lay-verify="input|pass|same" placeholder="Re-type Password" autocomplete="off"
+            <input type="password" name="password" required lay-verify="content|pass|same" placeholder="Re-type Password" autocomplete="off"
                    class="layui-input">
         </div>
         <div class="layui-input-inline login-btn">

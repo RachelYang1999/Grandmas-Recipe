@@ -16,7 +16,7 @@
                         <div class="layui-inline search-bar">
                             <form class="layui-form" action="/search">
                                 <div class="layui-inline input-item">
-                                    <input type="text" id="r_title" name="keyword" required lay-verify="input" placeholder="Type in keywords" autocomplete="off" class="layui-input" />
+                                    <input type="text" id="r_title" name="keyword" required lay-verify="content" placeholder="Type in keywords" autocomplete="off" class="layui-input" />
                                 </div>
                                 <button class="layui-btn layui-bg-orange" lay-submit>Search</button>
                             </form>
