@@ -1,337 +1,30 @@
 [{
-	"model": "upload.upload_profile",
-	"pk": 1,
-	"fields": {
-		"user": 1,
-		"profile_image": "avatar/logo.png"
-	}
-}, {
-	"model": "upload.upload_profile",
-	"pk": 2,
-	"fields": {
-		"user": 2,
-		"profile_image": "avatar/logo.png"
-	}
-}, {
-	"model": "upload.upload_profile",
-	"pk": 3,
-	"fields": {
-		"user": 3,
-		"profile_image": "avatar/logo.png"
-	}
-}, {
-	"model": "upload.upload_profile",
-	"pk": 4,
-	"fields": {
-		"user": 4,
-		"profile_image": "avatar/default.png"
-	}
-}, {
-	"model": "user.user",
-	"pk": 1,
-	"fields": {
-		"username": "root",
-		"password": "e538ded14ad313ed99d232eb6bf7c532",
-		"salt": "mKxc97lo",
-		"email": "root@root.com",
-		"introduction": "root",
-		"gender": "female",
-		"date_of_birth": "2020-11-10",
-		"register_date": "2020-11-10T01:22:37.460",
-		"total_follower": 2,
-		"total_following": 1
-	}
-}, {
-	"model": "user.user",
-	"pk": 2,
-	"fields": {
-		"username": "root1",
-		"password": "02bffb2325372973d5d7ac96513c2de2",
-		"salt": "3PB7AmVp",
-		"email": "root1@root1.com",
-		"introduction": "root1",
-		"gender": "male",
-		"date_of_birth": "2020-11-10",
-		"register_date": "2020-11-10T01:23:16.160",
-		"total_follower": 1,
-		"total_following": 1
-	}
-}, {
-	"model": "user.user",
-	"pk": 3,
-	"fields": {
-		"username": "root2",
-		"password": "f353dfc7f1a7f3ab91460b1b30676f1e",
-		"salt": "9WqVEsql",
-		"email": "root2@root2.com",
-		"introduction": "root2",
-		"gender": "other",
-		"date_of_birth": "2020-11-10",
-		"register_date": "2020-11-10T01:23:38.821",
-		"total_follower": 0,
-		"total_following": 1
-	}
-}, {
-	"model": "user.user",
-	"pk": 4,
-	"fields": {
-		"username": "rrrrrrrrr",
-		"password": "348c5bca290fe49c1eed1401b9c4df22",
-		"salt": "HhEpUztZ",
-		"email": "",
-		"introduction": "",
-		"gender": "",
-		"date_of_birth": "2020-11-12",
-		"register_date": "2020-11-12T03:48:54.347",
-		"total_follower": 0,
-		"total_following": 0
-	}
-}, {
-	"model": "user.user_follow",
-	"pk": 1,
-	"fields": {
-		"from_user": 1,
-		"to_user": 2
-	}
-}, {
-	"model": "user.user_follow",
-	"pk": 2,
-	"fields": {
-		"from_user": 2,
-		"to_user": 1
-	}
-}, {
-	"model": "user.user_follow",
-	"pk": 3,
-	"fields": {
-		"from_user": 3,
-		"to_user": 1
-	}
-}, {
-	"model": "calendars.calendar",
-	"pk": 1,
-	"fields": {
-		"date": "2020-09-21",
-		"meal_type": "lunch",
-		"recipe": 1,
-		"user": 1
-	}
-}, {
-	"model": "calendars.calendar",
-	"pk": 2,
-	"fields": {
-		"date": "2020-09-21",
-		"meal_type": "lunch",
-		"recipe": 1,
-		"user": 2
-	}
-}, {
-	"model": "calendars.calendar",
-	"pk": 3,
-	"fields": {
-		"date": "2020-09-21",
-		"meal_type": "lunch",
-		"recipe": 1,
-		"user": 3
-	}
-}, {
-	"model": "calendars.calendar",
-	"pk": 4,
-	"fields": {
-		"date": "2020-09-20",
-		"meal_type": "lunch",
-		"recipe": 1,
-		"user": 1
-	}
-}, {
-	"model": "calendars.calendar",
-	"pk": 5,
-	"fields": {
-		"date": "2020-09-20",
-		"meal_type": "lunch",
-		"recipe": 1,
-		"user": 2
-	}
-}, {
-	"model": "calendars.calendar",
-	"pk": 6,
-	"fields": {
-		"date": "2020-09-20",
-		"meal_type": "lunch",
-		"recipe": 1,
-		"user": 3
-	}
-}, {
-	"model": "calendars.calendar",
-	"pk": 7,
-	"fields": {
-		"date": "2020-09-19",
-		"meal_type": "lunch",
-		"recipe": 1,
-		"user": 1
-	}
-}, {
-	"model": "calendars.calendar",
-	"pk": 8,
-	"fields": {
-		"date": "2020-09-19",
-		"meal_type": "breakfirst",
-		"recipe": 1,
-		"user": 2
-	}
-}, {
-	"model": "calendars.calendar",
-	"pk": 9,
-	"fields": {
-		"date": "2020-09-18",
-		"meal_type": "breakfirst",
-		"recipe": 1,
-		"user": 2
-	}
-}, {
-	"model": "calendars.calendar",
-	"pk": 10,
-	"fields": {
-		"date": "2020-09-18",
-		"meal_type": "breakfirst",
-		"recipe": 1,
-		"user": 3
-	}
-}, {
-	"model": "calendars.calendar",
-	"pk": 11,
-	"fields": {
-		"date": "2020-11-11",
-		"meal_type": "breakfirst",
-		"recipe": 1,
-		"user": 1
-	}
-}, {
-	"model": "calendars.calendar",
-	"pk": 12,
-	"fields": {
-		"date": "2020-11-12",
-		"meal_type": "breakfirst",
-		"recipe": 1,
-		"user": 1
-	}
-}, {
-	"model": "calendars.calendar",
-	"pk": 13,
-	"fields": {
-		"date": "2020-11-11",
-		"meal_type": "lunch",
-		"recipe": 1,
-		"user": 1
-	}
-}, {
-	"model": "calendars.calendar",
-	"pk": 14,
-	"fields": {
-		"date": "2020-11-14",
-		"meal_type": "lunch",
-		"recipe": 1,
-		"user": 1
-	}
-}, {
-	"model": "calendars.calendar",
-	"pk": 15,
-	"fields": {
-		"date": "2020-11-13",
-		"meal_type": "lunch",
-		"recipe": 2,
-		"user": 1
-	}
-}, {
-	"model": "calendars.calendar",
-	"pk": 16,
-	"fields": {
-		"date": "2020-11-10",
-		"meal_type": "breakfirst",
-		"recipe": 1,
-		"user": 1
-	}
-}, {
-	"model": "calendars.calendar",
-	"pk": 17,
-	"fields": {
-		"date": "2020-11-09",
-		"meal_type": "breakfirst",
-		"recipe": 2,
-		"user": 1
-	}
-}, {
-	"model": "calendars.calendar",
-	"pk": 18,
-	"fields": {
-		"date": "2020-11-08",
-		"meal_type": "breakfirst",
-		"recipe": 1,
-		"user": 1
-	}
-}, {
-	"model": "calendars.calendar",
-	"pk": 19,
-	"fields": {
-		"date": "2020-11-08",
-		"meal_type": "lunch",
-		"recipe": 1,
-		"user": 1
-	}
-}, {
-	"model": "calendars.calendar",
-	"pk": 20,
-	"fields": {
-		"date": "2020-11-12",
-		"meal_type": "lunch",
-		"recipe": 2,
-		"user": 1
-	}
-}, {
-	"model": "calendars.calendar",
-	"pk": 21,
-	"fields": {
-		"date": "2020-11-09",
-		"meal_type": "dinner",
-		"recipe": 1,
-		"user": 1
-	}
-}, {
-	"model": "calendars.calendar",
-	"pk": 22,
-	"fields": {
-		"date": "2020-11-23",
-		"meal_type": "breakfirst",
-		"recipe": 1,
-		"user": 1
-	}
-}, {
 	"model": "category.category",
 	"pk": 1,
 	"fields": {
-		"category": "Breakfast",
-		"total_recipe": 11
+		"category": "Breakfirst",
+		"total_recipe": 1
 	}
 }, {
 	"model": "category.category",
 	"pk": 2,
 	"fields": {
 		"category": "Lunch",
-		"total_recipe": 1
+		"total_recipe": 3
 	}
 }, {
 	"model": "category.category",
 	"pk": 3,
 	"fields": {
 		"category": "Dinner",
-		"total_recipe": 8
+		"total_recipe": 2
 	}
 }, {
 	"model": "category.category",
 	"pk": 4,
 	"fields": {
-		"category": "Meat Lovers",
-		"total_recipe": 0
+		"category": "Meatlovers",
+		"total_recipe": 2
 	}
 }, {
 	"model": "category.category",
@@ -345,13 +38,13 @@
 	"pk": 6,
 	"fields": {
 		"category": "Asian",
-		"total_recipe": 1
+		"total_recipe": 0
 	}
 }, {
 	"model": "category.category",
 	"pk": 7,
 	"fields": {
-		"category": "Western",
+		"category": "Italian",
 		"total_recipe": 0
 	}
 }, {
@@ -365,466 +58,71 @@
 	"model": "category.category",
 	"pk": 9,
 	"fields": {
-		"category": "Sea Food",
-		"total_recipe": 0
+		"category": "Seafood",
+		"total_recipe": 1
 	}
 }, {
-	"model": "recipe.recipe",
+	"model": "user.user",
 	"pk": 1,
 	"fields": {
-		"recipe_title": "test",
-		"description": "test test",
-		"update_date": "2020-11-11",
-		"is_published": 1,
-		"user": 1
+		"username": "root",
+		"password": "e456ffd8bb1a7cd21638a70eb5963e5b",
+		"salt": "U3bviYQT",
+		"email": "root",
+		"introduction": "",
+		"gender": "",
+		"date_of_birth": "2020-11-19",
+		"register_date": "2020-11-19T08:57:50.049",
+		"total_follower": 0,
+		"total_following": 0,
+		"profile_image": "avatar/default.png"
 	}
 }, {
-	"model": "recipe.recipe",
+	"model": "user.user",
 	"pk": 2,
 	"fields": {
-		"recipe_title": "bbbb",
-		"description": "aaaaa",
-		"update_date": "2020-11-10",
-		"is_published": 1,
-		"user": 1
+		"username": "Sophie",
+		"password": "6187d8ac9380613b2ddde69b2e67c946",
+		"salt": "p3J6xjox",
+		"email": "1",
+		"introduction": "",
+		"gender": "",
+		"date_of_birth": "2020-11-19",
+		"register_date": "2020-11-19T09:04:18.803",
+		"total_follower": 0,
+		"total_following": 0,
+		"profile_image": "avatar/default.png"
 	}
 }, {
-	"model": "recipe.recipe",
+	"model": "user.user",
 	"pk": 3,
 	"fields": {
-		"recipe_title": "test",
-		"description": "test",
-		"update_date": "2020-11-10",
-		"is_published": 1,
-		"user": 1
+		"username": "test",
+		"password": "b5e076f4fbf0a23b60f7955db7000e08",
+		"salt": "uQ7x6eeH",
+		"email": "2",
+		"introduction": "",
+		"gender": "",
+		"date_of_birth": "2020-11-19",
+		"register_date": "2020-11-19T09:06:00.401",
+		"total_follower": 0,
+		"total_following": 0,
+		"profile_image": "avatar/default.png"
 	}
 }, {
-	"model": "recipe.recipe",
-	"pk": 4,
-	"fields": {
-		"recipe_title": "test1111",
-		"description": "test1111",
-		"update_date": "2020-11-11",
-		"is_published": 1,
-		"user": 1
-	}
-}, {
-	"model": "recipe.recipe",
-	"pk": 5,
-	"fields": {
-		"recipe_title": "Fried rice",
-		"description": "Good",
-		"update_date": "2020-11-13",
-		"is_published": 1,
-		"user": 1
-	}
-}, {
-	"model": "recipe.recipe",
+	"model": "user.user",
 	"pk": 6,
 	"fields": {
-		"recipe_title": "Fried rice",
-		"description": "Good",
-		"update_date": "2020-11-13",
-		"is_published": 1,
-		"user": 1
-	}
-}, {
-	"model": "recipe.recipe",
-	"pk": 7,
-	"fields": {
-		"recipe_title": "Fried rice",
-		"description": "Good",
-		"update_date": "2020-11-13",
-		"is_published": 1,
-		"user": 1
-	}
-}, {
-	"model": "recipe.recipe",
-	"pk": 8,
-	"fields": {
-		"recipe_title": "Fried rice",
-		"description": "Good",
-		"update_date": "2020-11-13",
-		"is_published": 1,
-		"user": 1
-	}
-}, {
-	"model": "recipe.recipe",
-	"pk": 9,
-	"fields": {
-		"recipe_title": "Fried rice",
-		"description": "Good",
-		"update_date": "2020-11-13",
-		"is_published": 1,
-		"user": 1
-	}
-}, {
-	"model": "recipe.recipe",
-	"pk": 10,
-	"fields": {
-		"recipe_title": "Pineapple Fried Rice",
-		"description": "Good",
-		"update_date": "2020-11-14",
-		"is_published": 1,
-		"user": 1
-	}
-}, {
-	"model": "recipe.recipe",
-	"pk": 11,
-	"fields": {
-		"recipe_title": "Tomato Fried Rice",
-		"description": "Good",
-		"update_date": "2020-11-14",
-		"is_published": 1,
-		"user": 1
-	}
-}, {
-	"model": "recipe.recipe",
-	"pk": 12,
-	"fields": {
-		"recipe_title": "Egg Fried Rice",
-		"description": "Good",
-		"update_date": "2020-11-14",
-		"is_published": 1,
-		"user": 1
-	}
-}, {
-	"model": "recipe.recipe",
-	"pk": 13,
-	"fields": {
-		"recipe_title": "Beef Noodle",
-		"description": "Beef noodle soup is a noodle soup made of stewed or red braised beef, beef broth, vegetables and Chinese noodles. It exists in various forms throughout East and Southeast Asia. The clear broth beef noodle soup was allegedly invented by the Hui people during the Tang dynasty and is commonly known as Lanzhou beef noodle soup.",
-		"update_date": "2020-11-15",
-		"is_published": 1,
-		"user": 1
-	}
-}, {
-	"model": "recipe.recipe_category",
-	"pk": 1,
-	"fields": {
-		"recipe_of_category": 1,
-		"category_of_recipe": 1
-	}
-}, {
-	"model": "recipe.recipe_category",
-	"pk": 2,
-	"fields": {
-		"recipe_of_category": 2,
-		"category_of_recipe": 1
-	}
-}, {
-	"model": "recipe.recipe_category",
-	"pk": 3,
-	"fields": {
-		"recipe_of_category": 3,
-		"category_of_recipe": 1
-	}
-}, {
-	"model": "recipe.recipe_category",
-	"pk": 4,
-	"fields": {
-		"recipe_of_category": 4,
-		"category_of_recipe": 1
-	}
-}, {
-	"model": "recipe.recipe_category",
-	"pk": 5,
-	"fields": {
-		"recipe_of_category": 4,
-		"category_of_recipe": 2
-	}
-}, {
-	"model": "recipe.recipe_category",
-	"pk": 6,
-	"fields": {
-		"recipe_of_category": 5,
-		"category_of_recipe": 1
-	}
-}, {
-	"model": "recipe.recipe_category",
-	"pk": 7,
-	"fields": {
-		"recipe_of_category": 5,
-		"category_of_recipe": 3
-	}
-}, {
-	"model": "recipe.recipe_category",
-	"pk": 8,
-	"fields": {
-		"recipe_of_category": 6,
-		"category_of_recipe": 1
-	}
-}, {
-	"model": "recipe.recipe_category",
-	"pk": 9,
-	"fields": {
-		"recipe_of_category": 6,
-		"category_of_recipe": 3
-	}
-}, {
-	"model": "recipe.recipe_category",
-	"pk": 10,
-	"fields": {
-		"recipe_of_category": 7,
-		"category_of_recipe": 1
-	}
-}, {
-	"model": "recipe.recipe_category",
-	"pk": 11,
-	"fields": {
-		"recipe_of_category": 7,
-		"category_of_recipe": 3
-	}
-}, {
-	"model": "recipe.recipe_category",
-	"pk": 12,
-	"fields": {
-		"recipe_of_category": 8,
-		"category_of_recipe": 1
-	}
-}, {
-	"model": "recipe.recipe_category",
-	"pk": 13,
-	"fields": {
-		"recipe_of_category": 8,
-		"category_of_recipe": 3
-	}
-}, {
-	"model": "recipe.recipe_category",
-	"pk": 14,
-	"fields": {
-		"recipe_of_category": 9,
-		"category_of_recipe": 1
-	}
-}, {
-	"model": "recipe.recipe_category",
-	"pk": 15,
-	"fields": {
-		"recipe_of_category": 9,
-		"category_of_recipe": 3
-	}
-}, {
-	"model": "recipe.recipe_category",
-	"pk": 16,
-	"fields": {
-		"recipe_of_category": 10,
-		"category_of_recipe": 1
-	}
-}, {
-	"model": "recipe.recipe_category",
-	"pk": 17,
-	"fields": {
-		"recipe_of_category": 10,
-		"category_of_recipe": 3
-	}
-}, {
-	"model": "recipe.recipe_category",
-	"pk": 18,
-	"fields": {
-		"recipe_of_category": 11,
-		"category_of_recipe": 1
-	}
-}, {
-	"model": "recipe.recipe_category",
-	"pk": 19,
-	"fields": {
-		"recipe_of_category": 11,
-		"category_of_recipe": 3
-	}
-}, {
-	"model": "recipe.recipe_category",
-	"pk": 20,
-	"fields": {
-		"recipe_of_category": 12,
-		"category_of_recipe": 1
-	}
-}, {
-	"model": "recipe.recipe_category",
-	"pk": 21,
-	"fields": {
-		"recipe_of_category": 12,
-		"category_of_recipe": 3
-	}
-}, {
-	"model": "recipe.recipe_category",
-	"pk": 22,
-	"fields": {
-		"recipe_of_category": 13,
-		"category_of_recipe": 2
-	}
-}, {
-	"model": "recipe.recipe_category",
-	"pk": 23,
-	"fields": {
-		"recipe_of_category": 13,
-		"category_of_recipe": 6
-	}
-}, {
-	"model": "step.step",
-	"pk": 1,
-	"fields": {
-		"step_description": "Steam rice",
-		"related_recipe": 9
-	}
-}, {
-	"model": "step.step",
-	"pk": 2,
-	"fields": {
-		"step_description": "Add oil and fry",
-		"related_recipe": 9
-	}
-}, {
-	"model": "step.step",
-	"pk": 3,
-	"fields": {
-		"step_description": "Steam rice",
-		"related_recipe": 10
-	}
-}, {
-	"model": "step.step",
-	"pk": 4,
-	"fields": {
-		"step_description": "Add oil and fry",
-		"related_recipe": 10
-	}
-}, {
-	"model": "step.step",
-	"pk": 5,
-	"fields": {
-		"step_description": "Steam rice",
-		"related_recipe": 11
-	}
-}, {
-	"model": "step.step",
-	"pk": 6,
-	"fields": {
-		"step_description": "Add oil and fry",
-		"related_recipe": 11
-	}
-}, {
-	"model": "step.step",
-	"pk": 7,
-	"fields": {
-		"step_description": "Steam rice",
-		"related_recipe": 12
-	}
-}, {
-	"model": "step.step",
-	"pk": 8,
-	"fields": {
-		"step_description": "Add oil and fry",
-		"related_recipe": 12
-	}
-}, {
-	"model": "step.step",
-	"pk": 9,
-	"fields": {
-		"step_description": "Boil beef soup.",
-		"related_recipe": 13
-	}
-}, {
-	"model": "step.step",
-	"pk": 10,
-	"fields": {
-		"step_description": "Add noodles.",
-		"related_recipe": 13
-	}
-}, {
-	"model": "ingredient.ingredient",
-	"pk": 1,
-	"fields": {
-		"ingredient_name": "Rice",
-		"ingredient_related_recipe": 7
-	}
-}, {
-	"model": "ingredient.ingredient",
-	"pk": 2,
-	"fields": {
-		"ingredient_name": "Oil",
-		"ingredient_related_recipe": 7
-	}
-}, {
-	"model": "ingredient.ingredient",
-	"pk": 3,
-	"fields": {
-		"ingredient_name": "Rice",
-		"ingredient_related_recipe": 8
-	}
-}, {
-	"model": "ingredient.ingredient",
-	"pk": 4,
-	"fields": {
-		"ingredient_name": "Oil",
-		"ingredient_related_recipe": 8
-	}
-}, {
-	"model": "ingredient.ingredient",
-	"pk": 5,
-	"fields": {
-		"ingredient_name": "Rice",
-		"ingredient_related_recipe": 9
-	}
-}, {
-	"model": "ingredient.ingredient",
-	"pk": 6,
-	"fields": {
-		"ingredient_name": "Oil",
-		"ingredient_related_recipe": 9
-	}
-}, {
-	"model": "ingredient.ingredient",
-	"pk": 7,
-	"fields": {
-		"ingredient_name": "Rice",
-		"ingredient_related_recipe": 10
-	}
-}, {
-	"model": "ingredient.ingredient",
-	"pk": 8,
-	"fields": {
-		"ingredient_name": "Pineapple",
-		"ingredient_related_recipe": 10
-	}
-}, {
-	"model": "ingredient.ingredient",
-	"pk": 9,
-	"fields": {
-		"ingredient_name": "Rice",
-		"ingredient_related_recipe": 11
-	}
-}, {
-	"model": "ingredient.ingredient",
-	"pk": 10,
-	"fields": {
-		"ingredient_name": "Tomato",
-		"ingredient_related_recipe": 11
-	}
-}, {
-	"model": "ingredient.ingredient",
-	"pk": 11,
-	"fields": {
-		"ingredient_name": "Rice",
-		"ingredient_related_recipe": 12
-	}
-}, {
-	"model": "ingredient.ingredient",
-	"pk": 12,
-	"fields": {
-		"ingredient_name": "Egg",
-		"ingredient_related_recipe": 12
-	}
-}, {
-	"model": "ingredient.ingredient",
-	"pk": 13,
-	"fields": {
-		"ingredient_name": "Noodles",
-		"ingredient_related_recipe": 13
-	}
-}, {
-	"model": "ingredient.ingredient",
-	"pk": 14,
-	"fields": {
-		"ingredient_name": "Beef",
-		"ingredient_related_recipe": 13
+		"username": "Rachel",
+		"password": "e01a59568d0f100efe6e983cb3d42260",
+		"salt": "YJR4dY5Z",
+		"email": "qyan6939@gmail.com",
+		"introduction": "I love cooking!",
+		"gender": "female",
+		"date_of_birth": "2020-11-19",
+		"register_date": "2020-11-19T09:06:45.304",
+		"total_follower": 0,
+		"total_following": 0,
+		"profile_image": "avatar/default.png"
 	}
 }]
