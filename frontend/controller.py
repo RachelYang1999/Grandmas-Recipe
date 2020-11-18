@@ -210,3 +210,15 @@ def upload_recipe():
     else:
         redirect('/signin?redirect_url=upload_recipe')
 
+@get('/profile_view')
+def profile_view():
+    rtv = getToken()
+    if rtv is not None:
+        url=root+'category/'
+
+        r2 = requests.request("GET", url)
+        category=json.loads(r2.text)["data"]
+
+        return template("profile_view",backend=get_backend(),username=rtv[1],avatar=rtv[2],signin=True,category=category)
+    else:
+        redirect('/signin?redirect_url=upload_recipe')
