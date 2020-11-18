@@ -5,8 +5,7 @@
 <link rel="stylesheet" href="/css/search.css">
 <title>Search</title>
 %include('header.tpl') 
-</head>
-<body>
+
     <div class="layui-body index-body">
         <div class="layui-container">
             <div class = "margin_to_header">

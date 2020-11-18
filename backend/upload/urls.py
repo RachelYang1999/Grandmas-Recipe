@@ -6,6 +6,7 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     path('upload/profile_image/', views.upload_profile_view.as_view()),
+    path('upload/intro_image/', views.upload_intro_view.as_view()),
     path('upload/recipe_image/', views.upload_recipe_view.as_view()),
     path('upload/comment_image/', views.upload_comment_view.as_view()),
 ]

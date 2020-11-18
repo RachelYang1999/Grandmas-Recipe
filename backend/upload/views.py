@@ -5,7 +5,7 @@ from uauth.auth import UserAuth
 from user.models import User
 from recipe.models import Recipe
 from comments.models import Comment
-from upload.models import Upload_profile, Upload_recipe, Upload_comment_meta
+from upload.models import Upload_profile, Upload_recipe, Upload_comment_meta,Upload_intro
 from upload.serializers import UploadSerializer, UploadSerializer_recipe, UploadSerializer_commentmeta
 
 from django.core.cache import cache
@@ -40,6 +40,26 @@ class upload_profile_view(APIView):
         
         return Response(rst)
 
+class upload_intro_view(APIView):
+
+    authentication_classes = (UserAuth,)
+
+    def post(self, request, *args, **kwargs):
+        file_uploaded = request.FILES['document']
+        recipe_id = request.data.get('recipe_id')
+        recipe = Recipe.objects.get(id=recipe_id)
+
+        try:
+            entry = Upload_intro.objects.get(recipe=recipe)
+            entry.intro_image=file_uploaded
+            entry.save()
+        except Upload_intro.DoesNotExist:
+            new_entry = Upload_intro.objects.create(recipe=recipe, intro_image=file_uploaded)
+        
+        rst=util.get_response(100,"success",None)
+        
+        return Response(rst)
+
 
 class upload_recipe_view(APIView):
 
@@ -54,7 +74,8 @@ class upload_recipe_view(APIView):
             step_image = Upload_recipe.objects.get(recipe=recipe, step=step)
         except Upload_recipe.DoesNotExist:
             new_entry = Upload_recipe.objects.create(recipe=recipe, step_id=step_id, recipe_image=file_uploaded)
-            rst=util.get_response(100,"success",None)
+        
+        rst=util.get_response(100,"success",None)
         
         return Response(rst)
 

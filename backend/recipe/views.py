@@ -5,7 +5,7 @@ from category.models import Category
 from user.models import User
 from step.models import Step
 from ingredient.models import Ingredient
-from upload.models import Upload_recipe
+from upload.models import Upload_recipe,Upload_intro
 from comments.models import Comment
 
 from rest_framework import status, exceptions
@@ -35,6 +35,8 @@ class RecipeView(APIView):
         get_update_date = recipe.update_date
         get_user_id = recipe.user_id
         get_user_name = User.objects.get(id = recipe.user_id).username
+        get_recipe_src=Upload_intro.objects.filter(recipe=recipe).values()[0]["intro_image"]
+        
 
         get_category_list = []
         for c in category_queryset:
@@ -62,6 +64,7 @@ class RecipeView(APIView):
 
         get_recipe = {
             "id": get_recipe_id,
+            "intro_src": get_recipe_src,
             "title": get_recipe_title,
             "description": get_recipe_description,
             "is_published": get_is_published,
@@ -94,7 +97,7 @@ class RecipeView(APIView):
                 category_object = Category.objects.get(id = c)
             except:
                 rst=util.get_response(400,"You must choose at least one category!",None)
-                return Response(rst,status=400)
+                return Response(rst)
 
         # Save mutiple step inputs into a list
         step_decription_list = []

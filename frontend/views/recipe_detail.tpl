@@ -42,7 +42,7 @@
         </div>
 
         <div class = "center">
-            <img src="https://media.github.sydney.edu.au/user/4849/files/66508100-26ff-11eb-9e66-63155c9c402f" alt="">
+            <img src='/img/{{recipe_data.get("intro_src")}}'' alt="">
             <br>
         </div>
         <hr>

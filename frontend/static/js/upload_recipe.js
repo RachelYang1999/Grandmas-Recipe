@@ -5,11 +5,15 @@ layui.use(['form','jquery','upload'], function(){
 
     var uploadInst = upload.render({
         elem: '#main-pic'
-        ,url:'http://'+$("#backend").html()+':9999/api/upload/recipe_image/'
+        ,url:'http://'+$("#backend").html()+':9999/api/upload/intro_image/'
         ,auto:false
         ,field: "document"
         ,headers:{"token":$.cookie("token")}
-        ,bindAction:'#submit'
+        ,data: { recipe_id: function () {
+                            return $("#recipe_id").val();
+                        },
+                }
+        ,bindAction:'#intro-submit'
         ,choose:function(obj){
             var files = obj.pushFile();
             $('#intro-pic-view').removeClass('layui-hide');
@@ -21,9 +25,9 @@ layui.use(['form','jquery','upload'], function(){
         }
         ,done: function(res){
             layer.msg('success');
-            $("#intro-pic").attr("src","/img/"+res.data.src);
         }
-        ,error: function(){
+        ,error: function(res){
+            console.log(res);
 
         }
     });
@@ -35,6 +39,7 @@ layui.use(['form','jquery','upload'], function(){
             ,auto:false
             ,field: "document"
             ,headers:{"token":$.cookie("token")}
+            ,data: { "recipe_id":$("#recipe_id").val()}
             ,bindAction:'#submit'
             ,choose:function(obj){
                 var files = obj.pushFile();
@@ -117,6 +122,10 @@ layui.use(['form','jquery','upload'], function(){
         step_counter-=1;
         $("#step-counter").val(String(step_counter));  
     }
+    var sleep = function(time) {
+        var startTime = new Date().getTime() + parseInt(time, 10);
+        while(new Date().getTime() < startTime) {}
+    };
 
 
     form.on('submit(submit)',function (data) {
@@ -132,12 +141,19 @@ layui.use(['form','jquery','upload'], function(){
             type:'post',
             headers:{"token":$.cookie("token")},
             success: function (data) {
-                window.location.href="/recipe_detail?id="+data.data.recipe_id;
-                console.log(data)
+                console.log(data.data.recipe_id)
+                if (data.code==100){
+                    $("#recipe_id").val(data.data.recipe_id);
+                    $("#intro-submit").click();
+                    sleep(3000); 
+                    window.location.href="/recipe_detail?id="+data.data.recipe_id;
+                    
+                }else{
+                    layer.msg(data.msg);
+                }
             },
             error: function(data){
-                layer.msg(data.responseJSON.msg);
-                console.log(data.responseJSON);
+                console.log(data);
             }
         })
         return false;

@@ -44,7 +44,7 @@
 
                         <div class="layui-col-md6">
 
-                            <label class="layui-form-label add-to-category">Add Category</label>
+                            <label class="layui-form-label add-to-category">Choose Category</label>
                             <div class="add-to-cat-boarder" >
                                 <div class="layui-input-block button-select-category">
                                     % for c in category:
@@ -129,11 +129,11 @@
                         <button class="layui-btn submit-button" id="submit" lay-submit lay-filter="submit">Submit</button>
                         <button type="reset" class="layui-btn layui-btn-primary">Reset</button>
                         <a href="/"><button type="button" class="layui-btn layui-btn-primary cancel-button">Cancel</button></a>
-
                     </div>
                 </div>
-
             </form>
+            <input type="text" id="recipe_id" value="" style="display:none" readonly>
+            <button class="layui-btn" id="intro-submit" style="display: none;">test</button>
         </div>
     </div>
 
