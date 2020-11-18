@@ -48,6 +48,5 @@
         </div>
     </div>
 %include('footer.tpl')
-<script type="text/javascript" src="/js/signin.js"></script>
 </body>
 </html>
