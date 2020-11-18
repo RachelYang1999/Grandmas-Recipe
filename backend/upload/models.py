@@ -17,12 +17,12 @@ class Upload_intro(models.Model):
     recipe = models.ForeignKey(Recipe, related_name='introimage',on_delete=models.CASCADE,default=1)
     intro_image = models.ImageField(upload_to='intro_image', null=True, blank=True)
 
-class Upload_recipe(models.Model):
-    class Meta:
-        db_table = 'step_metadata'
-    recipe = models.ForeignKey(Recipe, related_name='stepimage',on_delete=models.CASCADE,default=1)
-    step_id = models.ForeignKey(Step, related_name='step',on_delete=models.CASCADE)
-    recipe_image = models.ImageField(upload_to='step_image', null=True, blank=True)
+# class Upload_recipe(models.Model):
+#     class Meta:
+#         db_table = 'step_metadata'
+    # recipe = models.ForeignKey(Recipe, related_name='stepimage',on_delete=models.CASCADE,default=1)
+    # step = models.ForeignKey(Step, related_name='step',on_delete=models.CASCADE)
+    # recipe_image = models.ImageField(upload_to='step_image', null=True, blank=True)
 
 class Upload_comment_meta(models.Model):
     class Meta:

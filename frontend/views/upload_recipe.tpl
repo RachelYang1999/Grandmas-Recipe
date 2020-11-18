@@ -94,6 +94,7 @@
 
 
                     <div id="step-1">
+                        <input type="text" value="" id="step-id-1" style="display:none"  readonly>
                         <div class="layui-inline" >
                             <div class="layui-input-block step-explanation" >
                                 <textarea id="step-input-1" required lay-verify="content" name="step-1" placeholder="Step explanation" class="layui-textarea" ></textarea>
@@ -111,7 +112,7 @@
                             </div>
                         </div>
                         <div class="layui-inline" >
-                            <a class="layui-btn layui-btn-sm layui-btn-primary" id="step-delete-1" href="javascript:;" onclick= "delete_step(1)" >
+                            <a type="button" class="layui-btn layui-btn-sm layui-btn-primary" id="step-delete-1" onclick= "delete_step(1)" >
                                 <i class="layui-icon">&#xe640;</i>
                             </a>
                         </div>
@@ -120,7 +121,7 @@
 
                 </div>
 
-                <button id="add-step-btn" type="button" class="layui-btn layui-btn-warm add-step">
+                <button id="add-step-btn" type="button" onclick= "add_step()" class="layui-btn layui-btn-warm add-step">
                         <i class="layui-icon">&#xe608;</i> Add More Step
                 </button>
 
@@ -132,8 +133,12 @@
                     </div>
                 </div>
             </form>
-            <input type="text" id="recipe_id" value="" style="display:none" readonly>
-            <button class="layui-btn" id="intro-submit" style="display: none;">test</button>
+            <div id="submit-block">
+            <input type="text" id="recipe-id" value="" style="display:none" readonly />
+            <button class="layui-btn" id="intro-submit" style="display: none;"></button>
+            <button class="layui-btn" id="step-submit-1" style="display:none"></button>
+            </div>
+           
         </div>
     </div>
 

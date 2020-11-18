@@ -10,3 +10,4 @@ class Step(models.Model):
 
     step_description = models.CharField(max_length = 1000)
     related_recipe = models.ForeignKey(Recipe, on_delete = models.CASCADE, related_name="related_recipe")
+    step_image = models.ImageField(upload_to='step_image', null=True, blank=True)

@@ -10,8 +10,8 @@ layui.use(['form','jquery','upload'], function(){
         ,field: "document"
         ,headers:{"token":$.cookie("token")}
         ,data: { recipe_id: function () {
-                            return $("#recipe_id").val();
-                        },
+                        return $("#recipe-id").val();
+                    },
                 }
         ,bindAction:'#intro-submit'
         ,choose:function(obj){
@@ -24,51 +24,56 @@ layui.use(['form','jquery','upload'], function(){
             
         }
         ,done: function(res){
-            layer.msg('success');
+            console.log(res);
         }
         ,error: function(res){
             console.log(res);
-
         }
     });
 
-    var uploadStep = function(element){
+    picupload(1);
+    function picupload(id) {
         upload.render({
-            elem: "#step-addpic-"+element
+            elem: "#step-addpic-"+id
             ,url:'http://'+$("#backend").html()+':9999/api/upload/recipe_image/'
             ,auto:false
             ,field: "document"
             ,headers:{"token":$.cookie("token")}
-            ,data: { "recipe_id":$("#recipe_id").val()}
-            ,bindAction:'#submit'
+            ,data: { recipe_id: function () {
+                            return $("#recipe-id").val();
+                        },
+                        step_id:  function () {
+                            return $("#step-id-"+id).val();
+                        },
+                    }
+            ,bindAction:'#step-submit-'+id
             ,choose:function(obj){
                 var files = obj.pushFile();
-                $('#uploadDemoView-'+element).removeClass('layui-hide');
+                $('#uploadDemoView-'+id).removeClass('layui-hide');
             
                 obj.preview(function(index,file,result){
-                    $('#step-pic-'+element).attr('src', result); 
+                    $('#step-pic-'+id).attr('src', result); 
                 });
                 
             }
             ,done: function(res){
-                layer.msg('success');
-                $("#step-pic-"+element).attr("src","/img/"+res.data.src);
+                console.log(res);
             }
-            ,error: function(){
-
+            ,error: function(res){
+                console.log(res);
             }
         });
-    };
-    uploadStep("1");
+    }
 
-    $("#add-step-btn").click(function(){
+    window.add_step = function(){
     
         var step_counter = Number($("#step-counter").val());
         step_counter = step_counter+1;
         $("#step-counter").val(step_counter);
         console.log("add"+step_counter);
 
-        step_block='<div id="step-'+step_counter+'">\
+        var step_block='<div id="step-'+step_counter+'">\
+                            <input type="text" value="" id="step-id-'+step_counter+'" style="display:none"  readonly>\
                             <div class="layui-inline" >\
                                 <div class="layui-input-block step-explanation" >\
                                     <textarea required lay-verify="content" id="step-input-'+step_counter+'" name="step-'+step_counter+'" placeholder="Step explanation" class="layui-textarea" ></textarea>\
@@ -92,36 +97,15 @@ layui.use(['form','jquery','upload'], function(){
                             </div>\
                         </div>'
 
+        var submit_block='<button class="layui-btn" id="step-submit-'+step_counter+'" style="display:none" >test</button>'
+
         $("#step-block").append(step_block);
-        uploadStep(step_counter);
-    });
-
-    window.delete_step=function(del_id){
-        $("#step-"+del_id).remove();
-
-        var step_counter = Number($("#step-counter").val());
-        for (var i=del_id+1;i<=step_counter;i++){
-            $("#step-"+i).attr("id","step-"+String(i-1));
-
-            $("#step-input-"+i).attr("name","step-"+String(i-1));
-            $("#step-input-"+i).attr("id","step-input-"+String(i-1));
-
-            $("#step-addpic-"+i).attr("id","step-addpic-"+String(i-1));
-
-            $("#uploadDemoView-"+i).attr("id","uploadDemoView-"+String(i-1));
-            
-
-            $("#step-pic-"+i).attr("name",'step-'+String(i-1)+'-pic');
-            $("#step-pic-"+i).attr("id","step-pic-"+String(i-1));
-
-            $("#step-delete-"+i).attr("onclick",'delete_step('+String(i-1)+')');
-            $("#step-delete-"+i).attr("id","step-delete-"+String(i-1));
-            uploadStep(i-1);
-        }
-
-        step_counter-=1;
-        $("#step-counter").val(String(step_counter));  
+        $("#submit-block").append(submit_block);
+        picupload(step_counter);
     }
+    
+
+
     var sleep = function(time) {
         var startTime = new Date().getTime() + parseInt(time, 10);
         while(new Date().getTime() < startTime) {}
@@ -134,6 +118,9 @@ layui.use(['form','jquery','upload'], function(){
             arr_box.push($(this).val());
         });
         data.field.category=arr_box.join(",");
+
+        //图片不为空 检查
+
         
         $.ajax({
             url:'http://'+$("#backend").html()+':9999/api/recipe/',
@@ -141,10 +128,15 @@ layui.use(['form','jquery','upload'], function(){
             type:'post',
             headers:{"token":$.cookie("token")},
             success: function (data) {
-                console.log(data.data.recipe_id)
+                console.log(data.data)
                 if (data.code==100){
-                    $("#recipe_id").val(data.data.recipe_id);
+                    layer.msg("uploading...");
+                    $("#recipe-id").val(data.data.recipe_id);
                     $("#intro-submit").click();
+                    for(var key in data.data.steps){
+                        $("#step-id-"+key).val(data.data.steps[key]);
+                        $("#step-submit-"+key).click();
+                    }
                     sleep(3000); 
                     window.location.href="/recipe_detail?id="+data.data.recipe_id;
                     
@@ -159,6 +151,38 @@ layui.use(['form','jquery','upload'], function(){
         return false;
     })
 });
+
+
+
+function delete_step(del_id){
+    $("#step-"+del_id).remove();
+
+    var step_counter = Number($("#step-counter").val());
+    for (var i=del_id+1;i<=step_counter;i++){
+        $("#step-"+i).attr("id","step-"+String(i-1));
+
+        $("#step-input-"+i).attr("name","step-"+String(i-1));
+        $("#step-input-"+i).attr("id","step-input-"+String(i-1));
+
+        $("#step-addpic-"+i).attr("id","step-addpic-"+String(i-1));
+
+        $("#uploadDemoView-"+i).attr("id","uploadDemoView-"+String(i-1));
+        
+
+        $("#step-pic-"+i).attr("name",'step-'+String(i-1)+'-pic');
+        $("#step-pic-"+i).attr("id","step-pic-"+String(i-1));
+
+        $("#step-delete-"+i).attr("onclick",'delete_step('+String(i-1)+')');
+        $("#step-delete-"+i).attr("id","step-delete-"+String(i-1));
+
+        $("#step-id-"+i).attr("id","step-id-"+String(i-1));
+        
+        uploadStep(i-1);
+    }
+
+    step_counter-=1;
+    $("#step-counter").val(String(step_counter));  
+}
 
 function change_is_publish(){
     $("#is-pub").val(0);

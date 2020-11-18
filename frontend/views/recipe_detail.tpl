@@ -82,26 +82,21 @@
         <hr>
         <h1> Steps </h1>
         <br>
-        <div class="layui-row">
-            <div class="layui-col-md7", id = "step-text">
-
-                <ul>
-                    % count = 1
-                    % for step in recipe_data['step_list']:
-                        % step_with_count = str(count) + ": " + str(step)
-                        <li class = normal-text>Step {{step_with_count}}</li> 
-                        % count += 1
-                    % end
-                </ul>
+        % count = 1
+        % for step in recipe_data['step_list']:
+            % step_with_count = str(count) + ": " + str(step[0])
+            <div class="layui-row">
+                
+                <div class="layui-col-md7", id = "step-text">
+                    <div>Step {{step_with_count}}</div>
+                    
+                </div>
+                <div class="layui-col-md5", id = "step-image">
+                    <div><img src='/img/{{step[1]}}''></div>
+                </div>
             </div>
-            <div class="layui-col-md5", id = "step-image">
-                <ul>
-                    % for step in recipe_data['step_list']:
-                        <li class = normal-text>Put the image here.</li> 
-                    % end
-                </ul>
-            </div>
-        </div>
+            % count += 1
+         % end
         <hr>
         <h1> Comments </h1>
         <div>

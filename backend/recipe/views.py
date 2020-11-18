@@ -5,7 +5,7 @@ from category.models import Category
 from user.models import User
 from step.models import Step
 from ingredient.models import Ingredient
-from upload.models import Upload_recipe,Upload_intro
+from upload.models import Upload_intro
 from comments.models import Comment
 
 from rest_framework import status, exceptions
@@ -23,6 +23,7 @@ class RecipeView(APIView):
         recipe = Recipe.objects.get(id = recipe_id)
         category_queryset = Recipe_category.objects.filter(recipe_of_category_id = recipe_id)
         step_queryset = Step.objects.filter(related_recipe_id = recipe_id)
+       
         ingredient_queryset = Ingredient.objects.filter(ingredient_related_recipe_id = recipe_id)
         comment_all_queryset = Comment.objects.filter(comment_recipe_id = recipe_id)
         # print(Comment.objects.get(comment_recipe_id = recipe_id).comment_content)
@@ -46,7 +47,7 @@ class RecipeView(APIView):
 
         get_step_list = []
         for s in step_queryset:
-            get_step_list.append(s.step_description)
+            get_step_list.append((s.step_description,Step.objects.filter(id=s.id).values()[0]["step_image"]))
 
         get_ingredient_list = []
         for i in ingredient_queryset:
@@ -75,6 +76,7 @@ class RecipeView(APIView):
             "ingredient_name_list": get_ingredient_list,
             "user_name": get_user_name,
             "comment_dic_list": get_comment_dic_list,
+            
         }
 
         # print(get_recipe)
@@ -135,12 +137,17 @@ class RecipeView(APIView):
                 ingredient_object.save()
 
             # Add steps for a recipe
+            step_rtv={}
+            count=1
             for s in step_decription_list:
                 step_object = Step.objects.create(step_description = s,	related_recipe_id = new_recipe.id)
                 step_object.save()
+                step_rtv[count]=step_object.id
+                count+=1
 
             data={
-                "recipe_id":new_recipe.id
+                "recipe_id":new_recipe.id,
+                "steps": step_rtv
             }
             
             rst=util.get_response(100,"success",data)
@@ -155,7 +162,7 @@ class RecipeIndexView(APIView):
             temp={}
             temp["id"]=r.recipe_id
 
-            meta=Upload_recipe.objects.filter(recipe=Recipe.objects.get(id=r.recipe_id),step_id=0).values()[0]["recipe_image"]
+            meta=Recipe.objects.filter(id=r.recipe_id).values()[0]["recipe_image"]
             # print(meta)
             temp["meta"]=meta
             data.append(temp)

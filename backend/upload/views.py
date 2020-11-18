@@ -4,9 +4,10 @@ from django.core.files.storage import FileSystemStorage
 from uauth.auth import UserAuth
 from user.models import User
 from recipe.models import Recipe
+from step.models import Step
 from comments.models import Comment
-from upload.models import Upload_profile, Upload_recipe, Upload_comment_meta,Upload_intro
-from upload.serializers import UploadSerializer, UploadSerializer_recipe, UploadSerializer_commentmeta
+from upload.models import Upload_profile,  Upload_comment_meta,Upload_intro
+# from upload.serializers import UploadSerializer, UploadSerializer_recipe, UploadSerializer_commentmeta
 
 from django.core.cache import cache
 
@@ -15,6 +16,8 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 
 import app_3609.util as util
+
+import json
 
 
 class upload_profile_view(APIView):
@@ -66,14 +69,23 @@ class upload_recipe_view(APIView):
     authentication_classes = (UserAuth,)
 
     def post(self, request, *args, **kwargs):
+
         file_uploaded = request.FILES['document']
         recipe_id = request.data.get('recipe_id')
         recipe = Recipe.objects.get(id=recipe_id)
-        step = request.data.get('step_id')
-        try:
-            step_image = Upload_recipe.objects.get(recipe=recipe, step=step)
-        except Upload_recipe.DoesNotExist:
-            new_entry = Upload_recipe.objects.create(recipe=recipe, step_id=step_id, recipe_image=file_uploaded)
+        step_id = request.data.get('step_id')
+
+        step=Step.objects.get(id=step_id)
+        step.step_image=file_uploaded
+        step.save()
+        
+    
+        # try:
+        #     step_image = Step.objects.get(recipe=recipe, step=step)
+        #     step_image.recipe_image=file_uploaded
+        #     step_image.save()
+        # except Upload_recipe.DoesNotExist:
+        #     new_entry = Upload_recipe.objects.create(recipe=recipe, step=step, recipe_image=file_uploaded)
         
         rst=util.get_response(100,"success",None)
         
