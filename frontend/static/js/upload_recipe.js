@@ -7,6 +7,7 @@ layui.use(['form','jquery','upload'], function(){
         elem: '#main-pic'
         ,url:'http://'+$("#backend").html()+':9999/api/upload/intro_image/'
         ,auto:false
+        ,size: 1
         ,field: "document"
         ,headers:{"token":$.cookie("token")}
         ,data: { recipe_id: function () {
@@ -20,8 +21,7 @@ layui.use(['form','jquery','upload'], function(){
         
             obj.preview(function(index,file,result){
                 $('#intro-pic').attr('src', result); 
-            });
-            
+            });  
         }
         ,done: function(res){
             console.log(res);
@@ -37,6 +37,7 @@ layui.use(['form','jquery','upload'], function(){
             elem: "#step-addpic-"+id
             ,url:'http://'+$("#backend").html()+':9999/api/upload/recipe_image/'
             ,auto:false
+            ,size: 1
             ,field: "document"
             ,headers:{"token":$.cookie("token")}
             ,data: { recipe_id: function () {

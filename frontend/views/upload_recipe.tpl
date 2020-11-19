@@ -15,7 +15,7 @@
                 <div class="layui-form-item">
                     <div class="layui-inline">
                         <div class="layui-input-block ">
-                            <input type="text" name="recipe_title" required  lay-verify="content" placeholder="Recipe Title" autocomplete="off" class="layui-input recipe-title">
+                            <input type="text" name="recipe_title" required  lay-verify="content" placeholder="Recipe Title" autocomplete="off" class="layui-input recipe-title" maxLength="25">
                         </div>
                     </div>
                     <div class="layui-inline">
