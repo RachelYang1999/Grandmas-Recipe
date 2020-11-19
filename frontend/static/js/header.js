@@ -24,8 +24,8 @@ layui.use(['form','element'], function () {
             }
         },
         code: [
-            /^[\S]{6,6}$/
-            ,'Password length must be 8~24'
+            /^[\S]{8,8}$/
+            ,'Code length must be 8'
         ],
         email: [
             /\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*/

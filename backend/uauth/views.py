@@ -127,15 +127,14 @@ class User_se_pass(APIView):
 
         try:
             code = util.create_salt()
-            cache.set(code,email,timeout=300)
-
             user=User.objects.get(email=email)
+            cache.set(code,user.id,timeout=3600)
 
             send_mail('Code', code, 'no-reply@grandmasrecipe.com',[email], fail_silently=False)
 
             rst=util.get_response(100,"success",None)
             return Response(rst)
-        except User.DoesNotExist:
+        except:
             rst=util.get_response(400,"user not exists",None)
             
             return Response(rst)
@@ -148,18 +147,26 @@ class User_for_pass(APIView):
         code = request.data.get('code')
         new_password = request.data.get('new-password')
 
-        cache.get(code)
+        print(code)
 
-        if user.password == util.create_md5(old_password,user.salt):
+        try:
+            uid=cache.get(code)
+            cache.delete(code)
+
+            user=User.objects.get(id=uid)
+
             salt=util.create_salt()
             user.salt=salt
             user.password=util.create_md5(new_password,salt)
+
             user.save()
 
             rst=util.get_response(100,"success",None)
             return Response(rst)
-        else:
-            rst=util.get_response(400,"old password not correct",None)
+        except Exception as e:
+            print(e)
+
+            rst=util.get_response(400,"user not exists",None)
             return Response(rst)
 
         
