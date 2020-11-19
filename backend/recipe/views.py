@@ -108,6 +108,7 @@ class RecipeView(APIView):
             step_number = i + 1
             input_step_name = "step-" + str(step_number)
             step_decription_list.append(request.data.get(input_step_name))
+        print(step_decription_list)
 
         # Save mutiple ingredient inputs into a list
         ingredient_name_list = []
