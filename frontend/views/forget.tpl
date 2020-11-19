@@ -7,29 +7,29 @@
 %include('header_sign.tpl')
 <div class="login-main layui-body">
     <header class="layui-elip">Forget Password</header>
-    <form class="layui-form">
-        <div class="layui-inline">
-            <input type="text" name="email" required lay-verify="content" placeholder="E-mail" autocomplete="off"class="layui-input email" >
-        </div>
-        <div class="layui-inline">
-            <button lay-submit lay-filter="send" class="layui-btn">Send Code</button>
-        </div>
-    </form>
-    <form class="layui-form">
+    <div id="code-block">
+        
+            <input type="text" id="email" name="email"  placeholder="E-mail" autocomplete="off"class="layui-input email" >
+        
+        
+            <button class="layui-btn" onclick="send()">Send Code</button>
+        
+    </div>
+    <form class="layui-form layui-hide" id="password-block">
         <div class="layui-input-inline">
-            <input type="password" name="password" required lay-verify="code|email" placeholder="Code" autocomplete="off"
+            <input type="test" name="code" required lay-verify="code" placeholder="Verification Code" autocomplete="off"
                    class="layui-input">
         </div>
         <div class="layui-input-inline">
-            <input type="password" name="password" required lay-verify="content|pass" placeholder="Password" autocomplete="off"
+            <input id="password-first" type="password" name="new-password" required lay-verify="content|pass" placeholder="Password" autocomplete="off"
                    class="layui-input">
         </div>
         <div class="layui-input-inline">
-            <input type="password" name="password" required lay-verify="content|same" placeholder="Re-type Password" autocomplete="off"
+            <input id="password-second" type="password" required lay-verify="content|same" placeholder="Re-type Password" autocomplete="off"
                    class="layui-input">
         </div>
         <div class="layui-input-inline login-btn">
-            <button lay-submit lay-filter="login" class="layui-btn">Submit</button>
+            <button lay-submit lay-filter="forget" class="layui-btn">Submit</button>
         </div>
 
     </form>
@@ -37,7 +37,7 @@
 
 %include('footer.tpl')
 
-<script type="text/javascript" src="/js/signin.js"></script>
+<script type="text/javascript" src="/js/forget.js"></script>
 
 
 
