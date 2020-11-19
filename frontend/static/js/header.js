@@ -18,6 +18,11 @@ layui.use(['form','element'], function () {
                 return "The password are different";
             }
         },
+        same_change: function (value) {
+            if($("#new-password").val()!=$("#new-password-re").val()){
+                return "The password are different";
+            }
+        },
         code: [
             /^[\S]{6,6}$/
             ,'Password length must be 8~24'

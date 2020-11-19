@@ -1,6 +1,6 @@
 from uauth.auth import UserAuth
 from datetime import datetime
-from recipe.models import Recipe, Recipe_category, Recipe_mark
+from recipe.models import Recipe, Recipe_category, Recipe_mark,Recipe_favourite
 from category.models import Category
 from user.models import User
 from step.models import Step
@@ -168,8 +168,52 @@ class RecipeIndexView(APIView):
             temp={}
             temp["id"]=r.recipe_id
 
+            temp["title"]=Recipe.objects.get(id=r.recipe_id).recipe_title
+
             meta=Recipe.objects.filter(id=r.recipe_id).values()[0]["intro_image"]
             # print(meta)
+            
+            temp["meta"]=meta
+            data.append(temp)
+
+        rst=util.get_response(100,"success",data)
+
+        return Response(rst)
+
+class RecipeFavView(APIView):
+    authentication_classes = (UserAuth,)
+
+    def post(self, request):
+        recipe_id = request.data.get("recipe_id")
+        recipe=Recipe.objects.get(id=recipe_id)
+        user=request.user
+       
+        try:
+            Recipe_favourite.objects.get(user=user, recipe=recipe)
+            return Response(util.get_response(400,"favourite recipe exist",None))
+        except Recipe_favourite.DoesNotExist:
+            new_recipe = Recipe_favourite.objects.create(user=user, recipe=recipe)
+            
+
+        rst=util.get_response(100,"success",None)
+
+        return Response(rst)
+
+    def get(self, request):
+        user = request.user
+        recipes=Recipe_favourite.objects.filter(user=user).values()
+
+        print(recipes)
+        data=[]
+        for r in recipes:
+            temp={}
+            temp["id"]=r["recipe_id"]
+
+            temp["title"]=Recipe.objects.get(id=r["recipe_id"]).recipe_title
+
+            meta=Recipe.objects.filter(id=r["recipe_id"]).values()[0]["intro_image"]
+            # print(meta)
+            
             temp["meta"]=meta
             data.append(temp)
 

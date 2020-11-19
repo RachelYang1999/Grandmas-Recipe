@@ -1,6 +1,6 @@
 import uuid
 
-from uauth.auth import UserAuth_Auth
+from uauth.auth import UserAuth_Auth,UserAuth
 from user.models import User
 # from upload.models import Upload_profile
 
@@ -38,6 +38,7 @@ class User_auth(APIView):
     def post(self, request, *args, **kwargs):
         u_name = request.data.get('username')
         u_password = request.data.get('password')
+
         try:
             user = User.objects.get(username=u_name)
 
@@ -82,8 +83,34 @@ class User_auth(APIView):
             return Response(rst)
         except User.DoesNotExist:
             user=User.objects.create(username=username,password=password,salt=salt)
-            rst=util.get_response(100,"success",None)
+        
+        rst=util.get_response(100,"success",None)
 
         return Response(rst)
+
+class User_pass(APIView):
+
+    authentication_classes = (UserAuth,)
+
+    def post(self, request, *args, **kwargs):
+        user=request.user
+        
+        old_password = request.data.get('old-password')
+        new_password = request.data.get('new-password')
+
+        if user.password == util.create_md5(old_password,user.salt):
+            salt=util.create_salt()
+            user.salt=salt
+            user.password=util.create_md5(new_password,salt)
+            user.save()
+
+            rst=util.get_response(100,"success",None)
+            return Response(rst)
+        else:
+            rst=util.get_response(400,"old password not correct",None)
+            return Response(rst)
+
+        
+
 
 

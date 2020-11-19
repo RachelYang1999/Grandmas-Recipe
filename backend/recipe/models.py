@@ -28,3 +28,11 @@ class Recipe_mark(models.Model):
 
     recipe =  models.ForeignKey(Recipe, related_name='recipe_mark', on_delete = models.CASCADE)
     mark =  models.CharField(max_length = 100)
+
+
+class Recipe_favourite(models.Model):
+    class Meta:
+        db_table = 'recipe_favourite'
+
+    recipe =  models.ForeignKey(Recipe, related_name='recipe_fav', on_delete = models.CASCADE)
+    user = models.ForeignKey(User, on_delete = models.CASCADE, related_name="user_fav")

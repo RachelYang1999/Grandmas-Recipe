@@ -1,5 +1,6 @@
 function following_layer(){
-
+layui.use('layer', function () {
+    var layer = layui.layer;
     layer.open({
             type:1,
             area: ['500px', '300px'],
@@ -10,8 +11,6 @@ function following_layer(){
             yes:function(index,layero){
                 var form = new FormData();
                 form.append("recipe_id", $('#r_id').val());
-                form.append("date", datas[0]);
-                form.append("meal_type", datas[1]);
 
                 var settings = {
                     "url": "http://"+$("#backend").html()+":9999/api/calendar/",
@@ -36,6 +35,8 @@ function following_layer(){
                     
             }
         }); 
+
+    }); 
     
 
 }

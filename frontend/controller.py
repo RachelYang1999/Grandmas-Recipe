@@ -107,10 +107,12 @@ def index():
     r = requests.request("GET", url,data=payload)
     hottest=json.loads(r.text)["data"]
 
+    print(hottest)
+
     if rtv is not None:
         return template("index",backend=get_backend(),username=rtv[1],avatar=rtv[2],signin=True,category=category,banner=banner,hottest=hottest)
     else:
-        return template("index",backend=get_backend(),signin=False,category=category,banner=banner)
+        return template("index",backend=get_backend(),signin=False,category=category,banner=banner,hottest=hottest)
 
 @get('/profile')
 def profile():
