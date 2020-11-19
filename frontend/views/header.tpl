@@ -28,16 +28,15 @@
 
                 <ul id="changeable" class="layui-nav layui-layout-right" >
                     <li class="layui-nav-item header-up">
-                        <a href="/upload_recipe"><button class="layui-btn layui-bg-orange"><i class='layui-icon layui-icon-add-1'></i>NEW</button></a>
+                        <a href="/upload_recipe"><button class="layui-btn layui-btn-radius layui-bg-primary"><i class='layui-icon layui-icon-add-1'></i>NEW</button></a>
                     </li>
                     % if signin:
                     <li class="layui-nav-item header-up" lay-unselect="">
                         <a style="color:#393D49;" href="javascript:;"><img id="avatar-header" src="/img/{{avatar}}" class="layui-nav-img">{{username}}</a>
                         <dl class="layui-nav-child">
                         <dd><a href="/profile">My Profile</a></dd>
-                        <dd><a href="/profile_view?tab=1">My Recipe</a></dd>
-                        <dd><a href="/profile_view?tab=2">My Favourite</a></dd>
-                        <dd><a href="/profile_view?tab=3">Draft Box</a></dd>
+                        <dd><a href="javascript:;">My Favourite</a></dd>
+                        <dd><a href="/profile_view">My Recipe</a></dd>
                         <hr>
                         <dd><a href="/signout">Sign Out</a></dd>
                         </dl>
