@@ -14,9 +14,9 @@
                     <div class="layui-inline">
                         <h1 id = "recipe_title" style="font-family:Monospace;font-weight: bold;"> {{recipe_data.get("title")}} </h1>
                     </div>
-                    <div class="layui-inline">
-                        <button type="submit", class="layui-btn layui-btn-sm layui-btn-radius layui-btn-danger" onclick="favourite()" name = "favourite"><i class="layui-icon">&#xe68c;</i>Edit Recipe</button>
-                    </div>
+                    <button type="submit" class="layui-btn layui-btn-sm layui-btn-primary" style="margin-top: 3px;">
+                        <i class="layui-icon">&#xe642;</i>
+                    </button>
                 </div>
                 <div class="vertical-distance">
                     <div class="on-bottom layui-inline">

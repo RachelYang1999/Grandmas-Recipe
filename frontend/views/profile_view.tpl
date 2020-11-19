@@ -59,16 +59,16 @@
                                 <div class = "height_width">
                                     <a href = "/recipe_detail?id={{r['recipe_id']}}">
                                         <div class="layui-col-md5">
-                                            picture
+                                            <img src='/img/{{r["recipe_src"]}}' width="200" height="200" style="margin-top: 15px;">
                                         </div>
                                         <div class="layui-col-md7">
                                             <br>
                                             <br>
-                                            <br>    
-                                        %for elem in r:
-                                            <li>{{elem}}: {{r[elem]}}</li>
+                                            <div style="font-family:Comic Sans MS;font-weight: bold;font-size: large;">{{r["recipe_title"]}}</div>
                                             <br>
-                                        %end
+                                            <br>
+                                            <div style="font-family:Palatino;font-weight: lighter; text-align: center; line-height: 20px;">{{r["recipe_description"]}}</div>
+                                            <br> 
                                         </div>
                                     </a>
                                 </div>    
@@ -81,10 +81,7 @@
                 </div>
                 <div class="layui-tab-item {{t3s}}">内容3</div>
             </div>
-        </div>
-
-        
-            
+        </div>       
     </div>
 </div>
     
