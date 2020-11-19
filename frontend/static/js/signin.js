@@ -14,9 +14,12 @@ layui.use(['form','layer','jquery'], function () {
                     if (result.msg == "success"){
                         $.cookie("token",result.data.token);
                         window.location.href=($("#redirect").val());
+                    }else{
+                        layer.msg(result.msg)
                     }
                 },
                 error: function(data){
+                    
                     console.log(data);
                 }
             })

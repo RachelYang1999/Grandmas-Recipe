@@ -36,7 +36,7 @@
                                     <p>Click or Drag Here</p>
                                     <div class="layui-hide" id="intro-pic-view">
                                         <hr>
-                                        <img id="intro-pic" name="intro-pic" src="" style="max-width: 400px">
+                                        <img id="intro-pic" name="intro-pic" src="" height="200"  >
                                     </div>
                                 </div>
                             </div>
