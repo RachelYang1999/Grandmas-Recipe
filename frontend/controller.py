@@ -174,7 +174,7 @@ def search():
 
     if category == "true":
         payload["category"] = keyword
-    else:
+    elif keyword != None:
         payload['recipe_title'] = keyword
 
     url=root+'search/'
@@ -222,7 +222,14 @@ def profile_view():
         follower=json.loads(r2.text)["data"]["follower"]
         following=json.loads(r2.text)["data"]["following"]
 
-        
+        url=root+'search_user/'
+
+        r2 = requests.request("GET", url,headers=headers)
+        print(r2.text)
+        follower=json.loads(r2.text)["data"]["follower"]
+        following=json.loads(r2.text)["data"]["following"]
+
+
 
         return template("profile_view",backend=get_backend(),username=rtv[1],avatar=rtv[2],signin=True,follower=follower,following=following)
     else:
