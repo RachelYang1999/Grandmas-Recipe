@@ -208,6 +208,7 @@ class RecipeFavView(APIView):
         for r in recipes:
             temp={}
             temp["id"]=r["recipe_id"]
+            temp["description"]=Recipe.objects.get(id=r["recipe_id"]).description
 
             temp["title"]=Recipe.objects.get(id=r["recipe_id"]).recipe_title
 

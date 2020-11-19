@@ -13,7 +13,7 @@
                     <img id="avatar-header" src="/img/{{avatar}}" class="avarta-margin">
                 </div>
                 <div>
-                    <label class="layui-form-label title">{{username}}'s Recipes</label>
+                    <label class="layui-form-label title" style="font-family: Comic Sans MS;">{{username}}'s Recipes</label>
                 </div>
             </div>
             <div class="layui-col-md3">
@@ -89,6 +89,35 @@
                     </div>
                 </div>
                 <div class="layui-tab-item {{t2s}}">
+                    <div class="center">       
+                        % for r in favrecipes:
+                            <div class = "layui-row ">   
+                                <div class = "height_width">
+                                    <a href = "/recipe_detail?id={{r['id']}}">
+                                        <div class="layui-col-md5">
+                                            <img src='/img/{{r["meta"]}}' width="200" height="200" style="margin-top: 15px;">
+                                        </div>
+                                        <div class="layui-col-md7">
+                                            <br>
+                                            <br>
+                                            <div style="font-family:Comic Sans MS;font-weight: bold;font-size: large;">{{r["title"]}}</div>
+                                            <br>
+                                            <br>
+                                            <div style="font-family:Palatino;font-weight: lighter; text-align: center; line-height: 20px;">{{r["description"]}}</div>
+                                            <br> 
+                                        </div>
+                                    </a>
+                                </div>    
+                                
+                                <div style="margin-top: -150px;">
+                                <button type="button" class="layui-btn layui-btn-radius layui-btn-danger">
+                                    <i class="layui-icon">&#xe640;</i>
+                                </button>
+                                </div>
+                                
+                            </div>
+                        %end 
+                    </div>
                     
                 </div>
                 <div class="layui-tab-item {{t3s}}">内容3</div>

@@ -255,7 +255,12 @@ def profile_view():
         r2 = requests.request("GET", url,headers=headers)
         recipes=json.loads(r2.text)["data"]
 
-        return template("profile_view",backend=get_backend(),username=rtv[1],avatar=rtv[2],signin=True,follow_data=follow_data,recipes=recipes,t1=t1,t2=t2,t3=t3,t1s=t1s,t2s=t2s,t3s=t3s)
+        url2=root+'fav_recipe/'
+        r3= requests.request("GET", url2,headers=headers)
+        favrecipes=json.loads(r3.text)["data"]
+        print(favrecipes)
+
+        return template("profile_view",backend=get_backend(),username=rtv[1],avatar=rtv[2],signin=True,follow_data=follow_data,recipes=recipes,t1=t1,t2=t2,t3=t3,t1s=t1s,t2s=t2s,t3s=t3s,favrecipes=favrecipes)
     else:
         redirect('/signin?redirect_url=profile_view')
 
