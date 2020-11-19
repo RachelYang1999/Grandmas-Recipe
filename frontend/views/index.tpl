@@ -20,7 +20,7 @@
                     <div class="layui-carousel " id="test1">
                         <div carousel-item>
                             % for r in banner:
-                             <div><a href="/recipe_detail?id={{r['id']}}"><img src='/img/{{r["meta"]}}''></a></div>
+                             <div><a href="/recipe_detail?id={{r['id']}}"><img src='/img/{{r["meta"]}}'></a></div>
                             % end
                         </div>
                     </div>
@@ -36,20 +36,16 @@
                     <li>Simplest</li>
                 </ul>
                 <div class="layui-tab-content center">
-                    <div class="layui-tab-item center layui-show">
+                    <div class="layui-tab-item layui-show">
                         % for i in range (0,3):
-                        
-                            <div class="layui-row layui-col-space10">
-                                % for j in range (0,4):
-                                <a href="/recipe_detail?id={{hottest[i*4+j]['id']}}">
-                                <div class="layui-col-md3">
-                                    <img class="r_i" src='/img/{{hottest[i*4+j]["meta"]}}'>
-                                    <div class="center">Newest 1</div>
-                                </div>
-                                </a>
-                                % end
+                        <div class="layui-row layui-col-space10">
+                            % for i in range (0,4):
+                            <div class="layui-col-md3">
+                                <img class="r_i" src="/icon/logo.png">
+                                <div class="center">Newest 1</div>
                             </div>
-                      
+                            % end
+                        </div>
                         <br>
                         % end
                         <br>
@@ -58,7 +54,7 @@
                     <div class="layui-tab-item center">
                         % for i in range (0,3):
                         <div class="layui-row layui-col-space10">
-                            % for j in range (0,4):
+                            % for i in range (0,4):
                             <div class="layui-col-md3">
                                 <img class="r_i" src="/icon/logo.png">
                                 <div class="center">Hottest 2</div>
@@ -73,7 +69,7 @@
                     <div class="layui-tab-item center">
                         % for i in range (0,3):
                         <div class="layui-row layui-col-space10">
-                            % for j in range (0,4):
+                            % for i in range (0,4):
                             <div class="layui-col-md3">
                                 <img class="r_i" src="/icon/logo.png">
                                 <div class="center">Simplest 3</div>

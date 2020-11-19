@@ -28,7 +28,7 @@
                                     <div style="font-family:Comic Sans MS;font-weight: bold;font-size: large;">{{r["title"]}}</div>
                                     <br>
                                     <br>
-                                    <div style="font-family:Palatino;font-weight: lighter; text-align: left; line-height: 20px;">{{r["description"]}}</div>
+                                    <div style="font-family:Palatino;font-weight: lighter; text-align: center; line-height: 20px;">{{r["description"]}}</div>
                                     <br> 
                                 </div>
                             </a>
