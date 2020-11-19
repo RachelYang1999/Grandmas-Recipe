@@ -9,36 +9,27 @@
 <div class="layui-body">
     <div class = "layui-container">  
         <div class="layui-row" style="margin-top: 40px;">
-            <div class="layui-col-md8">
-                <div class="layui-col-md12 recipe-title" >
+                <div class="recipe-title" >
                     <input type="text" value = '{{recipe_data["id"]}}' id="r_id" style="display: none;" readonly>
                     <h1 id = "recipe_title" style="font-family:Monospace;font-weight: bold;"> {{recipe_data.get("title")}} </h1>
                 </div>
-                <div class="layui-col-md12 vertical-distance">
-                    <div class="layui-col-md3 on-bottom layui-inline">
-                        <div class="layui-col-md4">
-                        </div>
+                <div class="vertical-distance layui-inline">
+                    <div class="on-bottom layui-inline">
                         <div style = "margin: 10px">
                             <h2 id = "user_name">
+                                <input type="text" value='{{recipe_data.get("user_id")}}' id="auth_id" style="display:none" readonly>
                                 <img src="/img/{{avatar}}" class="layui-nav-img"> 
                                 {{recipe_data.get("user_name")}} 
                             </h2>
                         </div>
                     </div>
-                    <div class="layui-col-md9 layui-inline" style="margin-left: -50px;margin-top: 10px;">
-                        <button type="submit", class="layui-btn layui-btn-sm layui-btn-radius layui-btn-warm", name = "follow"><i class="layui-icon">&#xe6af;</i> Follow</button>
+                    <div class="layui-inline">
+                        <button type="submit", class="layui-btn layui-btn-sm layui-btn-radius layui-btn-warm" onclick="follow()" name = "follow"><i class="layui-icon">&#xe6af;</i> Follow the Auther</button>
+                    </div>
+                    <div class="layui-inline">
+                        <button type="submit", class="layui-btn layui-btn-sm layui-btn-radius layui-btn-danger" onclick="favourite()" name = "favourite"><i class="layui-icon">&#xe68c;</i>Add to Favourite</button>
                     </div>
                 </div>
-            </div>
-            <form class="layui-col-md4 right-align", action="post">
-                <div class="layui-col-md12 vertical-distance", style = "padding-left: 100px;padding-top: 50px;">
-                    <button type="submit", class="layui-btn layui-btn-sm layui-btn-radius layui-btn-normal", name = "follow"><i class="layui-icon">&#xe63c;</i>Add to Calendar</button>
-                </div>
-                <br>
-                <div class="layui-col-md12 vertical-distance", style = "padding-left: 100px;">
-                    <button type="submit", class="layui-btn layui-btn-sm layui-btn-radius layui-btn-danger", name = "favourite"><i class="layui-icon">&#xe68c;</i>Add to Favourite</button>
-                </div>
-            </form>
         </div>
 
         <div class = "center" style="margin-top: 50px;margin-bottom: 20px;" >

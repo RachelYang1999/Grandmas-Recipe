@@ -217,8 +217,6 @@ def upload_recipe():
 def profile_view():
     tab=request.query.tab
 
-    print(tab)
-
     t1=""
     t2=""
     t3=""
@@ -244,19 +242,17 @@ def profile_view():
         headers = {
         'token': rtv[0]
         }
-        url=root+'follow/'
 
+        url=root+'follow/'
         r2 = requests.request("GET", url,headers=headers)
-        print(r2.text)
-        follower=json.loads(r2.text)["data"]["follower"]
-        following=json.loads(r2.text)["data"]["following"]
+        follow_data=json.loads(r2.text)["data"]
+
+        print(follow_data)
 
         url=root+'search_user/'
-
         r2 = requests.request("GET", url,headers=headers)
-        print(r2.text)
         recipes=json.loads(r2.text)["data"]
 
-        return template("profile_view",backend=get_backend(),username=rtv[1],avatar=rtv[2],signin=True,follower=follower,following=following,recipes=recipes,t1=t1,t2=t2,t3=t3,t1s=t1s,t2s=t2s,t3s=t3s)
+        return template("profile_view",backend=get_backend(),username=rtv[1],avatar=rtv[2],signin=True,follow_data=follow_data,recipes=recipes,t1=t1,t2=t2,t3=t3,t1s=t1s,t2s=t2s,t3s=t3s)
     else:
         redirect('/signin?redirect_url=profile_view')

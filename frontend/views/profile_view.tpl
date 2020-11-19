@@ -22,7 +22,7 @@
                         <div class="layui-col-md4 ">
                             <a class="layui-form-label" onclick="following_layer()">
                                 <div class="follow-text">
-                                    Following<br/>{{following}}
+                                    Following<br/>{{follow_data["following"]}}
                                 </div> 
                             </a>
                         </div>
@@ -32,7 +32,7 @@
                         <div class="layui-col-md4 ">
                             <a class="layui-form-label" onclick="follower_layer()">
                                 <div class="follow-text follow-text-margin">
-                                    Follower<br/>{{follower}}
+                                    Follower<br/>{{follow_data["follower"]}}
                                 </div> 
                             </a>
                         </div>
@@ -81,12 +81,7 @@
             </div>
         </div>
 
-        <div id="following-block" class="layui-hide">
-
-        </div>
-        <div id="follower-block" class="layui-hide">
-
-        </div>
+        
             
     </div>
 </div>
@@ -94,4 +89,21 @@
 %include('footer.tpl')
 <script type="text/javascript" src="/js/profile_view.js"></script>
 </body>
+
+<div id="following-block" class="layui-hide">
+    % for following_data in follow_data["following_data"]:
+        <div class="layui-row">
+            <div class="layui-col-md8">
+                <img class="logo" src='/img/{{following_data["to_user_avatar"]}}'>{{following_data["to_user_name"]}}
+            </div>
+            <div class="layui-col-md4">
+                <button type="button" class="layui-btn layui-btn-primary">UNFOLLOW</button>
+            </div>
+        </div>
+    % end
+</div>
+<div id="follower-block" class="layui-hide">
+
+</div>
+
 </html>

@@ -1,15 +1,9 @@
 function following_layer(){
+
     layer.open({
             type:1,
             area: ['500px', '300px'],
-            content: '<div class="layui-row">\
-                        <div class="layui-col-md8">\
-                            <img class="logo" src="/icon/logo.png">Grandma\'s Recipe\
-                        </div>\
-                        <div class="layui-col-md4">\
-                            <button type="button" class="layui-btn layui-btn-normal">Follow</button>\
-                        </div>\
-                    </div>',
+            content: $("#following-block").html(),
             title:"Following",
             btn: ['Confirm', 'Cancel'], 
   

@@ -21,9 +21,28 @@ class Follow_view(APIView):
         except User_follow.DoesNotExist:
             return Response(util.get_response(400,"user not exist",None))
 
+        
+        following=[]
+        for u in User_follow.objects.filter(from_user=user).values():
+            temp={}
+            temp["to_user_id"]=u["to_user_id"]
+            temp["to_user_name"]=User.objects.get(id=u["to_user_id"]).username
+            temp["to_user_avatar"]=User.objects.filter(id=u["to_user_id"]).values()[0]["profile_image"]
+            following.append(temp)
+
+        follower=[]
+        for u in User_follow.objects.filter(to_user=user).values():
+            temp={}
+            temp["from_user_id"]=u["from_user_id"]
+            temp["from_user_name"]=User.objects.get(id=u["from_user_id"]).username
+            temp["from_user_avatar"]=User.objects.filter(id=u["from_user_id"]).values()[0]["profile_image"]
+            follower.append(temp)
+
         data = {
             "follower": user.total_follower,
-            "following": user.total_following
+            "follower_data": follower,
+            "following": user.total_following,
+            "following_data": following 
         }
 
         rst=util.get_response(100,"success",data)
@@ -31,14 +50,13 @@ class Follow_view(APIView):
         return Response(rst)
 
     def post(self, request, *args, **kwargs):
-        from_user = request.data.get('from_user')
+        from_user_obj = request.user
         to_user = request.data.get('to_user')
 
         try:
-            User_follow.objects.get(from_user=from_user, to_user=to_user)
+            User_follow.objects.get(from_user=from_user_obj, to_user=User.objects.get(id=to_user))
             return Response(util.get_response(400,"user follow exist",None))
         except User_follow.DoesNotExist:
-            from_user_obj = User.objects.get(id=from_user)
             from_user_obj.total_following = from_user_obj.total_following+1
             from_user_obj.save()
             to_user_obj = User.objects.get(id=to_user)

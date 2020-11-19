@@ -24,4 +24,29 @@ layui.use(['form','layer','jquery'], function () {
             location.reload();
         });
     })
+    window.follow = function (){
+        var form = new FormData();
+        form.append("to_user", $("#auth_id").val());
+
+        var settings = {
+        "url":'http://'+$("#backend").html()+':9999/api/follow/',
+        "method": "POST",
+        "timeout": 0,
+        "headers": {
+            "token": $.cookie("token")
+        },
+        "processData": false,
+        "mimeType": "multipart/form-data",
+        "contentType": false,
+        "data": form
+        };
+
+        $.ajax(settings).done(function (response) {
+            console.log(response);
+        });
+
+    }
+    window.favourite = function (){
+
+    }
 });
