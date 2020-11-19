@@ -19,16 +19,15 @@
                     <div class = "layui-row ">
                         <div class = "height_width">
                             <a href = "/recipe_detail?id={{r['id']}}">
-                                <div class="layui-col-md5">
+                                <div class="layui-col-md4">
                                     <img src='/img/{{r["recipe_src"]}}' width="200" height="200" style="margin-top: 15px;">
                                 </div>
-                                <div class="layui-col-md7">
+                                <div class="layui-col-md8">
                                     <br>
                                     <br>
                                     <div style="font-family:Comic Sans MS;font-weight: bold;font-size: large;">{{r["title"]}}</div>
                                     <br>
-                                    <br>
-                                    <div style="font-family:Palatino;font-weight: lighter; text-align: center; line-height: 20px;">{{r["description"]}}</div>
+                                    <div class="descr" style="font-family:Palatino;font-weight: lighter; text-align: center; line-height: 20px;">{{r["description"]}}</div>
                                     <br> 
                                 </div>
                             </a>

@@ -6,6 +6,7 @@
     /* padding: 10px; */
 }
 
+
 .margin_to_header{
     
     margin: 50px 0px 0px 0px !important;
@@ -14,14 +15,19 @@
 
 .height_width{
     height: 230px;
-    width: 60%;
+    width: 900px;
     /* margin: 100px, 0px, 0px, 0px; */
-    margin: 50px 0px 0px 160px !important;
+    margin: 50px 20px 0px 100px !important;
     /* up right down left */
     /* background-color: powderblue; */
     /* opacity: 0.3; */
     /* border-style: solid; */
     border: 1px solid LightGrey;;
-    
-    
+}
+
+.descr{
+    overflow:hidden;
+    text-overflow: ellipsis;
+    -webkit-line-clamp:2;
+    -webkit-box-orient:vertical;
 }
