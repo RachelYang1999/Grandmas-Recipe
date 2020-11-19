@@ -9,11 +9,16 @@
 <div class="layui-body">
     <div class = "layui-container">  
         <div class="layui-row" style="margin-top: 40px;">
-                <div class="recipe-title" >
+                <div class="recipe-title " >
                     <input type="text" value = '{{recipe_data["id"]}}' id="r_id" style="display: none;" readonly>
-                    <h1 id = "recipe_title" style="font-family:Monospace;font-weight: bold;"> {{recipe_data.get("title")}} </h1>
+                    <div class="layui-inline">
+                        <h1 id = "recipe_title" style="font-family:Monospace;font-weight: bold;"> {{recipe_data.get("title")}} </h1>
+                    </div>
+                    <div class="layui-inline">
+                        <button type="submit", class="layui-btn layui-btn-sm layui-btn-radius layui-btn-danger" onclick="favourite()" name = "favourite"><i class="layui-icon">&#xe68c;</i>Edit Recipe</button>
+                    </div>
                 </div>
-                <div class="vertical-distance layui-inline">
+                <div class="vertical-distance">
                     <div class="on-bottom layui-inline">
                         <div style = "margin: 10px">
                             <h2 id = "user_name">

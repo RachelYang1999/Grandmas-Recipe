@@ -1,4 +1,4 @@
-layui.use(['form','layer','jquery'], function () {
+layui.use(['form','jquery'], function () {
     var f = layui.form;
     var $ = layui.jquery;
     f.on('submit(comment)',function (data) {
@@ -47,6 +47,26 @@ layui.use(['form','layer','jquery'], function () {
 
     }
     window.favourite = function (){
+
+        var form = new FormData();
+        form.append("recipe_id", $("#r_id").val());
+
+        var settings = {
+        "url":'http://'+$("#backend").html()+":9999/api/fav_recipe/",
+        "method": "POST",
+        "timeout": 0,
+        "headers": {
+            "token": $.cookie("token")
+        },
+        "processData": false,
+        "mimeType": "multipart/form-data",
+        "contentType": false,
+        "data": form
+        };
+
+        $.ajax(settings).done(function (response) {
+            console.log(response);
+        });
 
     }
 });

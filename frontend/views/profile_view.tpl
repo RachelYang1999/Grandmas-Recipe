@@ -76,7 +76,9 @@
                         %end 
                     </div>
                 </div>
-                <div class="layui-tab-item {{t2s}}">内容2</div>
+                <div class="layui-tab-item {{t2s}}">
+                    
+                </div>
                 <div class="layui-tab-item {{t3s}}">内容3</div>
             </div>
         </div>
