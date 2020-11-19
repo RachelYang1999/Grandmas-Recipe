@@ -13,6 +13,8 @@ layui.use(['form','layer','jquery'], function () {
                     console.log(result);
                     if (result.msg == "success"){
                         window.location.href="/signin";
+                    }else{
+                        layer.msg(result.msg)
                     }
                 },
                 error: function(data){

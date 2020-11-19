@@ -7,7 +7,7 @@ layui.use(['form','jquery','upload'], function(){
         elem: '#main-pic'
         ,url:'http://'+$("#backend").html()+':9999/api/upload/intro_image/'
         ,auto:false
-        ,size: 1
+        ,size: 1024
         ,field: "document"
         ,headers:{"token":$.cookie("token")}
         ,data: { recipe_id: function () {
@@ -37,7 +37,7 @@ layui.use(['form','jquery','upload'], function(){
             elem: "#step-addpic-"+id
             ,url:'http://'+$("#backend").html()+':9999/api/upload/recipe_image/'
             ,auto:false
-            ,size: 1
+            ,size: 1024
             ,field: "document"
             ,headers:{"token":$.cookie("token")}
             ,data: { recipe_id: function () {
@@ -119,9 +119,7 @@ layui.use(['form','jquery','upload'], function(){
             arr_box.push($(this).val());
         });
         data.field.category=arr_box.join(",");
-
-        //图片不为空 检查
-
+    
         
         $.ajax({
             url:'http://'+$("#backend").html()+':9999/api/recipe/',
