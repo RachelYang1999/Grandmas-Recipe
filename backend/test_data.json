@@ -3,28 +3,28 @@
 	"pk": 1,
 	"fields": {
 		"category": "Breakfirst",
-		"total_recipe": 1
+		"total_recipe": 0
 	}
 }, {
 	"model": "category.category",
 	"pk": 2,
 	"fields": {
 		"category": "Lunch",
-		"total_recipe": 3
+		"total_recipe": 0
 	}
 }, {
 	"model": "category.category",
 	"pk": 3,
 	"fields": {
 		"category": "Dinner",
-		"total_recipe": 2
+		"total_recipe": 0
 	}
 }, {
 	"model": "category.category",
 	"pk": 4,
 	"fields": {
 		"category": "Meatlovers",
-		"total_recipe": 2
+		"total_recipe": 0
 	}
 }, {
 	"model": "category.category",
@@ -59,7 +59,7 @@
 	"pk": 9,
 	"fields": {
 		"category": "Seafood",
-		"total_recipe": 1
+		"total_recipe": 0
 	}
 }, {
 	"model": "user.user",

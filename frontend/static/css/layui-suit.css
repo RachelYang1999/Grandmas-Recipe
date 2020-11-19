@@ -3,7 +3,8 @@
 /* index */
 .index-body{
     margin:30px;
-    height: 86%;
+    left:0;
+    /* height: 86%; */
 }
 
 .center{
@@ -60,7 +61,7 @@
 }
 
 .header-up{
-    margin-top: -5px;
+    margin-top: -5.5px;
 }
 
 .seperater{

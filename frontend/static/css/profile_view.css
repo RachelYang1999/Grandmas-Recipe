@@ -4,27 +4,42 @@
 
 .title{
     margin-left: 200px;
-    margin-top: -40px;
+    margin-top: -80px;
     font-weight:bolder;
     font-size:250%;
     white-space: nowrap;
 }
-/* 
-.tab-margin{
-    margin-top: 50px;
-    margin-right:55px !important;
-} */
+
 
 .follow-box{
     border-style: outset;
-    width:170px;
-    height:50px;
+    width:200px;
+    height:80px;
     margin-top: 30px;
-
+    margin-left: -60px;
 }
+
+.follow-text{
+    text-align:center;
+    float:left;
+    color: gray;
+    margin-top:10px;
+    margin-left:10px;
+}
+
+.follow-text-margin{
+    margin-left:-25px;
+}
+
+.follow-line-margin{
+    margin-left:37px;
+    margin-top:15px;
+}
+
+
 
 .middle-line{
     width: 1px;
     height: 45px; 
-    background-color:Gray;
+    background-color:gray;  
 }

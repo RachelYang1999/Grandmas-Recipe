@@ -7,7 +7,7 @@ div.every-divs{
 }
 
 div.recipe-title {
-  font-size: 200%;
+  font-size: 300%;
 }
 
 div.vertical-distance {
@@ -25,7 +25,7 @@ div.on-bottom {
 
 div.right-align {
     
-    padding-left: 100px;
+    padding-left: 70px;
 }
 
 .normal-text {  
@@ -41,9 +41,11 @@ div.right-align {
 
 .comment-block{
     display: grid;
+    width:700px;
+    height:150px;
     /* background-color: #ded2be;; */
-    border-radius: 7px;
-    box-shadow: 0px 0px 5px 2px black;
+    border-radius: 5px;
+    box-shadow: 0px 0px 3px 2px black;
     /* margin-left: 55px; */
 }
 
@@ -62,4 +64,8 @@ div.right-align {
   /* width: 300px;
   border: 3px solid #73AD21;
   padding: 10px; */
+}
+
+.img-size{
+    width
 }
