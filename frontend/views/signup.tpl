@@ -19,6 +19,10 @@
                    class="layui-input">
         </div>
         <div class="layui-input-inline">
+            <input type="text" name="email" required lay-verify="email" placeholder="E-mail" autocomplete="off"
+                   class="layui-input">
+        </div>
+        <div class="layui-input-inline">
             <input type="password" id="password-first" name="password" required lay-verify="content|pass" placeholder="Password" autocomplete="off"
                    class="layui-input">
         </div>
@@ -26,6 +30,7 @@
             <input type="password" id="password-second" name="password-second" required lay-verify="content|same" placeholder="Re-type Password" autocomplete="off"
                    class="layui-input">
         </div>
+        
         <div class="layui-input-inline login-btn">
             <button lay-submit lay-filter="login" class="layui-btn">Sign Up</button>
         </div>

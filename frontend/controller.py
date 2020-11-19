@@ -272,9 +272,6 @@ def edit_recipe():
     if rtv is not None:
         url=root+'recipe/'
 
-
-        
-
         payload = {'id': rid}
 
         headers = {
@@ -286,8 +283,6 @@ def edit_recipe():
         url2=root+'category/'
         r2 = requests.request("GET", url2)
         category=json.loads(r2.text)["data"]
-
-        # print(recipe_data)
 
         return template("edit_recipe", backend=get_backend(), username = rtv[1], avatar = rtv[2], signin = True, recipe_data = recipe_data, category=category)
     else:

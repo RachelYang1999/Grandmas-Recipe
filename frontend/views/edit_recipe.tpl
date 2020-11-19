@@ -48,7 +48,11 @@
                             <div class="add-to-cat-boarder" >
                                 <div class="layui-input-block button-select-category">
                                     % for c in category:
-                                    <input type="checkbox" name="category" title="{{c['category']}}" value="{{c['id']}}">
+                                        % if c['id'] in recipe_data['category_id_list']:
+                                            <input type="checkbox" name="category" title="{{c['category']}}" value="{{c['id']}}" checked>
+                                        % else:
+                                            <input type="checkbox" name="category" title="{{c['category']}}" value="{{c['id']}}">
+                                        % end
                                     % end
                                 </div>
                             </div>
@@ -65,34 +69,26 @@
                 <div>
                 <label class="layui-form-label ingredient-label">Ingredient</label>
                 </div>
+
                 <div class="layui-form-item ingredient-margin">
-                    <input type="text" value = 1 name="ingredient_count" id="in-counter" style="display: none;" readonly>
+                    <input type="text" value = '{{len(recipe_data["ingredient_name_list"])}}' name="ingredient_count" id="in-counter" style="display: none;" readonly>
                     <div id="ingredient-block">
-                        <div id="ingredient-1"> 
+                         % for i in range(0,len(recipe_data['ingredient_name_list'])):
+                        <div id="ingredient-{{i+1}}"> 
                             <div class="layui-inline ingredient-input" >
-                                % index = 1
-                                % for i in recipe_data['ingredient_name_list']:
-                                    % if index % 2 != 0:
-                                        <input type="text" required lay-verify="content" id="ingredient-input-1" name="ingredient-1" value='{{i[0]}}' autocomplete="off" class="layui-input">   
-                                    % end
-                                    % index += 1  
-                                % end 
+                                <input type="text" required lay-verify="content" id="ingredient-input-{{i+1}}" name="ingredient-{{i+1}}" value="{{recipe_data['ingredient_name_list'][i][0]}}" autocomplete="off" class="layui-input">   
                             </div>
                             <div class="layui-inline ingredient-input" >
-                                % index = 1
-                                % for i in recipe_data['ingredient_name_list']:
-                                    % if index % 2 != 0:
-                                        <input type="text" required lay-verify="content" id="ingredient-shoppinglink-1" name="ingredient-1-shoppinglink" value='{{i[1]}}' autocomplete="off" class="layui-input"> 
-                                    % end
-                                    % index += 1  
-                                % end    
+                                <input type="text" required lay-verify="content" id="ingredient-shoppinglink-{{i+1}}" name="ingredient-{{i+1}}-shoppinglink" value="{{recipe_data['ingredient_name_list'][i][1]}}" autocomplete="off" class="layui-input"> 
+    
                             </div>
                             <div class="layui-inline">
-                                <button type="button" id="ingredient-delete-1" onclick= "delete_ingredient(1)" class="layui-btn layui-btn-sm layui-btn-primary"  >
+                                <button type="button" id="ingredient-delete-{{i+1}}" onclick= "delete_ingredient({{i+1}})" class="layui-btn layui-btn-sm layui-btn-primary"  >
                                     <i class="layui-icon">&#xe640;</i>
                                 </button>
                             </div>
                         </div>
+                        % end 
                     </div>
                 </div>
                 
@@ -104,50 +100,34 @@
                 <input type="text" value=1 id="step-counter" name="step_count" style="display: none;" readonly>
                 <div class="layui-form-item step-block" id="step-block"> 
 
-
-                    <div id="step-1">
-                        <input type="text" value="" id="step-id-1" style="display:none"  readonly>
-                        
-                        <div class="layui-inline" > 
-                            <div class="layui" id="uploadDemoView-1">
-                                % count = 1
-                                % for step in recipe_data['step_list']:
-                                    % step_with_count = str(count) + ": " + str(step[0])
-                                    <div class="layui-row">
-                                        
-                                        <div class="layui-col-md7", id = "step-text">
-                                            <label  style="font-weight: 200; line-height: 25px;">Step {{step_with_count}}</label>
-                                            
-                                            
-                                        </div>
-                                        <div class="layui-col-md5", id = "step-image">
-                                            <div><img src='/img/{{step[1]}}' width="200" height="200" style="margin-bottom: 40px;"></div>
-                                        </div>
-                                    </div>
-                                    % count += 1
-                                % end
-                                <img id="step-pic-1" name="step-1-pic" src="" style="max-width: 180px">
-                            </div>
-                        </div>
+                    % for i in range(0,len(recipe_data['step_list'])):
+                    <div id="step-{{i+1}}">
+                        <input type="text" value="" id="step-id-{{i+1}}" style="display:none"  readonly>
                         <div class="layui-inline" >
                             <div class="layui-input-block step-explanation" >
-                                <textarea id="step-input-1" required lay-verify="content" name="step-1" placeholder="Step explanation" class="layui-textarea" ></textarea>
+                                <textarea id="step-input-{{i+1}}" required lay-verify="content" name="step-{{i+1}}" placeholder="Step explanation" class="layui-textarea" >{{recipe_data['step_list'][i][0]}}</textarea>
                             </div>
                         </div>
                         <div class="layui-inline" >
-                            <div class="layui-upload-drag " id="step-addpic-1">
+                            <div class="layui-upload-drag " id="step-addpic-{{i+1}}">
                                 <i class="layui-icon"></i>
                                 <p>Click or Drag Here</p>
                             </div>
                         </div>
+                        <div class="layui-inline" > 
+                            <div  id="uploadDemoView-{{i+1}}">
+                                <img id="step-pic-{{i+1}}" name="step-{{i+1}}-pic" src="/img/{{recipe_data['step_list'][i][1]}}" style="max-width: 180px">
+                            </div>
+                        </div>
                         <div class="layui-inline" >
-                            <a type="button" class="layui-btn layui-btn-sm layui-btn-primary" id="step-delete-1" onclick= "delete_step(1)" >
+                            <a type="button" class="layui-btn layui-btn-sm layui-btn-primary" id="step-delete-{{i+1}}" onclick= "delete_step({{i+1}})" >
                                 <i class="layui-icon">&#xe640;</i>
                             </a>
                         </div>
                     </div>
-                    
+                    % end
 
+            
                 </div>
 
                 <button id="add-step-btn" type="button" onclick= "add_step()" class="layui-btn layui-btn-warm add-step">
@@ -161,9 +141,10 @@
                         <a href="/"><button type="button" class="layui-btn layui-btn-primary cancel-button">Cancel</button></a>
                     </div>
                 </div>
+                <input type="text" id="recipe-id" name="recipe_id" value="{{recipe_data['id']}" style="display:none" readonly />
             </form>
             <div id="submit-block">
-            <input type="text" id="recipe-id" value="" style="display:none" readonly />
+            
             <button class="layui-btn" id="intro-submit" style="display: none;"></button>
             <button class="layui-btn" id="step-submit-1" style="display:none"></button>
             </div>

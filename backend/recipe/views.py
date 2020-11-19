@@ -41,7 +41,7 @@ class RecipeView(APIView):
 
         get_category_list = []
         for c in category_queryset:
-            get_category_list.append(Category.objects.get(id = c.category_of_recipe_id).category)
+            get_category_list.append(Category.objects.get(id = c.category_of_recipe_id).id)
             # get_category_list.append(c.category_of_recipe_id)
             # print(c.category_of_recipe_id)
 
@@ -222,3 +222,83 @@ class RecipeFavView(APIView):
         return Response(rst)
 
 
+class RecipeEditView(APIView):
+
+    authentication_classes = (UserAuth,)
+
+    def post(self, request):
+        
+        user = request.user
+        recipe_id = request.data.get("recipe_id")
+        # current_user = User.objects.get(id = user_id)
+        recipe_title = request.data.get("recipe_title")
+        description =request.data.get("description")
+        is_published = request.data.get("is_published")
+
+        category = request.data.get("category")
+        category_list = category.split(",")
+
+        for c in category_list:
+            try:
+                category_object = Category.objects.get(id = c)
+            except:
+                rst=util.get_response(400,"You must choose at least one category!",None)
+                return Response(rst)
+
+        # Save mutiple step inputs into a list
+        step_decription_list = []
+        step_count = request.data.get("step_count")
+        for i in range(int(step_count)):
+            step_number = i + 1
+            input_step_name = "step-" + str(step_number)
+            step_decription_list.append(request.data.get(input_step_name))
+        print(step_decription_list)
+
+        # Save mutiple ingredient inputs into a list
+        ingredient_name_list = []
+        ingredient_link_list = []
+        ingredient_count = request.data.get("ingredient_count")
+        print(ingredient_count)
+        for i in range(int(ingredient_count)):
+            ingredient_number = i + 1
+            input_ingredient_name = "ingredient-" + str(ingredient_number)
+            ingredient_name_list.append(request.data.get(input_ingredient_name))
+            input_ingredient_link = "ingredient-" + str(ingredient_number)+"-shoppinglink"
+            ingredient_link_list.append(request.data.get(input_ingredient_link))
+            print(ingredient_link_list)
+
+        if recipe_title != None and description != None and is_published != None and category != None:
+
+            new_recipe = Recipe.objects.create(recipe_title = recipe_title, description = description, is_published = is_published, user = user)
+            new_recipe.save()
+            
+            # Add the total number of recipe amount of a category
+            # Add categories for a recipe  
+            for c in category_list:
+                category_object = Category.objects.get(id = c)
+                category_object.total_recipe = category_object.total_recipe + 1
+                category_object.save()
+                recipe_category_relationship = Recipe_category.objects.create(category_of_recipe_id = c, recipe_of_category_id = new_recipe.id)
+                recipe_category_relationship.save()
+
+            # Add ingredients for a recipe
+            for i in range(0,len(ingredient_name_list)):
+                ingredient_object = Ingredient.objects.create(ingredient_name = ingredient_name_list[i],ingredient_related_recipe_id = new_recipe.id, ingredient_link=ingredient_link_list[i])
+                ingredient_object.save()
+
+            # Add steps for a recipe
+            step_rtv={}
+            count=1
+            for s in step_decription_list:
+                step_object = Step.objects.create(step_description = s,	related_recipe_id = new_recipe.id)
+                step_object.save()
+                step_rtv[count]=step_object.id
+                count+=1
+
+            data={
+                "recipe_id":new_recipe.id,
+                "steps": step_rtv
+            }
+            
+            rst=util.get_response(100,"success",data)
+            return Response(rst)

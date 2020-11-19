@@ -29,7 +29,7 @@ layui.use(['form','element'], function () {
         ],
         email: [
             /\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*/
-            ,'Password length must be 8~24'
+            ,'This is not an email'
         ],
     });
 
