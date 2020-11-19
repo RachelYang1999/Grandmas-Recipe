@@ -256,3 +256,37 @@ def profile_view():
         return template("profile_view",backend=get_backend(),username=rtv[1],avatar=rtv[2],signin=True,follow_data=follow_data,recipes=recipes,t1=t1,t2=t2,t3=t3,t1s=t1s,t2s=t2s,t3s=t3s)
     else:
         redirect('/signin?redirect_url=profile_view')
+
+
+@get('/edit_recipe')
+def edit_recipe():
+    rid=request.query.id
+
+    if len(rid)==0:
+        redirect('/') 
+
+    rtv = getToken()
+
+    if rtv is not None:
+        url=root+'recipe/'
+
+
+        
+
+        payload = {'id': rid}
+
+        headers = {
+        'token': rtv[0]
+        }
+        r = requests.request("GET", url, headers=headers, data = payload)
+        recipe_data=json.loads(r.text)["data"]
+
+        url2=root+'category/'
+        r2 = requests.request("GET", url2)
+        category=json.loads(r2.text)["data"]
+
+        # print(recipe_data)
+
+        return template("edit_recipe", backend=get_backend(), username = rtv[1], avatar = rtv[2], signin = True, recipe_data = recipe_data, category=category)
+    else:
+        redirect('/signin?redirect_url=edit_recipe?id='+rid)
