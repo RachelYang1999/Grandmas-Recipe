@@ -177,7 +177,6 @@ function delete_step(del_id){
 
         $("#step-id-"+i).attr("id","step-id-"+String(i-1));
         
-        uploadStep(i-1);
     }
 
     step_counter-=1;

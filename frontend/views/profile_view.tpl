@@ -17,11 +17,26 @@
                 </div>
             </div>
             <div class="layui-col-md3">
-                <div class="follow-box">
-                    <div class="">
-                        <a class="layui-form-label" onclick="following_layer()">Following<br/>{{following}}</a>
-                        <div class="middle-line"></div> 
-                        <a class="layui-form-label"  onclick="">Follower<br />{{follower}}</a>
+                <div class="follow-box ">
+                    <div class="layui-row">
+                        <div class="layui-col-md4 ">
+                            <a class="layui-form-label" onclick="following_layer()">
+                                <div class="follow-text">
+                                    Following<br/>{{following}}
+                                </div> 
+                            </a>
+                        </div>
+                        <div class="layui-col-md4 ">
+                            <div class="middle-line follow-line-margin"></div> 
+                        </div>
+                        <div class="layui-col-md4 ">
+                            <a class="layui-form-label" onclick="follower_layer()">
+                                <div class="follow-text follow-text-margin">
+                                    Follower<br/>{{follower}}
+                                </div> 
+                            </a>
+                        </div>
+                            
                     </div>
                 </div>
             </div>

@@ -49,7 +49,7 @@ class User_auth(APIView):
 
                     token = "${}$".format(user.id)+uuid.uuid4().hex
 
-                    cache.set(user.id,token) #,timeout=3600
+                    cache.set(user.id,token,timeout=36000)
                     data['token']=token
 
                     rst=util.get_response(100,"success",data)
