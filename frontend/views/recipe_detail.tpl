@@ -124,20 +124,19 @@
         
         <h2 class = "comment-input-header, left-space " style="margin-top: 30px;">Write Something</h2>
         <br>
-
+        
             <div class = "comment-block", style = "margin-left: 55px;">
             <!-- <div style = "border-radius: 7px; box-shadow: 0px 0px 5px 2px black;"> -->
-                <textarea required lay-verify="input" rows="6" cols="20" id="comment"
-                                placeholder="Write your comment here!"></textarea>
+                <textarea required lay-verify="input|required" rows="6" cols="20" id="comment"
+                                placeholder="Write your comment here!" required></textarea>
                
             </div>
             <br>
             <button lay-submit lay-filter="comment" class="layui-btn layui-btn-sm layui-btn left-space">
                 Submit
             </button>
-
-            
-
+            <span id="Message" style="color:#ff0000"></span>
+        
     </div> 
 </div> 
 <!-- <img src="https://media.github.sydney.edu.au/user/4849/files/88c7b600-2762-11eb-8c11-c48c77502f32" alt=""> -->
