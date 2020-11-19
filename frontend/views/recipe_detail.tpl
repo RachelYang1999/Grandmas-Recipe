@@ -12,7 +12,7 @@
             <div class="layui-col-md8">
                 <div class="layui-col-md12 recipe-title" >
                     <input type="text" value = '{{recipe_data["id"]}}' id="r_id" style="display: none;" readonly>
-                    <h1 id = "recipe_title"> {{recipe_data.get("title")}} </h1>
+                    <h1 id = "recipe_title" style="font-family:Monospace;font-weight: bold;"> {{recipe_data.get("title")}} </h1>
                 </div>
                 <div class="layui-col-md12 vertical-distance">
                     <div class="layui-col-md3 on-bottom layui-inline">
@@ -25,32 +25,34 @@
                             </h2>
                         </div>
                     </div>
-                    <div class="layui-col-md9 layui-inline">
-                        <button type="submit", class="layui-btn layui-btn-warm", name = "follow">Follow the Author</button>
+                    <div class="layui-col-md9 layui-inline" style="margin-left: -50px;margin-top: 10px;">
+                        <button type="submit", class="layui-btn layui-btn-sm layui-btn-radius layui-btn-warm", name = "follow"><i class="layui-icon">&#xe6af;</i> Follow</button>
                     </div>
                 </div>
             </div>
             <form class="layui-col-md4 right-align", action="post">
-                <div class="layui-col-md12 vertical-distance", style = "padding-left: 240px;">
-                    <button type="submit", class="layui-btn layui-btn-warm", name = "follow">Add to Calendar</button>
+                <div class="layui-col-md12 vertical-distance", style = "padding-left: 100px;padding-top: 50px;">
+                    <button type="submit", class="layui-btn layui-btn-sm layui-btn-radius layui-btn-normal", name = "follow"><i class="layui-icon">&#xe63c;</i>Add to Calendar</button>
                 </div>
                 <br>
-                <div class="layui-col-md12 vertical-distance", style = "padding-left: 240px;">
-                    <button type="submit", class="layui-btn layui-btn-warm", name = "favourite">Add to Favourite</button>
+                <div class="layui-col-md12 vertical-distance", style = "padding-left: 100px;">
+                    <button type="submit", class="layui-btn layui-btn-sm layui-btn-radius layui-btn-danger", name = "favourite"><i class="layui-icon">&#xe68c;</i>Add to Favourite</button>
                 </div>
             </form>
         </div>
 
-        <div class = "center">
-            <img src='/img/{{recipe_data.get("intro_src")}}'' alt="">
+        <div class = "center" style="margin-top: 50px;margin-bottom: 20px;">
+            <img src='/img/{{recipe_data.get("intro_src")}}' width="400" height="400" alt="">
             <br>
         </div>
-        <hr>
-        <h1> Description </h1>
+        
+        
         <br>
-        <p class = "normal-text">{{recipe_data.get("description")}}</p>
-        <hr>
+        <p class = "normal-text" style="margin-bottom: 20px; text-align: center;">{{recipe_data.get("description")}}</p>
+   
+        <br>
         <h1> Ingredient </h1>
+        <br>
 
         <br>
         <div class="layui-row">
@@ -79,25 +81,31 @@
             </div>
         </div>
 
-        <hr>
+        
+        <br>
+        <br>
         <h1> Steps </h1>
         <br>
+        
         % count = 1
         % for step in recipe_data['step_list']:
             % step_with_count = str(count) + ": " + str(step[0])
             <div class="layui-row">
                 
                 <div class="layui-col-md7", id = "step-text">
-                    <div>Step {{step_with_count}}</div>
+                    <label class="layui-form-label" style="font-weight: 200;font-family: sans-serif">Step {{step_with_count}}</label>
+                    
                     
                 </div>
                 <div class="layui-col-md5", id = "step-image">
-                    <div><img src='/img/{{step[1]}}'></div>
+                    <div><img src='/img/{{step[1]}}' width="200" height="200" style="margin-bottom: 40px;"></div>
                 </div>
             </div>
             % count += 1
          % end
-        <hr>
+        
+        <br>
+        <br>
         <h1> Comments </h1>
         <div>
             % for comment in recipe_data['comment_dic_list']:
@@ -117,13 +125,13 @@
                 <br>
             % end 
         </div>
-        <hr>
+        
         <h2 class = "comment-input-header, left-space ">Write Something</h2>
         <br>
 
             <div class = "comment-block", style = "margin-left: 55px;">
             <!-- <div style = "border-radius: 7px; box-shadow: 0px 0px 5px 2px black;"> -->
-                <textarea required lay-verify="input" rows="6" cols="30" id="comment"
+                <textarea required lay-verify="input" rows="6" cols="20" id="comment"
                                 placeholder="Write your comment here!"></textarea>
                
             </div>
