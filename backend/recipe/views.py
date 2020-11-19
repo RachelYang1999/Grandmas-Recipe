@@ -168,7 +168,7 @@ class RecipeIndexView(APIView):
             temp={}
             temp["id"]=r.recipe_id
 
-            meta=Recipe.objects.filter(id=r.recipe_id).values()[0]["recipe_image"]
+            meta=Recipe.objects.filter(id=r.recipe_id).values()[0]["intro_image"]
             # print(meta)
             temp["meta"]=meta
             data.append(temp)

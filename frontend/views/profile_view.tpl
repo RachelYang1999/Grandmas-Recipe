@@ -44,18 +44,48 @@
         
         <div class="layui-tab tab">
             <ul class="layui-tab-title">
-                <li class="layui-this">My Recipes</li>
-                <li>My Favourite</li>
-                <li>Draft Box</li>
+                <li class="{{t1}}">My Recipes</li>
+                <li class="{{t2}}">My Favourite</li>
+                <li class="{{t3}}">Draft Box</li>
 
             </ul>
             <div class="layui-tab-content">
-                <div class="layui-tab-item layui-show">
-                    内容1
+                <div class="layui-tab-item {{t1s}}">
+                    <div class="center">       
+                        % for r in recipes:
+                            
+                            <div class = "layui-row ">
+                                    
+                                <div class = "height_width">
+                                    <a href = "/recipe_detail?id={{r['recipe_id']}}">
+                                        <div class="layui-col-md5">
+                                            picture
+                                        </div>
+                                        <div class="layui-col-md7">
+                                            <br>
+                                            <br>
+                                            <br>    
+                                        %for elem in r:
+                                            <li>{{elem}}: {{r[elem]}}</li>
+                                            <br>
+                                        %end
+                                        </div>
+                                    </a>
+                                </div>    
+                            </div>
+                        %end 
+                    </div>
                 </div>
-                <div class="layui-tab-item">内容2</div>
-                <div class="layui-tab-item">内容3</div>
+                <div class="layui-tab-item {{t2s}}">内容2</div>
+                <div class="layui-tab-item {{t3s}}">内容3</div>
             </div>
+        </div>
+
+        <div id="following-block" class="layui-hide">
+
+        </div>
+        <div id="follower-block" class="layui-hide">
+
         </div>
             
     </div>

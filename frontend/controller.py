@@ -102,8 +102,13 @@ def index():
     r = requests.request("GET", url,data=payload)
     banner=json.loads(r.text)["data"]
 
+    payload = {'position': "hottest"}
+
+    r = requests.request("GET", url,data=payload)
+    hottest=json.loads(r.text)["data"]
+
     if rtv is not None:
-        return template("index",backend=get_backend(),username=rtv[1],avatar=rtv[2],signin=True,category=category,banner=banner)
+        return template("index",backend=get_backend(),username=rtv[1],avatar=rtv[2],signin=True,category=category,banner=banner,hottest=hottest)
     else:
         return template("index",backend=get_backend(),signin=False,category=category,banner=banner)
 
@@ -181,7 +186,7 @@ def search():
 
     r = requests.request("GET", url, data = payload)
     search_data=json.loads(r.text)["data"]
-    # print(search_data)
+    print(search_data)
 
     rtv = getToken()
 
@@ -210,6 +215,30 @@ def upload_recipe():
 
 @get('/profile_view')
 def profile_view():
+    tab=request.query.tab
+
+    print(tab)
+
+    t1=""
+    t2=""
+    t3=""
+    t1s=""
+    t2s=""
+    t3s=""
+
+    if tab=="1":
+        t1="layui-this"
+        t1s="layui-show"
+    elif tab=="2":
+        t2="layui-this"
+        t2s="layui-show"
+    elif tab=="3":
+        t3="layui-this"
+        t3s="layui-show"
+    else:
+        t1="layui-this"
+        t1s="layui-show"
+
     rtv = getToken()
     if rtv is not None:
         headers = {
@@ -226,11 +255,8 @@ def profile_view():
 
         r2 = requests.request("GET", url,headers=headers)
         print(r2.text)
-        follower=json.loads(r2.text)["data"]["follower"]
-        following=json.loads(r2.text)["data"]["following"]
+        recipes=json.loads(r2.text)["data"]
 
-
-
-        return template("profile_view",backend=get_backend(),username=rtv[1],avatar=rtv[2],signin=True,follower=follower,following=following)
+        return template("profile_view",backend=get_backend(),username=rtv[1],avatar=rtv[2],signin=True,follower=follower,following=following,recipes=recipes,t1=t1,t2=t2,t3=t3,t1s=t1s,t2s=t2s,t3s=t3s)
     else:
         redirect('/signin?redirect_url=profile_view')

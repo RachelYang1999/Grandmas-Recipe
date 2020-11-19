@@ -36,7 +36,17 @@
     margin-top:15px;
 }
 
-
+.height_width{
+    height: 230px;
+    width: 60%;
+    /* margin: 100px, 0px, 0px, 0px; */
+    margin: 50px 0px 0px 160px !important;
+    /* up right down left */
+    /* background-color: powderblue; */
+    /* opacity: 0.3; */
+    /* border-style: solid; */
+    border: 3px solid #000000;
+}
 
 .middle-line{
     width: 1px;

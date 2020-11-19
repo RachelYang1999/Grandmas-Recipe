@@ -13,37 +13,28 @@
                     <h1> "{{keyword}}" Related results</h1>
                 </div>
             </div>
-            <div class="center">
-                </script>          
-                    <br>
-                    <ul>
-                        % for r in search_data:
-                           
-                            <div class = "layui-row ">
-                                    
-                                <div class = "layui-row grid-demo"> 
-                                   
-                                    <div class = "height_width">
-                                        <a href = "/recipe_detail?id={{r['id']}}">
-                                            <div class="layui-col-md5">
-                                                picture
-                                            </div>
-                                            <div class="layui-col-md7">
-                                                <br>
-                                                <br>
-                                                <br>    
-                                            %for elem in r:
-                                                <li>{{elem}}: {{r[elem]}}</li>
-                                                <br>
-                                            %end
-                                            </div>
-                                        </a>
-                                    </div>    
+            <div class="center">       
+                % for r in search_data:
+                    
+                    <div class = "layui-row ">
+                        <div class = "height_width">
+                            <a href = "/recipe_detail?id={{r['id']}}">
+                                <div class="layui-col-md5">
+                                    picture
                                 </div>
-                            </div>
-                        %end
-                    </ul>   
-                </script>
+                                <div class="layui-col-md7">
+                                    <br>
+                                    <br>
+                                    <br>    
+                                %for elem in r:
+                                    <li>{{elem}}: {{r[elem]}}</li>
+                                    <br>
+                                %end
+                                </div>
+                            </a>
+                        </div>    
+                    </div>
+                %end 
             </div>
         </div>
     </div>

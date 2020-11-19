@@ -107,12 +107,13 @@ class Search(APIView):
                         get_description = Recipe.objects.get(id=r).description
                         get_update_date = Recipe.objects.get(id=r).update_date 
                         get_userid =Recipe.objects.get(id=r).user_id
+                        recipe_src = Recipe.objects.filter(id=r).values()[0]["intro_image"]
                         result = {
                         "id": get_id,
                         "title": get_title,
                         "description": get_description,
                         "update_date": get_update_date,
-                        "userid": get_userid,
+                        "recipe_src": recipe_src,
                         }
                         result_list.append(result)
                     # print(result_list)
@@ -130,12 +131,13 @@ class Search(APIView):
                 get_description = r.description
                 get_update_date = r.update_date 
                 get_userid = r.user_id
+                recipe_src = Recipe.objects.filter(id=r.id).values()[0]["intro_image"]
                 result = {
                     "id":get_id,
                     "title": get_title,
                     "description": get_description,
                     "update_date": get_update_date,
-                    "userid": get_userid,
+                    "recipe_src": recipe_src,
                 }
                 result_list.append(result)
             # print(result_list)
@@ -156,11 +158,13 @@ class Search_user(APIView):
             u_recipe_title = r.recipe_title
             u_recipe_description = r.description
             u_recipe_update_date = r.update_date
+            recipe_src = Recipe.objects.filter(id=r.id).values()[0]["intro_image"]
             user_recipe_result = {
                 "recipe_id": u_recipe_id,
                 "recipe_title": u_recipe_title,
                 "recipe_description": u_recipe_description,
-                "recipe_update_date": u_recipe_update_date
+                "recipe_update_date": u_recipe_update_date,
+                "recipe_src": recipe_src,
             }
             user_recipe_list.append(user_recipe_result)
         
