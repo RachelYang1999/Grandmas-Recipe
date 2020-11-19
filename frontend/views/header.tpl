@@ -36,7 +36,7 @@
                         <dl class="layui-nav-child">
                         <dd><a href="/profile">My Profile</a></dd>
                         <dd><a href="javascript:;">My Favourite</a></dd>
-                        <dd><a href="javascript:;">My Recipe</a></dd>
+                        <dd><a href="/profile_view">My Recipe</a></dd>
                         <hr>
                         <dd><a href="/signout">Sign Out</a></dd>
                         </dl>
