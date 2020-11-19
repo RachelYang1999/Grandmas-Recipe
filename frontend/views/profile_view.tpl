@@ -55,7 +55,9 @@
                         % for r in recipes:
                             
                             <div class = "layui-row ">
-                                    
+
+
+                                   
                                 <div class = "height_width">
                                     <a href = "/recipe_detail?id={{r['recipe_id']}}">
                                         <div class="layui-col-md5">
@@ -72,6 +74,16 @@
                                         </div>
                                     </a>
                                 </div>    
+                                
+                                <div style="margin-top: -150px;">
+                                <button type="button" class="layui-btn layui-btn-radius layui-btn-warm">
+                                    <i class="layui-icon">&#xe642;</i>
+                                </button>
+                                <button type="button" class="layui-btn layui-btn-radius layui-btn-danger">
+                                    <i class="layui-icon">&#xe640;</i>
+                                </button>
+                                </div>
+                                
                             </div>
                         %end 
                     </div>
