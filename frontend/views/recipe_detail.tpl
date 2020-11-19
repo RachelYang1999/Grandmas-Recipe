@@ -8,7 +8,7 @@
 
 <div class="layui-body">
     <div class = "layui-container">  
-        <div class="layui-row">
+        <div class="layui-row" style="margin-top: 40px;">
             <div class="layui-col-md8">
                 <div class="layui-col-md12 recipe-title" >
                     <input type="text" value = '{{recipe_data["id"]}}' id="r_id" style="display: none;" readonly>
@@ -41,17 +41,17 @@
             </form>
         </div>
 
-        <div class = "center" style="margin-top: 50px;margin-bottom: 20px;">
+        <div class = "center" style="margin-top: 50px;margin-bottom: 20px;" >
             <img src='/img/{{recipe_data.get("intro_src")}}' width="400" height="400" alt="">
             <br>
         </div>
         
         
         <br>
-        <p class = "normal-text" style="margin-bottom: 20px; text-align: center;">{{recipe_data.get("description")}}</p>
+        <p class = "normal-text" style="margin-bottom: 20px; text-align: center; line-height: 30px; font-family: Verdana, Geneva, Tahoma, sans-serif;">{{recipe_data.get("description")}}</p>
    
         <br>
-        <h1> Ingredient </h1>
+        <h1 style="font-family:Comic Sans MS;"> Ingredient </h1>
         <br>
 
         <br>
@@ -84,7 +84,7 @@
         
         <br>
         <br>
-        <h1> Steps </h1>
+        <h1 style="font-family:Comic Sans MS;"> Steps </h1>
         <br>
         
         % count = 1
@@ -93,7 +93,7 @@
             <div class="layui-row">
                 
                 <div class="layui-col-md7", id = "step-text">
-                    <label class="layui-form-label" style="font-weight: 200;font-family: sans-serif">Step {{step_with_count}}</label>
+                    <label  style="font-weight: 200; line-height: 25px;">Step {{step_with_count}}</label>
                     
                     
                 </div>
@@ -106,7 +106,7 @@
         
         <br>
         <br>
-        <h1> Comments </h1>
+        <h1 style="font-family:Comic Sans MS;"> Comments </h1>
         <div>
             % for comment in recipe_data['comment_dic_list']:
             
@@ -126,7 +126,7 @@
             % end 
         </div>
         
-        <h2 class = "comment-input-header, left-space ">Write Something</h2>
+        <h2 class = "comment-input-header, left-space " style="margin-top: 30px;">Write Something</h2>
         <br>
 
             <div class = "comment-block", style = "margin-left: 55px;">
