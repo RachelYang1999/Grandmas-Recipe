@@ -217,7 +217,13 @@ def upload_recipe():
 
 @get('/profile_view')
 def profile_view():
+    userid=request.query.userid
     tab=request.query.tab
+
+    userid="?userid="+userid
+    if userid==None:
+        userid=""
+
 
     t1=""
     t2=""
@@ -245,17 +251,17 @@ def profile_view():
         'token': rtv[0]
         }
 
-        url=root+'follow/'
+        url=root+'follow/'+userid
         r2 = requests.request("GET", url,headers=headers)
         follow_data=json.loads(r2.text)["data"]
 
         print(follow_data)
 
-        url=root+'search_user/'
+        url=root+'search_user/'+userid
         r2 = requests.request("GET", url,headers=headers)
         recipes=json.loads(r2.text)["data"]
 
-        url2=root+'fav_recipe/'
+        url2=root+'fav_recipe/'+userid
         r3= requests.request("GET", url2,headers=headers)
         favrecipes=json.loads(r3.text)["data"]
         print(favrecipes)

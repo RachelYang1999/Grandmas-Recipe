@@ -14,7 +14,7 @@
                     <div class="layui-inline">
                         <h1 id = "recipe_title" style="font-family:Monospace;font-weight: bold;"> {{recipe_data.get("title")}} </h1>
                     </div>
-                    <button type="submit" class="layui-btn layui-btn-sm layui-btn-primary" style="margin-top: 3px;">
+                    <button type="submit" class="layui-btn layui-btn-sm layui-btn-primary layui-hide" style="margin-top: 3px;">
                         <i class="layui-icon">&#xe642;</i>
                     </button>
                 </div>
@@ -22,17 +22,21 @@
                     <div class="on-bottom layui-inline">
                         <div style = "margin: 10px">
                             <h2 id = "user_name">
+                                <a href='/profile_view?userid={{recipe_data.get("user_id")}}' >
                                 <input type="text" value='{{recipe_data.get("user_id")}}' id="auth_id" style="display:none" readonly>
                                 <img src="/img/{{avatar}}" class="layui-nav-img"> 
                                 {{recipe_data.get("user_name")}} 
+                                </a>
                             </h2>
                         </div>
                     </div>
                     <div class="layui-inline">
-                        <button type="submit", class="layui-btn layui-btn-sm layui-btn-radius layui-btn-warm" onclick="follow()" name = "follow"><i class="layui-icon">&#xe6af;</i> Follow the Auther</button>
+                        <button type="submit", class="layui-btn layui-btn-sm layui-btn-radius layui-btn-warm" onclick="follow()" id="fo" name = "follow"><i class="layui-icon">&#xe6af;</i> Follow the Auther</button>
+                        <button type="submit", class="layui-btn layui-btn-sm layui-btn-radius layui-btn-warm layui-hide" id="unfo" onclick="follow()" name = "follow"><i class="layui-icon">&#xe6af;</i> Unfollow</button>
                     </div>
                     <div class="layui-inline">
-                        <button type="submit", class="layui-btn layui-btn-sm layui-btn-radius layui-btn-danger" onclick="favourite()" name = "favourite"><i class="layui-icon">&#xe68c;</i>Add to Favourite</button>
+                        <button type="submit", class="layui-btn layui-btn-sm layui-btn-radius layui-btn-danger " onclick="favourite()" id="fav" name = "favourite"><i class="layui-icon">&#xe68c;</i>Add to Favourite</button>
+                        <button type="submit", class="layui-btn layui-btn-sm layui-btn-radius layui-btn-danger layui-hide" onclick="favourite()" id="unfav" name = "favourite"><i class="layui-icon">&#xe68c;</i>Cancel Favourite</button>
                     </div>
                 </div>
         </div>

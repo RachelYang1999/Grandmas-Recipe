@@ -37,7 +37,6 @@
                         <dd><a href="/profile">My Profile</a></dd>
                         <dd><a href="/profile_view?tab=1">My Recipe</a></dd>
                         <dd><a href="/profile_view?tab=2">My Favourite</a></dd>
-                        <dd><a href="/profile_view?tab=3">Draft Box</a></dd>
                         <hr>
                         <dd><a href="/signout">Sign Out</a></dd>
                         </dl>

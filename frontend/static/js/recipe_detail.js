@@ -49,6 +49,9 @@ layui.use(['form','jquery'], function () {
         };
 
         $.ajax(settings).done(function (response) {
+            layer.msg("Followed :)");
+             $("#fo").addClass("layui-hide");
+            $("#unfo").removeClass("layui-hide");
             console.log(response);
         });
 
@@ -72,6 +75,9 @@ layui.use(['form','jquery'], function () {
         };
 
         $.ajax(settings).done(function (response) {
+            layer.msg("Success :)");
+            $("#fav").addClass("layui-hide");
+            $("#unfav").removeClass("layui-hide");
             console.log(response);
         });
 

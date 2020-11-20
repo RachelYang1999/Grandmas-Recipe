@@ -46,15 +46,16 @@
             <ul class="layui-tab-title">
                 <li class="{{t1}}">My Recipes</li>
                 <li class="{{t2}}">My Favourite</li>
-                <li class="{{t3}}">Draft Box</li>
+                <!-- <li class="{{t3}}">Draft Box</li> -->
 
             </ul>
             <div class="layui-tab-content">
                 <div class="layui-tab-item {{t1s}}">
-                    <div class="center">       
+                    <div class="center">   
+                        % index=0    
                         % for r in recipes:
                             
-                            <div class = "layui-row ">
+                            <div class = "layui-row " id="my-{{index}}">
 
 
                                    
@@ -76,22 +77,24 @@
                                 </div>    
                                 
                                 <div style="margin-top: -150px;">
-                                <button type="button" class="layui-btn layui-btn-radius layui-btn-warm">
+                                <!-- <button type="button" class="layui-btn layui-btn-radius layui-btn-warm">
                                     <i class="layui-icon">&#xe642;</i>
-                                </button>
-                                <button type="button" class="layui-btn layui-btn-radius layui-btn-danger">
+                                </button> -->
+                                <button type="button" onclick="my_delt({{index}})" class="layui-btn layui-btn-radius layui-btn-danger">
                                     <i class="layui-icon">&#xe640;</i>
                                 </button>
                                 </div>
                                 
                             </div>
+                            % index+=1
                         %end 
                     </div>
                 </div>
                 <div class="layui-tab-item {{t2s}}">
-                    <div class="center">       
+                    <div class="center"> 
+                        % index=0          
                         % for r in favrecipes:
-                            <div class = "layui-row ">   
+                            <div class = "layui-row " id="my-{{index}}">   
                                 <div class = "height_width">
                                     <a href = "/recipe_detail?id={{r['id']}}">
                                         <div class="layui-col-md5">
@@ -110,17 +113,18 @@
                                 </div>    
                                 
                                 <div style="margin-top: -150px;">
-                                <button type="button" class="layui-btn layui-btn-radius layui-btn-danger">
+                                <button type="button" onclick="fav_delt({{index}})" class="layui-btn layui-btn-radius layui-btn-danger">
                                     <i class="layui-icon">&#xe640;</i>
                                 </button>
                                 </div>
                                 
                             </div>
+                            % index+=1
                         %end 
                     </div>
                     
                 </div>
-                <div class="layui-tab-item {{t3s}}">内容3</div>
+                <div class="layui-tab-item {{t3s}}">///</div>
             </div>
         </div>       
     </div>
@@ -143,7 +147,16 @@
     % end
 </div>
 <div id="follower-block" class="layui-hide">
-
+        % for follower_data in follow_data["follower_data"]:
+            <div class="layui-row">
+                <div class="layui-col-md8">
+                    <img class="logo" src='/img/{{follower_data["from_user_avatar"]}}'>{{follower_data["from_user_name"]}}
+                </div>
+                <div class="layui-col-md4">
+                    <button type="button" class="layui-btn layui-btn-primary">UNFOLLOW</button>
+                </div>
+            </div>
+        % end
 </div>
 
 </html>

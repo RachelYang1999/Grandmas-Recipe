@@ -15,13 +15,13 @@ class Follow_view(APIView):
     authentication_classes = (UserAuth,)
 
     def get(self, request, *args, **kwargs):
-        
-        try:
-            user = request.user
-        except User_follow.DoesNotExist:
-            return Response(util.get_response(400,"user not exist",None))
+        user_id = request.query_params.get("userid")
 
-        
+        try:
+            user=User.objects.get(id=user_id)
+        except:
+            user = request.user
+
         following=[]
         for u in User_follow.objects.filter(from_user=user).values():
             temp={}

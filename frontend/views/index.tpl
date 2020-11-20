@@ -31,12 +31,12 @@
             
             <div class="layui-tab layui-tab-brief" lay-filter="docDemoTabBrief">
                 <ul class="layui-tab-title">
-                    <li class="layui-this">Newest</li>
-                    <li>Hottest</li>
+                    <li >Newest</li>
+                    <li class="layui-this">Hottest</li>
                     <li>Simplest</li>
                 </ul>
                 <div class="layui-tab-content center">
-                    <div class="layui-tab-item layui-show">
+                    <div class="layui-tab-item">
                         % for i in range (0,3):
                         <div class="layui-row layui-col-space10">
                             % for j in range (0,4):
@@ -49,13 +49,12 @@
                         <br>
                         % end
                         <br>
-                        <button class="layui-btn layui-bg-orange">More</button>
                     </div>
-                    <div class="layui-tab-item center">
+                    <div class="layui-tab-item  layui-show center">
                         % for i in range (0,3):
                         <div class="layui-row layui-col-space10">
                             % for j in range (0,4):
-                            <a href='/recipe_detal?id={{hottest[i*4+j]["id"]}}''>
+                            <a href='/recipe_detail?id={{hottest[i*4+j]["id"]}}''>
                                 <div class="layui-col-md3">
                                     <img class="r_i" src='/img/{{hottest[i*4+j]["meta"]}}'>
                                     <div class="center">{{hottest[i*4+j]["title"]}}</div>
@@ -66,7 +65,6 @@
                         <br>
                         % end
                         <br>
-                        <button class="layui-btn layui-bg-orange">More</button>
                     </div>
                     <div class="layui-tab-item center">
                         % for i in range (0,3):
@@ -81,7 +79,6 @@
                         <br>
                         % end
                         <br>
-                        <button class="layui-btn layui-bg-orange">More</button>
                     </div>
                 </div>
             </div> 

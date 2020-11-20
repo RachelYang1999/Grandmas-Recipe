@@ -200,7 +200,12 @@ class RecipeFavView(APIView):
         return Response(rst)
 
     def get(self, request):
-        user = request.user
+        user_id = request.query_params.get("userid")
+
+        try:
+            user=User.objects.get(id=user_id)
+        except:
+            user = request.user
         recipes=Recipe_favourite.objects.filter(user=user).values()
 
         print(recipes)

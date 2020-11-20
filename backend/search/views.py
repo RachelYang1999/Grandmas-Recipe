@@ -149,8 +149,13 @@ class Search_user(APIView):
     authentication_classes = (UserAuth,)
 
     def get(self, request):
+        user_id = request.query_params.get("userid")
 
-        user = request.user
+        try:
+            user=User.objects.get(id=user_id)
+        except:
+            user = request.user
+
         user_recipe = Recipe.objects.filter(user = user)
         user_recipe_list = []
         for r in user_recipe:

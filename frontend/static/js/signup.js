@@ -21,7 +21,9 @@ layui.use(['form','layer','jquery'], function () {
                     console.log(data);
                 }
             })
+            return false;
         })
+        
  
     });
 
