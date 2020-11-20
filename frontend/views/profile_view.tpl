@@ -13,7 +13,7 @@
                     <img id="avatar-header" src="/img/{{avatar}}" class="avarta-margin">
                 </div>
                 <div>
-                    <label class="layui-form-label title" style="font-family: Comic Sans MS;">{{username}}'s Recipes</label>
+                    <label class="layui-form-label title" style="font-family: Comic Sans MS;">{{userdata["username"]}}'s Recipes</label>
                 </div>
             </div>
             <div class="layui-col-md3">
@@ -44,8 +44,11 @@
         
         <div class="layui-tab tab">
             <ul class="layui-tab-title">
-                <li class="{{t1}}">My Recipes</li>
-                <li class="{{t2}}">My Favourite</li>
+
+                <li class="{{t1}}">{{userdata["username"]}}'s Recipes</li>
+                % if username == userdata["username"]:
+                <li class="{{t2}}">{{userdata["username"]}}'s Favourite</li>
+                % end
                 <!-- <li class="{{t3}}">Draft Box</li> -->
 
             </ul>
@@ -80,10 +83,12 @@
                                 <!-- <button type="button" class="layui-btn layui-btn-radius layui-btn-warm">
                                     <i class="layui-icon">&#xe642;</i>
                                 </button> -->
+                                % if username == userdata["username"]:
                                 <button type="button" onclick="my_delt({{index}})" class="layui-btn layui-btn-radius layui-btn-danger">
                                     <i class="layui-icon">&#xe640;</i>
                                 </button>
                                 </div>
+                                % end
                                 
                             </div>
                             % index+=1
@@ -111,12 +116,13 @@
                                         </div>
                                     </a>
                                 </div>    
-                                
+                                % if username == userdata["username"]:
                                 <div style="margin-top: -150px;">
                                 <button type="button" onclick="fav_delt({{index}})" class="layui-btn layui-btn-radius layui-btn-danger">
                                     <i class="layui-icon">&#xe640;</i>
                                 </button>
                                 </div>
+                                % end
                                 
                             </div>
                             % index+=1
@@ -153,7 +159,7 @@
                     <img class="logo" src='/img/{{follower_data["from_user_avatar"]}}'>{{follower_data["from_user_name"]}}
                 </div>
                 <div class="layui-col-md4">
-                    <button type="button" class="layui-btn layui-btn-primary">UNFOLLOW</button>
+                    <button type="button" class="layui-btn layui-btn-normal">FOLLOW</button>
                 </div>
             </div>
         % end

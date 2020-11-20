@@ -44,8 +44,8 @@ function follower_layer(){
         layer.open({
                 type:1,
                 area: ['500px', '300px'],
-                content: $("#followER-block").html(),
-                title:"Following",
+                content: $("#follower-block").html(),
+                title:"Follower",
                 btn: ['Confirm', 'Cancel'], 
     
                 yes:function(index,layero){

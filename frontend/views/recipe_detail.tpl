@@ -12,7 +12,7 @@
                 <div class="recipe-title " >
                     <input type="text" value = '{{recipe_data["id"]}}' id="r_id" style="display: none;" readonly>
                     <div class="layui-inline">
-                        <h1 id = "recipe_title" style="font-family:Monospace;font-weight: bold;"> {{recipe_data.get("title")}} </h1>
+                        <h1 id = "recipe_title" style="font-family:Monospace;font-weight: bold;"> {{recipe_data["id"]}}. {{recipe_data.get("title")}} </h1>
                     </div>
                     <button type="submit" class="layui-btn layui-btn-sm layui-btn-primary layui-hide" style="margin-top: 3px;">
                         <i class="layui-icon">&#xe642;</i>
@@ -30,14 +30,18 @@
                             </h2>
                         </div>
                     </div>
+                    % if username != recipe_data.get("user_name"):
                     <div class="layui-inline">
                         <button type="submit", class="layui-btn layui-btn-sm layui-btn-radius layui-btn-warm" onclick="follow()" id="fo" name = "follow"><i class="layui-icon">&#xe6af;</i> Follow the Auther</button>
                         <button type="submit", class="layui-btn layui-btn-sm layui-btn-radius layui-btn-warm layui-hide" id="unfo" onclick="follow()" name = "follow"><i class="layui-icon">&#xe6af;</i> Unfollow</button>
                     </div>
+                    % end
+                    
                     <div class="layui-inline">
                         <button type="submit", class="layui-btn layui-btn-sm layui-btn-radius layui-btn-danger " onclick="favourite()" id="fav" name = "favourite"><i class="layui-icon">&#xe68c;</i>Add to Favourite</button>
                         <button type="submit", class="layui-btn layui-btn-sm layui-btn-radius layui-btn-danger layui-hide" onclick="favourite()" id="unfav" name = "favourite"><i class="layui-icon">&#xe68c;</i>Cancel Favourite</button>
                     </div>
+                    
                 </div>
         </div>
 

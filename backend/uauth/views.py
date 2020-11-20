@@ -19,8 +19,14 @@ class User_auth(APIView):
     authentication_classes = (UserAuth_Auth,)
 
     def get(self, request, *args, **kwargs):
+        user_id = request.query_params.get("userid")
+
+        try:
+            user=User.objects.get(id=user_id)
+        except:
+            user = request.user
         
-        data = {"username": request.user.username,"avatar":User.objects.filter(id=request.user.id).values()[0]["profile_image"]}
+        data = {"username": user.username,"avatar":User.objects.filter(id=user.id).values()[0]["profile_image"]}
         rst=util.get_response(100,"success",data)
         return Response(rst)
 

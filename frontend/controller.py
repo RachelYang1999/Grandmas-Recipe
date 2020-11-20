@@ -266,7 +266,12 @@ def profile_view():
         favrecipes=json.loads(r3.text)["data"]
         print(favrecipes)
 
-        return template("profile_view",backend=get_backend(),username=rtv[1],avatar=rtv[2],signin=True,follow_data=follow_data,recipes=recipes,t1=t1,t2=t2,t3=t3,t1s=t1s,t2s=t2s,t3s=t3s,favrecipes=favrecipes)
+        url2=root+'auth/'+userid
+        r3= requests.request("GET", url2,headers=headers)
+        userdata=json.loads(r3.text)["data"]
+        print(userdata)
+
+        return template("profile_view",backend=get_backend(),username=rtv[1],avatar=rtv[2],signin=True,follow_data=follow_data,recipes=recipes,t1=t1,t2=t2,t3=t3,t1s=t1s,t2s=t2s,t3s=t3s,favrecipes=favrecipes,userdata=userdata)
     else:
         redirect('/signin?redirect_url=profile_view')
 
@@ -294,6 +299,7 @@ def edit_recipe():
         url2=root+'category/'
         r2 = requests.request("GET", url2)
         category=json.loads(r2.text)["data"]
+        
 
         return template("edit_recipe", backend=get_backend(), username = rtv[1], avatar = rtv[2], signin = True, recipe_data = recipe_data, category=category)
     else:

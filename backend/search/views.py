@@ -77,7 +77,7 @@ class Search(APIView):
         # elif 
         if category_type!=None:
             # search by category
-            category_list =["Breakfirst", "Lunch","Dinner", "Meatlovers", "Vegetarian", "Asian", "Italian","Dessert","Seafood"]
+            category_list =["Breakfast", "Lunch","Dinner", "Meatlovers", "Vegetarian", "Asian", "Italian","Dessert","Seafood"]
             
             # From Category table get corresponding id of input category string  
             if category_type!=None:

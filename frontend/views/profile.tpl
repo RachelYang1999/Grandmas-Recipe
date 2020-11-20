@@ -36,12 +36,7 @@
                         <input type="radio" name="gender" value="other" title="Other" {{checked_other}}>
                     </div>
                 </div>
-                <div class="layui-form-item">
-                    <label class="layui-form-label">DOB: </label>
-                    <div class="layui-input-block" style="width: 120px;">
-                        <input type="text" name="dob" value="{{u_data['dob']}}" class="layui-input" id="test2">
-                    </div>
-                </div>
+
                 <div class="layui-form-item">
                     <label class="layui-form-label">Join Date: </label>
                     <div class="layui-input-block" style="width: 120px;">

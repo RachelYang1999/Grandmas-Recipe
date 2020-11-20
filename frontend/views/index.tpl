@@ -20,7 +20,15 @@
                     <div class="layui-carousel " id="test1">
                         <div carousel-item>
                             % for r in banner:
-                             <div><a href="/recipe_detail?id={{r['id']}}"><img src='/img/{{r["meta"]}}'></a></div>
+                            <div>
+                                <a href="/recipe_detail?id={{r['id']}}">
+                                <div style="margin:20px;">{{r["title"]}}</div>
+                                <div><img src='/img/{{r["meta"]}}'></div>
+                            
+                                </a>
+                            
+                            </div>
+                             
                             % end
                         </div>
                     </div>
@@ -46,13 +54,11 @@
                             </div>
                             % end
                         </div>
-                        <br>
                         % end
-                        <br>
                     </div>
                     <div class="layui-tab-item  layui-show center">
                         % for i in range (0,3):
-                        <div class="layui-row layui-col-space10">
+                        <div class="layui-row" style="margin:30px;">
                             % for j in range (0,4):
                             <a href='/recipe_detail?id={{hottest[i*4+j]["id"]}}''>
                                 <div class="layui-col-md3">
@@ -62,9 +68,8 @@
                             </a>
                             % end
                         </div>
-                        <br>
                         % end
-                        <br>
+                        
                     </div>
                     <div class="layui-tab-item center">
                         % for i in range (0,3):
@@ -76,9 +81,8 @@
                             </div>
                             % end
                         </div>
-                        <br>
                         % end
-                        <br>
+
                     </div>
                 </div>
             </div> 
