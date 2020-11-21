@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
  
-    <title>Home</title>
+    <title>Grandma's Recipe - Home</title>
 %include('header.tpl')
  
     <div class="layui-body index-body" style="left: 0px">

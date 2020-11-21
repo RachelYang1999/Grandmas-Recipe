@@ -143,18 +143,21 @@
 <div id="following-block" class="layui-hide">
     % for following_data in follow_data["following_data"]:
         <div class="layui-row">
+            <a href='/profile_view?userid={{following_data["to_user_id"]}}'>
             <div class="layui-col-md8">
                 <img class="logo" src='/img/{{following_data["to_user_avatar"]}}'>{{following_data["to_user_name"]}}
             </div>
             <div class="layui-col-md4">
                 <button type="button" class="layui-btn layui-btn-primary">UNFOLLOW</button>
             </div>
+            </a>
         </div>
     % end
 </div>
 <div id="follower-block" class="layui-hide">
         % for follower_data in follow_data["follower_data"]:
             <div class="layui-row">
+                <a href='/profile_view?userid={{follower_data["from_user_id"]}}'>
                 <div class="layui-col-md8">
                     <img class="logo" src='/img/{{follower_data["from_user_avatar"]}}'>{{follower_data["from_user_name"]}}
                 </div>
@@ -162,6 +165,7 @@
                     <button type="button" class="layui-btn layui-btn-normal">FOLLOW</button>
                 </div>
             </div>
+            </a>
         % end
 </div>
 

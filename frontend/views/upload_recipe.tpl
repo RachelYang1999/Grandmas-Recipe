@@ -20,9 +20,9 @@
                     </div>
                     <div class="layui-inline">
                         <input type="text" name="is_published" value=1 id="is-pub" style="display:none" readonly>
-                        <button type="button" onclick="change_is_publish()" class="layui-btn layui-btn-warm">
+                        <!-- <button type="button" onclick="change_is_publish()" class="layui-btn layui-btn-warm">
                             <i class="layui-icon">&#xe608;</i> Add to Draft
-                        </button>
+                        </button> -->
                     </div>
                 </div>
                 
