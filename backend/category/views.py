@@ -15,4 +15,5 @@ class Category_view(APIView):
 
     def get(self, request, *args, **kwargs):
         rst=util.get_response(100,"success",Category.objects.all().values())
+        # print()
         return Response(rst)
