@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 
 from pathlib import Path
 import os
+import sys
 from corsheaders.defaults import default_headers
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -110,7 +111,11 @@ DATABASES = {
         'HOST': '172.17.0.1',
         'PORT': '3306',
     }
+    
 }
+if 'test' in sys.argv:
+    DATABASES['default'] = {'ENGINE': 'django.db.backends.sqlite3','NAME': BASE_DIR / 'db.sqlite3'}
+
 
 
 # Password validation
@@ -173,3 +178,7 @@ EMAIL_PORT = 587
 EMAIL_HOST_USER = 'flower@immartonline.com'
 EMAIL_HOST_PASSWORD = 'Zy88109595'
 DEFAULT_FROM_EMAIL = 'no-reply@grandmasrecipe.com'
+
+FIXTURE_DIRS = [
+    os.path.join(BASE_DIR, 'test_data.json'),
+]

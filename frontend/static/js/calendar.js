@@ -53,8 +53,9 @@ function get_data(start, end) {
 
 function get_recipe(response,date,type){
     for ( var i = 0; i < response.length; i++) { 
+        console.log(response[i]);
         if (response[i].date==date && response[i].meal_type==type){
-            return  '<input id="'+date+":"+type+'" type="text" style="width:80px;border:0" value="'+response[i].recipe_title+'" readonly/>' + "<br><button class='layui-btn' value='change' onclick='add_cal(\""+date+":"+type+"\")'>change</button>"
+            return  '<a href="/recipe_detail?id='+response[i].id+'"><input id="'+date+":"+type+'" type="text" style="width:80px;border:0" value="'+response[i].recipe_title+'" readonly/></a>' + "<br><button class='layui-btn layui-btn-xs' value='change' onclick='add_cal(\""+date+":"+type+"\")'>change</button>"
         }
     }
     return "<button class='layui-btn layui-btn-radius layui-bg-red' onclick='add_cal(\""+date+":"+type+"\")'><i class='layui-icon layui-icon-add-1 '></i> </button>"
@@ -64,9 +65,11 @@ function add_cal(data){
     console.log(data);
     var datas = data.split(":");
     layui.use('layer', function(){
+        var layer = layui.layer;
         layer.open({
             type:1,
-            content: 'reciep_id: <input id="r_id" type="text" style="width:80px;" value="" />',
+            area: ['500px', '300px'],
+            content: $("#fav-block").html(),
             title:"Select Recipe",
             btn: ['Confirm', 'Cancel'], 
   
@@ -98,7 +101,17 @@ function add_cal(data){
                 layer.close(index);
                     
             }
+            
         }); 
+        window.sel_cal=function (ele){
+                $("#r_id").val(ele);
+                $("#select-"+ele).removeClass("layui-btn-normal");
+                $("#select-"+ele).addClass("layui-btn-primary");
+                $("#select-"+ele).html("SELECTED");
+                
+            }
+            layer.render();
+        
     }); 
     
 
@@ -172,4 +185,11 @@ function getNewDay(dateTemp, days) {
     var date = rDate.getDate();
     if (date < 10) date = "0" + date;
     return (year + "-" + month + "-" + date);
+}
+
+function sel_cal(ele){
+    $("#r_id").val(ele);
+    $("#select-"+ele).removeClass("layui-btn-normal");
+    $("#select-"+ele).addClass("layui-btn-primary");
+    $("#select-"+ele).html("SELECTED");
 }

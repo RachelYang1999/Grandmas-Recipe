@@ -86,4 +86,18 @@
 <script type="text/javascript" src="/js/calendar.js"></script>
 
 </body>
+<div class="layui-hide" id="fav-block" >
+    <input type="text" value = '' id="r_id" style="display: none;" readonly>
+    % for r in favrecipes:
+        <div class="layui-row">
+            <div class="layui-col-md8">
+                ----{{r["title"]}}
+            </div>
+            <div class="layui-col-md4">
+                <button type="button" id='select-{{r["id"]}}' onclick='sel_cal({{r["id"]}})' class="layui-btn layui-btn-normal">SELECT</button>
+            </div>
+        </div>
+        <br>
+    % end
+</div>
 </html>

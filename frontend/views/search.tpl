@@ -6,7 +6,7 @@
 <title>Search</title>
 %include('header.tpl') 
 
-    <div class="layui-body index-body">
+    <div class="layui-body index-body" >
         <div class="layui-container">
             <div class = "margin_to_header">
                 <div class = "layui-row">

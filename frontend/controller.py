@@ -20,7 +20,7 @@ def getToken():
         url=root+'auth/'
         r = requests.get(url,headers=headers)
         rtv=json.loads(r.text)
-        print(r.text)
+        # print(r.text)
 
         if rtv["msg"]=="success":
             return token,rtv["data"]["username"],rtv["data"]["avatar"]
@@ -83,7 +83,15 @@ def signout():
 def calendar():
     rtv = getToken()
     if rtv is not None:
-        return template("calendar",backend=get_backend(),username=rtv[1],avatar=rtv[2],signin=True)
+        headers = {
+        'token': rtv[0]
+        }
+        url2=root+'fav_recipe/'
+        r3= requests.request("GET", url2,headers=headers)
+        favrecipes=json.loads(r3.text)["data"]
+        # print(favrecipes)
+
+        return template("calendar",backend=get_backend(),username=rtv[1],avatar=rtv[2],signin=True,favrecipes=favrecipes)
     else:
         redirect('/signin?redirect_url=calendar')
     
@@ -107,7 +115,7 @@ def index():
     r = requests.request("GET", url,data=payload)
     hottest=json.loads(r.text)["data"]
 
-    print(hottest)
+    # print(hottest)
 
     if rtv is not None:
         return template("index",backend=get_backend(),username=rtv[1],avatar=rtv[2],signin=True,category=category,banner=banner,hottest=hottest)
@@ -188,7 +196,7 @@ def search():
 
     r = requests.request("GET", url, data = payload)
     search_data=json.loads(r.text)["data"]
-    print(search_data)
+    # print(search_data)
 
     rtv = getToken()
 
@@ -255,7 +263,7 @@ def profile_view():
         r2 = requests.request("GET", url,headers=headers)
         follow_data=json.loads(r2.text)["data"]
 
-        print(follow_data)
+        # print(follow_data)
 
         url=root+'search_user/'+userid
         r2 = requests.request("GET", url,headers=headers)
@@ -264,12 +272,12 @@ def profile_view():
         url2=root+'fav_recipe/'+userid
         r3= requests.request("GET", url2,headers=headers)
         favrecipes=json.loads(r3.text)["data"]
-        print(favrecipes)
+        # print(favrecipes)
 
         url2=root+'auth/'+userid
         r3= requests.request("GET", url2,headers=headers)
         userdata=json.loads(r3.text)["data"]
-        print(userdata)
+        # print(userdata)
 
         return template("profile_view",backend=get_backend(),username=rtv[1],avatar=rtv[2],signin=True,follow_data=follow_data,recipes=recipes,t1=t1,t2=t2,t3=t3,t1s=t1s,t2s=t2s,t3s=t3s,favrecipes=favrecipes,userdata=userdata)
     else:

@@ -32,7 +32,7 @@
                     </div>
                     % if username != recipe_data.get("user_name"):
                     <div class="layui-inline">
-                        <button type="submit", class="layui-btn layui-btn-sm layui-btn-radius layui-btn-warm" onclick="follow()" id="fo" name = "follow"><i class="layui-icon">&#xe6af;</i> Follow the Auther</button>
+                        <button type="submit", class="layui-btn layui-btn-sm layui-btn-radius layui-btn-warm" onclick="follow()" id="fo" name = "follow"><i class="layui-icon">&#xe6af;</i> Follow the Author</button>
                         <button type="submit", class="layui-btn layui-btn-sm layui-btn-radius layui-btn-warm layui-hide" id="unfo" onclick="follow()" name = "follow"><i class="layui-icon">&#xe6af;</i> Unfollow</button>
                     </div>
                     % end
