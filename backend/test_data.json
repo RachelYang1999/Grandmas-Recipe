@@ -2,64 +2,64 @@
 	"model": "category.category",
 	"pk": 1,
 	"fields": {
-		"category": "Breakfirst",
-		"total_recipe": 0
+		"category": "Breakfast",
+		"total_recipe": 23
 	}
 }, {
 	"model": "category.category",
 	"pk": 2,
 	"fields": {
 		"category": "Lunch",
-		"total_recipe": 0
+		"total_recipe": 19
 	}
 }, {
 	"model": "category.category",
 	"pk": 3,
 	"fields": {
 		"category": "Dinner",
-		"total_recipe": 0
+		"total_recipe": 29
 	}
 }, {
 	"model": "category.category",
 	"pk": 4,
 	"fields": {
 		"category": "Meatlovers",
-		"total_recipe": 0
+		"total_recipe": 27
 	}
 }, {
 	"model": "category.category",
 	"pk": 5,
 	"fields": {
 		"category": "Vegetarian",
-		"total_recipe": 0
+		"total_recipe": 17
 	}
 }, {
 	"model": "category.category",
 	"pk": 6,
 	"fields": {
 		"category": "Asian",
-		"total_recipe": 0
+		"total_recipe": 21
 	}
 }, {
 	"model": "category.category",
 	"pk": 7,
 	"fields": {
 		"category": "Italian",
-		"total_recipe": 0
+		"total_recipe": 18
 	}
 }, {
 	"model": "category.category",
 	"pk": 8,
 	"fields": {
 		"category": "Dessert",
-		"total_recipe": 0
+		"total_recipe": 20
 	}
 }, {
 	"model": "category.category",
 	"pk": 9,
 	"fields": {
 		"category": "Seafood",
-		"total_recipe": 0
+		"total_recipe": 22
 	}
 }, {
 	"model": "user.user",
