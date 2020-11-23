@@ -25,7 +25,7 @@ function get_data(start, end) {
         data: {start: start,
             end: end},
         dataType: 'json',
-        headers: {"token": $.cookie("token")},
+        headers: {"token": $.cookie("token"),"ctoken": $.cookie("ctoken"),},
         success: function(response) {
             console.log(response);
             
@@ -84,7 +84,8 @@ function add_cal(data){
                     "method": "POST",
                     "timeout": 0,
                     "headers": {
-                        "token": $.cookie("token")
+                        "token": $.cookie("token"),
+                        "ctoken": $.cookie("ctoken"),
                     },
                     "processData": false,
                     "mimeType": "multipart/form-data",

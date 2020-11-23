@@ -9,7 +9,7 @@ layui.use(['form','jquery','upload'], function(){
         ,auto:false
         ,size: 1024
         ,field: "document"
-        ,headers:{"token":$.cookie("token")}
+        ,headers:{"token":$.cookie("token"),"ctoken": $.cookie("ctoken"),}
         ,data: { recipe_id: function () {
                         return $("#recipe-id").val();
                     },
@@ -39,7 +39,7 @@ layui.use(['form','jquery','upload'], function(){
             ,auto:false
             ,size: 1024
             ,field: "document"
-            ,headers:{"token":$.cookie("token")}
+            ,headers:{"token":$.cookie("token"),"ctoken": $.cookie("ctoken"),}
             ,data: { recipe_id: function () {
                             return $("#recipe-id").val();
                         },
@@ -125,7 +125,7 @@ layui.use(['form','jquery','upload'], function(){
             url:'http://'+$("#backend").html()+':9999/api/recipe/',
             data:data.field,
             type:'post',
-            headers:{"token":$.cookie("token")},
+            headers:{"token":$.cookie("token"),"ctoken": $.cookie("ctoken"),},
             success: function (data) {
                 console.log(data.data)
                 if (data.code==100){
