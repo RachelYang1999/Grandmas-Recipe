@@ -175,7 +175,10 @@ class User_for_pass(APIView):
             rst=util.get_response(400,"user not exists",None)
             return Response(rst)
 
-        
+class CSRF(APIView):
 
-
-
+    def get(self, request):
+        token=util.create_salt(64)
+        cache.set(token,token,timeout=7200)
+        rst=util.get_response(100,"success",{'ctoken':token})
+        return Response(rst)

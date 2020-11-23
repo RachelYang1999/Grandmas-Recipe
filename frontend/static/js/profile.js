@@ -7,7 +7,7 @@ layui.use(['upload','laydate'], function(){
     upload = upload.render({
         elem: '#test1'
         ,url: 'http://'+$("#backend").html()+':9999/api/upload/profile_image/'
-        ,headers:{"token":$.cookie("token")}
+        ,headers:{"token":$.cookie("token"),"ctoken": $.cookie("ctoken"),}
         ,field: "document"
         ,done: function(res){
             layer.msg('success');
@@ -31,7 +31,7 @@ layui.use(['upload','laydate'], function(){
         $.ajax({
             url:'http://'+$("#backend").html()+':9999/api/profile/',
             data:data.field,
-            headers:{"token":$.cookie("token")},
+            headers:{"token":$.cookie("token"),"ctoken": $.cookie("ctoken"),},
             type:'post',
             success: function (data) {
                 layer.msg('success');
@@ -79,7 +79,8 @@ function change(){
                 "method": "POST",
                 "timeout": 0,
                 "headers": {
-                    "token": $.cookie("token")
+                    "token": $.cookie("token"),
+                    "ctoken": $.cookie("ctoken"),
                 },
                 "processData": false,
                 "mimeType": "multipart/form-data",

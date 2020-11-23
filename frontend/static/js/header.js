@@ -32,6 +32,14 @@ layui.use(['form','element'], function () {
             ,'This is not an email'
         ],
     });
+    $.ajax({
+            url:'http://'+$("#backend").html()+':9999/api/csrftoken/',
+            type: 'get',
+            success: function (res) {
+                $.cookie("ctoken",res.data.ctoken);
+                console.log(res);
+            }
+        })
 
 });
 

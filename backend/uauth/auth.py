@@ -9,6 +9,18 @@ from rest_framework import exceptions
 class UserAuth(BaseAuthentication):
 
     def authenticate(self, request):
+        if request.method != 'GET':
+            try:
+                ctoken = request.META.get('HTTP_CTOKEN')
+                print("ctoken",ctoken)
+                cache_toke = cache.get(ctoken)
+                cache.delete(cache_toke)
+
+                if ctoken== None or cache_toke!=ctoken:
+                    raise exceptions.AuthenticationFailed()
+            except:
+                raise exceptions.AuthenticationFailed({"code":400,"msg": "ctoken invalid","data":None})
+
         if request.method == 'GET' or request.method == 'POST':
             
             try:

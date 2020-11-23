@@ -17,7 +17,8 @@ function following_layer(){
                         "method": "POST",
                         "timeout": 0,
                         "headers": {
-                            "token": $.cookie("token")
+                            "token": $.cookie("token"),
+                            "ctoken": $.cookie("ctoken"),
                         },
                         "processData": false,
                         "mimeType": "multipart/form-data",
@@ -57,7 +58,8 @@ function follower_layer(){
                         "method": "POST",
                         "timeout": 0,
                         "headers": {
-                            "token": $.cookie("token")
+                            "token": $.cookie("token"),
+                            "ctoken": $.cookie("ctoken"),
                         },
                         "processData": false,
                         "mimeType": "multipart/form-data",
