@@ -14,7 +14,6 @@ class UserAuth(BaseAuthentication):
                 ctoken = request.META.get('HTTP_CTOKEN')
                 print("ctoken",ctoken)
                 cache_toke = cache.get(ctoken)
-                cache.delete(cache_toke)
 
                 if ctoken== None or cache_toke!=ctoken:
                     raise exceptions.AuthenticationFailed()
