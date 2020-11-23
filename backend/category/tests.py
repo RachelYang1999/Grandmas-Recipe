@@ -23,8 +23,8 @@ class CategoryTest(TestCase):
     def test_category_model(self):
         """Test the model of Category"""
         first_category = Category.objects.get(id = 1)
-        self.assertEqual(first_category.category, "Breakfirst")
-        self.assertEqual(first_category.total_recipe, 0)
+        self.assertEqual(first_category.category, "Breakfast")
+        self.assertEqual(first_category.total_recipe, 23)
 
     def test_get_category_status_code(self):
         """Test the status code"""
@@ -50,15 +50,15 @@ class CategoryTest(TestCase):
         request = self.factory.get(url)
         my_view = Category_view.as_view()
         response = my_view(request)
-        excepted_data = [{"id":1,"category":"Breakfirst","total_recipe":0}, \
-            {"id":2,"category":"Lunch","total_recipe":0}, \
-                {"id":3,"category":"Dinner","total_recipe":0}, \
-                    {"id":4,"category":"Meatlovers","total_recipe":0}, \
-                        {"id":5,"category":"Vegetarian","total_recipe":0}, \
-                            {"id":6,"category":"Asian","total_recipe":0}, \
-                                {"id":7,"category":"Italian","total_recipe":0}, \
-                                    {"id":8,"category":"Dessert","total_recipe":0}, \
-                                        {"id":9,"category":"Seafood","total_recipe":0}]
+        excepted_data = [{"id":1,"category":"Breakfast","total_recipe":23}, \
+            {"id":2,"category":"Lunch","total_recipe":19}, \
+                {"id":3,"category":"Dinner","total_recipe":29}, \
+                    {"id":4,"category":"Meatlovers","total_recipe":27}, \
+                        {"id":5,"category":"Vegetarian","total_recipe":17}, \
+                            {"id":6,"category":"Asian","total_recipe":21}, \
+                                {"id":7,"category":"Italian","total_recipe":18}, \
+                                    {"id":8,"category":"Dessert","total_recipe":20}, \
+                                        {"id":9,"category":"Seafood","total_recipe":22}]
         i = 0
         for category in response.data['data']:
             self.assertEqual(category, excepted_data[i])
