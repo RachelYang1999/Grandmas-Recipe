@@ -8,8 +8,8 @@ from django.test import Client
 from recipe.models import Recipe
 from user.models import User
 from category.models import Category
-from uauth.views import User_auth
-from search.views import Search
+from uauth.views import User_auth,CSRF
+from search.views import Search,Search_user
 
 # Create your tests here.
 
@@ -17,7 +17,7 @@ class SearchTest(TestCase):
 
     def setUp(self):
         call_command("loaddata", "test_data.json",verbosity=0)
-        self.factory = APIRequestFactory()
+        self.factory = APIRequestFactory(enforce_csrf_checks=False)
     
     # def test_get_search_category(self):
 
@@ -31,19 +31,14 @@ class SearchTest(TestCase):
     def test_get_search_user(self):
 
         """Test get user recipe after logging in"""
-        login_url = "/api/auth/"      
-        login_request = self.factory.post(login_url,{"username":"root","password":"root"})
-        login_view = User_auth.as_view()
-        login_response = login_view(login_request)
-        self.token = login_response.data["data"]["token"]
 
         user = User.objects.get(id=1)
 
         # get status code
         search_user_url = "/api/search_user/"      
-        search_user_request = self.factory.get(search_user_url, {"id":1})
+        search_user_request = self.factory.get(search_user_url, HTTP_TOKEN=self.token)
         force_authenticate(search_user_request, user=user)
-        search_user_view = Search.as_view()
+        search_user_view = Search_user.as_view()
         search_user_response = search_user_view(search_user_request)
         self.assertEqual(search_user_response.status_code, 200)
 

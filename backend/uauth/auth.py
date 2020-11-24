@@ -12,7 +12,7 @@ class UserAuth(BaseAuthentication):
         if request.method != 'GET':
             try:
                 ctoken = request.META.get('HTTP_CTOKEN')
-                # print("ctoken",ctoken)
+                print("ctoken",ctoken)
                 cache_toke = cache.get(ctoken)
 
                 if ctoken== None or cache_toke!=ctoken:
@@ -27,6 +27,7 @@ class UserAuth(BaseAuthentication):
                 print(token)
                 user_id=token.split("$")[1]
                 cache_toke = cache.get(user_id)
+                print(cache_toke)
                 if cache_toke==token:
                     user = User.objects.get(pk=user_id)
                     return user, token
