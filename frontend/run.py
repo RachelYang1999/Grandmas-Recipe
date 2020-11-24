@@ -54,7 +54,7 @@ def serve_css(css):
 
 @app.error(404)
 def error404(error):
-   return 'Page not Found'
+   return static_file(html, root='/app/frontend/error.html')
 
 @app.get('/signin')
 def signin():
