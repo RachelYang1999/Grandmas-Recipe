@@ -8,16 +8,11 @@ from django.test import Client
 from recipe.models import Recipe
 from user.models import User
 from category.models import Category
-<<<<<<< HEAD
-from uauth.views import User_auth
+# from uauth.views import User_auth
 from search.views import Search
 from search.views import Search_user
 
 from datetime import datetime, date
-=======
-from uauth.views import User_auth,CSRF
-from search.views import Search,Search_user
->>>>>>> 7633c0c5b8aa9795bd3c3b1f6881a6d80eedaf27
 
 # Create your tests here.
 
@@ -272,7 +267,7 @@ class SearchTest(TestCase):
     #     # get status code
     #     search_title_url = "/api/search/"      
     #     search_title_request = self.factory.get(search_title_url, {"recipe_title":"potato"})
-    #     search_title_view = Search.as_view()
+    #     search_title_view = Search_user.as_view()
     #     search_title_response = search_title_view(search_title_request)
     #     self.assertEqual(search_title_response.status_code, 200)
 
@@ -280,44 +275,14 @@ class SearchTest(TestCase):
     #     self.assertEqual(search_title_response.data['code'], 100)
     #     self.assertEqual(search_title_response.data['msg'], "success")
 
-    #     # get data
-    #     expected_data = [
-
-    #             {
-    #                 "id": 38,
-    #                 "title": " Potato Dauphinoise",
-    #                 "description": "This crispy, creamy gratin is so indulgently good it might upstage your main. Try our step-by-step guide for an indulgent potato dauphinoise dish, the ideal side-dish treat - easy to make and delicious to eat – you’ll love this creamy, layered potato dish. Don't forget to screenshot the ingredients list at the bottom of the page to take in store.",
-    #                 "update_date": "2020-11-20",
-    #                 "recipe_src": "intro_image/Xnip2020-11-20_01-00-32.jpg"
-    #             },
-    #             {
-    #                 "id": 49,
-    #                 "title": "BBQ Chicken Loaded Sweet Potatoes",
-    #                 "description": "Swap a plain jacket potato for these loaded BBQ chicken sweet potatoes, made with just 3 ingredients. Shredded chicken thighs and tangy BBQ sauce are loaded into roasted sweet potatoes for an easy, budget-friendly family dinner. Plus, you can make enough for 6 and freeze for another time. There’s a handy ingredients list at the bottom of the page for everything you need.",
-    #                 "update_date": "2020-11-20",
-    #                 "recipe_src": "intro_image/Xnip2020-11-20_02-04-54.jpg"
-    #             },
-    #             {
-    #                 "id": 51,
-    #                 "title": " Creamy Ham and Potato Casserole",
-    #                 "description": "Winter comfort food just got easy with this 3-ingredient creamy ham and potato casserole. Perfect for feeding the family, make a big batch and freeze for future cold nights. There’s a handy ingredients list at the bottom of the page for everything you need, so remember to take a screenshot of the ingredients before heading to the shops.",
-    #                 "update_date": "2020-11-20",
-    #                 "recipe_src": "intro_image/Xnip2020-11-20_02-15-31.jpg"
-    #             }
-    #         ]
-
-    #     self.assertEqual(search_title_response.data["data"], expected_data)
-
 
     def test_get_search_user(self):
-
-        """Test get user recipe after logging in"""
 
         user = User.objects.get(id=1)
 
         # get status code
         search_user_url = "/api/search_user/"      
-        search_user_request = self.factory.get(search_user_url)
+        search_user_request = self.factory.get(search_user_url, {"id":1})
         force_authenticate(search_user_request, user=user)
         search_user_view = Search_user.as_view()
         search_user_response = search_user_view(search_user_request)
@@ -326,83 +291,6 @@ class SearchTest(TestCase):
         # get msg
         self.assertEqual(search_user_response.data['code'], 100)
         self.assertEqual(search_user_response.data['msg'], "success")
-
-        # get data
-        expected_data = [
-
-                {
-                    "recipe_id": 3,
-                    "recipe_title": "naozi",
-                    "recipe_description": "haochi",
-                    "recipe_update_date": date(int(2020), int(11), int(19)),
-                    "recipe_src": "intro_image/2020-05-22-Scene_0iqQ2Lx.png"
-                },
-                {
-                    "recipe_id": 6,
-                    "recipe_title": "advsd",
-                    "recipe_description": "casca",
-                    "recipe_update_date": date(int(2020), int(11), int(19)),
-                    "recipe_src": "intro_image/ttt.jpg"
-                },
-                {
-                    "recipe_id": 34,
-                    "recipe_title": "Overnight Blueberry French Toast",
-                    "recipe_description": "This is a very unique breakfast dish. Good for any holiday breakfast or brunch, it's filled with the fresh taste of blueberries, and covered with a rich blueberry sauce to make it a one of a kind.",
-                    "recipe_update_date": date(int(2020), int(11), int(19)),
-                    "recipe_src": "intro_image/test.jpeg"
-                },
-                {
-                    "recipe_id": 35,
-                    "recipe_title": "11",
-                    "recipe_description": "221",
-                    "recipe_update_date": date(int(2020), int(11), int(19)),
-                    "recipe_src": "intro_image/default.png"
-                },
-                {
-                    "recipe_id": 36,
-                    "recipe_title": "131",
-                    "recipe_description": "qwfqf",
-                    "recipe_update_date": date(int(2020), int(11), int(19)),
-                    "recipe_src": "intro_image/test_Qtwpz3b.jpeg"
-                },
-                {
-                    "recipe_id": 37,
-                    "recipe_title": "qwdqw",
-                    "recipe_description": "qwdq",
-                    "recipe_update_date": date(int(2020), int(11), int(19)),
-                    "recipe_src": "intro_image/ttt_lvuBhye.jpg"
-                },
-                {
-                    "recipe_id": 41,
-                    "recipe_title": "111",
-                    "recipe_description": "222",
-                    "recipe_update_date": date(int(2020), int(11), int(20)),
-                    "recipe_src": "intro_image/test_HArjKyH.jpeg"
-                },
-                {
-                    "recipe_id": 62,
-                    "recipe_title": "hhh",
-                    "recipe_description": "s",
-                    "recipe_update_date": date(int(2020), int(11), int(20)),
-                    "recipe_src": "intro_image/default.png"
-                },
-                {
-                    "recipe_id": 63,
-                    "recipe_title": "mmmm",
-                    "recipe_description": "t",
-                    "recipe_update_date": date(int(2020), int(11), int(20)),
-                    "recipe_src": "intro_image/Netflix_Logo_Final.png"
-                },
-                {
-                    "recipe_id": 84,
-                    "recipe_title": "qqq",
-                    "recipe_description": "ddd",
-                    "recipe_update_date": date(int(2020), int(11), int(24)),
-                    "recipe_src": "intro_image/test_v8AYyaH.jpeg"
-                }
-            ] 
-
-        self.assertEqual(search_user_response.data["data"], expected_data)
 
         
         
