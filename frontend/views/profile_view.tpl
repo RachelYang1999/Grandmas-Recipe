@@ -149,7 +149,7 @@
             </div>
              </a>
             <div class="layui-col-md4">
-                <button type="button" class="layui-btn layui-btn-primary">UNFOLLOW</button>
+                <button type="button" onclick='u_unfollow({{following_data["to_user_id"]}})' class="layui-btn layui-btn-primary">UNFOLLOW</button>
             </div>
            
         </div>
@@ -171,9 +171,9 @@
                         % end
                     % end
                     % if flag:
-                        <button type="button" onclick='u_follow({{follower_data["from_user_id"]}})' class="layui-btn layui-btn-primary">UNFOLLOW</button>
+                        <button type="button" onclick='u_unfollow({{follower_data["from_user_id"]}})' class="layui-btn layui-btn-primary">UNFOLLOW</button>
                     % else:
-                        <button type="button" onclick='u_unfollow({{follower_data["from_user_id"]}})' class="layui-btn layui-btn-normal">FOLLOW</button>
+                        <button type="button" onclick='u_follow({{follower_data["from_user_id"]}})' class="layui-btn layui-btn-normal">FOLLOW</button>
                     % end
                 </div>
             </div>

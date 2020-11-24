@@ -36,18 +36,18 @@ class SearchTest(TestCase):
     #     self.assertEqual(search_category_response.data['msg'], "success")
 
     
-    def test_get_search_title(self):
+    # def test_get_search_title(self):
 
-        # get status code
-        search_title_url = "/api/search/"      
-        search_title_request = self.factory.get(search_title_url, {"recipe_title":"potato"})
-        search_title_view = Search.as_view()
-        search_title_response = search_title_view(search_title_request)
-        self.assertEqual(search_title_response.status_code, 200)
+    #     # get status code
+    #     search_title_url = "/api/search/"      
+    #     search_title_request = self.factory.get(search_title_url, {"recipe_title":"potato"})
+    #     search_title_view = Search.as_view()
+    #     search_title_response = search_title_view(search_title_request)
+    #     self.assertEqual(search_title_response.status_code, 200)
 
-        # get msg
-        self.assertEqual(search_title_response.data['code'], 100)
-        self.assertEqual(search_title_response.data['msg'], "success")
+    #     # get msg
+    #     self.assertEqual(search_title_response.data['code'], 100)
+    #     self.assertEqual(search_title_response.data['msg'], "success")
 
 
     def test_get_search_user(self):

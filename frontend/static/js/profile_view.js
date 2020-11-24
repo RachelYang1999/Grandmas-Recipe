@@ -61,10 +61,12 @@ function u_follow(ele){
         };
 
         $.ajax(settings).done(function (response) {
-            layer.msg("Followed :)");
             console.log(response);
+            layer.msg("Followed :)");
+            location.reload();
+            
         });
-        $(".layui-layer-btn0").click();    
+        
 
 }
 
@@ -87,9 +89,10 @@ function u_unfollow(ele){
     };
 
     $.ajax(settings).done(function (response) {
-        layer.msg("Unfllowed :)");
         console.log(response);
+        layer.msg("Unfllowed :)");
+        location.reload();
     });
-    $(".layui-layer-btn0").click();    
+       
 
 }

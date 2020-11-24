@@ -73,7 +73,7 @@ class Follow_view(APIView):
         to_user = request.data.get('to_user')
 
         try:
-            User_follow.objects.filter(from_user=from_user_obj.id, to_user=to_user).delete()
+            User_follow.objects.get(from_user=from_user_obj.id, to_user=to_user).delete()
         except User_follow.DoesNotExist:
             return Response(util.get_response(400,"user follow not exist",None))
 
