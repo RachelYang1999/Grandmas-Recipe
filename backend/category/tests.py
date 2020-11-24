@@ -40,7 +40,7 @@ class CategoryTest(TestCase):
         request = self.factory.get(url)
         my_view = Category_view.as_view()
         response = my_view(request)
-        print(response.data['data'])
+        # print(response.data['data'])
         self.assertEqual(response.data['code'], 100)
         self.assertEqual(response.data['msg'], "success")
 

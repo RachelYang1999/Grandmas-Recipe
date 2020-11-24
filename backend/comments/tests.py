@@ -14,11 +14,6 @@ from uauth.views import User_auth
 
 class CommentTest(TestCase):
 
-    #     comment_content = models.CharField(max_length=500)
-    # comment_publish_date = models.DateTimeField(auto_now_add=True)
-    # comment_recipe = models.ForeignKey(Recipe, related_name='referenceRecipe',on_delete=models.CASCADE,default=1)
-    # comment_user = models.ForeignKey(User, related_name='referenceUser',on_delete=models.CASCADE,default=1)
-
     def setUp(self):
         call_command("loaddata", "test_data.json",verbosity=0)
         self.factory = APIRequestFactory()
@@ -31,13 +26,13 @@ class CommentTest(TestCase):
             )
 
     def test_comment_model(self):
-        recipe = Recipe.objects.get(id = 1)
-        user = User.objects.get(id = 1)
+        # recipe = Recipe.objects.get(id = 1)
+        # user = User.objects.get(id = 1)
 
-        Comment.objects.create(comment_content = "Nice!", comment_recipe = recipe, comment_user = user)
+        # Comment.objects.create(comment_content = "Nice!", comment_recipe = recipe, comment_user = user)
         comment = Comment.objects.get(id = 1)
-        self.assertEqual(comment.comment_content, "Nice!")
-        self.assertEqual(comment.comment_recipe.id, 1)
+        self.assertEqual(comment.comment_content, "hihi")
+        self.assertEqual(comment.comment_recipe.id, 3)
         self.assertEqual(comment.comment_user.id, 1)
 
     def test_post_comment_without_login(self):

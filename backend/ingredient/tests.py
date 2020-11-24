@@ -23,16 +23,16 @@ class CategoryTest(TestCase):
                         user = User.objects.get(id = 1)
             )
 
-        Ingredient.objects.create(ingredient_name = "milk", ingredient_link = \
-            "https://shop.coles.com.au/a/national/product/sanitarium-so-good-milk-long-life-soy-regular-403029p?adId=display_DtLwZdDP-tNJSUJSu6HyfyLtNI80MDMwMjlQ",\
-                ingredient_related_recipe = Recipe.objects.get(id = 1))
+        # Ingredient.objects.create(ingredient_name = "milk", ingredient_link = \
+        #     "https://shop.coles.com.au/a/national/product/sanitarium-so-good-milk-long-life-soy-regular-403029p?adId=display_DtLwZdDP-tNJSUJSu6HyfyLtNI80MDMwMjlQ",\
+        #         ingredient_related_recipe = Recipe.objects.get(id = 1))
 
     def test_ingredient_model(self):
 
         """Test the model of Ingredient"""
         ingredient = Ingredient.objects.get(id = 1)
 
-        self.assertEqual(ingredient.ingredient_name, "milk")
+        self.assertEqual(ingredient.ingredient_name, "1 cup soy milk")
         self.assertEqual(ingredient.ingredient_link, \
             "https://shop.coles.com.au/a/national/product/sanitarium-so-good-milk-long-life-soy-regular-403029p?adId=display_DtLwZdDP-tNJSUJSu6HyfyLtNI80MDMwMjlQ")
         self.assertEqual(ingredient.ingredient_related_recipe.id, 1)
