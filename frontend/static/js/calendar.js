@@ -27,7 +27,7 @@ function get_data(start, end) {
         dataType: 'json',
         headers: {"token": $.cookie("token"),"ctoken": $.cookie("ctoken"),},
         success: function(response) {
-            console.log(response);
+            // console.log(response);
             
             var tableStr="<td>Breaky</td>";
             for ( var i = 0; i < 7; i++) {
@@ -53,7 +53,7 @@ function get_data(start, end) {
 
 function get_recipe(response,date,type){
     for ( var i = 0; i < response.length; i++) { 
-        console.log(response[i]);
+        // console.log(response[i]);
         if (response[i].date==date && response[i].meal_type==type){
             return  '<a href="/recipe_detail?id='+response[i].id+'"><input id="'+date+":"+type+'" type="text" style="width:80px;border:0" value="'+response[i].recipe_title+'" readonly/></a>' + "<br><button class='layui-btn layui-btn-xs' value='change' onclick='add_cal(\""+date+":"+type+"\")'>change</button>"
         }
@@ -62,7 +62,7 @@ function get_recipe(response,date,type){
 }
  
 function add_cal(data){
-    console.log(data);
+    // console.log(data);
     var datas = data.split(":");
     layui.use('layer', function(){
         var layer = layui.layer;
@@ -104,14 +104,6 @@ function add_cal(data){
             }
             
         }); 
-        window.sel_cal=function (ele){
-                $("#r_id").val(ele);
-                $("#select-"+ele).removeClass("layui-btn-normal");
-                $("#select-"+ele).addClass("layui-btn-primary");
-                $("#select-"+ele).html("SELECTED");
-                
-            }
-            layer.render();
         
     }); 
     
@@ -190,7 +182,8 @@ function getNewDay(dateTemp, days) {
 
 function sel_cal(ele){
     $("#r_id").val(ele);
-    $("#select-"+ele).removeClass("layui-btn-normal");
-    $("#select-"+ele).addClass("layui-btn-primary");
-    $("#select-"+ele).html("SELECTED");
+    // $("#select-"+ele).removeClass("layui-btn-normal");
+    // $("#select-"+ele).addClass("layui-btn-primary");
+    // $("#select-"+ele).html("SELECTED");
+    $(".layui-layer-btn0").click();    
 }
