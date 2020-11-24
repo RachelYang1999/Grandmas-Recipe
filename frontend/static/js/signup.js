@@ -4,7 +4,7 @@ layui.use(['form','layer','jquery'], function () {
         var $ = layui.jquery;
         form.on('submit(login)',function (data) {
             $.ajax({
-                url:'http://'+$("#backend").html()+':9999/api/auth/',
+                url:$("#backend").html()+'api/auth/',
                 data:data.field,
                 dataType:'text',
                 type:'put',

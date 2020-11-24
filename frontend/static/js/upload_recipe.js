@@ -5,7 +5,7 @@ layui.use(['form','jquery','upload'], function(){
 
     var uploadInst = upload.render({
         elem: '#main-pic'
-        ,url:'http://'+$("#backend").html()+':9999/api/upload/intro_image/'
+        ,url:$("#backend").html()+'api/upload/intro_image/'
         ,auto:false
         ,size: 1024
         ,field: "document"
@@ -35,7 +35,7 @@ layui.use(['form','jquery','upload'], function(){
     function picupload(id) {
         upload.render({
             elem: "#step-addpic-"+id
-            ,url:'http://'+$("#backend").html()+':9999/api/upload/recipe_image/'
+            ,url:$("#backend").html()+'api/upload/recipe_image/'
             ,auto:false
             ,size: 1024
             ,field: "document"
@@ -122,7 +122,7 @@ layui.use(['form','jquery','upload'], function(){
     
         
         $.ajax({
-            url:'http://'+$("#backend").html()+':9999/api/recipe/',
+            url:$("#backend").html()+'api/recipe/',
             data:data.field,
             type:'post',
             headers:{"token":$.cookie("token"),"ctoken": $.cookie("ctoken"),},

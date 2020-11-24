@@ -11,7 +11,7 @@ def get_backend():
     config.read('config.ini')
     return config['SETTING']['backend']
 
-root='http://'+get_backend()+':9999/api/'
+root=get_backend()+'api/'
 
 def getToken():
     token = request.get_cookie('token')

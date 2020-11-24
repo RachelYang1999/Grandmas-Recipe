@@ -6,7 +6,7 @@ layui.use(['form','layer','jquery'], function () {
         form.on('submit(forget)',function (data) {
             $.ajax({
                 
-                url:'http://'+$("#backend").html()+':9999/api/f_password/',
+                url:$("#backend").html()+'api/f_password/',
                 data:data.field,
                 dataType:'text',
                 type:'post',
@@ -35,7 +35,7 @@ function send(){
         form.append("email", $("#email").val());
 
         var settings = {
-        "url": 'http://'+$("#backend").html()+':9999/api/e_password/',
+        "url": $("#backend").html()+'api/e_password/',
         "method": "POST",
         "timeout": 0,
         "processData": false,

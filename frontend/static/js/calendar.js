@@ -20,7 +20,7 @@ layui.use(['laydate','layer'], function () {
 
 function get_data(start, end) {
     $.ajax({
-        url: 'http://'+$("#backend").html()+':9999/api/calendar/',
+        url: $("#backend").html()+'api/calendar/',
         type:'get',
         data: {start: start,
             end: end},
@@ -80,7 +80,7 @@ function add_cal(data){
                 form.append("meal_type", datas[1]);
 
                 var settings = {
-                    "url": "http://"+$("#backend").html()+":9999/api/calendar/",
+                    "url": $("#backend").html()+"api/calendar/",
                     "method": "POST",
                     "timeout": 0,
                     "headers": {

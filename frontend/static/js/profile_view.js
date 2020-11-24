@@ -13,7 +13,7 @@ function following_layer(){
                     form.append("recipe_id", $('#r_id').val());
 
                     var settings = {
-                        "url": "http://"+$("#backend").html()+":9999/api/calendar/",
+                        "url": $("#backend").html()+"api/calendar/",
                         "method": "POST",
                         "timeout": 0,
                         "headers": {
@@ -54,7 +54,7 @@ function follower_layer(){
                     form.append("recipe_id", $('#r_id').val());
 
                     var settings = {
-                        "url": "http://"+$("#backend").html()+":9999/api/calendar/",
+                        "url": $("#backend").html()+"api/calendar/",
                         "method": "POST",
                         "timeout": 0,
                         "headers": {
