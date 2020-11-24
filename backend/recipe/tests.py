@@ -3,7 +3,6 @@ from rest_framework.test import APIRequestFactory,force_authenticate
 from unittest.mock import patch
 from django.core.management import call_command
 from django.test import Client
-from datetime import *
 
 from comments.models import Comment
 from recipe.models import Recipe
@@ -47,23 +46,25 @@ class RecipeTest(TestCase):
         self.assertEqual(response.status_code, 403)
 
 
-    def test_get_recipe_success(self):
-        """Test get recipe after logging in"""
-        login_url = "/api/auth/"      
-        login_request = self.factory.post(login_url,{"username":"root","password":"root"})
-        login_view = User_auth.as_view()
-        login_response = login_view(login_request)
-        self.token = login_response.data["data"]["token"]
+    # def test_get_recipe(self):
+    #     """Test get recipe after logging in"""
+    #     login_url = "/api/auth/"      
+    #     login_request = self.factory.post(login_url,{"username":"root","password":"root"})
+    #     login_view = User_auth.as_view()
+    #     login_response = login_view(login_request)
+    #     self.token = login_response.data["data"]["token"]
 
-        user = User.objects.get(id = 1)
+    #     user = User.objects.get(id = 1)
 
-        recipe_url = "/api/recipe/"      
-        recipe_request = self.factory.get(recipe_url, {"id": 1})
+    #     recipe_url = "/api/recipe/"      
+    #     recipe_request = self.factory.get(recipe_url)
 
-        force_authenticate(recipe_request, user=user)
-        recipe_view = RecipeView.as_view()
-        recipe_response = recipe_view(recipe_request)
-        self.assertEqual(recipe_response.status_code, 200)
+    #     # recipe_request = self.factory.get(recipe_url, {"id": 1})
+
+    #     force_authenticate(recipe_request, user=user)
+    #     recipe_view = RecipeView.as_view()
+    #     recipe_response = recipe_view(recipe_request)
+    #     self.assertEqual(recipe_response.status_code, 200)
 
     def test_post_recipe_without_login(self):
         """Test post recipe without auth"""
@@ -185,6 +186,96 @@ class RecipeFavViewTest(TestCase):
         self.assertEqual(returned_code, 400)
         self.assertEqual(returned_msg, "favourite recipe exist")
 
+class RecipeEditViewTest(TestCase):
+
+    def setUp(self):
+        call_command("loaddata", "test_data.json",verbosity=0)
+        self.factory = APIRequestFactory()
+
+    def test_edit_without_login(self):
+        view = RecipeEditView.as_view()
+        recipe_url = "/api/edit_recipe/"      
+        recipe_request = self.factory.post(recipe_url, {"recipe_id": 1, "recipe_title": "Noodles", \
+            "description": "Nice",\
+                "is_published": 1,\
+                    "category": "Lunch,Dinner",\
+                        "step_count": 2,\
+                            "step-1": "Boil",\
+                                "step-2": "fry",\
+                                    "ingredient_count": 2,\
+                                        "ingredient-1": "salt",\
+                                            "ingredient-1-shoppinglink": "linka",\
+                                                "ingredient-2": "ingredient",\
+                                                    "ingredient-2-shoppinglink": "linkb"})
+        response = view(recipe_request)
+        self.assertEqual(response.status_code, 403)
+
+    def test_edit_success(self):
+
+        """Test post after logging in"""
+        login_url = "/api/auth/"      
+        login_request = self.factory.post(login_url,{"username":"root","password":"root"})
+        login_view = User_auth.as_view()
+        login_response = login_view(login_request)
+        self.token = login_response.data["data"]["token"]
+
+        user = User.objects.get(id = 1)
+
+        view = RecipeEditView.as_view()
+        recipe_url = "/api/edit_recipe/"      
+        recipe_request = self.factory.post(recipe_url, {"recipe_id": 1, "recipe_title": "Noodles", \
+            "description": "Nice",\
+                "is_published": 1,\
+                    "category": "Dinner,Lunch,Seafood",\
+                        "step_count": 2,\
+                            "step-1": "Boil",\
+                                "step-2": "fry",\
+                                    "ingredient_count": 2,\
+                                        "ingredient-1": "salt",\
+                                            "ingredient-1-shoppinglink": "linka",\
+                                                "ingredient-2": "ingredient",\
+                                                    "ingredient-2-shoppinglink": "linkb"})
+        force_authenticate(recipe_request, user=user)
+
+        recipe_response = view(recipe_request)
+        self.assertEqual(recipe_response.status_code, 200)
+
+    def test_edit_no_category(self):
+
+        """Test post after logging in"""
+        login_url = "/api/auth/"      
+        login_request = self.factory.post(login_url,{"username":"root","password":"root"})
+        login_view = User_auth.as_view()
+        login_response = login_view(login_request)
+        self.token = login_response.data["data"]["token"]
+
+        user = User.objects.get(id = 1)
+
+        view = RecipeEditView.as_view()
+        recipe_url = "/api/edit_recipe/"      
+        recipe_request = self.factory.post(recipe_url, {"recipe_id": 1, "recipe_title": "Noodles", \
+            "description": "Nice",\
+                "is_published": 1,\
+                    "category": "",\
+                        "step_count": 2,\
+                            "step-1": "Boil",\
+                                "step-2": "fry",\
+                                    "ingredient_count": 2,\
+                                        "ingredient-1": "salt",\
+                                            "ingredient-1-shoppinglink": "linka",\
+                                                "ingredient-2": "ingredient",\
+                                                    "ingredient-2-shoppinglink": "linkb"})
+        force_authenticate(recipe_request, user=user)
+
+        recipe_response = view(recipe_request)
+        self.assertEqual(recipe_response.status_code, 200)
+
+        # Test return code and msg
+        returned_code = recipe_response.data['code']
+        returned_msg = recipe_response.data['msg']
+        self.assertEqual(returned_code, 400)
+        self.assertEqual(returned_msg, "You must choose at least one category!")
+             
 
 
 

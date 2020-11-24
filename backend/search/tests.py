@@ -8,7 +8,7 @@ from django.test import Client
 from recipe.models import Recipe
 from user.models import User
 from category.models import Category
-# from uauth.views import User_auth
+from uauth.views import User_auth
 from search.views import Search
 from search.views import Search_user
 
