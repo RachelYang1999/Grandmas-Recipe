@@ -9,29 +9,6 @@ function following_layer(){
                 btn: ['Confirm', 'Cancel'], 
     
                 yes:function(index,layero){
-                    var form = new FormData();
-                    form.append("recipe_id", $('#r_id').val());
-
-                    var settings = {
-                        "url": $("#backend").html()+"api/calendar/",
-                        "method": "POST",
-                        "timeout": 0,
-                        "headers": {
-                            "token": $.cookie("token"),
-                            "ctoken": $.cookie("ctoken"),
-                        },
-                        "processData": false,
-                        "mimeType": "multipart/form-data",
-                        "contentType": false,
-                        "data": form
-                    };
-
-                    $.ajax(settings).done(function (response) {
-                        var dateTemp = datas[0].split("-");
-                        var nDate = new Date(dateTemp[1] + '-' + dateTemp[2] + '-' + dateTemp[0]);
-                        var date = new Date(nDate);
-                        newDate(date);
-                    });
                     layer.close(index);
                         
                 }
@@ -50,29 +27,6 @@ function follower_layer(){
                 btn: ['Confirm', 'Cancel'], 
     
                 yes:function(index,layero){
-                    var form = new FormData();
-                    form.append("recipe_id", $('#r_id').val());
-
-                    var settings = {
-                        "url": $("#backend").html()+"api/calendar/",
-                        "method": "POST",
-                        "timeout": 0,
-                        "headers": {
-                            "token": $.cookie("token"),
-                            "ctoken": $.cookie("ctoken"),
-                        },
-                        "processData": false,
-                        "mimeType": "multipart/form-data",
-                        "contentType": false,
-                        "data": form
-                    };
-
-                    $.ajax(settings).done(function (response) {
-                        var dateTemp = datas[0].split("-");
-                        var nDate = new Date(dateTemp[1] + '-' + dateTemp[2] + '-' + dateTemp[0]);
-                        var date = new Date(nDate);
-                        newDate(date);
-                    });
                     layer.close(index);
                         
                 }
@@ -86,4 +40,56 @@ function my_delt(ele){
 
 function fav_delt(ele){
     $("#fav-"+ele).remove();
+}
+
+function u_follow(ele){
+    var form = new FormData();
+        form.append("to_user", ele);
+
+        var settings = {
+        "url":$("#backend").html()+'api/follow/',
+        "method": "POST",
+        "timeout": 0,
+        "headers": {
+            "token": $.cookie("token"),
+            "ctoken": $.cookie("ctoken"),
+        },
+        "processData": false,
+        "mimeType": "multipart/form-data",
+        "contentType": false,
+        "data": form
+        };
+
+        $.ajax(settings).done(function (response) {
+            layer.msg("Followed :)");
+            console.log(response);
+        });
+        $(".layui-layer-btn0").click();    
+
+}
+
+function u_unfollow(ele){
+    var form = new FormData();
+    form.append("to_user", ele);
+
+    var settings = {
+    "url":$("#backend").html()+'api/follow/',
+    "method": "DELETE",
+    "timeout": 0,
+    "headers": {
+        "token": $.cookie("token"),
+        "ctoken": $.cookie("ctoken"),
+    },
+    "processData": false,
+    "mimeType": "multipart/form-data",
+    "contentType": false,
+    "data": form
+    };
+
+    $.ajax(settings).done(function (response) {
+        layer.msg("Unfllowed :)");
+        console.log(response);
+    });
+    $(".layui-layer-btn0").click();    
+
 }
