@@ -33,7 +33,7 @@ layui.use(['form','element'], function () {
         ],
     });
     $.ajax({
-            url:'http://'+$("#backend").html()+':9999/api/csrftoken/',
+            url:$("#backend").html()+'api/csrftoken/',
             type: 'get',
             success: function (res) {
                 $.cookie("ctoken",res.data.ctoken);

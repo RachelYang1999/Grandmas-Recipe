@@ -179,6 +179,6 @@ class CSRF(APIView):
 
     def get(self, request):
         token=util.create_salt(64)
-        cache.set(token,token,timeout=7200)
+        cache.set(token,token,timeout=3600)
         rst=util.get_response(100,"success",{'ctoken':token})
         return Response(rst)

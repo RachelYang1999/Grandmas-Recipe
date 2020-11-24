@@ -6,7 +6,7 @@ layui.use(['upload','laydate'], function(){
    
     upload = upload.render({
         elem: '#test1'
-        ,url: 'http://'+$("#backend").html()+':9999/api/upload/profile_image/'
+        ,url: $("#backend").html()+'api/upload/profile_image/'
         ,headers:{"token":$.cookie("token"),"ctoken": $.cookie("ctoken"),}
         ,field: "document"
         ,done: function(res){
@@ -29,7 +29,7 @@ layui.use(['upload','laydate'], function(){
 
     form.on('submit(profile-submit)',function (data) {
         $.ajax({
-            url:'http://'+$("#backend").html()+':9999/api/profile/',
+            url:$("#backend").html()+'api/profile/',
             data:data.field,
             headers:{"token":$.cookie("token"),"ctoken": $.cookie("ctoken"),},
             type:'post',
@@ -75,7 +75,7 @@ function change(){
                 form.append("new-password", $("#new-password").val());
 
                 var settings = {
-                "url": 'http://'+$("#backend").html()+':9999/api/password/',
+                "url": $("#backend").html()+'api/password/',
                 "method": "POST",
                 "timeout": 0,
                 "headers": {

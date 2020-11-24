@@ -9,7 +9,7 @@ layui.use(['form','jquery'], function () {
             form.append("recipe_id", $("#r_id").val());
 
             var settings = {
-            "url":'http://'+$("#backend").html()+':9999/api/comments/',
+            "url":$("#backend").html()+'api/comments/',
             "method": "POST",
             "timeout": 0,
             "headers": {
@@ -37,7 +37,7 @@ layui.use(['form','jquery'], function () {
         form.append("to_user", $("#auth_id").val());
 
         var settings = {
-        "url":'http://'+$("#backend").html()+':9999/api/follow/',
+        "url":$("#backend").html()+'api/follow/',
         "method": "POST",
         "timeout": 0,
         "headers": {
@@ -64,7 +64,7 @@ layui.use(['form','jquery'], function () {
         form.append("recipe_id", $("#r_id").val());
 
         var settings = {
-        "url":'http://'+$("#backend").html()+":9999/api/fav_recipe/",
+        "url":$("#backend").html()+"api/fav_recipe/",
         "method": "POST",
         "timeout": 0,
         "headers": {
