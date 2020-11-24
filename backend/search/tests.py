@@ -17,7 +17,7 @@ class SearchTest(TestCase):
 
     def setUp(self):
         call_command("loaddata", "test_data.json",verbosity=0)
-        self.factory = APIRequestFactory(enforce_csrf_checks=False)
+        self.factory = APIRequestFactory()
     
     # def test_get_search_category(self):
 
@@ -36,7 +36,7 @@ class SearchTest(TestCase):
 
         # get status code
         search_user_url = "/api/search_user/"      
-        search_user_request = self.factory.get(search_user_url, HTTP_TOKEN=self.token)
+        search_user_request = self.factory.get(search_user_url)
         force_authenticate(search_user_request, user=user)
         search_user_view = Search_user.as_view()
         search_user_response = search_user_view(search_user_request)
