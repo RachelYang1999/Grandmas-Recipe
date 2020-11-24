@@ -65,6 +65,7 @@ class SearchTest(TestCase):
         # get msg
         self.assertEqual(search_user_response.data['code'], 100)
         self.assertEqual(search_user_response.data['msg'], "success")
+    
 
         
         
