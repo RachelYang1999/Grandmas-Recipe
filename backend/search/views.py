@@ -43,6 +43,7 @@ class Search(APIView):
         # mark_type = request.data.get("mark")
         category_type=request.data.get("category")
         recipe_name=request.data.get("recipe_title")
+        # print(category_type,recipe_name)
 
         # search recipes by mark
         

@@ -39,9 +39,9 @@ class Follow_view(APIView):
             follower.append(temp)
 
         data = {
-            "follower": user.total_follower,
+            "follower": len(follower),
             "follower_data": follower,
-            "following": user.total_following,
+            "following": len(following),
             "following_data": following 
         }
 
@@ -64,6 +64,18 @@ class Follow_view(APIView):
             to_user_obj.save()
             follow = User_follow.objects.create(from_user=from_user_obj, to_user=to_user_obj)
             follow.save()
+
+        rst=util.get_response(100,"success",None)
+        return Response(rst)
+
+    def delete(self, request, *args, **kwargs):
+        from_user_obj = request.user
+        to_user = request.data.get('to_user')
+
+        try:
+            User_follow.objects.get(from_user=from_user_obj.id, to_user=to_user).delete()
+        except User_follow.DoesNotExist:
+            return Response(util.get_response(400,"user follow not exist",None))
 
         rst=util.get_response(100,"success",None)
         return Response(rst)

@@ -99,7 +99,7 @@
                     <div class="center"> 
                         % index=0          
                         % for r in favrecipes:
-                            <div class = "layui-row " id="my-{{index}}">   
+                            <div class = "layui-row " id="fav-{{index}}">   
                                 <div class = "height_width">
                                     <a href = "/recipe_detail?id={{r['id']}}">
                                         <div class="layui-col-md5">
@@ -147,10 +147,11 @@
             <div class="layui-col-md8">
                 <img class="logo" src='/img/{{following_data["to_user_avatar"]}}'>{{following_data["to_user_name"]}}
             </div>
+             </a>
             <div class="layui-col-md4">
-                <button type="button" class="layui-btn layui-btn-primary">UNFOLLOW</button>
+                <button type="button" onclick='u_unfollow({{following_data["to_user_id"]}})' class="layui-btn layui-btn-primary">UNFOLLOW</button>
             </div>
-            </a>
+           
         </div>
     % end
 </div>
@@ -161,11 +162,22 @@
                 <div class="layui-col-md8">
                     <img class="logo" src='/img/{{follower_data["from_user_avatar"]}}'>{{follower_data["from_user_name"]}}
                 </div>
+                </a>
                 <div class="layui-col-md4">
-                    <button type="button" class="layui-btn layui-btn-normal">FOLLOW</button>
+                    % flag=False
+                    % for following_data in follow_data["following_data"]:
+                        % if follower_data["from_user_id"]==following_data["to_user_id"]:
+                            % flag=True
+                        % end
+                    % end
+                    % if flag:
+                        <button type="button" onclick='u_unfollow({{follower_data["from_user_id"]}})' class="layui-btn layui-btn-primary">UNFOLLOW</button>
+                    % else:
+                        <button type="button" onclick='u_follow({{follower_data["from_user_id"]}})' class="layui-btn layui-btn-normal">FOLLOW</button>
+                    % end
                 </div>
             </div>
-            </a>
+            
         % end
 </div>
 

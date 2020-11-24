@@ -12,7 +12,7 @@ class UserAuth(BaseAuthentication):
         if request.method != 'GET':
             try:
                 ctoken = request.META.get('HTTP_CTOKEN')
-                print("ctoken",ctoken)
+                # print("ctoken",ctoken)
                 cache_toke = cache.get(ctoken)
 
                 if ctoken== None or cache_toke!=ctoken:
@@ -20,14 +20,14 @@ class UserAuth(BaseAuthentication):
             except:
                 raise exceptions.AuthenticationFailed({"code":400,"msg": "ctoken invalid","data":None})
 
-        if request.method == 'GET' or request.method == 'POST':
+        if request.method == 'GET' or request.method == 'POST' or request.method == 'DELETE':
             
             try:
                 token = request.META.get('HTTP_TOKEN')
-                print(token)
+                # print(token)
                 user_id=token.split("$")[1]
                 cache_toke = cache.get(user_id)
-                print(cache_toke)
+                # print(cache_toke)
                 if cache_toke==token:
                     user = User.objects.get(pk=user_id)
                     return user, token
@@ -43,7 +43,7 @@ class UserAuth_Auth(BaseAuthentication):
             
             try:
                 token = request.META.get('HTTP_TOKEN')
-                print(token)
+                # print(token)
                 user_id=token.split("$")[1]
                 cache_toke = cache.get(user_id)
                 if cache_toke==token:
@@ -61,7 +61,7 @@ class UserAuth_POST(BaseAuthentication):
             
             try:
                 token = request.META.get('HTTP_TOKEN')
-                print(token)
+                # print(token)
                 user_id=token.split("$")[1]
                 cache_toke = cache.get(user_id)
                 if cache_toke==token:
