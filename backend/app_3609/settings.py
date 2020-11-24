@@ -109,7 +109,7 @@ DATABASES = {
         'NAME': 'elec3609',
         'USER': 'elec3609',
         'PASSWORD': 'rPnd37b4zwBX4ppi',
-        'HOST': '172.17.0.4',
+        'HOST': '172.17.0.1',
         'PORT': '3306',
     }
     
