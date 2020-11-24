@@ -8,16 +8,11 @@ from django.test import Client
 from recipe.models import Recipe
 from user.models import User
 from category.models import Category
-<<<<<<< HEAD
 from uauth.views import User_auth
 from search.views import Search
 from search.views import Search_user
 
 from datetime import datetime, date
-=======
-from uauth.views import User_auth,CSRF
-from search.views import Search,Search_user
->>>>>>> 7633c0c5b8aa9795bd3c3b1f6881a6d80eedaf27
 
 # Create your tests here.
 
