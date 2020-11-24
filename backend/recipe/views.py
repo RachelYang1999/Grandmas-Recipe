@@ -105,7 +105,7 @@ class RecipeView(APIView):
         step_decription_list = []
         step_count = request.data.get("step_count")
         for i in range(int(step_count)):
-            step_number = i + 1
+            step_number = i + 1 
             input_step_name = "step-" + str(step_number)
             step_decription_list.append(request.data.get(input_step_name))
         print(step_decription_list)
