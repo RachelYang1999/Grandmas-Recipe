@@ -4,7 +4,7 @@ from unittest.mock import patch
 from django.core.management import call_command
 
 from user.models import User
-from uauth.views import User_auth,User_pass,User_se_pass
+from uauth.views import User_auth,User_pass,User_se_pass,CSRF
 
 
 
