@@ -78,8 +78,10 @@ def signout():
     redirect('/')
 
 @app.get('/forget')
-def signout():
-    
+def forget():
+    rtv = getToken()
+    if rtv is not None:
+        redirect('/')
     return template("forget",backend=get_backend(),page="forget")
 
 @app.get('/calendar')

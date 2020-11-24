@@ -7,14 +7,14 @@
 %include('header_sign.tpl')
 <div class="login-main layui-body">
     <header class="layui-elip">Forget Password</header>
-    <div id="code-block">
-        
+    <form class="layui-form" id="code-block">
+        <div class="layui-input-inline">
             <input type="text" id="email" name="email"  placeholder="E-mail" autocomplete="off"class="layui-input email" >
-        
-        
-            <button class="layui-btn" onclick="send()">Send Code</button>
-        
-    </div>
+        </div>
+        <div class="layui-input-inline">
+            <button class="layui-btn" lay-submit lay-filter="send" >Send Code</button>
+        </div>
+    </form>
     <form class="layui-form layui-hide" id="password-block">
         <div class="layui-input-inline">
             <input type="test" name="code" required lay-verify="code" placeholder="Verification Code" autocomplete="off"

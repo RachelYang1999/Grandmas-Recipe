@@ -99,7 +99,7 @@
                     <div class="center"> 
                         % index=0          
                         % for r in favrecipes:
-                            <div class = "layui-row " id="fav-{{index}}">   
+                            <div class = "layui-row " id="fav-{{r['id']}}">   
                                 <div class = "height_width">
                                     <a href = "/recipe_detail?id={{r['id']}}">
                                         <div class="layui-col-md5">
@@ -118,7 +118,7 @@
                                 </div>    
                                 % if username == userdata["username"]:
                                 <div style="margin-top: -150px;">
-                                <button type="button" onclick="fav_delt({{index}})" class="layui-btn layui-btn-radius layui-btn-danger">
+                                <button type="button" onclick="u_unfav({{r['id']}})" class="layui-btn layui-btn-radius layui-btn-danger">
                                     <i class="layui-icon">&#xe640;</i>
                                 </button>
                                 </div>
@@ -141,6 +141,7 @@
 </body>
 
 <div id="following-block" class="layui-hide">
+    <div style="margin-left:30px;margin-top:30px;"> 
     % for following_data in follow_data["following_data"]:
         <div class="layui-row">
             <a href='/profile_view?userid={{following_data["to_user_id"]}}'>
@@ -154,8 +155,10 @@
            
         </div>
     % end
+    </div>
 </div>
 <div id="follower-block" class="layui-hide">
+        <div style="margin-left:30px;margin-top:30px;"> 
         % for follower_data in follow_data["follower_data"]:
             <div class="layui-row">
                 <a href='/profile_view?userid={{follower_data["from_user_id"]}}'>
@@ -179,6 +182,7 @@
             </div>
             
         % end
+        </div>
 </div>
 
 </html>

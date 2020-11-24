@@ -46,12 +46,14 @@
                 <div class="layui-tab-content center">
                     <div class="layui-tab-item">
                         % for i in range (0,3):
-                        <div class="layui-row layui-col-space10">
+                        <div class="layui-row" style="margin:30px;">
                             % for j in range (0,4):
-                            <div class="layui-col-md3">
-                                <img class="r_i" src="/icon/logo.png">
-                                <div class="center">Newest 1</div>
-                            </div>
+                            <a href='/recipe_detail?id={{hottest[(2-i)*4+(3-j)]["id"]}}''>
+                                <div class="layui-col-md3">
+                                    <img class="r_i" src='/img/{{hottest[(2-i)*4+(3-j)]["meta"]}}'>
+                                    <div class="center">{{hottest[i*4+j]["title"]}}</div>
+                                </div>
+                            </a>
                             % end
                         </div>
                         % end
@@ -73,12 +75,14 @@
                     </div>
                     <div class="layui-tab-item center">
                         % for i in range (0,3):
-                        <div class="layui-row layui-col-space10">
+                        <div class="layui-row" style="margin:30px;">
                             % for j in range (0,4):
-                            <div class="layui-col-md3">
-                                <img class="r_i" src="/icon/logo.png">
-                                <div class="center">Simplest 3</div>
-                            </div>
+                            <a href='/recipe_detail?id={{hottest[i*4+(3-j)]["id"]}}''>
+                                <div class="layui-col-md3">
+                                    <img class="r_i" src='/img/{{hottest[i*4+(3-j)]["meta"]}}'>
+                                    <div class="center">{{hottest[i*4+j]["title"]}}</div>
+                                </div>
+                            </a>
                             % end
                         </div>
                         % end

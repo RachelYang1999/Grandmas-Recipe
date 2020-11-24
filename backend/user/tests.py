@@ -34,4 +34,45 @@ class UserTest(TestCase):
         self.assertEqual(follow_response.data['code'], 100)
         self.assertEqual(follow_response.data['msg'], "success")
 
+    def test_post_follow(self):
+        view = Follow_view.as_view()
+        user = User.objects.get(id=1)
+
+        url = "/api/follow/"      
+        request = self.factory.post(url, {"to_user":"2"})
+
+        force_authenticate(request, user=user)
+
+        response = view(request)
+        exp=None
+
+        rst= response.data["data"]
+
+        request = self.factory.post(url, {"to_user":"7"})
+
+        force_authenticate(request, user=user)
+
+        response = view(request)
+        exp=None
+
+        rst= response.data["data"]
+
+        self.assertEqual(rst, exp)
+
+    def test_del_follow(self):
+        view = Follow_view.as_view()
+        user = User.objects.get(id=1)
+
+        url = "/api/follow/"      
+        request = self.factory.delete(url, {"to_user":"2"})
+
+        force_authenticate(request, user=user)
+
+        response = view(request)
+        exp=None
+
+        rst= response.data["data"]
+
+        self.assertEqual(rst, exp)
+
 

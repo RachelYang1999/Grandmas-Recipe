@@ -24,7 +24,7 @@
                             <h2 id = "user_name">
                                 <a href='/profile_view?userid={{recipe_data.get("user_id")}}' >
                                 <input type="text" value='{{recipe_data.get("user_id")}}' id="auth_id" style="display:none" readonly>
-                                <img src="/img/{{avatar}}" class="layui-nav-img"> 
+                                <img src='/img/{{recipe_data.get("user_avatar")}}' class="layui-nav-img"> 
                                 {{recipe_data.get("user_name")}} 
                                 </a>
                             </h2>
@@ -32,14 +32,24 @@
                     </div>
                     % if username != recipe_data.get("user_name"):
                     <div class="layui-inline">
-                        <button type="submit", class="layui-btn layui-btn-sm layui-btn-radius layui-btn-warm" onclick="follow()" id="fo" name = "follow"><i class="layui-icon">&#xe6af;</i> Follow the Author</button>
-                        <button type="submit", class="layui-btn layui-btn-sm layui-btn-radius layui-btn-warm layui-hide" id="unfo" onclick="follow()" name = "follow"><i class="layui-icon">&#xe6af;</i> Unfollow</button>
+                        % if not recipe_data.get("followed"):
+                        <button type="submit", class="layui-btn layui-btn-sm layui-btn-radius layui-btn-warm" onclick="follow()" id="fo" ><i class="layui-icon">&#xe6af;</i> Follow the Author</button>
+                        <button type="submit", class="layui-btn layui-btn-sm layui-btn-radius layui-btn-warm layui-hide" onclick="unfollow()" id="unfo" ><i class="layui-icon">&#xe6af;</i> Unfollow</button>
+                        % else:
+                        <button type="submit", class="layui-btn layui-btn-sm layui-btn-radius layui-btn-warm layui-hide" onclick="follow()" id="fo" ><i class="layui-icon">&#xe6af;</i> Follow the Author</button>
+                        <button type="submit", class="layui-btn layui-btn-sm layui-btn-radius layui-btn-warm" onclick="unfollow()" id="unfo" ><i class="layui-icon">&#xe6af;</i> Unfollow</button>
+                        % end
                     </div>
                     % end
                     
                     <div class="layui-inline">
+                        % if not recipe_data.get("faved"):
                         <button type="submit", class="layui-btn layui-btn-sm layui-btn-radius layui-btn-danger " onclick="favourite()" id="fav" name = "favourite"><i class="layui-icon">&#xe68c;</i>Add to Favourite</button>
-                        <button type="submit", class="layui-btn layui-btn-sm layui-btn-radius layui-btn-danger layui-hide" onclick="favourite()" id="unfav" name = "favourite"><i class="layui-icon">&#xe68c;</i>Cancel Favourite</button>
+                        <button type="submit", class="layui-btn layui-btn-sm layui-btn-radius layui-btn-danger layui-hide" onclick="unfavourite()" id="unfav" name = "favourite"><i class="layui-icon">&#xe68c;</i>Cancel Favourite</button>
+                        % else:
+                        <button type="submit", class="layui-btn layui-btn-sm layui-btn-radius layui-btn-danger layui-hide" onclick="favourite()" id="fav" name = "favourite"><i class="layui-icon">&#xe68c;</i>Add to Favourite</button>
+                        <button type="submit", class="layui-btn layui-btn-sm layui-btn-radius layui-btn-danger " onclick="unfavourite()" id="unfav" name = "favourite"><i class="layui-icon">&#xe68c;</i>Cancel Favourite</button>
+                        % end
                     </div>
                     
                 </div>
@@ -117,7 +127,7 @@
                 <div style = "margin: 10px">
                     
                     <h2>
-                        <img src="/img/{{avatar}}" class="layui-nav-img"> 
+                        <img src="/img/{{comment['comment_user_avatar']}}" class="layui-nav-img"> 
                         {{comment['comment_user_name']}} 
                     </h2>
                 </div>

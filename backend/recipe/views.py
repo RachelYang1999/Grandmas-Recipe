@@ -2,7 +2,7 @@ from uauth.auth import UserAuth
 from datetime import datetime
 from recipe.models import Recipe, Recipe_category, Recipe_mark,Recipe_favourite
 from category.models import Category
-from user.models import User
+from user.models import User,User_follow
 from step.models import Step
 from ingredient.models import Ingredient
 
@@ -19,6 +19,7 @@ class RecipeView(APIView):
     authentication_classes = (UserAuth,)
 
     def get(self, request):
+        user = request.user
         recipe_id = request.data.get("id")
         recipe = Recipe.objects.get(id = recipe_id)
         category_queryset = Recipe_category.objects.filter(recipe_of_category_id = recipe_id)
@@ -28,17 +29,33 @@ class RecipeView(APIView):
         comment_all_queryset = Comment.objects.filter(comment_recipe_id = recipe_id)
         # print(Comment.objects.get(comment_recipe_id = recipe_id).comment_content)
 
-        get_recipe_id = recipe.id
+        
 
         get_recipe_title = recipe.recipe_title
         get_recipe_description = recipe.description
         get_is_published = recipe.is_published
         get_update_date = recipe.update_date
         get_user_id = recipe.user_id
+        get_user_avatar = User.objects.filter(id=recipe.user_id).values()[0]["profile_image"]
         get_user_name = User.objects.get(id = recipe.user_id).username
         get_recipe_src=Recipe.objects.filter(id=recipe.id).values()[0]["intro_image"]
-        
 
+        get_recipe_id = recipe.id
+        get_followed=False
+        try:
+            User_follow.objects.get(from_user=user.id,to_user=get_user_id)
+            get_followed=True
+        except:
+            get_followed=False
+
+        get_fav=False
+        try:
+            Recipe_favourite.objects.get(recipe=get_recipe_id,user=user.id)
+            get_fav=True
+        except:
+            get_fav=False
+
+        
         get_category_list = []
         for c in category_queryset:
             get_category_list.append(Category.objects.get(id = c.category_of_recipe_id).id)
@@ -58,6 +75,7 @@ class RecipeView(APIView):
             single_comment = {}
             single_comment['comment_user_id'] = c.comment_user_id
             single_comment['comment_user_name'] = User.objects.get(id = c.comment_user_id).username
+            single_comment['comment_user_avatar'] = User.objects.filter(id = c.comment_user_id).values()[0]["profile_image"]
             single_comment['comment_content'] = c.comment_content
             single_comment['comment_date'] = c.comment_publish_date.strftime('%Y-%m-%d')
             # print(single_comment)
@@ -67,10 +85,13 @@ class RecipeView(APIView):
             "id": get_recipe_id,
             "intro_src": get_recipe_src,
             "title": get_recipe_title,
+            "followed": get_followed,
+            "faved": get_fav,
             "description": get_recipe_description,
             "is_published": get_is_published,
             "update_date": get_update_date,    
-            "user_id": get_user_id,  
+            "user_id": get_user_id, 
+            "user_avatar": get_user_avatar,  
             "category_id_list": get_category_list, 
             "step_list": get_step_list,
             "ingredient_name_list": get_ingredient_list,
@@ -195,6 +216,20 @@ class RecipeFavView(APIView):
             new_recipe = Recipe_favourite.objects.create(user=user, recipe=recipe)
             
 
+        rst=util.get_response(100,"success",None)
+
+        return Response(rst)
+
+    def delete(self, request):
+        recipe_id = request.data.get("recipe_id")
+        
+        user=request.user
+       
+        try:
+            recipe=Recipe.objects.get(id=recipe_id)
+            Recipe_favourite.objects.get(user=user, recipe=recipe).delete()
+        except Recipe_favourite.DoesNotExist:
+            return Response(util.get_response(400,"favourite recipe exist",None))
         rst=util.get_response(100,"success",None)
 
         return Response(rst)

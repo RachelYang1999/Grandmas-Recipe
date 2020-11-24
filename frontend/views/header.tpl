@@ -1,3 +1,4 @@
+    <link rel="icon" href="/icon/logo.png" type="image/x-icon">
     <link rel="stylesheet" href="/css/layui.css">
     <link rel="stylesheet" href="/css/layui-suit.css">
  

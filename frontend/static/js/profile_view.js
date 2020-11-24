@@ -34,12 +34,9 @@ function follower_layer(){
 
         }); 
 }
+
 function my_delt(ele){
     $("#my-"+ele).remove();
-}
-
-function fav_delt(ele){
-    $("#fav-"+ele).remove();
 }
 
 function u_follow(ele){
@@ -91,6 +88,31 @@ function u_unfollow(ele){
     $.ajax(settings).done(function (response) {
         console.log(response);
         layer.msg("Unfllowed :)");
+        location.reload();
+    });
+}
+
+function u_unfav(ele){
+    var form = new FormData();
+    form.append("recipe_id", ele);
+
+    var settings = {
+    "url":$("#backend").html()+'api/fav_recipe/',
+    "method": "DELETE",
+    "timeout": 0,
+    "headers": {
+        "token": $.cookie("token"),
+        "ctoken": $.cookie("ctoken"),
+    },
+    "processData": false,
+    "mimeType": "multipart/form-data",
+    "contentType": false,
+    "data": form
+    };
+
+    $.ajax(settings).done(function (response) {
+        console.log(response);
+        $("#fav-"+ele).remove();
         location.reload();
     });
        

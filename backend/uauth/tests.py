@@ -127,8 +127,8 @@ class MockAPITest(TestCase):
         force_authenticate(request, user=user)
 
         response = view(request)
-        exp=None
+        exp="success"
 
-        rst= response.data["data"]
+        rst= response.data["msg"]
 
         self.assertEqual(rst, exp)

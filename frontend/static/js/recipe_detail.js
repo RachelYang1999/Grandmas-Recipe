@@ -56,6 +56,31 @@ layui.use(['form','jquery'], function () {
             $("#unfo").removeClass("layui-hide");
             console.log(response);
         });
+    }
+    window.unfollow = function (){
+        var form = new FormData();
+        form.append("to_user", $("#auth_id").val());
+
+        var settings = {
+        "url":$("#backend").html()+'api/follow/',
+        "method": "DELETE",
+        "timeout": 0,
+        "headers": {
+            "token": $.cookie("token"),
+            "ctoken": $.cookie("ctoken"),
+        },
+        "processData": false,
+        "mimeType": "multipart/form-data",
+        "contentType": false,
+        "data": form
+        };
+
+        $.ajax(settings).done(function (response) {
+            layer.msg("Unfollowed :)");
+             $("#unfo").addClass("layui-hide");
+            $("#fo").removeClass("layui-hide");
+            console.log(response);
+        });
 
     }
     window.favourite = function (){
@@ -81,6 +106,33 @@ layui.use(['form','jquery'], function () {
             layer.msg("Success :)");
             $("#fav").addClass("layui-hide");
             $("#unfav").removeClass("layui-hide");
+            console.log(response);
+        });
+
+    }
+    window.unfavourite = function (){
+
+        var form = new FormData();
+        form.append("recipe_id", $("#r_id").val());
+
+        var settings = {
+        "url":$("#backend").html()+"api/fav_recipe/",
+        "method": "DELETE",
+        "timeout": 0,
+        "headers": {
+            "token": $.cookie("token"),
+            "ctoken": $.cookie("ctoken"),
+        },
+        "processData": false,
+        "mimeType": "multipart/form-data",
+        "contentType": false,
+        "data": form
+        };
+
+        $.ajax(settings).done(function (response) {
+            layer.msg("Favourite cancelled :)");
+            $("#unfav").addClass("layui-hide");
+            $("#fav").removeClass("layui-hide");
             console.log(response);
         });
 
