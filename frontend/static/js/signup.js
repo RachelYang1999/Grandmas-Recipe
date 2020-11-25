@@ -3,6 +3,7 @@ layui.use(['form','layer','jquery'], function () {
         var form = layui.form;
         var $ = layui.jquery;
         form.on('submit(login)',function (data) {
+            layer.msg("Signing up ......");
             $.ajax({
                 url:$("#backend").html()+'api/auth/',
                 data:data.field,
