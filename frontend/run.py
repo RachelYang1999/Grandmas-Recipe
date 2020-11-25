@@ -54,15 +54,15 @@ def serve_css(css):
 
 @app.error(404)
 def error404(error):
-   return static_file("error.html", root='/app/Frontend/')
+   return static_file("error.html", root='/app/error')
 
 @app.error(403)
 def error404(error):
-   return static_file("error.html", root='/app/Frontend/')
+   return static_file("error.html", root='/app/error')
 
 @app.error(500)
 def error404(error):
-   return static_file("error.html", root='/app/Frontend/')
+   return static_file("error.html", root='/app/error')
 
 @app.get('/signin')
 def signin():
