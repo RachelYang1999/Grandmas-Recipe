@@ -21,7 +21,12 @@ class RecipeView(APIView):
     def get(self, request):
         user = request.user
         recipe_id = request.data.get("id")
-        recipe = Recipe.objects.get(id = recipe_id)
+        try:
+            recipe = Recipe.objects.get(id = recipe_id)
+        except:
+            rst=util.get_response(400,"No this recipe",None)
+            return Response(rst)
+        
         category_queryset = Recipe_category.objects.filter(recipe_of_category_id = recipe_id)
         step_queryset = Step.objects.filter(related_recipe_id = recipe_id)
        
