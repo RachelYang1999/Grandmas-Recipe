@@ -14,6 +14,8 @@ A survey conducted by Hunter, a food and beverage communications firm, shows tha
 
 ![](https://github.com/RachelYang1999/Image_Storage/commit/68033ef67e97f0ab189bf91e9cfea5fbb44d67dc)
 
+
+
 ## Data Model
 
 ![](https://github.com/RachelYang1999/Image_Storage/blob/main/Screen%20Shot%202021-10-10%20at%206.32.44%20PM.png)
