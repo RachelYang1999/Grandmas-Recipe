@@ -8,6 +8,12 @@ A survey conducted by Hunter, a food and beverage communications firm, shows tha
 
 “Grandma’s Recipe” is an integrated recipe web application, which is suitable for a wide range of people with diverse diet habits. Specifically, cooking neophytes, such as overseas students, workers, or people who live independently, are able to make tasty meals by simply following recipe instructions; for people, like housewives, restaurant chefs, who would like to enhance their cooking competencies or eager to learn advanced dishes, this platform offers a great opportunity for them to absorb new cooking knowledge; as for elderly people who are not good at using the online application, they can adapt our website quickly as the user interfaces are designed in a friendly readable style.
 
+## Web Application Overview
+
+![](https://github.com/RachelYang1999/Image_Storage/blob/main/Screen%20Shot%202021-10-10%20at%206.37.42%20PM.png)
+
+![](https://github.com/RachelYang1999/Image_Storage/commit/68033ef67e97f0ab189bf91e9cfea5fbb44d67dc)
+
 ## Data Model
 
 ![](https://github.com/RachelYang1999/Image_Storage/blob/main/Screen%20Shot%202021-10-10%20at%206.32.44%20PM.png)
